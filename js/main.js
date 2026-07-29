@@ -139,36 +139,7 @@
   });
 })();
 
-/* Mobile nav */
-(function () {
-  var toggle = document.getElementById('nav-toggle');
-  var menu = document.getElementById('mobile-nav');
-  if (!toggle || !menu) return;
-  var iconOpen = toggle.querySelector('.nav-icon-open');
-  var iconClose = toggle.querySelector('.nav-icon-close');
-
-  function setOpen(open) {
-    menu.classList.toggle('is-open', open);
-    document.body.classList.toggle('nav-open', open);
-    toggle.setAttribute('aria-expanded', open ? 'true' : 'false');
-    toggle.setAttribute('aria-label', open ? 'Close menu' : 'Open menu');
-    if (iconOpen) iconOpen.classList.toggle('hidden', open);
-    if (iconClose) iconClose.classList.toggle('hidden', !open);
-  }
-
-  toggle.addEventListener('click', function () {
-    setOpen(!menu.classList.contains('is-open'));
-  });
-  menu.querySelectorAll('a').forEach(function (link) {
-    link.addEventListener('click', function () { setOpen(false); });
-  });
-  document.addEventListener('keydown', function (e) {
-    if (e.key === 'Escape') setOpen(false);
-  });
-  window.addEventListener('resize', function () {
-    if (window.innerWidth >= 768) setOpen(false);
-  });
-})();
+/* Mobile nav removed */
 
 /* Forms → Google Sheet only */
 (function () {

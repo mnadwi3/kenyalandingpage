@@ -370,44 +370,53 @@ label {
   }
 }
 
-/* ---- Mobile nav ---- */
-.nav-toggle {
+/* Mobile hamburger nav removed — keep selectors inert if markup remains elsewhere */
+.nav-toggle,
+.mobile-nav { display: none !important; }
+
+/* ---- Mobile bottom bar (WhatsApp + Book Now) ---- */
+.mobile-bottom-bar {
   display: none;
-  width: 2.5rem;
-  height: 2.5rem;
-  border-radius: 0.5rem;
-  border: 1px solid rgba(255,255,255,0.25);
-  background: rgba(255,255,255,0.1);
-  color: #fff;
+}
+.mobile-bottom-btn {
+  flex: 1;
+  display: inline-flex;
   align-items: center;
   justify-content: center;
-  cursor: pointer;
-  flex-shrink: 0;
+  gap: 0.45rem;
+  min-height: 3rem;
+  padding: 0.7rem 0.75rem;
+  border-radius: 0.5rem;
+  color: #fff;
+  font-weight: 700;
+  font-size: 0.95rem;
+  text-decoration: none;
+  box-shadow: 0 4px 14px rgba(0, 0, 0, 0.18);
 }
-.mobile-nav {
-  display: none;
+.mobile-bottom-wa {
+  background: #25D366;
+}
+.mobile-bottom-wa:hover { background: #1ebe57; }
+.mobile-bottom-book {
   background: #076279;
-  border-top: 1px solid rgba(255,255,255,0.12);
-  padding: 0.75rem 1rem 1rem;
 }
-.mobile-nav a {
-  display: block;
-  color: rgba(255,255,255,0.92);
-  font-weight: 600;
-  font-size: var(--fs-nav);
-  padding: 0.7rem 0.25rem;
-  border-bottom: 1px solid rgba(255,255,255,0.08);
-}
-.mobile-nav a:last-child { border-bottom: none; }
-body.nav-open { overflow: hidden; }
+.mobile-bottom-book:hover { background: #0a7a94; }
 
 @media (max-width: 767px) {
-  .nav-toggle { display: inline-flex; }
-  header .header-wa-text { display: none; }
-  header .header-wa { padding-left: 0.75rem; padding-right: 0.75rem; min-height: 3rem; }
+  header .header-wa {
+    padding: 0.55rem 0.85rem;
+    min-height: 2.6rem;
+    border-radius: 0.5rem;
+  }
+  header .header-wa-text { display: inline; }
   header .site-logo { height: auto; width: auto; }
-  header .site-logo img { height: 2.75rem; width: auto; }
-  .mobile-nav.is-open { display: block; }
+  header .site-logo img {
+    height: 3.5rem;
+    width: auto;
+    max-width: 10rem;
+    object-fit: contain;
+    object-position: left center;
+  }
 
   .hero-slider {
     min-height: 0;
@@ -444,7 +453,24 @@ body.nav-open { overflow: hidden; }
     padding: 0;
     margin: 0;
   }
-  #whatsapp-float { bottom: 1rem; right: 1rem; }
+
+  .mobile-bottom-bar {
+    display: flex;
+    position: fixed;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    z-index: 60;
+    gap: 0.55rem;
+    padding: 0.55rem 0.7rem calc(0.55rem + env(safe-area-inset-bottom, 0px));
+    background: rgba(255, 255, 255, 0.96);
+    border-top: 1px solid rgba(15, 23, 42, 0.08);
+    box-shadow: 0 -6px 20px rgba(15, 23, 42, 0.12);
+  }
+
+  body {
+    padding-bottom: calc(4.5rem + env(safe-area-inset-bottom, 0px));
+  }
 
   .trust-strip {
     background: #EAF4F7 !important;

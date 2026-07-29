@@ -159,19 +159,19 @@
       <!-- Appointment form overlay (desktop right / mobile below via flow) -->
       <div class="absolute inset-0 z-[3] pointer-events-none">
         <div class="max-w-6xl mx-auto px-4 sm:px-6 h-full flex items-center justify-end py-14">
-          <div class="pointer-events-auto w-full max-w-[17.5rem] hidden lg:block bg-white rounded-2xl shadow-card p-5 border border-slate-100 appointment-card">
+          <div class="pointer-events-auto w-full max-w-[20rem] hidden lg:block bg-white rounded-2xl shadow-card p-5 border border-slate-100 appointment-card">
             <h3 class="text-primary mb-3 text-center">Book An Appointment</h3>
             <form id="hero-form" class="space-y-3" novalidate>
-              <input type="text" name="name" required placeholder="Your Name" autocomplete="name"
+              <input type="text" name="name" required placeholder="Full name" autocomplete="name" aria-label="Name"
                 class="w-full rounded-lg border border-slate-200 px-3.5 py-2.5 text-sm focus:outline-none focus:ring-2 focus:ring-primary/40 focus:border-primary">
-              <input type="text" name="country" required placeholder="Your Country" autocomplete="country-name"
+              <input type="tel" name="whatsapp" required placeholder="+91 XXXXXXXXXX" autocomplete="tel" inputmode="tel" aria-label="WhatsApp No"
                 class="w-full rounded-lg border border-slate-200 px-3.5 py-2.5 text-sm focus:outline-none focus:ring-2 focus:ring-primary/40 focus:border-primary">
-              <input type="email" name="email" placeholder="Your Email" autocomplete="email"
+              <input type="text" name="country" required placeholder="Your country" autocomplete="country-name" aria-label="Country"
                 class="w-full rounded-lg border border-slate-200 px-3.5 py-2.5 text-sm focus:outline-none focus:ring-2 focus:ring-primary/40 focus:border-primary">
-              <input type="text" name="treatment" required placeholder="Your Treatment"
-                class="w-full rounded-lg border border-slate-200 px-3.5 py-2.5 text-sm focus:outline-none focus:ring-2 focus:ring-primary/40 focus:border-primary">
-              <button type="submit" class="w-full bg-primary hover:bg-primary-dark text-white font-bold py-3 rounded-lg uppercase tracking-wide text-sm transition-colors">
-                Submit
+              <textarea name="condition" required rows="3" placeholder="Briefly describe your condition, stage, and any specific questions..." aria-label="Condition Details"
+                class="w-full rounded-lg border border-slate-200 px-3.5 py-2.5 text-sm focus:outline-none focus:ring-2 focus:ring-primary/40 focus:border-primary resize-y min-h-[4.5rem]"></textarea>
+              <button type="submit" class="w-full bg-primary hover:bg-primary-dark text-white font-bold py-3 rounded-lg text-sm transition-colors">
+                Book Now
               </button>
             </form>
             <p id="hero-form-success" class="hidden text-center text-sm text-primary font-semibold mt-3">Thank you — we received your details and will contact you shortly.</p>
@@ -193,11 +193,11 @@
       <div class="max-w-sm mx-auto bg-white rounded-2xl shadow-card p-5 border border-slate-100 appointment-card">
         <h3 class="text-primary mb-3 text-center">Book An Appointment</h3>
         <form id="hero-form-mobile" class="space-y-3" novalidate>
-          <input type="text" name="name" required placeholder="Your Name" autocomplete="name" class="w-full rounded-lg border border-slate-200 px-3.5 py-2.5 text-sm focus:outline-none focus:ring-2 focus:ring-primary/40 focus:border-primary">
-          <input type="text" name="country" required placeholder="Your Country" autocomplete="country-name" class="w-full rounded-lg border border-slate-200 px-3.5 py-2.5 text-sm focus:outline-none focus:ring-2 focus:ring-primary/40 focus:border-primary">
-          <input type="email" name="email" placeholder="Your Email" autocomplete="email" class="w-full rounded-lg border border-slate-200 px-3.5 py-2.5 text-sm focus:outline-none focus:ring-2 focus:ring-primary/40 focus:border-primary">
-          <input type="text" name="treatment" required placeholder="Your Treatment" class="w-full rounded-lg border border-slate-200 px-3.5 py-2.5 text-sm focus:outline-none focus:ring-2 focus:ring-primary/40 focus:border-primary">
-          <button type="submit" class="w-full bg-primary hover:bg-primary-dark text-white font-bold py-3 rounded-lg uppercase tracking-wide text-sm">Submit</button>
+          <input type="text" name="name" required placeholder="Full name" autocomplete="name" aria-label="Name" class="w-full rounded-lg border border-slate-200 px-3.5 py-2.5 text-sm focus:outline-none focus:ring-2 focus:ring-primary/40 focus:border-primary">
+          <input type="tel" name="whatsapp" required placeholder="+91 XXXXXXXXXX" autocomplete="tel" inputmode="tel" aria-label="WhatsApp No" class="w-full rounded-lg border border-slate-200 px-3.5 py-2.5 text-sm focus:outline-none focus:ring-2 focus:ring-primary/40 focus:border-primary">
+          <input type="text" name="country" required placeholder="Your country" autocomplete="country-name" aria-label="Country" class="w-full rounded-lg border border-slate-200 px-3.5 py-2.5 text-sm focus:outline-none focus:ring-2 focus:ring-primary/40 focus:border-primary">
+          <textarea name="condition" required rows="3" placeholder="Briefly describe your condition, stage, and any specific questions..." aria-label="Condition Details" class="w-full rounded-lg border border-slate-200 px-3.5 py-2.5 text-sm focus:outline-none focus:ring-2 focus:ring-primary/40 focus:border-primary resize-y min-h-[4.5rem]"></textarea>
+          <button type="submit" class="w-full bg-primary hover:bg-primary-dark text-white font-bold py-3 rounded-lg text-sm">Book Now</button>
         </form>
         <p id="hero-form-mobile-success" class="hidden text-center text-sm text-primary font-semibold mt-3">Thank you — we received your details and will contact you shortly.</p>
       </div>
@@ -750,19 +750,19 @@
           </div>
 
           <div class="reveal flex justify-center lg:justify-end">
-            <div class="w-full max-w-[17.5rem] bg-white text-ink rounded-2xl shadow-card p-5 border border-slate-100 appointment-card">
+            <div class="w-full max-w-[20rem] bg-white text-ink rounded-2xl shadow-card p-5 border border-slate-100 appointment-card">
               <div id="form-panel">
                 <h3 class="text-primary mb-3 text-center">Book An Appointment</h3>
                 <form id="enquiry-form" class="space-y-3" novalidate>
-                  <input type="text" id="name" name="name" required autocomplete="name" placeholder="Your Name"
+                  <input type="text" id="name" name="name" required autocomplete="name" placeholder="Full name" aria-label="Name"
                     class="w-full rounded-lg border border-slate-200 px-3.5 py-2.5 text-sm focus:outline-none focus:ring-2 focus:ring-primary/40 focus:border-primary">
-                  <input type="text" id="country" name="country" required autocomplete="country-name" placeholder="Your Country"
+                  <input type="tel" id="whatsapp" name="whatsapp" required autocomplete="tel" inputmode="tel" placeholder="+91 XXXXXXXXXX" aria-label="WhatsApp No"
                     class="w-full rounded-lg border border-slate-200 px-3.5 py-2.5 text-sm focus:outline-none focus:ring-2 focus:ring-primary/40 focus:border-primary">
-                  <input type="email" id="email" name="email" autocomplete="email" placeholder="Your Email"
+                  <input type="text" id="country" name="country" required autocomplete="country-name" placeholder="Your country" aria-label="Country"
                     class="w-full rounded-lg border border-slate-200 px-3.5 py-2.5 text-sm focus:outline-none focus:ring-2 focus:ring-primary/40 focus:border-primary">
-                  <input type="text" id="treatment" name="treatment" required placeholder="Your Treatment"
-                    class="w-full rounded-lg border border-slate-200 px-3.5 py-2.5 text-sm focus:outline-none focus:ring-2 focus:ring-primary/40 focus:border-primary">
-                  <button type="submit" class="w-full bg-primary hover:bg-primary-dark text-white font-bold py-3 rounded-lg uppercase tracking-wide text-sm transition-colors">Submit</button>
+                  <textarea id="condition" name="condition" required rows="3" placeholder="Briefly describe your condition, stage, and any specific questions..." aria-label="Condition Details"
+                    class="w-full rounded-lg border border-slate-200 px-3.5 py-2.5 text-sm focus:outline-none focus:ring-2 focus:ring-primary/40 focus:border-primary resize-y min-h-[4.5rem]"></textarea>
+                  <button type="submit" class="w-full bg-primary hover:bg-primary-dark text-white font-bold py-3 rounded-lg text-sm transition-colors">Book Now</button>
                 </form>
               </div>
               <div id="form-success" class="hidden text-center py-4">
@@ -818,6 +818,6 @@
     </a>
   </div>
 
-  <script src="js/main.js?v=20260729-mobile-bar"></script>
+  <script src="js/main.js?v=20260729-form-fields"></script>
 </body>
 </html>

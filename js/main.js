@@ -156,7 +156,7 @@
   function getLeadPayload(form) {
     return {
       name: field(form, ['name']),
-      whatsapp: field(form, ['whatsapp', 'phone', 'email']),
+      whatsapp: field(form, ['whatsapp', 'phone']),
       country: field(form, ['country']),
       condition: field(form, ['condition', 'treatment'])
     };

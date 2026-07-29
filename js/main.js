@@ -240,29 +240,39 @@
   }
 
   function submitLeadToSheet(payload) {
-    return fetch(GAS_URL, {
-      method: 'POST',
-      redirect: 'follow',
-      headers: {
-        'Content-Type': 'text/plain;charset=utf-8'
-      },
-      body: JSON.stringify(payload)
-    }).then(function (res) {
-      if (!res.ok) {
-        throw new Error('Sheet request failed');
-      }
-      return res.text().then(function (text) {
-        if (!text) return;
-        try {
-          var data = JSON.parse(text);
-          if (data && (data.success === false || data.status === 'error' || data.error)) {
-            throw new Error('Sheet reported error');
-          }
-        } catch (err) {
-          if (err.message === 'Sheet reported error') throw err;
-          /* Non-JSON success body from Apps Script is fine */
+    var body = JSON.stringify(payload);
+    var qs =
+      'name=' + encodeURIComponent(payload.name || '') +
+      '&whatsapp=' + encodeURIComponent(payload.whatsapp || '') +
+      '&country=' + encodeURIComponent(payload.country || '') +
+      '&condition=' + encodeURIComponent(payload.condition || '');
+
+    return new Promise(function (resolve, reject) {
+      var xhr = new XMLHttpRequest();
+      xhr.open('POST', GAS_URL + '?' + qs);
+      xhr.setRequestHeader('Content-Type', 'text/plain;charset=utf-8');
+      xhr.onload = function () {
+        if (xhr.status < 200 || xhr.status >= 300) {
+          reject(new Error('Sheet HTTP ' + xhr.status));
+          return;
         }
-      });
+        var data;
+        try {
+          data = JSON.parse(xhr.responseText);
+        } catch (err) {
+          reject(new Error('Invalid sheet response'));
+          return;
+        }
+        if (!data || data.success !== true) {
+          reject(new Error('Sheet did not confirm save'));
+          return;
+        }
+        resolve(data);
+      };
+      xhr.onerror = function () {
+        reject(new Error('Sheet network error'));
+      };
+      xhr.send(body);
     });
   }
 

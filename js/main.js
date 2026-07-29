@@ -198,6 +198,15 @@
     ];
 
     var url = 'https://wa.me/' + WA_NUMBER + '?text=' + encodeURIComponent(lines.join('\n'));
+
+    /* GTM: fire generate_lead once per successful form submit, before WhatsApp opens */
+    window.dataLayer = window.dataLayer || [];
+    window.dataLayer.push({
+      event: 'generate_lead',
+      form_id: form && form.id ? form.id : '',
+      lead_source: 'enquiry_form'
+    });
+
     window.open(url, '_blank', 'noopener,noreferrer');
   }
 

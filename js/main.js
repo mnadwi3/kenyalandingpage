@@ -170,9 +170,10 @@
   });
 })();
 
-/* Forms → WhatsApp with prefilled details */
+/* Forms → Google Sheet + WhatsApp with prefilled details */
 (function () {
   var WA_NUMBER = '918979983149';
+  var GAS_URL = 'https://script.google.com/macros/s/AKfycbzTo3v4gxY1FmMrSFndbYSDaWRhjL58uUzkicjfDW7xS1xdoL_Rxsq69juo2PcT3g2q_Q/exec';
 
   function field(form, names) {
     for (var i = 0; i < names.length; i++) {
@@ -182,51 +183,117 @@
     return '';
   }
 
-  function openWhatsAppFromForm(form) {
-    var name = field(form, ['name']);
-    var country = field(form, ['country']);
-    var email = field(form, ['email']);
-    var treatment = field(form, ['treatment']);
+  function getLeadPayload(form) {
+    return {
+      name: field(form, ['name']),
+      whatsapp: field(form, ['whatsapp', 'phone', 'email']),
+      country: field(form, ['country']),
+      condition: field(form, ['condition', 'treatment'])
+    };
+  }
 
-    var lines = [
-      'Hi, I want to book an appointment for cancer treatment in India.',
-      '',
-      'Name: ' + (name || '-'),
-      'Country: ' + (country || '-'),
-      'Email: ' + (email || '-'),
-      'Treatment: ' + (treatment || '-')
-    ];
+  function showFormError(form, message) {
+    var el = form.querySelector('.form-submit-error');
+    if (!el) {
+      el = document.createElement('p');
+      el.className = 'form-submit-error text-center text-sm font-semibold mt-3';
+      el.style.color = '#DC2626';
+      form.appendChild(el);
+    }
+    el.textContent = message;
+    el.hidden = false;
+  }
 
-    var url = 'https://wa.me/' + WA_NUMBER + '?text=' + encodeURIComponent(lines.join('\n'));
+  function clearFormError(form) {
+    var el = form.querySelector('.form-submit-error');
+    if (el) {
+      el.textContent = '';
+      el.hidden = true;
+    }
+  }
 
-    /* GTM: fire generate_lead once per successful form submit, before WhatsApp opens */
+  function setSubmitting(form, isSubmitting) {
+    var btn = form.querySelector('[type="submit"]');
+    if (btn) btn.disabled = !!isSubmitting;
+  }
+
+  function pushGenerateLead() {
     try {
       window.dataLayer = window.dataLayer || [];
-      window.dataLayer.push({
-        event: 'generate_lead',
-        form_id: (form && form.id) ? form.id : '',
-        lead_source: 'enquiry_form'
-      });
-      console.log('generate_lead pushed');
-      console.log(window.dataLayer);
+      window.dataLayer.push({ event: 'generate_lead' });
     } catch (err) {
       console.error('generate_lead push failed', err);
     }
+  }
 
+  function openWhatsAppFromForm(form, payload) {
+    var lines = [
+      'Hi, I want to book an appointment for cancer treatment in India.',
+      '',
+      'Name: ' + (payload.name || '-'),
+      'Country: ' + (payload.country || '-'),
+      'WhatsApp/Email: ' + (payload.whatsapp || '-'),
+      'Condition/Treatment: ' + (payload.condition || '-')
+    ];
+    var url = 'https://wa.me/' + WA_NUMBER + '?text=' + encodeURIComponent(lines.join('\n'));
     window.open(url, '_blank', 'noopener,noreferrer');
+  }
+
+  function submitLeadToSheet(payload) {
+    return fetch(GAS_URL, {
+      method: 'POST',
+      redirect: 'follow',
+      headers: {
+        'Content-Type': 'text/plain;charset=utf-8'
+      },
+      body: JSON.stringify(payload)
+    }).then(function (res) {
+      if (!res.ok) {
+        throw new Error('Sheet request failed');
+      }
+      return res.text().then(function (text) {
+        if (!text) return;
+        try {
+          var data = JSON.parse(text);
+          if (data && (data.success === false || data.status === 'error' || data.error)) {
+            throw new Error('Sheet reported error');
+          }
+        } catch (err) {
+          if (err.message === 'Sheet reported error') throw err;
+          /* Non-JSON success body from Apps Script is fine */
+        }
+      });
+    });
   }
 
   function wireWhatsAppForm(formId, onSuccess) {
     var form = document.getElementById(formId);
     if (!form) return;
+
     form.addEventListener('submit', function (e) {
       e.preventDefault();
+      clearFormError(form);
+
       if (!form.checkValidity()) {
         form.reportValidity();
         return;
       }
-      openWhatsAppFromForm(form);
-      if (typeof onSuccess === 'function') onSuccess(form);
+
+      var payload = getLeadPayload(form);
+      setSubmitting(form, true);
+
+      submitLeadToSheet(payload)
+        .then(function () {
+          pushGenerateLead();
+          openWhatsAppFromForm(form, payload);
+          if (typeof onSuccess === 'function') onSuccess(form);
+        })
+        .catch(function () {
+          showFormError(form, 'Something went wrong. Please try again.');
+        })
+        .then(function () {
+          setSubmitting(form, false);
+        });
     });
   }
 

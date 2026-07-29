@@ -170,9 +170,8 @@
   });
 })();
 
-/* Forms → Google Sheet + WhatsApp with prefilled details */
+/* Forms → Google Sheet only */
 (function () {
-  var WA_NUMBER = '918979983149';
   var GAS_URL = 'https://script.google.com/macros/s/AKfycbzTo3v4gxY1FmMrSFndbYSDaWRhjL58uUzkicjfDW7xS1xdoL_Rxsq69juo2PcT3g2q_Q/exec';
 
   function field(form, names) {
@@ -226,19 +225,6 @@
     }
   }
 
-  function openWhatsAppFromForm(form, payload) {
-    var lines = [
-      'Hi, I want to book an appointment for cancer treatment in India.',
-      '',
-      'Name: ' + (payload.name || '-'),
-      'Country: ' + (payload.country || '-'),
-      'WhatsApp/Email: ' + (payload.whatsapp || '-'),
-      'Condition/Treatment: ' + (payload.condition || '-')
-    ];
-    var url = 'https://wa.me/' + WA_NUMBER + '?text=' + encodeURIComponent(lines.join('\n'));
-    window.open(url, '_blank', 'noopener,noreferrer');
-  }
-
   function submitLeadToSheet(payload) {
     var body = JSON.stringify(payload);
     var qs =
@@ -276,7 +262,7 @@
     });
   }
 
-  function wireWhatsAppForm(formId, onSuccess) {
+  function wireLeadForm(formId, onSuccess) {
     var form = document.getElementById(formId);
     if (!form) return;
 
@@ -295,7 +281,6 @@
       submitLeadToSheet(payload)
         .then(function () {
           pushGenerateLead();
-          openWhatsAppFromForm(form, payload);
           if (typeof onSuccess === 'function') onSuccess(form);
         })
         .catch(function () {
@@ -307,19 +292,19 @@
     });
   }
 
-  wireWhatsAppForm('hero-form', function (form) {
+  wireLeadForm('hero-form', function (form) {
     form.classList.add('hidden');
     var success = document.getElementById('hero-form-success');
     if (success) success.classList.remove('hidden');
   });
 
-  wireWhatsAppForm('hero-form-mobile', function (form) {
+  wireLeadForm('hero-form-mobile', function (form) {
     form.classList.add('hidden');
     var success = document.getElementById('hero-form-mobile-success');
     if (success) success.classList.remove('hidden');
   });
 
-  wireWhatsAppForm('enquiry-form', function () {
+  wireLeadForm('enquiry-form', function () {
     var panel = document.getElementById('form-panel');
     var success = document.getElementById('form-success');
     if (panel) panel.classList.add('hidden');

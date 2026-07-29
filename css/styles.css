@@ -405,7 +405,8 @@ body.nav-open { overflow: hidden; }
   .nav-toggle { display: inline-flex; }
   header .header-wa-text { display: none; }
   header .header-wa { padding-left: 0.75rem; padding-right: 0.75rem; min-height: 3rem; }
-  header .site-logo { height: 3rem; width: 3rem; }
+  header .site-logo { height: auto; width: auto; }
+  header .site-logo img { height: 2.75rem; width: auto; }
   .mobile-nav.is-open { display: block; }
 
   .hero-slider {

@@ -79,10 +79,10 @@
   start();
 })();
 
-/* Order main menu sections: Treatment → Doctors → Pricing → Visa & Travel → Testimonials → About Us → FAQ */
+/* Order sections: Treatment → How It Works → Doctors → Visa & Travel → Testimonials → About Us → FAQ */
 (function () {
-  var order = ['treatment', 'doctors', 'pricing', 'visa-travel', 'testimonials', 'about-apollo', 'faq'];
-  var anchor = document.getElementById('why-india') || document.getElementById('how-it-works');
+  var order = ['treatment', 'how-it-works', 'doctors', 'visa-travel', 'testimonials', 'about-apollo', 'faq'];
+  var anchor = document.getElementById('why-india');
   if (!anchor) return;
   var cursor = anchor;
   order.forEach(function (id) {

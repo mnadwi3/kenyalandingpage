@@ -171,7 +171,7 @@ label {
 }
 
 /* ---- Treatment cards ---- */
-/* Mobile: centered stack | Desktop: horizontal icon + copy + red + */
+/* Centered stack on all breakpoints: icon, name, price, copy, Book Appointment */
 .tx-grid {
   display: grid;
   grid-template-columns: repeat(2, minmax(0, 1fr));
@@ -266,7 +266,6 @@ label {
   transition: background 0.15s ease;
 }
 .tx-book:hover { background: #1ebe57; }
-.tx-plus { display: none; }
 
 @media (min-width: 640px) and (max-width: 1023px) {
   .tx-card { padding: 1.15rem 0.9rem 1rem; }
@@ -280,61 +279,41 @@ label {
   .tx-book { min-height: 2.45rem; font-size: 0.875rem; }
 }
 
-/* Desktop: restore horizontal card style */
+/* Desktop: same centered layout as mobile, larger type */
 @media (min-width: 1024px) {
   .tx-card {
-    flex-direction: row;
-    align-items: flex-start;
-    text-align: left;
-    gap: 0.85rem;
-    padding: 1.1rem 1rem;
-    min-height: 6.5rem;
+    padding: 1.35rem 1.15rem 1.15rem;
   }
   .tx-icon {
-    width: 3.35rem;
-    height: 3.35rem;
-    margin-bottom: 0;
-    background: transparent;
+    width: 4rem;
+    height: 4rem;
+    margin-bottom: 0.75rem;
   }
-  .tx-icon svg { width: 100%; height: 100%; }
-  .tx-body {
-    flex: 1;
-    min-width: 0;
-    padding-right: 1.75rem;
+  .tx-icon svg {
+    width: 2.25rem;
+    height: 2.25rem;
   }
+  .tx-card h3,
   .tx-body h3 {
-    margin: 0 0 0.35rem;
-    font-size: 1.05rem !important;
+    font-size: 1.1rem !important;
   }
-  .tx-price { display: none; }
-  .tx-body p {
-    margin: 0;
-    font-size: 0.8125rem;
-  }
-  .tx-book { display: none; }
-  .tx-plus {
+  .tx-price {
     display: inline-flex;
-    position: absolute;
-    top: 0.7rem;
-    right: 0.7rem;
-    width: 1.75rem;
-    height: 1.75rem;
-    border-radius: 999px;
-    background: #E11D48;
-    color: #fff;
-    align-items: center;
-    justify-content: center;
-    font-size: 1.15rem;
-    font-weight: 700;
-    line-height: 1;
-    text-decoration: none;
-    box-shadow: 0 2px 8px rgba(225, 29, 72, 0.35);
-    transition: background 0.15s ease, transform 0.15s ease;
+    font-size: 0.875rem;
+    padding: 0.28rem 0.85rem;
+    margin-bottom: 0.55rem;
   }
-  .tx-plus:hover {
-    background: #BE123C;
-    transform: scale(1.06);
+  .tx-card p,
+  .tx-body p {
+    font-size: 0.875rem;
+    margin-bottom: 1rem;
   }
+  .tx-book {
+    display: inline-flex;
+    min-height: 2.65rem;
+    font-size: 0.9375rem;
+  }
+  .tx-plus { display: none !important; }
 }
 
 /* Scroll reveal */

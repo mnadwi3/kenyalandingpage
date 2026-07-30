@@ -79,12 +79,18 @@
   start();
 })();
 
-/* Move Cancer Specialists section after Treatments */
+/* Order main menu sections: Treatment → Doctors → Pricing → Visa & Travel → Testimonials → About Us → FAQ */
 (function () {
-  var doctors = document.getElementById('doctors');
-  var cancers = document.getElementById('cancers');
-  if (!doctors || !cancers) return;
-  cancers.insertAdjacentElement('afterend', doctors);
+  var order = ['treatment', 'doctors', 'pricing', 'visa-travel', 'testimonials', 'about-apollo', 'faq'];
+  var anchor = document.getElementById('why-india') || document.getElementById('how-it-works');
+  if (!anchor) return;
+  var cursor = anchor;
+  order.forEach(function (id) {
+    var el = document.getElementById(id);
+    if (!el) return;
+    cursor.insertAdjacentElement('afterend', el);
+    cursor = el;
+  });
 })();
 
 /* Scroll reveal */

@@ -163,7 +163,7 @@ label {
 }
 
 /* Dense card / step titles */
-#cancers h3,
+#treatment h3,
 #why-india h3,
 #doctors h3,
 .appointment-card h3 {
@@ -486,7 +486,9 @@ label {
   }
 
   #doctors h2,
-  #cancers h2,
+  #treatment h2,
+  #pricing h2,
+  #visa-travel h2,
   #testimonials h2,
   #faq h2,
   #location h2 {

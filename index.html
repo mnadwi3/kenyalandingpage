@@ -50,7 +50,7 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
 
-  <link rel="stylesheet" href="css/styles.css?v=20260729-mobile-bar">
+  <link rel="stylesheet" href="css/styles.css?v=20260730-nav">
 </head>
 <body class="bg-white antialiased">
   <!-- Google Tag Manager (noscript) -->
@@ -65,11 +65,14 @@
         <img src="https://cdn.jsdelivr.net/gh/mnadwi3/kenyalandingpage@08c22b1/images/apollo-wordmark.png" alt="Apollo Hospitals" width="280" height="150" class="h-14 sm:h-16 lg:h-[4.25rem] w-auto max-w-[9.5rem] sm:max-w-[12.5rem] lg:max-w-[14rem] object-contain object-left" decoding="async">
       </a>
 
-      <nav class="hidden md:flex items-center gap-6 text-white/90" aria-label="Primary">
+      <nav class="hidden md:flex items-center gap-2.5 lg:gap-4 text-[0.8125rem] lg:text-sm text-white/90 whitespace-nowrap" aria-label="Primary">
         <a href="#top" class="hover:text-white transition-colors">Home</a>
-        <a href="#about-apollo" class="hover:text-white transition-colors">About Us</a>
+        <a href="#treatment" class="hover:text-white transition-colors">Treatment</a>
         <a href="#doctors" class="hover:text-white transition-colors">Doctors</a>
-        <a href="#cancers" class="hover:text-white transition-colors">Treatments</a>
+        <a href="#pricing" class="hover:text-white transition-colors">Pricing</a>
+        <a href="#visa-travel" class="hover:text-white transition-colors">Visa &amp; Travel</a>
+        <a href="#testimonials" class="hover:text-white transition-colors">Testimonials</a>
+        <a href="#about-apollo" class="hover:text-white transition-colors">About Us</a>
         <a href="#faq" class="hover:text-white transition-colors">FAQ</a>
       </nav>
 
@@ -231,7 +234,7 @@
     </div>
 
     <!-- ========== ABOUT APOLLO HOSPITALS ========== -->
-    <section id="about-apollo" class="py-16 sm:py-20 bg-soft">
+    <section id="about-apollo" class="py-16 sm:py-20 bg-soft scroll-mt-24">
       <div class="max-w-6xl mx-auto px-4 sm:px-6">
         <div class="grid lg:grid-cols-2 gap-10 lg:gap-14 items-center reveal">
           <div class="rounded-2xl overflow-hidden shadow-card ring-1 ring-slate-100 aspect-[4/3] lg:aspect-auto lg:min-h-[320px]">
@@ -366,7 +369,7 @@
 
     <!-- ========== DOCTORS ========== -->
     <!-- PLACEHOLDER: Verify doctor names, experience, and education before launch. -->
-    <section id="doctors" class="py-16 sm:py-20 bg-soft">
+    <section id="doctors" class="py-16 sm:py-20 bg-soft scroll-mt-24">
       <div class="max-w-7xl mx-auto px-4 sm:px-6">
         <div class="text-center max-w-2xl mx-auto mb-10 reveal">
           <p class="text-sm font-semibold uppercase tracking-wider text-primary mb-2">Cancer Specialists</p>
@@ -445,10 +448,10 @@
     </section>
 
     <!-- ========== TREATMENTS (Apollo-style cards) ========== -->
-    <section id="cancers" class="py-16 sm:py-20 bg-soft">
+    <section id="treatment" class="py-16 sm:py-20 bg-soft scroll-mt-24">
       <div class="max-w-6xl mx-auto px-4 sm:px-6">
         <div class="text-center max-w-2xl mx-auto mb-10 reveal">
-          <p class="text-sm font-semibold uppercase tracking-wider text-primary mb-2">Treatments</p>
+          <p class="text-sm font-semibold uppercase tracking-wider text-primary mb-2">Treatment</p>
           <h2 class="font-display text-[clamp(1.15rem,5vw,1.5rem)] sm:text-4xl font-bold text-primary mb-2 text-center leading-snug">Types of Cancer We Treat</h2>
           <div class="w-14 h-1 bg-gold rounded-full mx-auto mb-4" aria-hidden="true"></div>
           <p class="text-slate-600 hidden sm:block">Book an appointment on WhatsApp for a free second opinion and care pathway guidance.</p>
@@ -580,6 +583,107 @@
       </div>
     </section>
 
+    <!-- ========== PRICING ========== -->
+    <section id="pricing" class="py-16 sm:py-20 bg-white scroll-mt-24">
+      <div class="max-w-6xl mx-auto px-4 sm:px-6">
+        <div class="text-center max-w-2xl mx-auto mb-10 reveal">
+          <p class="text-sm font-semibold uppercase tracking-wider text-primary mb-2">Pricing</p>
+          <h2 class="font-display text-2xl sm:text-3xl lg:text-4xl font-bold text-primary mb-2">Transparent Treatment Estimates</h2>
+          <div class="w-14 h-1 bg-gold rounded-full mx-auto mb-4" aria-hidden="true"></div>
+          <p class="text-slate-600 text-sm sm:text-base">Indicative ranges for planning. After reviewing reports, we share a personalized estimate with no obligation.</p>
+        </div>
+
+        <div class="grid sm:grid-cols-2 lg:grid-cols-3 gap-5 lg:gap-6">
+          <article class="reveal rounded-2xl border border-slate-200 bg-soft p-6 flex flex-col">
+            <h3 class="text-lg font-bold text-secondary mb-2">Consultation &amp; Second Opinion</h3>
+            <p class="text-3xl font-bold text-primary mb-1">Free</p>
+            <p class="text-sm text-slate-500 mb-4">Doctor review of your reports</p>
+            <ul class="text-sm text-slate-600 space-y-2 mb-6 flex-1">
+              <li>Report review by oncologist</li>
+              <li>Care pathway guidance</li>
+              <li>Cost estimate for planned treatment</li>
+            </ul>
+            <a href="#contact" class="inline-flex items-center justify-center w-full bg-primary hover:bg-secondary text-white font-semibold text-sm py-3 px-4 rounded-lg transition-colors">Book Now</a>
+          </article>
+
+          <article class="reveal rounded-2xl border border-slate-200 bg-soft p-6 flex flex-col">
+            <h3 class="text-lg font-bold text-secondary mb-2">Surgery Packages</h3>
+            <p class="text-3xl font-bold text-primary mb-1">From $3,500</p>
+            <p class="text-sm text-slate-500 mb-4">Depending on procedure &amp; hospital stay</p>
+            <ul class="text-sm text-slate-600 space-y-2 mb-6 flex-1">
+              <li>Surgical oncology procedures</li>
+              <li>Hospital stay &amp; basic investigations</li>
+              <li>Final quote after clinical review</li>
+            </ul>
+            <a href="#contact" class="inline-flex items-center justify-center w-full bg-primary hover:bg-secondary text-white font-semibold text-sm py-3 px-4 rounded-lg transition-colors">Book Now</a>
+          </article>
+
+          <article class="reveal rounded-2xl border border-slate-200 bg-soft p-6 flex flex-col sm:col-span-2 lg:col-span-1">
+            <h3 class="text-lg font-bold text-secondary mb-2">Chemo / Radiation / Advanced Care</h3>
+            <p class="text-3xl font-bold text-primary mb-1">Custom</p>
+            <p class="text-sm text-slate-500 mb-4">Based on diagnosis, stage &amp; protocol</p>
+            <ul class="text-sm text-slate-600 space-y-2 mb-6 flex-1">
+              <li>Chemotherapy &amp; immunotherapy cycles</li>
+              <li>Radiation / proton pathways where indicated</li>
+              <li>Transparent line-item estimate before travel</li>
+            </ul>
+            <a href="#contact" class="inline-flex items-center justify-center w-full bg-primary hover:bg-secondary text-white font-semibold text-sm py-3 px-4 rounded-lg transition-colors">Book Now</a>
+          </article>
+        </div>
+        <p class="text-center text-xs text-slate-500 mt-6 max-w-2xl mx-auto reveal">Prices are indicative in USD and may vary by case complexity, hospital, length of stay, and investigations. We confirm exact costs before you travel.</p>
+      </div>
+    </section>
+
+    <!-- ========== VISA & TRAVEL ========== -->
+    <section id="visa-travel" class="py-16 sm:py-20 bg-[#EAF4F7] scroll-mt-24">
+      <div class="max-w-6xl mx-auto px-4 sm:px-6">
+        <div class="text-center max-w-2xl mx-auto mb-10 reveal">
+          <p class="text-sm font-semibold uppercase tracking-wider text-primary mb-2">Visa &amp; Travel</p>
+          <h2 class="font-display text-2xl sm:text-3xl lg:text-4xl font-bold text-primary mb-2">End-to-End Travel Support</h2>
+          <div class="w-14 h-1 bg-gold rounded-full mx-auto mb-4" aria-hidden="true"></div>
+          <p class="text-slate-600 text-sm sm:text-base">From medical visa paperwork to airport pickup and local stay — we coordinate the journey so your family can focus on care.</p>
+        </div>
+
+        <div class="grid sm:grid-cols-2 gap-5 lg:gap-6">
+          <article class="reveal bg-white rounded-2xl border border-[#C5E0E8] p-6 shadow-soft">
+            <div class="w-12 h-12 rounded-full bg-primary text-white flex items-center justify-center mb-4" aria-hidden="true">
+              <svg class="w-6 h-6" fill="none" stroke="currentColor" stroke-width="1.8" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M15 9h3.75M15 12h3.75M15 15h3.75M4.5 19.5h15a2.25 2.25 0 002.25-2.25V6.75A2.25 2.25 0 0019.5 4.5h-15a2.25 2.25 0 00-2.25 2.25v10.5A2.25 2.25 0 004.5 19.5zm6-10.125a1.875 1.875 0 11-3.75 0 1.875 1.875 0 013.75 0zm1.294 6.336a6.721 6.721 0 01-3.17.789 6.721 6.721 0 01-3.168-.789 3.376 3.376 0 016.338 0z"/></svg>
+            </div>
+            <h3 class="text-lg font-bold text-secondary mb-2">Medical Visa Assistance</h3>
+            <p class="text-sm text-slate-600 leading-relaxed">Guidance on documents, invitation letters, and embassy timelines so patients and attendants can apply with confidence.</p>
+          </article>
+
+          <article class="reveal bg-white rounded-2xl border border-[#C5E0E8] p-6 shadow-soft">
+            <div class="w-12 h-12 rounded-full bg-primary text-white flex items-center justify-center mb-4" aria-hidden="true">
+              <svg class="w-6 h-6" fill="none" stroke="currentColor" stroke-width="1.8" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M6 12L3.269 3.126A59.768 59.768 0 0121.485 12 59.77 59.77 0 013.27 20.876L5.999 12zm0 0h7.5"/></svg>
+            </div>
+            <h3 class="text-lg font-bold text-secondary mb-2">Travel Planning</h3>
+            <p class="text-sm text-slate-600 leading-relaxed">Help planning flights and arrival dates around your consultation or admission schedule at the hospital.</p>
+          </article>
+
+          <article class="reveal bg-white rounded-2xl border border-[#C5E0E8] p-6 shadow-soft">
+            <div class="w-12 h-12 rounded-full bg-primary text-white flex items-center justify-center mb-4" aria-hidden="true">
+              <svg class="w-6 h-6" fill="none" stroke="currentColor" stroke-width="1.8" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M2.25 21h19.5m-18-18v18m10.5-18v18m6-13.5V21M6.75 6.75h.75m-.75 3h.75m-.75 3h.75m3-6h.75m-.75 3h.75m-.75 3h.75M6.75 21v-3.375c0-.621.504-1.125 1.125-1.125h2.25c.621 0 1.125.504 1.125 1.125V21M3 3h12m-.75 4.5H21m-3.75 0h.008v.008h-.008v-.008zm0 3h.008v.008h-.008v-.008zm0 3h.008v.008h-.008v-.008z"/></svg>
+            </div>
+            <h3 class="text-lg font-bold text-secondary mb-2">Stay &amp; Accommodation</h3>
+            <p class="text-sm text-slate-600 leading-relaxed">Support finding patient-friendly stays near the hospital for treatment cycles and recovery periods.</p>
+          </article>
+
+          <article class="reveal bg-white rounded-2xl border border-[#C5E0E8] p-6 shadow-soft">
+            <div class="w-12 h-12 rounded-full bg-primary text-white flex items-center justify-center mb-4" aria-hidden="true">
+              <svg class="w-6 h-6" fill="none" stroke="currentColor" stroke-width="1.8" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M8.25 18.75a1.5 1.5 0 01-3 0m3 0a1.5 1.5 0 00-3 0m3 0h6m-9 0H3.375a1.125 1.125 0 01-1.125-1.125V14.25m17.25 4.5a1.5 1.5 0 01-3 0m3 0a1.5 1.5 0 00-3 0m3 0h1.125c.621 0 1.129-.504 1.09-1.124a17.902 17.902 0 00-3.213-9.193 2.056 2.056 0 00-1.58-.86H14.25M16.5 18.75h-2.25m0-11.177v-.958c0-.568-.422-1.048-.987-1.106a48.554 48.554 0 00-10.026 0 1.106 1.106 0 00-.987 1.106v7.635m12-6.677v6.677m0 4.5v-4.5m0 0h-12"/></svg>
+            </div>
+            <h3 class="text-lg font-bold text-secondary mb-2">Airport Pickup &amp; Drop</h3>
+            <p class="text-sm text-slate-600 leading-relaxed">Arrival and departure transfers arranged so you reach the hospital or hotel without stress after a long flight.</p>
+          </article>
+        </div>
+
+        <div class="text-center mt-8 reveal">
+          <a href="#contact" class="inline-flex items-center justify-center gap-2 bg-primary hover:bg-secondary text-white font-semibold px-6 py-3 rounded-lg transition-colors">Plan Your Travel</a>
+        </div>
+      </div>
+    </section>
+
     <!-- ========== LOCATION — Apollo Delhi ========== -->
     <section id="location" class="py-16 sm:py-20 bg-soft">
       <div class="max-w-6xl mx-auto px-4 sm:px-6">
@@ -628,7 +732,7 @@
 
     <!-- ========== 5. TESTIMONIALS (video slots) ========== -->
     <!-- VIDEO: Replace each slot below with your MP4 file or embed (YouTube/Vimeo iframe). -->
-    <section id="testimonials" class="py-16 sm:py-20 bg-white">
+    <section id="testimonials" class="py-16 sm:py-20 bg-white scroll-mt-24">
       <div class="max-w-6xl mx-auto px-4 sm:px-6">
         <div class="text-center max-w-2xl mx-auto mb-10 reveal">
           <p class="text-sm font-semibold uppercase tracking-wider text-primary mb-2">Patient Stories</p>
@@ -681,7 +785,7 @@
     </section>
 
     <!-- ========== 6. FAQ ========== -->
-    <section id="faq" class="py-16 sm:py-20 bg-soft">
+    <section id="faq" class="py-16 sm:py-20 bg-soft scroll-mt-24">
       <div class="max-w-3xl mx-auto px-4 sm:px-6">
         <div class="text-center mb-10 reveal">
           <p class="text-sm font-semibold uppercase tracking-wider text-primary mb-2">FAQ</p>
@@ -735,7 +839,7 @@
     </section>
 
     <!-- ========== 7. FINAL CTA ========== -->
-    <section id="contact" class="py-16 sm:py-20 bg-secondary text-white">
+    <section id="contact" class="py-16 sm:py-20 bg-secondary text-white scroll-mt-24">
       <div class="max-w-6xl mx-auto px-4 sm:px-6">
         <div class="grid lg:grid-cols-2 gap-8 lg:gap-14 items-center">
           <div class="reveal flex flex-col justify-center items-center text-center lg:items-start lg:text-left">
@@ -818,6 +922,6 @@
     </a>
   </div>
 
-  <script src="js/main.js?v=20260729-form-fields"></script>
+  <script src="js/main.js?v=20260730-nav"></script>
 </body>
 </html>

@@ -147,9 +147,10 @@
 
 /* Mobile nav removed */
 
-/* Forms → Google Sheet only */
+/* Forms → Google Sheet, then generate_lead, then WhatsApp */
 (function () {
   var GAS_URL = 'https://script.google.com/macros/s/AKfycbzTo3v4gxY1FmMrSFndbYSDaWRhjL58uUzkicjfDW7xS1xdoL_Rxsq69juo2PcT3g2q_Q/exec';
+  var WA_NUMBER = '918979983149';
 
   function field(form, names) {
     for (var i = 0; i < names.length; i++) {
@@ -166,6 +167,17 @@
       country: field(form, ['country']),
       condition: field(form, ['condition', 'treatment'])
     };
+  }
+
+  function buildWhatsAppUrl(payload) {
+    var lines = [
+      'New enquiry from website:',
+      'Name: ' + (payload.name || ''),
+      'WhatsApp: ' + (payload.whatsapp || ''),
+      'Country: ' + (payload.country || ''),
+      'Condition: ' + (payload.condition || '')
+    ];
+    return 'https://wa.me/' + WA_NUMBER + '?text=' + encodeURIComponent(lines.join('\n'));
   }
 
   function showFormError(form, message) {
@@ -191,15 +203,6 @@
   function setSubmitting(form, isSubmitting) {
     var btn = form.querySelector('[type="submit"]');
     if (btn) btn.disabled = !!isSubmitting;
-  }
-
-  function pushGenerateLead() {
-    try {
-      window.dataLayer = window.dataLayer || [];
-      window.dataLayer.push({ event: 'generate_lead' });
-    } catch (err) {
-      console.error('generate_lead push failed', err);
-    }
   }
 
   function submitLeadToSheet(payload) {
@@ -239,6 +242,29 @@
     });
   }
 
+  /* After Sheets success, before WhatsApp: fire generate_lead for GTM + GA4 */
+  function fireGenerateLeadThenOpenWhatsApp(form, whatsappUrl) {
+    window.dataLayer = window.dataLayer || [];
+    window.dataLayer.push({
+      event: 'generate_lead',
+      form_id: (form && form.id) || '',
+      lead_source: 'website_form'
+    });
+
+    if (typeof gtag === 'function') {
+      gtag('event', 'generate_lead', {
+        form_id: (form && form.id) || '',
+        lead_source: 'website_form'
+      });
+    }
+
+    return new Promise(function (resolve) {
+      setTimeout(resolve, 500);
+    }).then(function () {
+      window.open(whatsappUrl, '_blank');
+    });
+  }
+
   function wireLeadForm(formId, onSuccess) {
     var form = document.getElementById(formId);
     if (!form) return;
@@ -253,11 +279,14 @@
       }
 
       var payload = getLeadPayload(form);
+      var whatsappUrl = buildWhatsAppUrl(payload);
       setSubmitting(form, true);
 
       submitLeadToSheet(payload)
         .then(function () {
-          pushGenerateLead();
+          return fireGenerateLeadThenOpenWhatsApp(form, whatsappUrl);
+        })
+        .then(function () {
           if (typeof onSuccess === 'function') onSuccess(form);
         })
         .catch(function () {

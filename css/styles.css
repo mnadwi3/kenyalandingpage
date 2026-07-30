@@ -171,94 +171,102 @@ label {
 }
 
 /* ---- Treatment cards ---- */
-/* Centered stack on all breakpoints: icon, name, price, copy, Book Appointment */
+/* Centered stack: icon, name, price, copy, Book Appointment */
 .tx-grid {
   display: grid;
   grid-template-columns: repeat(2, minmax(0, 1fr));
-  gap: 0.75rem;
+  gap: 0.85rem;
 }
 @media (min-width: 1024px) {
   .tx-grid {
     grid-template-columns: repeat(3, minmax(0, 1fr));
-    gap: 1rem;
+    gap: 1.25rem;
   }
 }
 .tx-card {
-  position: relative;
   display: flex;
   flex-direction: column;
   align-items: center;
   text-align: center;
   background: #fff;
-  border-radius: 0.85rem;
-  padding: 1rem 0.7rem 0.85rem;
-  box-shadow: 0 4px 16px rgba(15, 23, 42, 0.06);
-  border: 1px solid rgba(15, 23, 42, 0.05);
+  border-radius: 1rem;
+  padding: 1.15rem 0.85rem 1rem;
+  box-shadow: 0 6px 20px rgba(15, 23, 42, 0.07);
+  border: 1px solid rgba(15, 23, 42, 0.04);
   transition: transform 0.2s ease, box-shadow 0.2s ease;
+  height: 100%;
 }
 .tx-card:hover {
-  transform: translateY(-2px);
-  box-shadow: 0 8px 22px rgba(15, 23, 42, 0.1);
+  transform: translateY(-3px);
+  box-shadow: 0 10px 28px rgba(15, 23, 42, 0.11);
 }
 .tx-icon {
-  width: 3.25rem;
-  height: 3.25rem;
+  width: 3.5rem;
+  height: 3.5rem;
   border-radius: 999px;
   background: #EAF7F4;
-  background: color-mix(in srgb, var(--tx-color, #076279) 14%, #fff);
+  background: color-mix(in srgb, var(--tx-color, #076279) 16%, #fff);
   color: var(--tx-color, #076279);
   display: flex;
   align-items: center;
   justify-content: center;
-  margin-bottom: 0.55rem;
+  margin-bottom: 0.7rem;
   flex-shrink: 0;
 }
 .tx-icon svg {
-  width: 1.85rem;
-  height: 1.85rem;
+  width: 1.95rem;
+  height: 1.95rem;
   display: block;
 }
-.tx-body { width: 100%; }
+.tx-body {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  flex: 1;
+}
 .tx-card h3,
 .tx-body h3 {
-  margin: 0 0 0.4rem;
-  font-size: 0.8125rem !important;
+  margin: 0 0 0.45rem;
+  font-size: 0.875rem !important;
   font-weight: 700 !important;
   line-height: 1.25 !important;
-  color: #0f172a;
+  color: #023B44;
 }
 .tx-price {
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  margin: 0 0 0.5rem;
-  padding: 0.2rem 0.65rem;
+  margin: 0 0 0.55rem;
+  padding: 0.25rem 0.75rem;
   border-radius: 999px;
   background: #E7F6F1;
   color: #0F766E;
-  font-size: 0.6875rem;
+  font-size: 0.75rem;
   font-weight: 600;
   line-height: 1.3;
   white-space: nowrap;
 }
 .tx-card p,
 .tx-body p {
-  margin: 0 0 0.75rem;
-  font-size: 0.6875rem;
-  line-height: 1.4;
+  margin: 0 0 0.9rem;
+  font-size: 0.75rem;
+  line-height: 1.45;
   color: #64748b;
+  flex: 1;
 }
 .tx-book {
   display: inline-flex;
   align-items: center;
   justify-content: center;
   width: 100%;
-  min-height: 2.25rem;
-  padding: 0.45rem 0.5rem;
-  border-radius: 0.5rem;
+  min-height: 2.35rem;
+  padding: 0.5rem 0.6rem;
+  margin-top: auto;
+  border-radius: 0.55rem;
   background: #25D366;
   color: #fff;
-  font-size: 0.78rem;
+  font-size: 0.8125rem;
   font-weight: 700;
   line-height: 1.1;
   text-decoration: none;
@@ -267,53 +275,53 @@ label {
 }
 .tx-book:hover { background: #1ebe57; }
 
-@media (min-width: 640px) and (max-width: 1023px) {
-  .tx-card { padding: 1.15rem 0.9rem 1rem; }
-  .tx-icon { width: 3.6rem; height: 3.6rem; }
-  .tx-icon svg { width: 2.05rem; height: 2.05rem; }
-  .tx-card h3,
-  .tx-body h3 { font-size: 0.95rem !important; }
-  .tx-price { font-size: 0.78rem; }
-  .tx-card p,
-  .tx-body p { font-size: 0.78rem; }
-  .tx-book { min-height: 2.45rem; font-size: 0.875rem; }
-}
-
-/* Desktop: same centered layout as mobile, larger type */
-@media (min-width: 1024px) {
-  .tx-card {
-    padding: 1.35rem 1.15rem 1.15rem;
-  }
+@media (min-width: 640px) {
+  .tx-card { padding: 1.35rem 1.1rem 1.15rem; }
   .tx-icon {
     width: 4rem;
     height: 4rem;
-    margin-bottom: 0.75rem;
+    margin-bottom: 0.85rem;
   }
   .tx-icon svg {
-    width: 2.25rem;
-    height: 2.25rem;
+    width: 2.2rem;
+    height: 2.2rem;
   }
   .tx-card h3,
-  .tx-body h3 {
-    font-size: 1.1rem !important;
-  }
+  .tx-body h3 { font-size: 1.05rem !important; }
   .tx-price {
-    display: inline-flex;
     font-size: 0.875rem;
-    padding: 0.28rem 0.85rem;
-    margin-bottom: 0.55rem;
+    padding: 0.3rem 0.9rem;
   }
   .tx-card p,
   .tx-body p {
     font-size: 0.875rem;
-    margin-bottom: 1rem;
+    margin-bottom: 1.05rem;
   }
   .tx-book {
-    display: inline-flex;
     min-height: 2.65rem;
     font-size: 0.9375rem;
   }
-  .tx-plus { display: none !important; }
+}
+
+@media (min-width: 1024px) {
+  .tx-card { padding: 1.5rem 1.25rem 1.25rem; }
+  .tx-icon {
+    width: 4.25rem;
+    height: 4.25rem;
+  }
+  .tx-icon svg {
+    width: 2.35rem;
+    height: 2.35rem;
+  }
+  .tx-card h3,
+  .tx-body h3 { font-size: 1.125rem !important; }
+  .tx-price { font-size: 0.9rem; }
+  .tx-card p,
+  .tx-body p { font-size: 0.9rem; }
+  .tx-book {
+    min-height: 2.75rem;
+    font-size: 1rem;
+  }
 }
 
 /* Scroll reveal */

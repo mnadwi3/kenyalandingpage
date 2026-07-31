@@ -234,5 +234,22 @@
     });
   }
 
+  /* Sticky bar absorbs footer copyright at page end */
+  var stickyBar = document.querySelector(".sticky-bar");
+  var siteFooter = document.querySelector(".tp-footer");
+  if (stickyBar && siteFooter && "IntersectionObserver" in window) {
+    var footerIo = new IntersectionObserver(
+      function (entries) {
+        entries.forEach(function (entry) {
+          var atEnd = entry.isIntersecting;
+          stickyBar.classList.toggle("is-at-end", atEnd);
+          siteFooter.classList.toggle("is-covered", atEnd);
+        });
+      },
+      { root: null, threshold: 0, rootMargin: "0px 0px -40px 0px" }
+    );
+    footerIo.observe(siteFooter);
+  }
+
   /* Exit intent removed */
 })();

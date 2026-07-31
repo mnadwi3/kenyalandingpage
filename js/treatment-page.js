@@ -244,6 +244,7 @@
           var atEnd = entry.isIntersecting;
           stickyBar.classList.toggle("is-at-end", atEnd);
           siteFooter.classList.toggle("is-covered", atEnd);
+          document.body.classList.toggle("sticky-at-end", atEnd);
         });
       },
       { root: null, threshold: 0, rootMargin: "0px 0px -40px 0px" }

@@ -300,6 +300,24 @@ ul { margin: 0; padding: 0; }
   line-height: 1.65;
 }
 
+/* Symptoms + Diagnosis two columns */
+.sym-dx { border-bottom: 1px solid var(--line); }
+.sym-dx-grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 2.5rem;
+}
+.sym-dx-col .sechead { max-width: none; margin-bottom: 1.25rem; }
+.sym-dx-col .checklist-wide,
+.sym-dx-col .diag-note { max-width: none; }
+@media (min-width: 900px) {
+  .sym-dx-grid {
+    grid-template-columns: 1fr 1fr;
+    gap: 3rem 3.5rem;
+    align-items: start;
+  }
+}
+
 /* Treatment options */
 .optgrid {
   display: grid; grid-template-columns: 1fr;

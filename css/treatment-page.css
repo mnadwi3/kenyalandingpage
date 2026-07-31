@@ -243,6 +243,43 @@ ul { margin: 0; padding: 0; }
 }
 @media (min-width: 900px) { .twocol { grid-template-columns: 1fr 1fr; gap: 48px; } }
 
+/* Overview cards */
+.overview-grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 16px;
+}
+.overview-card {
+  background: var(--bg-alt);
+  border: 1px solid var(--line);
+  border-radius: 8px;
+  padding: 1.25rem 1.35rem;
+}
+.overview-card h3 {
+  font-size: 1.05rem;
+  margin-bottom: 0.5rem;
+  color: var(--secondary);
+}
+.overview-card p {
+  font-size: 0.95rem;
+  color: var(--muted);
+  line-height: 1.65;
+  margin: 0;
+}
+@media (min-width: 720px) {
+  .overview-grid { grid-template-columns: 1fr 1fr; gap: 18px; }
+}
+.checklist-wide {
+  max-width: 720px;
+}
+.diag-note {
+  margin-top: 1.25rem;
+  max-width: 720px;
+  font-size: 0.95rem;
+  color: var(--muted);
+  line-height: 1.65;
+}
+
 /* Treatment options */
 .optgrid {
   display: grid; grid-template-columns: 1fr;

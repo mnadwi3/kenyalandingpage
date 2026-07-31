@@ -719,6 +719,7 @@ p { margin: 0 0 1rem; color: var(--muted); }
 /* Case manager (text-only) */
 .manager-card { padding: 1.25rem 1.35rem; }
 .manager-card h3 { font-family: var(--font); margin: 0 0 0.35rem; }
+.manager-card .btn { margin-top: 0.85rem; }
 
 /* Comparison */
 .compare-grid {

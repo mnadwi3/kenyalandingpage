@@ -175,7 +175,8 @@ label {
 .tx-grid {
   display: grid;
   grid-template-columns: repeat(2, minmax(0, 1fr));
-  gap: 0.85rem;
+  gap: 0.75rem;
+  align-items: start;
 }
 @media (min-width: 1024px) {
   .tx-grid {
@@ -190,12 +191,13 @@ label {
   align-items: center;
   text-align: center;
   background: #fff;
-  border-radius: 1rem;
-  padding: 1.35rem 0.85rem 1rem;
+  border-radius: 0.85rem;
+  padding: 1rem 0.55rem 0.75rem;
   box-shadow: 0 6px 20px rgba(15, 23, 42, 0.07);
   border: 1px solid rgba(15, 23, 42, 0.04);
   transition: transform 0.2s ease, box-shadow 0.2s ease;
-  height: 100%;
+  min-width: 0;
+  width: 100%;
 }
 .tx-card:hover {
   transform: translateY(-3px);
@@ -203,10 +205,10 @@ label {
 }
 .tx-page-link {
   position: absolute;
-  top: 0.75rem;
-  right: 0.75rem;
-  width: 1.85rem;
-  height: 1.85rem;
+  top: 0.55rem;
+  right: 0.55rem;
+  width: 1.65rem;
+  height: 1.65rem;
   border-radius: 999px;
   border: 1.5px solid #CBD5E1;
   color: #64748B;
@@ -224,13 +226,13 @@ label {
   background: #F0F9FB;
 }
 .tx-page-link svg {
-  width: 0.85rem;
-  height: 0.85rem;
+  width: 0.75rem;
+  height: 0.75rem;
   display: block;
 }
 .tx-icon {
-  width: 4.25rem;
-  height: 4.25rem;
+  width: 3rem;
+  height: 3rem;
   border-radius: 999px;
   background: #EAF7F4;
   background: color-mix(in srgb, var(--tx-color, #076279) 14%, #fff);
@@ -238,12 +240,12 @@ label {
   display: flex;
   align-items: center;
   justify-content: center;
-  margin: 0.15rem 0 0.85rem;
+  margin: 0.1rem 0 0.55rem;
   flex-shrink: 0;
 }
 .tx-icon svg {
-  width: 2.35rem;
-  height: 2.35rem;
+  width: 1.65rem;
+  height: 1.65rem;
   display: block;
 }
 .tx-body {
@@ -251,12 +253,12 @@ label {
   display: flex;
   flex-direction: column;
   align-items: center;
-  flex: 1;
+  min-width: 0;
 }
 .tx-card h3,
 .tx-body h3 {
-  margin: 0 0 0.45rem;
-  font-size: 0.875rem !important;
+  margin: 0 0 0.35rem;
+  font-size: 0.8125rem !important;
   font-weight: 700 !important;
   line-height: 1.25 !important;
   color: #023B44;
@@ -274,58 +276,68 @@ label {
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  margin: 0 0 0.55rem;
-  padding: 0.25rem 0.75rem;
+  margin: 0 0 0.4rem;
+  padding: 0.2rem 0.55rem;
   border-radius: 999px;
   background: #E7F6F1;
   color: #0F766E;
-  font-size: 0.75rem;
+  font-size: 0.6875rem;
   font-weight: 600;
   line-height: 1.3;
   white-space: nowrap;
 }
 .tx-card p,
 .tx-body p {
-  margin: 0 0 0.9rem;
-  font-size: 0.75rem;
-  line-height: 1.45;
+  margin: 0 0 0.65rem;
+  font-size: 0.6875rem;
+  line-height: 1.4;
   color: #64748b;
-  flex: 1;
 }
 .tx-book {
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  gap: 0.35rem;
+  gap: 0.25rem;
   width: 100%;
-  min-height: 2.35rem;
-  padding: 0.5rem 0.6rem;
-  margin-top: auto;
-  border-radius: 0.55rem;
+  max-width: 100%;
+  box-sizing: border-box;
+  min-height: 2.15rem;
+  padding: 0.45rem 0.35rem;
+  margin-top: 0;
+  border-radius: 0.5rem;
   background: #25D366;
   color: #fff;
-  font-size: 0.8125rem;
+  font-size: 0.65rem;
   font-weight: 700;
-  line-height: 1.1;
+  line-height: 1.2;
   text-decoration: none;
-  white-space: nowrap;
+  white-space: normal;
+  text-align: center;
+  hyphens: auto;
+  overflow-wrap: anywhere;
   transition: background 0.15s ease;
 }
 .tx-book:hover { background: #1ebe57; }
 .tx-book svg {
-  width: 0.85rem;
-  height: 0.85rem;
-  flex-shrink: 0;
+  display: none;
 }
+.tx-book-full { display: none; }
+.tx-book-short { display: inline; }
 
 @media (min-width: 640px) {
-  .tx-card { padding: 1.5rem 1.1rem 1.15rem; }
+  .tx-grid { align-items: stretch; gap: 1rem; }
+  .tx-card {
+    padding: 1.5rem 1.1rem 1.15rem;
+    height: 100%;
+    border-radius: 1rem;
+  }
   .tx-page-link {
     width: 2rem;
     height: 2rem;
     top: 0.9rem;
     right: 0.9rem;
   }
+  .tx-page-link svg { width: 0.85rem; height: 0.85rem; }
   .tx-icon {
     width: 4.75rem;
     height: 4.75rem;
@@ -335,17 +347,35 @@ label {
     width: 2.6rem;
     height: 2.6rem;
   }
+  .tx-body { flex: 1; }
   .tx-card h3,
   .tx-body h3 {
     font-size: 1rem !important;
   }
-  .tx-price { font-size: 0.8125rem; }
+  .tx-price { font-size: 0.8125rem; padding: 0.25rem 0.75rem; margin-bottom: 0.55rem; }
   .tx-card p,
   .tx-body p {
     font-size: 0.8125rem;
     line-height: 1.5;
+    margin-bottom: 0.9rem;
+    flex: 1;
   }
-  .tx-book { font-size: 0.875rem; min-height: 2.5rem; }
+  .tx-book {
+    margin-top: auto;
+    font-size: 0.875rem;
+    min-height: 2.5rem;
+    padding: 0.5rem 0.75rem;
+    white-space: nowrap;
+    overflow-wrap: normal;
+  }
+  .tx-book-short { display: none; }
+  .tx-book-full { display: inline; }
+  .tx-book svg {
+    display: block;
+    width: 0.85rem;
+    height: 0.85rem;
+    flex-shrink: 0;
+  }
 }
 
 /* ---- Treatment detail pages ---- */

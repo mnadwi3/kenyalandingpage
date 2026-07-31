@@ -171,7 +171,7 @@ label {
 }
 
 /* ---- Treatment cards ---- */
-/* Centered stack: icon, name, price, copy, Get Free Consultation */
+/* Centered stack: page arrow, icon, name, price, copy, Get Free Consultation */
 .tx-grid {
   display: grid;
   grid-template-columns: repeat(2, minmax(0, 1fr));
@@ -184,13 +184,14 @@ label {
   }
 }
 .tx-card {
+  position: relative;
   display: flex;
   flex-direction: column;
   align-items: center;
   text-align: center;
   background: #fff;
   border-radius: 1rem;
-  padding: 1.15rem 0.85rem 1rem;
+  padding: 1.35rem 0.85rem 1rem;
   box-shadow: 0 6px 20px rgba(15, 23, 42, 0.07);
   border: 1px solid rgba(15, 23, 42, 0.04);
   transition: transform 0.2s ease, box-shadow 0.2s ease;
@@ -200,22 +201,49 @@ label {
   transform: translateY(-3px);
   box-shadow: 0 10px 28px rgba(15, 23, 42, 0.11);
 }
+.tx-page-link {
+  position: absolute;
+  top: 0.75rem;
+  right: 0.75rem;
+  width: 1.85rem;
+  height: 1.85rem;
+  border-radius: 999px;
+  border: 1.5px solid #CBD5E1;
+  color: #64748B;
+  background: #fff;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  text-decoration: none;
+  transition: border-color 0.15s ease, color 0.15s ease, background 0.15s ease;
+  z-index: 2;
+}
+.tx-page-link:hover {
+  border-color: #097895;
+  color: #097895;
+  background: #F0F9FB;
+}
+.tx-page-link svg {
+  width: 0.85rem;
+  height: 0.85rem;
+  display: block;
+}
 .tx-icon {
-  width: 3.5rem;
-  height: 3.5rem;
+  width: 4.25rem;
+  height: 4.25rem;
   border-radius: 999px;
   background: #EAF7F4;
-  background: color-mix(in srgb, var(--tx-color, #076279) 16%, #fff);
+  background: color-mix(in srgb, var(--tx-color, #076279) 14%, #fff);
   color: var(--tx-color, #076279);
   display: flex;
   align-items: center;
   justify-content: center;
-  margin-bottom: 0.7rem;
+  margin: 0.15rem 0 0.85rem;
   flex-shrink: 0;
 }
 .tx-icon svg {
-  width: 1.95rem;
-  height: 1.95rem;
+  width: 2.35rem;
+  height: 2.35rem;
   display: block;
 }
 .tx-body {
@@ -232,6 +260,15 @@ label {
   font-weight: 700 !important;
   line-height: 1.25 !important;
   color: #023B44;
+}
+.tx-card h3 a,
+.tx-body h3 a {
+  color: inherit;
+  text-decoration: none;
+}
+.tx-card h3 a:hover,
+.tx-body h3 a:hover {
+  color: #097895;
 }
 .tx-price {
   display: inline-flex;
@@ -259,6 +296,7 @@ label {
   display: inline-flex;
   align-items: center;
   justify-content: center;
+  gap: 0.35rem;
   width: 100%;
   min-height: 2.35rem;
   padding: 0.5rem 0.6rem;
@@ -274,44 +312,142 @@ label {
   transition: background 0.15s ease;
 }
 .tx-book:hover { background: #1ebe57; }
+.tx-book svg {
+  width: 0.85rem;
+  height: 0.85rem;
+  flex-shrink: 0;
+}
 
 @media (min-width: 640px) {
-  .tx-card { padding: 1.35rem 1.1rem 1.15rem; }
+  .tx-card { padding: 1.5rem 1.1rem 1.15rem; }
+  .tx-page-link {
+    width: 2rem;
+    height: 2rem;
+    top: 0.9rem;
+    right: 0.9rem;
+  }
   .tx-icon {
-    width: 4rem;
-    height: 4rem;
-    margin-bottom: 0.85rem;
+    width: 4.75rem;
+    height: 4.75rem;
+    margin-bottom: 1rem;
   }
   .tx-icon svg {
-    width: 2.2rem;
-    height: 2.2rem;
+    width: 2.6rem;
+    height: 2.6rem;
   }
   .tx-card h3,
-  .tx-body h3 { font-size: 1.05rem !important; }
-  .tx-price {
-    font-size: 0.875rem;
-    padding: 0.3rem 0.9rem;
+  .tx-body h3 {
+    font-size: 1rem !important;
   }
+  .tx-price { font-size: 0.8125rem; }
   .tx-card p,
   .tx-body p {
-    font-size: 0.875rem;
-    margin-bottom: 1.05rem;
+    font-size: 0.8125rem;
+    line-height: 1.5;
   }
-  .tx-book {
-    min-height: 2.65rem;
-    font-size: 0.9375rem;
+  .tx-book { font-size: 0.875rem; min-height: 2.5rem; }
+}
+
+/* ---- Treatment detail pages ---- */
+.tx-detail-layout {
+  display: grid;
+  gap: 1.5rem;
+  align-items: start;
+}
+@media (min-width: 1024px) {
+  .tx-detail-layout {
+    grid-template-columns: minmax(0, 1fr) 20rem;
+    gap: 2rem;
   }
+}
+.tx-detail-content {
+  background: #fff;
+  border-radius: 1.25rem;
+  border: 1px solid #e2e8f0;
+  box-shadow: 0 4px 20px rgba(2, 59, 68, 0.06);
+  padding: 1.5rem 1.25rem;
+}
+@media (min-width: 640px) {
+  .tx-detail-content { padding: 2rem 2.25rem; }
+}
+.tx-detail-content .tx-detail-icon {
+  width: 4.5rem;
+  height: 4.5rem;
+  border-radius: 999px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 1rem;
+  background: color-mix(in srgb, var(--tx-color, #076279) 14%, #fff);
+  color: var(--tx-color, #076279);
+}
+.tx-detail-content .tx-detail-icon svg {
+  width: 2.4rem;
+  height: 2.4rem;
+}
+.tx-detail-content h1 {
+  color: #023B44;
+  margin: 0 0 0.5rem;
+}
+.tx-detail-content .tx-detail-price {
+  display: inline-flex;
+  margin-bottom: 1rem;
+  padding: 0.3rem 0.85rem;
+  border-radius: 999px;
+  background: #E7F6F1;
+  color: #0F766E;
+  font-size: 0.875rem;
+  font-weight: 600;
+}
+.tx-detail-content h2 {
+  color: #023B44;
+  font-size: 1.15rem !important;
+  margin: 1.5rem 0 0.65rem;
+}
+.tx-detail-content p,
+.tx-detail-content li {
+  color: #475569;
+  line-height: 1.7;
+}
+.tx-detail-content ul {
+  margin: 0.5rem 0 0;
+  padding-left: 1.15rem;
+}
+.tx-detail-content li { margin-bottom: 0.4rem; }
+.tx-detail-placeholder {
+  margin-top: 1.25rem;
+  padding: 1rem 1.1rem;
+  border-radius: 0.85rem;
+  border: 1.5px dashed #97C9D4;
+  background: #F3FAFC;
+  color: #476A73;
+  font-size: 0.9rem;
+}
+.tx-float-form {
+  position: relative;
+}
+@media (min-width: 1024px) {
+  .tx-float-form {
+    position: sticky;
+    top: 5.5rem;
+  }
+}
+.tx-float-form .appointment-card {
+  width: 100%;
+  max-width: 20rem;
+  margin-left: auto;
+  margin-right: auto;
 }
 
 @media (min-width: 1024px) {
   .tx-card { padding: 1.5rem 1.25rem 1.25rem; }
   .tx-icon {
-    width: 4.25rem;
-    height: 4.25rem;
+    width: 5rem;
+    height: 5rem;
   }
   .tx-icon svg {
-    width: 2.35rem;
-    height: 2.35rem;
+    width: 2.75rem;
+    height: 2.75rem;
   }
   .tx-card h3,
   .tx-body h3 { font-size: 1.125rem !important; }

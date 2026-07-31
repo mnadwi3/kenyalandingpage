@@ -8,6 +8,15 @@
   'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
   })(window,document,'script','dataLayer','GTM-KZ86XPT5');</script>
   <!-- End Google Tag Manager -->
+  <!-- GA4 via gtag (send_page_view off — GTM already sends pageviews; ensures generate_lead reaches GA4/Ads) -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-5TBH8QQ2EQ"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    window.gtag = gtag;
+    gtag('js', new Date());
+    gtag('config', 'G-5TBH8QQ2EQ', { send_page_view: false });
+  </script>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Cancer Treatment in India | TabeebWay</title>
@@ -855,6 +864,6 @@
     </a>
   </div>
 
-  <script src="js/main.js?v=20260731-tabeebway-brand"></script>
+  <script src="js/main.js?v=20260731-conversion-clean"></script>
 </body>
 </html>

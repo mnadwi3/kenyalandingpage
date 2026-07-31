@@ -242,21 +242,33 @@
     });
   }
 
-  /* After Sheets success, before WhatsApp: fire generate_lead for GTM + GA4 */
+  /* After Sheets success, before WhatsApp: fire generate_lead for GTM + GA4 → Google Ads */
   function fireGenerateLeadThenOpenWhatsApp(form, whatsappUrl) {
+    var formId = (form && form.id) || '';
+    var payload = {
+      form_id: formId,
+      lead_source: 'website_form'
+    };
+
     window.dataLayer = window.dataLayer || [];
+    /* Custom event for GTM triggers */
     window.dataLayer.push({
       event: 'generate_lead',
-      form_id: (form && form.id) || '',
+      form_id: formId,
       lead_source: 'website_form'
     });
 
-    if (typeof gtag === 'function') {
-      gtag('event', 'generate_lead', {
-        form_id: (form && form.id) || '',
-        lead_source: 'website_form'
-      });
+    /* Ensure gtag exists — GTM can load gtag.js without exposing window.gtag */
+    if (typeof window.gtag !== 'function') {
+      window.gtag = function () {
+        window.dataLayer.push(arguments);
+      };
     }
+
+    /* GA4 event (imported in Google Ads as Primary: tabeebway.com generate_lead) */
+    window.gtag('event', 'generate_lead', Object.assign({
+      send_to: 'G-5TBH8QQ2EQ'
+    }, payload));
 
     return new Promise(function (resolve) {
       setTimeout(resolve, 500);

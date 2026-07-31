@@ -149,19 +149,8 @@ ul { margin: 0; padding: 0; }
 .hero-sub {
   font-size: 1.05rem; color: var(--muted); max-width: 480px; margin-bottom: 28px;
 }
-.hero-ctas { display: flex; flex-wrap: wrap; gap: 12px; margin-bottom: 36px; }
+.hero-ctas { display: flex; flex-wrap: wrap; gap: 12px; margin-bottom: 0; }
 .hero-ctas .btn-outline-dark { border-color: var(--deep); color: var(--deep); }
-.trustrow {
-  display: grid; grid-template-columns: 1fr 1fr; gap: 18px 24px;
-  padding-top: 24px; border-top: 1px solid var(--line);
-}
-.trustitem b {
-  font-family: var(--mono); font-size: 1.15rem; color: var(--deep); display: block;
-}
-.trustitem span { font-size: 12.5px; color: var(--muted); }
-@media (min-width: 640px) {
-  .trustrow { grid-template-columns: repeat(4, 1fr); }
-}
 @media (min-width: 960px) {
   .hero-grid { grid-template-columns: 1.15fr 0.85fr; gap: 56px; }
 }

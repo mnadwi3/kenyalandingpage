@@ -189,11 +189,11 @@
         })
         .then(function () {
           window.open(waUrl, "_blank");
-          var panel = form.closest(".lead-card");
+          var panel = form.closest(".formcard") || form.closest(".lead-card");
           if (panel) {
             var success = panel.querySelector(".form-success");
             var fields = panel.querySelector(".form-fields");
-            if (fields) fields.style.display = "none";
+            if (fields) fields.classList.add("is-hidden");
             if (success) success.classList.add("is-visible");
           }
         })
@@ -214,9 +214,9 @@
   document.querySelectorAll('[data-scroll-to="lead"]').forEach(function (el) {
     el.addEventListener("click", function (e) {
       var target =
-        window.matchMedia("(min-width: 1100px)").matches
-          ? document.getElementById("lead-desktop")
-          : document.getElementById("lead-mobile");
+        document.getElementById("lead") ||
+        document.getElementById("lead-desktop") ||
+        document.getElementById("lead-mobile");
       if (!target) return;
       e.preventDefault();
       target.scrollIntoView({ behavior: "smooth", block: "center" });

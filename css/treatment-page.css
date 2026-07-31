@@ -1,5 +1,5 @@
 /* TabeebWay treatment pages — editorial layout
-   Home palette + pink accent (--rose) */
+   Default = home teal accents; .tx-theme-women = pink accents */
 :root {
   --bg: #FFFFFF;
   --bg-alt: #F7FAFB;
@@ -8,9 +8,12 @@
   --deep-light: #0BA5C4;
   --deep-dark: #076279;
   --secondary: #023B44;
-  --rose: #B3566A;
-  --rose-dark: #8C4054;
+  --accent: #097895;
+  --accent-dark: #076279;
+  --accent-soft: #B9D4DC;
   --gold: #D4A017;
+  --cta: #F5821F;
+  --cta-hover: #E07416;
   --muted: #5B6B70;
   --line: #D9E4E8;
   --white: #FFFFFF;
@@ -19,6 +22,13 @@
   --font: "Inter", "Segoe UI", system-ui, sans-serif;
   --mono: ui-monospace, "SFMono-Regular", Menlo, Consolas, monospace;
   --ease: cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+/* Women’s cancer pages only (breast, cervical) */
+body.tx-theme-women {
+  --accent: #B3566A;
+  --accent-dark: #8C4054;
+  --accent-soft: #F2CDD6;
 }
 
 *, *::before, *::after { box-sizing: border-box; }
@@ -51,7 +61,7 @@ ul { margin: 0; padding: 0; }
 }
 .scroll-progress {
   position: fixed; top: 0; left: 0; height: 3px; width: 0;
-  background: linear-gradient(90deg, var(--deep), var(--rose));
+  background: linear-gradient(90deg, var(--deep), var(--accent));
   z-index: 1000;
 }
 
@@ -104,8 +114,8 @@ ul { margin: 0; padding: 0; }
   border: 1px solid transparent; white-space: nowrap;
   transition: background .2s, color .2s, border-color .2s;
 }
-.btn-primary { background: var(--rose); color: #fff; }
-.btn-primary:hover { background: var(--rose-dark); color: #fff; }
+.btn-primary { background: var(--accent); color: #fff; }
+.btn-primary:hover { background: var(--accent-dark); color: #fff; }
 .btn-outline {
   border-color: rgba(255,255,255,.55); color: #fff; background: transparent;
 }
@@ -127,15 +137,15 @@ ul { margin: 0; padding: 0; }
 }
 .eyebrow {
   font-size: 13px; font-weight: 600; letter-spacing: .06em;
-  text-transform: uppercase; color: var(--rose);
+  text-transform: uppercase; color: var(--accent);
   margin-bottom: 16px; display: flex; align-items: center; gap: 8px;
 }
-.eyebrow::before { content: ""; width: 18px; height: 1px; background: var(--rose); }
+.eyebrow::before { content: ""; width: 18px; height: 1px; background: var(--accent); }
 .hero h1 {
   font-size: clamp(1.85rem, 5vw, 2.75rem);
   line-height: 1.1; margin-bottom: 20px; color: var(--secondary);
 }
-.hero h1 em { font-style: italic; font-weight: 600; color: var(--rose); }
+.hero h1 em { font-style: italic; font-weight: 600; color: var(--accent); }
 .hero-sub {
   font-size: 1.05rem; color: var(--muted); max-width: 480px; margin-bottom: 28px;
 }
@@ -178,7 +188,7 @@ ul { margin: 0; padding: 0; }
   font-size: 14px; background: var(--bg-alt); color: var(--ink);
 }
 .field input:focus, .field select:focus, .field textarea:focus {
-  outline: 2px solid var(--rose); outline-offset: 1px; border-color: var(--rose);
+  outline: 2px solid var(--accent); outline-offset: 1px; border-color: var(--accent);
 }
 .formcard .submit { width: 100%; justify-content: center; padding: 13px; margin-top: 6px; }
 .formnote { font-size: 11.5px; color: var(--muted); margin-top: 12px; text-align: center; }
@@ -192,7 +202,7 @@ ul { margin: 0; padding: 0; }
 .tp-section { padding: 64px 0; border-bottom: 1px solid var(--line); }
 .kicker {
   font-size: 12.5px; font-weight: 600; letter-spacing: .08em;
-  text-transform: uppercase; color: var(--rose); margin-bottom: 10px;
+  text-transform: uppercase; color: var(--accent); margin-bottom: 10px;
 }
 .sechead { max-width: 640px; margin-bottom: 40px; }
 .sechead h2 { font-size: clamp(1.5rem, 3vw, 2rem); line-height: 1.15; }
@@ -208,7 +218,7 @@ ul { margin: 0; padding: 0; }
 }
 .fact .num {
   font-family: var(--mono); font-size: 1.15rem;
-  color: #F2CDD6; margin-bottom: 6px;
+  color: var(--accent-soft); margin-bottom: 6px;
 }
 .fact .lbl { font-size: 12.5px; color: #B9D4DC; line-height: 1.4; }
 @media (min-width: 900px) {
@@ -227,7 +237,7 @@ ul { margin: 0; padding: 0; }
 .checklist li:first-child { border-top: none; }
 .checklist .mark {
   width: 20px; height: 20px; border-radius: 50%;
-  background: var(--bg-alt); color: var(--rose-dark);
+  background: var(--bg-alt); color: var(--accent-dark);
   display: flex; align-items: center; justify-content: center;
   font-size: 12px; flex-shrink: 0; margin-top: 1px; font-weight: 700;
 }
@@ -240,7 +250,7 @@ ul { margin: 0; padding: 0; }
 }
 .optcard { background: var(--white); padding: 28px 24px; }
 .optcard .idx {
-  font-family: var(--mono); font-size: 12px; color: var(--rose); margin-bottom: 14px;
+  font-family: var(--mono); font-size: 12px; color: var(--accent); margin-bottom: 14px;
 }
 .optcard h3 { font-size: 1.1rem; margin-bottom: 8px; color: var(--secondary); }
 .optcard p { font-size: 14px; color: var(--muted); }
@@ -274,12 +284,12 @@ ul { margin: 0; padding: 0; }
 .barrow .barlabel b { font-family: var(--mono); font-weight: 500; }
 .bartrack { height: 10px; background: var(--bg-alt); border-radius: 2px; overflow: hidden; }
 .barfill { height: 100%; border-radius: 2px; }
-.barfill.india { background: var(--rose); width: 22%; }
+.barfill.india { background: var(--accent); width: 22%; }
 .barfill.usuk { background: var(--muted); width: 100%; }
 .costcard {
   background: var(--deep); color: #fff; border-radius: 8px; padding: 32px;
 }
-.costcard .kicker { color: #F2CDD6; }
+.costcard .kicker { color: var(--accent-soft); }
 .costcard .price {
   font-family: var(--mono); font-size: 2rem; margin: 8px 0 18px; color: #fff;
 }
@@ -302,20 +312,20 @@ ul { margin: 0; padding: 0; }
 .doccard .avatar {
   height: 110px;
   background: linear-gradient(135deg, var(--deep), var(--deep-dark));
-  color: #F2CDD6; font-size: 1.6rem; font-weight: 700;
+  color: var(--accent-soft); font-size: 1.6rem; font-weight: 700;
   display: flex; align-items: center; justify-content: center;
 }
 .doccard .info { padding: 18px 20px; display: flex; flex-direction: column; flex: 1; }
 .doccard h3 { font-size: 1rem; margin-bottom: 3px; }
 .doccard .role {
-  font-size: 13px; color: var(--rose-dark); font-weight: 600; margin-bottom: 10px;
+  font-size: 13px; color: var(--accent-dark); font-weight: 600; margin-bottom: 10px;
 }
 .doccard .meta { font-size: 12.5px; color: var(--muted); line-height: 1.6; margin-bottom: 14px; flex: 1; }
 .doccard .link {
   font-size: 13px; font-weight: 600; color: var(--deep);
   border-bottom: 1px solid var(--deep); align-self: flex-start;
 }
-.doccard .link:hover { color: var(--rose); border-color: var(--rose); }
+.doccard .link:hover { color: var(--accent); border-color: var(--accent); }
 @media (min-width: 640px) { .docgrid { grid-template-columns: 1fr 1fr; gap: 20px; } }
 @media (min-width: 960px) { .docgrid { grid-template-columns: repeat(3, 1fr); } }
 
@@ -330,11 +340,11 @@ ul { margin: 0; padding: 0; }
 .step .node {
   position: absolute; left: -38px; top: 2px;
   width: 19px; height: 19px; border-radius: 50%;
-  background: var(--white); border: 2px solid var(--rose);
+  background: var(--white); border: 2px solid var(--accent);
 }
 .step .day {
   font-family: var(--mono); font-size: 12px;
-  color: var(--rose-dark); margin-bottom: 4px;
+  color: var(--accent-dark); margin-bottom: 4px;
 }
 .step h3 { font-size: 1.05rem; margin-bottom: 5px; }
 .step p { font-size: 14px; color: var(--muted); max-width: 520px; }
@@ -347,9 +357,9 @@ ul { margin: 0; padding: 0; }
   cursor: pointer; font-size: 15.5px; font-weight: 600;
   color: var(--secondary); background: none; border: none; text-align: left;
 }
-.faq-trigger:focus-visible { outline: 2px solid var(--rose); outline-offset: 2px; }
+.faq-trigger:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
 .faq-trigger .x {
-  font-family: var(--mono); color: var(--rose); font-size: 18px;
+  font-family: var(--mono); color: var(--accent); font-size: 18px;
   transition: transform .2s; flex-shrink: 0;
 }
 .faq-panel {

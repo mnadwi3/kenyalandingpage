@@ -349,33 +349,40 @@ ul { margin: 0; padding: 0; }
 @media (min-width: 640px) { .whygrid { grid-template-columns: 1fr 1fr; gap: 20px; } }
 @media (min-width: 1000px) { .whygrid { grid-template-columns: repeat(3, 1fr); } }
 
-/* Cost */
-.costwrap { display: grid; grid-template-columns: 1fr; gap: 40px; align-items: center; }
-.barrow { margin-bottom: 22px; }
-.barrow .barlabel {
-  display: flex; justify-content: space-between; gap: 12px;
-  font-size: 13.5px; margin-bottom: 7px;
+/* Cost — minimal */
+.cost-simple { max-width: 40rem; }
+.cost-simple h2 {
+  font-family: var(--mono);
+  font-size: clamp(1.75rem, 3vw, 2.25rem);
+  font-weight: 600;
+  color: var(--deep);
+  margin: 0.35rem 0 0.85rem;
+  letter-spacing: -0.02em;
 }
-.barrow .barlabel b { font-family: var(--mono); font-weight: 500; }
-.bartrack { height: 10px; background: var(--bg-alt); border-radius: 2px; overflow: hidden; }
-.barfill { height: 100%; border-radius: 2px; }
-.barfill.india { background: var(--accent); width: 22%; }
-.barfill.usuk { background: var(--muted); width: 100%; }
-.costcard {
-  background: var(--deep); color: #fff; border-radius: 8px; padding: 32px;
+.cost-simple-lead {
+  color: var(--muted);
+  font-size: 1rem;
+  line-height: 1.65;
+  margin: 0 0 1rem;
 }
-.costcard .kicker { color: var(--accent-soft); }
-.costcard .price {
-  font-family: var(--mono); font-size: 2rem; margin: 8px 0 18px; color: #fff;
+.cost-simple-row {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.35rem 0.65rem;
+  align-items: baseline;
+  font-size: 0.95rem;
+  color: var(--ink);
+  padding: 0.85rem 0;
+  border-top: 1px solid var(--line);
+  border-bottom: 1px solid var(--line);
 }
-.costcard .price span { font-size: 1rem; color: #B9D4DC; }
-.costcard ul { list-style: none; font-size: 14px; }
-.costcard li {
-  padding: 9px 0; border-top: 1px solid rgba(255,255,255,.14);
-  display: flex; gap: 10px;
+.cost-simple-row strong { color: var(--secondary); font-weight: 600; }
+.cost-simple-sep { color: var(--muted); }
+.cost-simple-note {
+  margin: 0.85rem 0 0;
+  font-size: 12.5px;
+  color: var(--muted);
 }
-.costcard li:first-child { border-top: none; }
-@media (min-width: 900px) { .costwrap { grid-template-columns: 1fr 1fr; gap: 56px; } }
 
 /* Doctors */
 .docgrid { display: grid; grid-template-columns: 1fr; gap: 16px; }
@@ -404,25 +411,81 @@ ul { margin: 0; padding: 0; }
 @media (min-width: 640px) { .docgrid { grid-template-columns: 1fr 1fr; gap: 20px; } }
 @media (min-width: 960px) { .docgrid { grid-template-columns: repeat(3, 1fr); } }
 
-/* Journey spine */
-.spine { position: relative; padding-left: 38px; }
-.spine::before {
-  content: ""; position: absolute; left: 9px; top: 6px; bottom: 6px;
-  width: 1px; background: var(--line);
+/* Journey — horizontal timeline */
+.timeline {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 1.25rem;
+  position: relative;
 }
-.step { position: relative; padding-bottom: 34px; }
-.step:last-child { padding-bottom: 0; }
-.step .node {
-  position: absolute; left: -38px; top: 2px;
-  width: 19px; height: 19px; border-radius: 50%;
-  background: var(--white); border: 2px solid var(--accent);
+.tl-step {
+  position: relative;
+  padding: 0 0 0 1.35rem;
+  border-left: 2px solid var(--line);
+  margin-left: 7px;
 }
-.step .day {
-  font-family: var(--mono); font-size: 12px;
-  color: var(--accent-dark); margin-bottom: 4px;
+.tl-step:last-child { border-left-color: transparent; padding-bottom: 0; }
+.tl-node {
+  position: absolute;
+  left: -9px;
+  top: 4px;
+  width: 14px;
+  height: 14px;
+  border-radius: 50%;
+  background: var(--white);
+  border: 2px solid var(--accent);
+  z-index: 1;
 }
-.step h3 { font-size: 1.05rem; margin-bottom: 5px; }
-.step p { font-size: 14px; color: var(--muted); max-width: 520px; }
+.tl-day {
+  font-family: var(--mono);
+  font-size: 11px;
+  font-weight: 600;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  color: var(--accent-dark);
+  margin-bottom: 0.25rem;
+}
+.tl-step h3 {
+  font-size: 0.95rem;
+  margin: 0 0 0.3rem;
+  color: var(--secondary);
+}
+.tl-step p {
+  font-size: 0.82rem;
+  color: var(--muted);
+  line-height: 1.45;
+  margin: 0;
+}
+@media (min-width: 900px) {
+  .timeline {
+    display: grid;
+    grid-template-columns: repeat(6, minmax(0, 1fr));
+    gap: 0;
+    padding-top: 0.5rem;
+  }
+  .timeline::before {
+    content: "";
+    position: absolute;
+    left: 8%;
+    right: 8%;
+    top: 11px;
+    height: 2px;
+    background: var(--line);
+  }
+  .tl-step {
+    border-left: none;
+    margin-left: 0;
+    padding: 0 0.65rem 0 0;
+    text-align: left;
+  }
+  .tl-step:last-child { padding-right: 0; }
+  .tl-node {
+    position: relative;
+    left: auto;
+    top: auto;
+    margin-bottom: 0.85rem;
+  }
+}
 
 /* FAQ */
 .faq-item { border-bottom: 1px solid var(--line); }

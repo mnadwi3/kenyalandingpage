@@ -129,8 +129,13 @@ p { margin: 0 0 1rem; color: var(--muted); }
 .tp-main { min-width: 0; }
 .tp-aside { display: none; }
 @media (min-width: 1100px) {
-  .tp-aside { display: block; position: sticky; top: calc(var(--header-h) + 1rem); }
-  .tp-aside .lead-card { margin-top: 1.25rem; }
+  .tp-aside {
+    display: block;
+    position: sticky;
+    /* Vertically center in the viewport while sticky; never sit under the header */
+    top: max(calc(var(--header-h) + 0.75rem), calc(50vh - 50%));
+    align-self: start;
+  }
 }
 
 /* Hero */

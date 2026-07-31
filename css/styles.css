@@ -1,5 +1,5 @@
 /* ============================================
-   Apollo Kenya — Main Stylesheet
+   TabeebWay — Main Stylesheet
    ============================================ */
 
 :root {
@@ -564,9 +564,9 @@ label {
   header .header-wa-text { display: inline; }
   header .site-logo { height: auto; width: auto; }
   header .site-logo img {
-    height: 3.5rem;
+    height: 3.25rem;
     width: auto;
-    max-width: 10rem;
+    max-width: 3.5rem;
     object-fit: contain;
     object-position: left center;
   }
@@ -683,7 +683,7 @@ label {
 .type-small { font-size: var(--fs-small) !important; }
 .type-caption { font-size: var(--fs-caption) !important; }
 
-/* ---- Why Choose Apollo ---- */
+/* ---- Why Choose TabeebWay ---- */
 #why-india .why-heading {
   font-size: clamp(2rem, 9vw, 2.75rem) !important;
   font-weight: 700 !important;

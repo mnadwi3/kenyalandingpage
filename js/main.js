@@ -1,5 +1,5 @@
 /* ============================================
-   Apollo Kenya — Main JavaScript
+   TabeebWay — Main JavaScript
    ============================================ */
 
 /* Hero slider */
@@ -81,7 +81,7 @@
 
 /* Order sections: Treatment → How It Works → Doctors → Visa & Travel → Testimonials → About Us → FAQ */
 (function () {
-  var order = ['treatment', 'how-it-works', 'doctors', 'visa-travel', 'testimonials', 'about-apollo', 'faq'];
+  var order = ['treatment', 'how-it-works', 'doctors', 'visa-travel', 'testimonials', 'about-us', 'faq'];
   var anchor = document.getElementById('why-india');
   if (!anchor) return;
   var cursor = anchor;

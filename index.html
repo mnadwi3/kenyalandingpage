@@ -16,7 +16,7 @@
 
   <script src="https://cdn.tailwindcss.com"></script>
   <script>
-    /* Apollo-inspired palette: deep teal primary, cyan accent, soft clinical neutrals */
+    /* Brand palette: deep teal primary, cyan accent, soft clinical neutrals */
     tailwind.config = {
       theme: {
         extend: {
@@ -50,7 +50,7 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
 
-  <link rel="stylesheet" href="css/styles.css?v=20260730-tx-restore">
+  <link rel="stylesheet" href="css/styles.css?v=20260731-tabeebway-brand">
 </head>
 <body class="bg-white antialiased">
   <!-- Google Tag Manager (noscript) -->
@@ -58,11 +58,12 @@
   height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
   <!-- End Google Tag Manager (noscript) -->
 
-  <!-- ========== HEADER (Apollo-style teal bar) ========== -->
+  <!-- ========== HEADER ========== -->
   <header class="sticky top-0 z-50 bg-primary shadow-md">
     <div class="max-w-6xl mx-auto px-4 sm:px-6 h-[4.25rem] sm:h-[4.75rem] flex items-center justify-between gap-3">
-      <a href="#top" class="site-logo shrink-0 inline-flex items-center" aria-label="Home">
-        <img src="https://cdn.jsdelivr.net/gh/mnadwi3/kenyalandingpage@08c22b1/images/apollo-wordmark.png" alt="Apollo Hospitals" width="280" height="150" class="h-14 sm:h-16 lg:h-[4.25rem] w-auto max-w-[9.5rem] sm:max-w-[12.5rem] lg:max-w-[14rem] object-contain object-left" decoding="async">
+      <a href="#top" class="site-logo shrink-0 inline-flex items-center gap-2.5" aria-label="TabeebWay Home">
+        <img src="images/tabeebway-logo.png?v=20260731" alt="TabeebWay" width="120" height="120" class="h-12 sm:h-14 lg:h-16 w-auto object-contain object-left" decoding="async">
+        <span class="font-display font-bold text-white text-lg sm:text-xl tracking-tight hidden sm:inline">TabeebWay</span>
       </a>
 
       <nav class="hidden md:flex items-center gap-2.5 lg:gap-4 text-[0.8125rem] lg:text-sm text-white/90 whitespace-nowrap" aria-label="Primary">
@@ -70,7 +71,7 @@
         <a href="#treatment" class="hover:text-white transition-colors">Treatment</a>
         <a href="#doctors" class="hover:text-white transition-colors">Doctors</a>
         <a href="#testimonials" class="hover:text-white transition-colors">Testimonials</a>
-        <a href="#about-apollo" class="hover:text-white transition-colors">About Us</a>
+        <a href="#about-us" class="hover:text-white transition-colors">About Us</a>
         <a href="#faq" class="hover:text-white transition-colors">FAQ</a>
       </nav>
 
@@ -216,14 +217,14 @@
       </ul>
     </div>
 
-    <!-- ========== ABOUT APOLLO HOSPITALS ========== -->
-    <section id="about-apollo" class="py-16 sm:py-20 bg-soft scroll-mt-24">
+    <!-- ========== ABOUT TABEEBWAY ========== -->
+    <section id="about-us" class="py-16 sm:py-20 bg-soft scroll-mt-24">
       <div class="max-w-6xl mx-auto px-4 sm:px-6">
         <div class="grid lg:grid-cols-2 gap-10 lg:gap-14 items-center reveal">
           <div class="rounded-2xl overflow-hidden shadow-card ring-1 ring-slate-100 aspect-[4/3] lg:aspect-auto lg:min-h-[320px]">
             <img
               src="https://drupal-cdn-hfaeddcdbng5hfbg.a01.azurefd.net/sites/default/files/2025-02/Apollo-Hospitals-Chennai%2C%20Nellore.jpg"
-              alt="Apollo Hospitals facility"
+              alt="Partner hospital care facility in India"
               class="w-full h-full object-cover"
               loading="lazy"
               width="800"
@@ -233,13 +234,13 @@
           <div>
             <h2 class="text-2xl sm:text-3xl font-bold mb-4 leading-tight">
               <span class="block text-secondary">About</span>
-              <span class="block text-primary">Apollo Hospitals</span>
+              <span class="block text-primary">TabeebWay</span>
             </h2>
             <p class="text-slate-600 leading-relaxed mb-4 text-left">
-              Apollo Hospitals is one of India's established private healthcare groups, known for multidisciplinary cancer care, advanced diagnostics, and dedicated international patient services. Many families choose India for oncology treatment because of access to experienced specialists and structured care pathways.
+              TabeebWay is a medical tourism facilitation platform helping families access multidisciplinary cancer care in India — including advanced diagnostics, specialist second opinions, and coordinated international patient support. Many families choose India for oncology treatment because of access to experienced specialists and structured care pathways.
             </p>
             <p class="text-slate-600 leading-relaxed mb-0 text-left">
-              TabeebWay helps you navigate that journey — from sharing reports and arranging a free second opinion to travel coordination and follow-up after you return home. Hospital selection is based on your clinical needs and the care plan recommended after specialist review.
+              We guide you through every step — from sharing reports and arranging a free second opinion to travel coordination and follow-up after you return home. Hospital selection is based on your clinical needs and the care plan recommended after specialist review.
             </p>
           </div>
         </div>
@@ -249,7 +250,7 @@
     <!-- ========== HOW IT WORKS ========== -->
     <section id="how-it-works" aria-labelledby="hiw-heading">
       <div class="hiw-inner reveal">
-        <h2 id="hiw-heading">How to Get Treatment at Apollo</h2>
+        <h2 id="hiw-heading">How to Get Treatment with TabeebWay</h2>
         <ol class="hiw-grid" aria-label="Treatment process steps">
           <li class="hiw-col"><h3 class="hiw-ribbon">Send Your Test Reports</h3></li>
           <li class="hiw-col"><h3 class="hiw-ribbon">Doctor's Opinion</h3></li>
@@ -261,7 +262,7 @@
       </div>
     </section>
 
-    <!-- ========== WHY CHOOSE APOLLO DELHI ========== -->
+    <!-- ========== WHY CHOOSE TABEEBWAY ========== -->
     <section id="why-india" class="py-16 sm:py-20 bg-[#EAF4F7]">
       <div class="max-w-6xl mx-auto px-4 sm:px-6">
         <div class="bg-[#F4FAFC] border border-[#C5E0E8] rounded-2xl p-6 sm:p-8 lg:p-10 reveal">
@@ -270,24 +271,24 @@
               <p class="text-xs sm:text-sm font-semibold uppercase tracking-[0.18em] text-primary mb-3">Our Strengths</p>
               <h2 class="why-heading font-display font-bold mb-3">
                 <span class="why-heading-lead">Why<br>Choose</span>
-                <span class="why-heading-brand">Apollo<br>Hospital?</span>
+                <span class="why-heading-brand">TabeebWay?</span>
               </h2>
               <div class="w-16 h-1.5 bg-gold rounded-full mb-6" aria-hidden="true"></div>
               <p class="text-slate-600 leading-relaxed mb-10 text-[0.95rem] sm:text-base">
-                Established in 1983, Apollo Healthcare has a robust presence across the healthcare ecosystem. From routine wellness and preventive care to innovative life-saving treatments and diagnostic services, Apollo Hospitals has touched over 120 million lives from over 120 countries.
+                TabeebWay coordinates cancer care journeys for international patients — from report review and specialist matching to visa guidance, travel planning, and post-treatment follow-up — so families can focus on care with clear support at every step.
               </p>
               <div class="why-stats flex flex-nowrap items-start justify-between gap-2 sm:gap-8">
                 <div class="min-w-0 flex-1 text-center sm:text-left">
-                  <p class="text-2xl sm:text-4xl font-bold text-primary leading-none whitespace-nowrap">120M+</p>
-                  <p class="text-[0.58rem] sm:text-[0.65rem] font-semibold tracking-[0.08em] sm:tracking-[0.14em] uppercase text-slate-500 mt-1.5 sm:mt-2 leading-tight">Lives Touched</p>
+                  <p class="text-2xl sm:text-4xl font-bold text-primary leading-none whitespace-nowrap">Free</p>
+                  <p class="text-[0.58rem] sm:text-[0.65rem] font-semibold tracking-[0.08em] sm:tracking-[0.14em] uppercase text-slate-500 mt-1.5 sm:mt-2 leading-tight">Second Opinion</p>
                 </div>
                 <div class="min-w-0 flex-1 text-center sm:text-left">
-                  <p class="text-2xl sm:text-4xl font-bold text-primary leading-none whitespace-nowrap">120+</p>
-                  <p class="text-[0.58rem] sm:text-[0.65rem] font-semibold tracking-[0.08em] sm:tracking-[0.14em] uppercase text-slate-500 mt-1.5 sm:mt-2 leading-tight">Countries</p>
+                  <p class="text-2xl sm:text-4xl font-bold text-primary leading-none whitespace-nowrap">24–48h</p>
+                  <p class="text-[0.58rem] sm:text-[0.65rem] font-semibold tracking-[0.08em] sm:tracking-[0.14em] uppercase text-slate-500 mt-1.5 sm:mt-2 leading-tight">Typical Review</p>
                 </div>
                 <div class="min-w-0 flex-1 text-center sm:text-left">
-                  <p class="text-2xl sm:text-4xl font-bold text-primary leading-none whitespace-nowrap">1983</p>
-                  <p class="text-[0.58rem] sm:text-[0.65rem] font-semibold tracking-[0.08em] sm:tracking-[0.14em] uppercase text-slate-500 mt-1.5 sm:mt-2 leading-tight">Est. Since</p>
+                  <p class="text-2xl sm:text-4xl font-bold text-primary leading-none whitespace-nowrap">Full</p>
+                  <p class="text-[0.58rem] sm:text-[0.65rem] font-semibold tracking-[0.08em] sm:tracking-[0.14em] uppercase text-slate-500 mt-1.5 sm:mt-2 leading-tight">Travel Support</p>
                 </div>
               </div>
             </div>
@@ -300,7 +301,7 @@
                 <div class="min-w-0">
                   <h3 class="font-bold text-secondary mb-1.5 flex items-center gap-2.5 flex-wrap">
                     <span class="inline-flex h-6 w-6 items-center justify-center rounded-full bg-primary text-white text-xs font-bold shrink-0">1</span>
-                    <span>11,000+ Healing Hands</span>
+                    <span>Expert Care Network</span>
                   </h3>
                   <p class="text-sm text-slate-600 leading-relaxed">Largest network of the best and brightest medical experts in the world, with the largest network of Caregivers delivering the best clinical outcomes.</p>
                 </div>
@@ -313,9 +314,9 @@
                 <div class="min-w-0">
                   <h3 class="font-bold text-secondary mb-1.5 flex items-center gap-2.5 flex-wrap">
                     <span class="inline-flex h-6 w-6 items-center justify-center rounded-full bg-gold text-white text-xs font-bold shrink-0">2</span>
-                    <span>4,500+ Pharmacies</span>
+                    <span>Coordinated Care Support</span>
                   </h3>
-                  <p class="text-sm text-slate-600 leading-relaxed">Apollo Pharmacy is India’s first and largest branded pharmacy network, distributing medicines across the country with trusted care standards.</p>
+                  <p class="text-sm text-slate-600 leading-relaxed">Access to a coordinated network of experienced oncologists and care teams focused on clear clinical guidance and strong treatment pathways.</p>
                 </div>
               </article>
 
@@ -328,7 +329,7 @@
                     <span class="inline-flex h-6 w-6 items-center justify-center rounded-full bg-primary text-white text-xs font-bold shrink-0">3</span>
                     <span>Most Advanced Healthcare Technology</span>
                   </h3>
-                  <p class="text-sm text-slate-600 leading-relaxed">Apollo Hospitals has been a pioneer in bringing ground-breaking healthcare technologies to India, supporting complex oncology care.</p>
+                  <p class="text-sm text-slate-600 leading-relaxed">We connect patients with hospitals that use advanced oncology technology — supporting complex cancer care with modern diagnostics and treatment options.</p>
                 </div>
               </article>
 
@@ -341,7 +342,7 @@
                     <span class="inline-flex h-6 w-6 items-center justify-center rounded-full bg-gold text-white text-xs font-bold shrink-0">4</span>
                     <span>Best Clinical Outcomes</span>
                   </h3>
-                  <p class="text-sm text-slate-600 leading-relaxed">Leveraging its rich experience and technological advantage, Apollo Hospitals focuses on delivering best-in-class clinical outcomes.</p>
+                  <p class="text-sm text-slate-600 leading-relaxed">Our focus is transparent guidance and coordinated support so families can move forward with clarity toward the best available clinical outcomes.</p>
                 </div>
               </article>
             </div>
@@ -430,7 +431,7 @@
       </div>
     </section>
 
-    <!-- ========== TREATMENTS (Apollo-style cards) ========== -->
+    <!-- ========== TREATMENTS ========== -->
     <section id="treatment" class="py-16 sm:py-20 bg-soft scroll-mt-24">
       <div class="max-w-6xl mx-auto px-4 sm:px-6">
         <div class="text-center max-w-2xl mx-auto mb-10 reveal">
@@ -616,7 +617,7 @@
       </div>
     </section>
 
-    <!-- ========== LOCATION — Apollo Delhi ========== -->
+    <!-- ========== LOCATION — Partner Hospital Delhi ========== -->
     <section id="location" class="py-16 sm:py-20 bg-soft">
       <div class="max-w-6xl mx-auto px-4 sm:px-6">
         <div class="text-center mb-10 reveal">
@@ -628,7 +629,7 @@
           <div class="min-h-[240px] md:min-h-[320px]">
             <img
               src="images/apollo-delhi.png"
-              alt="Indraprastha Apollo Hospitals Delhi building exterior"
+              alt="Partner cancer hospital in Delhi"
               class="w-full h-full object-cover"
               loading="lazy"
               width="900"
@@ -640,7 +641,7 @@
               <svg class="w-3.5 h-3.5" fill="currentColor" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5a2.5 2.5 0 110-5 2.5 2.5 0 010 5z"/></svg>
               Hospital Location
             </span>
-            <h3 class="font-display text-2xl sm:text-3xl font-bold text-primary mb-2">Indraprastha Apollo Hospital – Delhi</h3>
+            <h3 class="font-display text-2xl sm:text-3xl font-bold text-primary mb-2">Partner Hospital – Delhi</h3>
             <div class="w-12 h-1 bg-gold rounded-full mb-5" aria-hidden="true"></div>
             <p class="text-sm font-semibold text-secondary mb-1">Address</p>
             <p class="text-slate-600 text-sm leading-relaxed mb-6">
@@ -854,6 +855,6 @@
     </a>
   </div>
 
-  <script src="js/main.js?v=20260731-generate-lead"></script>
+  <script src="js/main.js?v=20260731-tabeebway-brand"></script>
 </body>
 </html>

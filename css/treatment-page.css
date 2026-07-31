@@ -130,6 +130,7 @@ p { margin: 0 0 1rem; color: var(--muted); }
 .tp-aside { display: none; }
 @media (min-width: 1100px) {
   .tp-aside { display: block; position: sticky; top: calc(var(--header-h) + 1rem); }
+  .tp-aside .lead-card { margin-top: 1.25rem; }
 }
 
 /* Hero */
@@ -297,8 +298,22 @@ p { margin: 0 0 1rem; color: var(--muted); }
 .soft-card h3 { font-family: var(--font); font-size: 1rem; margin-bottom: 0.35rem; }
 .soft-card p { font-size: 0.9rem; margin: 0; }
 .fact-value {
-  font-family: var(--display); font-size: 1.45rem; color: var(--blue);
-  font-weight: 700; margin-bottom: 0.25rem;
+  font-family: var(--display); font-size: 1.05rem; color: var(--blue);
+  font-weight: 700; margin-bottom: 0.2rem;
+}
+.card-grid.cols-5 .soft-card {
+  padding: 0.85rem 0.9rem;
+  box-shadow: none;
+  border-radius: 14px;
+}
+.card-grid.cols-5 .soft-card:hover {
+  transform: none;
+  box-shadow: none;
+  border-color: #c9dbf5;
+}
+.card-grid.cols-5 .soft-card p {
+  font-size: 0.78rem;
+  line-height: 1.4;
 }
 
 /* Content prose */
@@ -326,42 +341,49 @@ p { margin: 0 0 1rem; color: var(--muted); }
   border-radius: 999px; margin-bottom: 0.55rem;
 }
 
-/* Why India — minimal horizontal strip */
+/* Why India — minimal horizontal row, no slider */
 .why-india-row {
-  display: flex;
-  flex-wrap: nowrap;
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
   gap: 0;
-  overflow-x: auto;
-  -webkit-overflow-scrolling: touch;
   border: 1px solid var(--line);
   border-radius: var(--radius);
   background: #fff;
   box-shadow: var(--shadow);
-  scrollbar-width: thin;
+  overflow: hidden;
 }
 .why-india-item {
-  flex: 1 0 auto;
-  min-width: 140px;
-  padding: 1rem 1.15rem;
+  padding: 0.9rem 0.85rem;
   text-align: center;
   border-right: 1px solid var(--line);
+  border-bottom: 1px solid var(--line);
 }
-.why-india-item:last-child { border-right: 0; }
+.why-india-item:nth-child(2n) { border-right: 0; }
+.why-india-item:nth-last-child(-n+2) { border-bottom: 0; }
 .why-india-item strong {
   display: block;
-  font-size: 0.88rem;
+  font-size: 0.84rem;
   color: var(--ink);
   font-weight: 700;
-  margin-bottom: 0.2rem;
+  margin-bottom: 0.15rem;
 }
 .why-india-item span {
   display: block;
-  font-size: 0.75rem;
+  font-size: 0.72rem;
   color: var(--muted);
   line-height: 1.35;
 }
-@media (max-width: 699px) {
-  .why-india-item { min-width: 46%; }
+@media (min-width: 800px) {
+  .why-india-row {
+    grid-template-columns: repeat(6, minmax(0, 1fr));
+  }
+  .why-india-item {
+    border-right: 1px solid var(--line);
+    border-bottom: 0;
+    padding: 1rem 0.65rem;
+  }
+  .why-india-item:nth-child(2n) { border-right: 1px solid var(--line); }
+  .why-india-item:last-child { border-right: 0; }
 }
 
 /* Why lists */

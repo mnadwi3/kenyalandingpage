@@ -234,28 +234,5 @@
     });
   }
 
-  /* Exit intent (desktop once) */
-  var exitShown = false;
-  var exit = document.getElementById("exit-overlay");
-  function openExit() {
-    if (!exit || exitShown || window.innerWidth < 900) return;
-    exitShown = true;
-    exit.classList.add("is-open");
-    exit.setAttribute("aria-hidden", "false");
-  }
-  function closeExit() {
-    if (!exit) return;
-    exit.classList.remove("is-open");
-    exit.setAttribute("aria-hidden", "true");
-  }
-  document.addEventListener("mouseout", function (e) {
-    if (e.clientY < 12 && e.relatedTarget == null) openExit();
-  });
-  if (exit) {
-    exit.addEventListener("click", function (e) {
-      if (e.target === exit) closeExit();
-    });
-    var closeBtn = exit.querySelector(".close");
-    if (closeBtn) closeBtn.addEventListener("click", closeExit);
-  }
+  /* Exit intent removed */
 })();

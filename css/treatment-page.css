@@ -402,7 +402,7 @@ p { margin: 0 0 1rem; color: var(--muted); }
   .why-india-item:last-child { border-right: 0; }
 }
 
-/* Why lists */
+/* Why lists (legacy) */
 .feature-list {
   display: grid; gap: 0.65rem;
   grid-template-columns: 1fr;
@@ -420,6 +420,216 @@ p { margin: 0 0 1rem; color: var(--muted); }
 }
 .feature-item strong { display: block; color: var(--ink); font-size: 0.95rem; }
 .feature-item span { font-size: 0.85rem; color: var(--muted); }
+
+/* ========== Why Choose TabeebWay ========== */
+#why-tabeebway {
+  --wc-teal: #123A36;
+  --wc-teal-soft: #1A5C56;
+  --wc-gold: #C9992F;
+  --wc-bg: #EFF5F8;
+  --wc-card-a: #E4EFF4;
+  --wc-card-b: #FCF1DC;
+  --wc-body: #5B6B70;
+  --wc-white: #FFFFFF;
+  padding: 0;
+  background: transparent;
+  border: none;
+}
+#why-tabeebway .wc-trust {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  align-items: center;
+  gap: 0.85rem 1.35rem;
+  background: var(--wc-teal);
+  color: var(--wc-white);
+  border-radius: 16px 16px 0 0;
+  padding: 1rem 1.1rem;
+}
+#why-tabeebway .wc-trust-item {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.55rem;
+  font-size: 0.78rem;
+  font-weight: 600;
+  letter-spacing: 0.01em;
+  line-height: 1.3;
+}
+#why-tabeebway .wc-trust-icon {
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  background: var(--wc-white);
+  color: var(--wc-teal);
+  display: grid;
+  place-items: center;
+  flex-shrink: 0;
+}
+#why-tabeebway .wc-trust-icon svg { width: 16px; height: 16px; }
+#why-tabeebway .wc-panel {
+  background: var(--wc-bg);
+  border-radius: 0 0 16px 16px;
+  padding: 1.5rem 1.15rem 1.75rem;
+}
+#why-tabeebway .wc-grid {
+  display: grid;
+  gap: 1.75rem;
+}
+#why-tabeebway .wc-left { min-width: 0; }
+#why-tabeebway .wc-kicker {
+  margin: 0 0 0.65rem;
+  font-size: 0.72rem;
+  font-weight: 700;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--wc-gold);
+}
+#why-tabeebway .wc-heading {
+  margin: 0 0 0.75rem;
+  font-family: var(--font);
+  font-weight: 700;
+  line-height: 1.05;
+  letter-spacing: -0.02em;
+  font-size: clamp(1.75rem, 6vw, 2.25rem);
+}
+#why-tabeebway .wc-heading-lead {
+  display: block;
+  color: var(--wc-teal);
+}
+#why-tabeebway .wc-heading-brand {
+  display: block;
+  color: var(--wc-teal-soft);
+}
+#why-tabeebway .wc-bar {
+  width: 3.5rem;
+  height: 4px;
+  border-radius: 999px;
+  background: var(--wc-gold);
+  margin-bottom: 1.1rem;
+}
+#why-tabeebway .wc-intro {
+  margin: 0 0 1.5rem;
+  color: var(--wc-body);
+  font-size: 0.95rem;
+  line-height: 1.65;
+  max-width: 36rem;
+}
+#why-tabeebway .wc-stats {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 0.65rem 0.75rem;
+}
+#why-tabeebway .wc-stat-value {
+  margin: 0;
+  font-size: clamp(1.35rem, 4vw, 1.85rem);
+  font-weight: 700;
+  color: var(--wc-teal);
+  line-height: 1;
+  white-space: nowrap;
+}
+#why-tabeebway .wc-stat-label {
+  margin: 0.45rem 0 0;
+  font-size: 0.58rem;
+  font-weight: 700;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: #6B7C82;
+  line-height: 1.25;
+}
+#why-tabeebway .wc-cards {
+  display: flex;
+  flex-direction: column;
+  gap: 0.85rem;
+  min-width: 0;
+}
+#why-tabeebway .wc-card {
+  display: flex;
+  gap: 0.9rem;
+  align-items: flex-start;
+  border-radius: 16px;
+  padding: 1rem 1rem 1.1rem;
+  margin: 0;
+  box-shadow: 0 6px 18px rgba(18, 58, 54, 0.06);
+}
+#why-tabeebway .wc-card--a { background: var(--wc-card-a); }
+#why-tabeebway .wc-card--b { background: var(--wc-card-b); }
+#why-tabeebway .wc-card-icon {
+  width: 44px;
+  height: 44px;
+  border-radius: 50%;
+  display: none;
+  place-items: center;
+  flex-shrink: 0;
+  color: var(--wc-white);
+  margin-top: 0.15rem;
+}
+#why-tabeebway .wc-card-icon svg { width: 22px; height: 22px; }
+#why-tabeebway .wc-card--a .wc-card-icon { background: var(--wc-teal); }
+#why-tabeebway .wc-card--b .wc-card-icon { background: var(--wc-gold); }
+#why-tabeebway .wc-card-body { min-width: 0; }
+#why-tabeebway .wc-card-title {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 0.55rem;
+  margin: 0 0 0.4rem;
+  font-family: var(--font);
+  font-size: 1rem;
+  font-weight: 700;
+  color: var(--wc-teal);
+  line-height: 1.3;
+}
+#why-tabeebway .wc-num {
+  width: 24px;
+  height: 24px;
+  border-radius: 50%;
+  display: inline-grid;
+  place-items: center;
+  font-size: 0.72rem;
+  font-weight: 700;
+  color: var(--wc-white);
+  flex-shrink: 0;
+}
+#why-tabeebway .wc-card--a .wc-num { background: var(--wc-teal); }
+#why-tabeebway .wc-card--b .wc-num { background: var(--wc-gold); }
+#why-tabeebway .wc-card-desc {
+  margin: 0;
+  color: var(--wc-body);
+  font-size: 0.875rem;
+  line-height: 1.55;
+}
+@media (min-width: 640px) {
+  #why-tabeebway .wc-trust { padding: 1.1rem 1.5rem; gap: 1rem 1.75rem; }
+  #why-tabeebway .wc-trust-item { font-size: 0.84rem; }
+  #why-tabeebway .wc-panel { padding: 1.75rem 1.5rem 2rem; }
+  #why-tabeebway .wc-heading { font-size: clamp(2rem, 4.5vw, 2.5rem); }
+  #why-tabeebway .wc-card { padding: 1.15rem 1.25rem; }
+  #why-tabeebway .wc-card-icon { display: grid; }
+  #why-tabeebway .wc-stat-label { font-size: 0.65rem; letter-spacing: 0.12em; }
+}
+@media (min-width: 1024px) {
+  #why-tabeebway .wc-grid {
+    grid-template-columns: 2fr 3fr;
+    gap: 2rem;
+    align-items: start;
+  }
+  #why-tabeebway .wc-left {
+    position: sticky;
+    top: calc(var(--header-h) + 1rem);
+  }
+  #why-tabeebway .wc-heading { font-size: clamp(2.35rem, 3vw, 3.1rem); }
+  #why-tabeebway .wc-panel { padding: 2rem 1.75rem 2.25rem; }
+}
+@media (max-width: 639px) {
+  #why-tabeebway .wc-stats {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+  #why-tabeebway .wc-stats .wc-stat:last-child {
+    grid-column: 1 / -1;
+    max-width: 50%;
+  }
+  #why-tabeebway .wc-trust-item { flex: 1 1 100%; justify-content: center; }
+}
 
 /* Doctor cards — equal height */
 .doctor-grid {

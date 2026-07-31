@@ -80,7 +80,7 @@
     });
   });
 
-  /* File input label */
+  /* File input label — kept for optional future use */
   document.querySelectorAll(".file-box input[type=file]").forEach(function (input) {
     input.addEventListener("change", function () {
       var label = input.closest(".file-box").querySelector("[data-file-label]");

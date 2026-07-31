@@ -198,23 +198,24 @@ p { margin: 0 0 1rem; color: var(--muted); }
 .lead-card {
   background: #fff; border-radius: var(--radius);
   box-shadow: var(--shadow-lg); border: 1px solid var(--line);
-  padding: 1.35rem 1.25rem 1.4rem;
+  padding: 1.15rem 1.1rem 1.2rem;
 }
 .lead-card h3 {
-  font-family: var(--font); font-size: 1.15rem; margin: 0 0 0.25rem; color: var(--ink);
+  font-family: var(--font); font-size: 1.05rem; margin: 0 0 0.2rem; color: var(--ink);
 }
-.lead-card .sub { font-size: 0.8125rem; color: var(--muted); margin-bottom: 1rem; }
+.lead-card .sub { font-size: 0.78rem; color: var(--muted); margin-bottom: 0.75rem; }
 .lead-card label {
-  display: block; font-size: 0.75rem; font-weight: 600; color: var(--ink);
-  margin: 0 0 0.3rem;
+  display: block; font-size: 0.72rem; font-weight: 600; color: var(--ink);
+  margin: 0 0 0.25rem;
 }
-.lead-card .field { margin-bottom: 0.75rem; }
+.lead-card .field { margin-bottom: 0.55rem; }
 .lead-card input,
 .lead-card select,
 .lead-card textarea {
   width: 100%; border: 1.5px solid var(--line); border-radius: 12px;
-  padding: 0.7rem 0.85rem; background: #fff; color: var(--ink);
+  padding: 0.58rem 0.75rem; background: #fff; color: var(--ink);
   transition: border-color 0.15s, box-shadow 0.15s;
+  font-size: 0.9rem;
 }
 .lead-card input:focus,
 .lead-card select:focus,
@@ -222,17 +223,30 @@ p { margin: 0 0 1rem; color: var(--muted); }
   outline: none; border-color: var(--blue);
   box-shadow: 0 0 0 3px rgba(11,94,215,0.12);
 }
-.lead-card textarea { min-height: 72px; resize: vertical; }
-.file-box {
-  border: 1.5px dashed #B6C9E8; border-radius: 12px; padding: 0.85rem;
-  background: var(--blue-soft); text-align: center; font-size: 0.8125rem; color: var(--muted);
-  cursor: pointer; position: relative;
+.lead-card textarea { min-height: 56px; resize: vertical; }
+.form-note { font-size: 0.72rem; color: var(--muted); margin: 0.5rem 0 0; text-align: center; }
+.lead-card .btn { padding: 0.75rem 1rem; font-size: 0.875rem; }
+
+/* Compact page intro (replaces large hero) */
+.page-intro {
+  padding: 0.35rem 0 0.25rem;
 }
-.file-box input {
-  position: absolute; inset: 0; opacity: 0; cursor: pointer; padding: 0; border: 0;
+.page-intro h1 {
+  font-size: clamp(1.55rem, 3.5vw, 2.15rem);
+  margin-bottom: 0.45rem;
 }
-.file-box strong { color: var(--blue); display: block; margin-bottom: 0.15rem; }
-.form-note { font-size: 0.75rem; color: var(--muted); margin: 0.65rem 0 0; text-align: center; }
+.page-intro p {
+  max-width: 40rem;
+  margin-bottom: 0.85rem;
+  font-size: 0.98rem;
+}
+.page-intro .hero-ctas { margin-bottom: 0.35rem; }
+.page-intro .response-badge {
+  margin-top: 0.65rem;
+  color: var(--muted);
+  font-size: 0.8rem;
+}
+.page-intro .response-badge strong { color: var(--blue); }
 .form-error { color: #DC2626; font-size: 0.8125rem; font-weight: 600; margin-top: 0.5rem; text-align: center; }
 .form-success {
   display: none; text-align: center; padding: 1.5rem 0.5rem;
@@ -312,6 +326,44 @@ p { margin: 0 0 1rem; color: var(--muted); }
   border-radius: 999px; margin-bottom: 0.55rem;
 }
 
+/* Why India — minimal horizontal strip */
+.why-india-row {
+  display: flex;
+  flex-wrap: nowrap;
+  gap: 0;
+  overflow-x: auto;
+  -webkit-overflow-scrolling: touch;
+  border: 1px solid var(--line);
+  border-radius: var(--radius);
+  background: #fff;
+  box-shadow: var(--shadow);
+  scrollbar-width: thin;
+}
+.why-india-item {
+  flex: 1 0 auto;
+  min-width: 140px;
+  padding: 1rem 1.15rem;
+  text-align: center;
+  border-right: 1px solid var(--line);
+}
+.why-india-item:last-child { border-right: 0; }
+.why-india-item strong {
+  display: block;
+  font-size: 0.88rem;
+  color: var(--ink);
+  font-weight: 700;
+  margin-bottom: 0.2rem;
+}
+.why-india-item span {
+  display: block;
+  font-size: 0.75rem;
+  color: var(--muted);
+  line-height: 1.35;
+}
+@media (max-width: 699px) {
+  .why-india-item { min-width: 46%; }
+}
+
 /* Why lists */
 .feature-list {
   display: grid; gap: 0.65rem;
@@ -330,6 +382,60 @@ p { margin: 0 0 1rem; color: var(--muted); }
 }
 .feature-item strong { display: block; color: var(--ink); font-size: 0.95rem; }
 .feature-item span { font-size: 0.85rem; color: var(--muted); }
+
+/* Doctor cards — equal height */
+.doctor-grid {
+  display: grid;
+  gap: 0.9rem;
+  grid-template-columns: 1fr;
+}
+@media (min-width: 560px) { .doctor-grid { grid-template-columns: 1fr 1fr; } }
+@media (min-width: 900px) { .doctor-grid { grid-template-columns: repeat(3, 1fr); } }
+.doctor-card {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  height: 100%;
+  min-height: 320px;
+  padding: 1.35rem 1.1rem 1.15rem;
+}
+.doctor-card .doc-photo {
+  width: 96px;
+  height: 96px;
+  border-radius: 50%;
+  object-fit: cover;
+  margin-bottom: 0.85rem;
+  background: linear-gradient(145deg, var(--blue-soft), #c5d9f5);
+  border: 3px solid #fff;
+  box-shadow: var(--shadow);
+  display: grid;
+  place-items: center;
+  font-family: var(--display);
+  font-size: 1.45rem;
+  font-weight: 700;
+  color: var(--blue);
+  flex-shrink: 0;
+}
+.doctor-card h3 {
+  font-family: var(--font);
+  font-size: 1.05rem;
+  margin: 0 0 0.25rem;
+}
+.doctor-card .doc-role {
+  font-size: 0.82rem;
+  font-weight: 600;
+  color: var(--blue);
+  margin-bottom: 0.65rem;
+}
+.doctor-card .doc-meta {
+  font-size: 0.82rem;
+  color: var(--muted);
+  margin: 0 0 0.35rem;
+  width: 100%;
+}
+.doctor-card .doc-meta strong { color: var(--ink); font-weight: 600; }
+.doctor-card .btn { margin-top: auto; width: 100%; }
 
 /* Hospitals / Doctors */
 .entity-card { overflow: hidden; padding: 0; }
@@ -572,18 +678,9 @@ p { margin: 0 0 1rem; color: var(--muted); }
   padding: 0.25rem 0.55rem; font-size: 0.75rem; color: var(--muted);
 }
 
-/* Case manager */
-.manager-card {
-  display: grid; gap: 1rem; align-items: center;
-}
-@media (min-width: 700px) {
-  .manager-card { grid-template-columns: 140px 1fr; }
-}
-.manager-card .photo {
-  width: 120px; height: 120px; border-radius: 50%;
-  background: var(--blue-soft) center/cover; margin-inline: auto;
-  border: 3px solid #fff; box-shadow: var(--shadow);
-}
+/* Case manager (text-only) */
+.manager-card { padding: 1.25rem 1.35rem; }
+.manager-card h3 { font-family: var(--font); margin: 0 0 0.35rem; }
 
 /* Comparison */
 .compare-grid {

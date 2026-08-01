@@ -994,9 +994,9 @@ label {
   header .header-wa-text { display: inline; }
   header .site-logo { height: auto; width: auto; }
   header .site-logo img {
-    height: 3.5rem;
+    height: 3.75rem;
     width: auto;
-    max-width: 10rem;
+    max-width: 12.5rem;
     object-fit: contain;
     object-position: left center;
   }

@@ -58,7 +58,7 @@
   }
 }
 
-html { scroll-behavior: smooth; scroll-padding-top: 13.5rem; overflow-x: hidden; }
+html { scroll-behavior: smooth; scroll-padding-top: 4.5rem; overflow-x: hidden; }
 
 body {
   font-family: var(--font-body);
@@ -994,9 +994,9 @@ label {
   header .header-wa-text { display: inline; }
   header .site-logo { height: auto; width: auto; }
   header .site-logo img {
-    height: 11.25rem;
+    height: 3.5rem;
     width: auto;
-    max-width: 37.5rem;
+    max-width: 10rem;
     object-fit: contain;
     object-position: left center;
   }

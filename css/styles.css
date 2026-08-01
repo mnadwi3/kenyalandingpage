@@ -676,14 +676,20 @@ label {
 .reveal.visible { opacity: 1; transform: translateY(0); }
 
 /* ---- Hero slider ---- */
-.hero-slider { position: relative; min-height: clamp(560px, 88vh, 720px); overflow: hidden; background: var(--secondary); }
+.hero-slider {
+  position: relative;
+  min-height: clamp(560px, 88vh, 720px);
+  overflow: hidden;
+  background: linear-gradient(180deg, #F5FBFA 0%, #D5EFEC 48%, #8CDAD4 100%);
+}
 .hero-slide {
   position: absolute; inset: 0;
   opacity: 0;
   visibility: hidden;
   pointer-events: none;
   transition: opacity 0.8s ease, visibility 0.8s;
-  background-color: var(--secondary);
+  background-color: transparent;
+  background-image: none !important;
   background-size: cover;
   background-position: 65% center;
   background-repeat: no-repeat;
@@ -696,33 +702,24 @@ label {
   z-index: 1;
 }
 .hero-slide::before {
-  content: '';
-  position: absolute; inset: 0;
-  background: linear-gradient(
-    90deg,
-    rgba(0, 0, 0, 0.78) 0%,
-    rgba(0, 0, 0, 0.62) 40%,
-    rgba(0, 0, 0, 0.45) 70%,
-    rgba(0, 0, 0, 0.38) 100%
-  );
-  z-index: 1;
+  content: none;
 }
 .hero-slide::after {
   content: none;
 }
 .hero-slide-content { position: relative; z-index: 2; }
 .hero-copy {
-  text-shadow: 0 2px 18px rgba(0, 0, 0, 0.45);
+  text-shadow: none;
 }
 .hero-copy h1,
 .hero-copy h2 {
-  color: var(--background) !important;
+  color: var(--text) !important;
 }
 .hero-copy .hero-accent {
-  color: var(--primary-light) !important;
+  color: var(--primary) !important;
 }
 .hero-copy p {
-  color: rgba(255, 255, 255, 0.94) !important;
+  color: var(--text-light) !important;
   max-width: 34rem;
 }
 
@@ -734,7 +731,7 @@ label {
   box-shadow: 0 4px 16px rgba(0,0,0,0.25);
   transition: background 0.2s ease, transform 0.2s ease;
 }
-.hero-arrow:hover { background: var(--primary-light); transform: translateY(-50%) scale(1.05); }
+.hero-arrow:hover { background: var(--primary-dark); transform: translateY(-50%) scale(1.05); }
 .hero-arrow.prev { left: 0.75rem; }
 .hero-arrow.next { right: 0.75rem; }
 @media (min-width: 768px) {
@@ -745,10 +742,10 @@ label {
 .hero-dots { position: absolute; bottom: 1.25rem; left: 0; right: 0; z-index: 5; display: flex; justify-content: center; gap: 0.5rem; }
 .hero-dot {
   width: 0.55rem; height: 0.55rem; border-radius: 9999px; border: none;
-  background: rgba(255,255,255,0.45); cursor: pointer; padding: 0;
+  background: rgba(15, 76, 129, 0.28); cursor: pointer; padding: 0;
   transition: background 0.2s, width 0.2s;
 }
-.hero-dot.active { background: var(--background); width: 1.5rem; }
+.hero-dot.active { background: var(--primary); width: 1.5rem; }
 
 /* ---- How It Works ---- */
 #how-it-works {
@@ -1066,13 +1063,13 @@ header .site-logo-img {
     object-position: left center;
   }
 
-  /* Lock hero to slide-2.png aspect (1024Ã-720) so slides don't resize the page */
+  /* Soft gradient hero — keep stable height on mobile */
   .hero-slider {
     aspect-ratio: 1024 / 720;
     width: 100%;
     min-height: 22.5rem;
     height: auto;
-    background: var(--secondary);
+    background: linear-gradient(180deg, #F5FBFA 0%, #D5EFEC 48%, #8CDAD4 100%);
     overflow: hidden;
   }
   .hero-slide {

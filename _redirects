@@ -1,2 +1,13 @@
 /index.html    /    301
 /*.html        /:splat   301
+
+# Home section clean URLs (SPA-style rewrite to homepage)
+/treatment          /index.html   200
+/doctors            /index.html   200
+/testimonials       /index.html   200
+/about-us           /index.html   200
+/faq                /index.html   200
+/contact            /index.html   200
+/book-appointment   /index.html   200
+/visa-travel        /index.html   200
+/how-it-works       /index.html   200

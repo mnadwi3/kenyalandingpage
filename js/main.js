@@ -329,3 +329,78 @@
     if (success) success.classList.remove('hidden');
   });
 })();
+
+/* Clean section URLs: /treatment → scroll to #treatment (no hash in address bar) */
+(function () {
+  var SECTION_PATHS = {
+    treatment: 'treatment',
+    doctors: 'doctors',
+    testimonials: 'testimonials',
+    'about-us': 'about-us',
+    faq: 'faq',
+    contact: 'contact',
+    'book-appointment': 'book-appointment',
+    'visa-travel': 'visa-travel',
+    'how-it-works': 'how-it-works'
+  };
+
+  function pathToSection(pathname) {
+    var seg = (pathname || '').replace(/\/+$/, '').split('/').pop() || '';
+    return SECTION_PATHS[seg] || null;
+  }
+
+  function scrollToId(id, behavior) {
+    var el = document.getElementById(id);
+    if (!el) return false;
+    el.scrollIntoView({ behavior: behavior || 'smooth', block: 'start' });
+    return true;
+  }
+
+  function goSection(id, push) {
+    if (!scrollToId(id, 'smooth')) return;
+    if (push && window.history && history.pushState) {
+      history.pushState({ section: id }, '', '/' + id);
+    }
+  }
+
+  /* Legacy /#treatment → /treatment */
+  if (location.hash && location.hash.length > 1) {
+    var hashId = location.hash.slice(1);
+    if (SECTION_PATHS[hashId] && document.getElementById(hashId)) {
+      if (history.replaceState) {
+        history.replaceState({ section: hashId }, '', '/' + hashId);
+      }
+      setTimeout(function () { scrollToId(hashId, 'auto'); }, 0);
+    }
+  } else {
+    var fromPath = pathToSection(location.pathname);
+    if (fromPath) {
+      setTimeout(function () { scrollToId(fromPath, 'auto'); }, 50);
+    }
+  }
+
+  document.addEventListener('click', function (e) {
+    var a = e.target.closest && e.target.closest('a[href]');
+    if (!a) return;
+    var href = a.getAttribute('href');
+    if (!href) return;
+
+    var id = null;
+    if (href.charAt(0) === '/' && href.indexOf('#') === -1 && href.indexOf('?') === -1) {
+      id = pathToSection(href);
+    }
+    if (!id) return;
+    if (!document.getElementById(id)) return;
+
+    e.preventDefault();
+    goSection(id, true);
+  });
+
+  window.addEventListener('popstate', function () {
+    var id = pathToSection(location.pathname);
+    if (id) scrollToId(id, 'smooth');
+    else if (location.pathname === '/' || location.pathname === '') {
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    }
+  });
+})();

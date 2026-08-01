@@ -1,0 +1,22 @@
+# tabeebway.com (kenyalandingpage)
+
+Static cancer medical-tourism site: https://www.tabeebway.com  
+Repo: https://github.com/mnadwi3/kenyalandingpage
+
+## Key files
+- index.html â€” homepage
+- css/styles.css â€” home styles (tx-card treatments, doc-card doctors, how-it-works journey)
+- js/main.js â€” slider, FAQ, forms, clean section URLs, DOM section order
+- treatments/*.html + css/treatment-page.css + js/treatment-page.js â€” per-cancer pages
+- .htaccess / _redirects â€” extensionless clean URLs
+
+## Clean paths
+/treatment /doctors /how-it-works /visa-travel /testimonials /about-us /faq /contact /book-appointment  
+/treatments/{cancer-slug} /privacy-policy /disclaimer
+
+## Brand
+primary #097895 Â· secondary #023B44 Â· gold #D4A017 Â· WhatsApp +91 8979983149
+
+## Notes
+Doctor credentials and patient quotes may still be placeholders â€” verify before launch.
+Ads final URL: https://www.tabeebway.com/

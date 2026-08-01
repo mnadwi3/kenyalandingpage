@@ -95,7 +95,7 @@ ul { margin: 0; padding: 0; }
 }
 .tp-logo { display: inline-flex; align-items: center; flex-shrink: 0; }
 .tp-logo img {
-  height: 52px; width: auto; max-width: 12.5rem;
+  height: 36px; width: auto; max-width: 15rem;
   object-fit: contain; object-position: left center;
 }
 .tp-nav { display: none; gap: 1.5rem; }
@@ -104,7 +104,7 @@ ul { margin: 0; padding: 0; }
 .navcta { display: flex; gap: 10px; align-items: center; }
 @media (min-width: 900px) {
   .tp-nav { display: flex; }
-  .tp-logo img { height: 60px; max-width: 14rem; }
+  .tp-logo img { height: 42px; max-width: 17rem; }
 }
 
 /* Buttons */

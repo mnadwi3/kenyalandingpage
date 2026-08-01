@@ -389,16 +389,26 @@ ul { margin: 0; padding: 0; }
 .docgrid { display: grid; grid-template-columns: 1fr; gap: 16px; }
 .doccard {
   border: 1px solid var(--line);
-  border-left: 3px solid var(--deep);
+  border-bottom: 3px solid var(--deep);
   border-radius: 8px;
   overflow: hidden;
   background: var(--white);
   display: flex;
   flex-direction: column;
+  align-items: center;
+  text-align: center;
   box-shadow: 0 1px 0 rgba(9, 120, 149, 0.04);
 }
 .doccard .avatar { display: none; }
-.doccard .info { padding: 18px 20px; display: flex; flex-direction: column; flex: 1; }
+.doccard .info {
+  padding: 20px 18px 22px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  flex: 1;
+  width: 100%;
+}
 .doccard h3 { font-size: 1rem; margin-bottom: 3px; }
 .doccard .role {
   font-size: 13px; color: var(--accent-dark); font-weight: 600; margin-bottom: 10px;
@@ -406,16 +416,16 @@ ul { margin: 0; padding: 0; }
 .doccard .meta { font-size: 12.5px; color: var(--muted); line-height: 1.6; margin-bottom: 14px; flex: 1; }
 .doccard .link {
   font-size: 13px; font-weight: 600; color: var(--deep);
-  border-bottom: 1px solid var(--deep); align-self: flex-start;
+  border-bottom: 1px solid var(--deep); align-self: center;
 }
 .doccard .link:hover { color: var(--accent); border-color: var(--accent); }
 @media (max-width: 639px) {
   .docgrid { gap: 10px; }
   .doccard {
-    border-left-width: 2px;
+    border-bottom-width: 2px;
     border-radius: 6px;
   }
-  .doccard .info { padding: 12px 14px; }
+  .doccard .info { padding: 14px 12px 16px; }
   .doccard h3 { font-size: 0.875rem; margin-bottom: 2px; }
   .doccard .role { font-size: 11.5px; margin-bottom: 6px; }
   .doccard .meta { font-size: 11.5px; margin-bottom: 8px; line-height: 1.45; }

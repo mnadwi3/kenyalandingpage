@@ -1,5 +1,5 @@
 /* ============================================
-   TabeebWay — Main JavaScript
+   tabeebway.com — Main JavaScript
    ============================================ */
 
 /* Hero slider */

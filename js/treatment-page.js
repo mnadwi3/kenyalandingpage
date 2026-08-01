@@ -1,4 +1,4 @@
-/* TabeebWay treatment page interactions */
+/* tabeebway.com treatment page interactions */
 (function () {
   "use strict";
 

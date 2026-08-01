@@ -1,5 +1,5 @@
 /* ============================================
-   TabeebWay — Main Stylesheet
+   tabeebway.com — Main Stylesheet
    ============================================ */
 
 :root {
@@ -849,7 +849,7 @@ label {
 .type-small { font-size: var(--fs-small) !important; }
 .type-caption { font-size: var(--fs-caption) !important; }
 
-/* ---- Why Choose TabeebWay ---- */
+/* ---- Why Choose tabeebway.com ---- */
 #why-india .why-heading {
   font-size: clamp(2rem, 9vw, 2.75rem) !important;
   font-weight: 700 !important;

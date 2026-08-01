@@ -381,6 +381,10 @@ label {
     height: 0.85rem;
     flex-shrink: 0;
   }
+}
+
+/* Short CTA on phones/tablets; full label on wide desktops */
+@media (min-width: 1100px) {
   .tx-book-short { display: none; }
   .tx-book-full { display: inline; }
 }

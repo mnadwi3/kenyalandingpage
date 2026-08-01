@@ -1,6 +1,6 @@
-# VaidTrack.com â€” Cancer Medical Tourism Landing Page
+# VaidTrack.com - Cancer Medical Tourism Landing Page
 
-Static marketing site for **[VaidTrack.com](https://www.vaidtrack.com)** â€” medical tourism facilitation for international patients seeking cancer care in India (second opinion, specialist matching, visa & travel coordination).
+Static marketing site for **[VaidTrack.com](https://www.vaidtrack.com)** - medical tourism facilitation for international patients seeking cancer care in India (second opinion, specialist matching, visa & travel coordination).
 
 **Live site:** https://www.vaidtrack.com  
 **Repo:** https://github.com/mnadwi3/kenyalandingpage
@@ -13,7 +13,7 @@ Static marketing site for **[VaidTrack.com](https://www.vaidtrack.com)** â€�
 |--------|--------|
 | Markup | Static HTML (no build step) |
 | Styles | Tailwind CDN + `css/styles.css` + `css/treatment-page.css` |
-| Scripts | Vanilla JS â€” `js/main.js`, `js/treatment-page.js` |
+| Scripts | Vanilla JS - `js/main.js`, `js/treatment-page.js` |
 | Hosting | Apache (`.htaccess`) and/or Netlify-style (`_redirects`) |
 | Analytics | GTM `GTM-KZ86XPT5`, GA4 `G-5TBH8QQ2EQ` |
 | Lead CTA | WhatsApp `wa.me/918979983149` + on-page enquiry forms |
@@ -46,21 +46,21 @@ Static marketing site for **[VaidTrack.com](https://www.vaidtrack.com)** â€�
 
 Order is enforced in `js/main.js` (after `#why-india`):
 
-1. **Hero** (`#hero`) â€” slider + appointment forms
+1. **Hero** (`#hero`) - slider + appointment forms
 2. **About** (`#about-us`)
 3. **Why choose** (`#why-india`)
-4. **Treatments** (`#treatment`) â€” `.tx-card` grid
-5. **Doctors** (`#doctors`) â€” `.doc-card` grid (8 specialists; verify credentials before launch)
-6. **Journey** (`#how-it-works`, also `#visa-travel`) â€” combined 6-step process + travel CTA
-7. **Testimonials** (`#testimonials`) â€” video slots
+4. **Treatments** (`#treatment`) - `.tx-card` grid
+5. **Doctors** (`#doctors`) - `.doc-card` grid (8 specialists; verify credentials before launch)
+6. **Journey** (`#how-it-works`, also `#visa-travel`) - combined 6-step process + travel CTA
+7. **Testimonials** (`#testimonials`) - video slots
 8. **FAQ** (`#faq`)
 9. **Contact** (`#contact`)
-10. **Location** (`#location`) â€” partner hospital Delhi
+10. **Location** (`#location`) - partner hospital Delhi
 
 Card styling notes:
 
 - **Treatment cards** (`.tx-card`): white background, cyan border `#C5E0E8`
-- **Doctor cards** (`.doc-card`): soft teal gradient, deep teal top accent, gold specialty badge â€” no initials circles
+- **Doctor cards** (`.doc-card`): soft teal gradient, deep teal top accent, gold specialty badge - no initials circles
 
 ---
 

@@ -1,5 +1,5 @@
 /* ============================================
-   VaidTrack.com â€” Main JavaScript
+   VaidTrack.com - Main JavaScript
    ============================================ */
 
 /* Hero slider */
@@ -258,7 +258,7 @@
       lead_source: 'website_form'
     });
 
-    /* Ensure gtag exists â€” GTM can load gtag.js without exposing window.gtag */
+    /* Ensure gtag exists - GTM can load gtag.js without exposing window.gtag */
     if (typeof window.gtag !== 'function') {
       window.gtag = function () {
         window.dataLayer.push(arguments);

@@ -1,4 +1,4 @@
-/* VaidTrack.com treatment pages â€” editorial layout
+/* VaidTrack.com treatment pages - editorial layout
    Default = home teal accents; .tx-theme-women = pink accents */
 :root {
   --bg: #FFFFFF;
@@ -24,7 +24,7 @@
   --ease: cubic-bezier(0.22, 1, 0.36, 1);
 }
 
-/* Womenâ€™s cancer pages only (breast, cervical) */
+/* Women's cancer pages only (breast, cervical) */
 body.tx-theme-women {
   --accent: #B3566A;
   --accent-dark: #8C4054;
@@ -81,7 +81,7 @@ ul { margin: 0; padding: 0; }
   font-weight: 600;
 }
 
-/* Header â€” home teal bar */
+/* Header - home teal bar */
 .tp-header {
   position: sticky; top: 0; z-index: 50;
   background: var(--deep);
@@ -360,7 +360,7 @@ ul { margin: 0; padding: 0; }
 @media (min-width: 640px) { .whygrid { grid-template-columns: 1fr 1fr; gap: 20px; } }
 @media (min-width: 1000px) { .whygrid { grid-template-columns: repeat(3, 1fr); } }
 
-/* Cost â€” minimal */
+/* Cost - minimal */
 .cost-simple { max-width: 40rem; }
 .cost-simple h2 {
   font-family: var(--mono);
@@ -448,7 +448,7 @@ ul { margin: 0; padding: 0; }
 @media (min-width: 900px) { .docgrid { grid-template-columns: repeat(3, 1fr); } }
 @media (min-width: 1100px) { .docgrid { grid-template-columns: repeat(4, 1fr); gap: 16px; } }
 
-/* Journey â€” horizontal timeline */
+/* Journey - horizontal timeline */
 .timeline {
   display: grid;
   grid-template-columns: 1fr;

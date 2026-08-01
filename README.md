@@ -122,7 +122,7 @@ Open `index.html` in a browser, or serve the folder root so clean paths work:
 npx --yes serve .
 ```
 
-Bump cache query strings when shipping CSS/JS (e.g. `styles.css?v=â€¦`, `main.js?v=â€¦`).
+Bump cache query strings when shipping CSS/JS (e.g. `styles.css?v=...`, `main.js?v=...`).
 
 ---
 

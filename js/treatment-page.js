@@ -80,13 +80,13 @@
     });
   });
 
-  /* File input label â€” kept for optional future use */
+  /* File input label - kept for optional future use */
   document.querySelectorAll(".file-box input[type=file]").forEach(function (input) {
     input.addEventListener("change", function () {
       var label = input.closest(".file-box").querySelector("[data-file-label]");
       if (!label) return;
       if (input.files && input.files.length) {
-        label.textContent = input.files.length + " file(s) selected â€” we will confirm via WhatsApp";
+        label.textContent = input.files.length + " file(s) selected - we will confirm via WhatsApp";
       } else {
         label.textContent = "PDF, JPG or PNG up to 10MB";
       }

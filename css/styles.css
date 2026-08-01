@@ -993,17 +993,17 @@ header .site-logo {
 header .site-logo img,
 header .site-logo-img {
   display: block;
-  height: 2.6rem;
+  height: 2.21rem;
   width: auto;
-  max-width: 15.75rem;
+  max-width: 13.4rem;
   object-fit: contain;
   object-position: left center;
 }
 @media (min-width: 1024px) {
   header .site-logo img,
   header .site-logo-img {
-    height: 2.85rem;
-    max-width: 17.55rem;
+    height: 2.42rem;
+    max-width: 14.92rem;
   }
 }
 
@@ -1030,8 +1030,8 @@ header .site-logo-img {
   header .site-logo img {
     display: block;
     height: auto;
-    width: min(100%, 13rem);
-    max-height: 2.35rem;
+    width: min(100%, 11.05rem);
+    max-height: 2rem;
     max-width: 100%;
     object-fit: contain;
     object-position: left center;

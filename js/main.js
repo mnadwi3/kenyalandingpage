@@ -1,5 +1,5 @@
 /* ============================================
-   tabeebway.com — Main JavaScript
+   VaidTrack.com â€” Main JavaScript
    ============================================ */
 
 /* Hero slider */
@@ -79,7 +79,7 @@
   start();
 })();
 
-/* Order sections: Treatment → Doctors → Journey (how-it-works) → Testimonials → About Us → FAQ */
+/* Order sections: Treatment â†’ Doctors â†’ Journey (how-it-works) â†’ Testimonials â†’ About Us â†’ FAQ */
 (function () {
   var order = ['treatment', 'doctors', 'how-it-works', 'testimonials', 'about-us', 'faq'];
   var anchor = document.getElementById('why-india');
@@ -147,7 +147,7 @@
 
 /* Mobile nav removed */
 
-/* Forms → Google Sheet, then generate_lead, then WhatsApp */
+/* Forms â†’ Google Sheet, then generate_lead, then WhatsApp */
 (function () {
   var GAS_URL = 'https://script.google.com/macros/s/AKfycbzTo3v4gxY1FmMrSFndbYSDaWRhjL58uUzkicjfDW7xS1xdoL_Rxsq69juo2PcT3g2q_Q/exec';
   var WA_NUMBER = '918979983149';
@@ -242,7 +242,7 @@
     });
   }
 
-  /* After Sheets success, before WhatsApp: fire generate_lead for GTM + GA4 → Google Ads */
+  /* After Sheets success, before WhatsApp: fire generate_lead for GTM + GA4 â†’ Google Ads */
   function fireGenerateLeadThenOpenWhatsApp(form, whatsappUrl) {
     var formId = (form && form.id) || '';
     var payload = {
@@ -258,14 +258,14 @@
       lead_source: 'website_form'
     });
 
-    /* Ensure gtag exists — GTM can load gtag.js without exposing window.gtag */
+    /* Ensure gtag exists â€” GTM can load gtag.js without exposing window.gtag */
     if (typeof window.gtag !== 'function') {
       window.gtag = function () {
         window.dataLayer.push(arguments);
       };
     }
 
-    /* GA4 event (imported in Google Ads as Primary: tabeebway.com generate_lead) */
+    /* GA4 event (imported in Google Ads as Primary: VaidTrack.com generate_lead) */
     window.gtag('event', 'generate_lead', Object.assign({
       send_to: 'G-5TBH8QQ2EQ'
     }, payload));
@@ -330,7 +330,7 @@
   });
 })();
 
-/* Clean section URLs: /treatment → scroll to #treatment (no hash in address bar) */
+/* Clean section URLs: /treatment â†’ scroll to #treatment (no hash in address bar) */
 (function () {
   var SECTION_PATHS = {
     treatment: 'treatment',
@@ -363,7 +363,7 @@
     }
   }
 
-  /* Legacy /#treatment → /treatment */
+  /* Legacy /#treatment â†’ /treatment */
   if (location.hash && location.hash.length > 1) {
     var hashId = location.hash.slice(1);
     if (SECTION_PATHS[hashId] && document.getElementById(hashId)) {

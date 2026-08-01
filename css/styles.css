@@ -1,5 +1,5 @@
 /* ============================================
-   tabeebway.com — Main Stylesheet
+   VaidTrack.com â€” Main Stylesheet
    ============================================ */
 
 :root {
@@ -953,7 +953,7 @@ label {
   transform: translateY(-1px);
 }
 
-/* Mobile hamburger nav removed — keep selectors inert if markup remains elsewhere */
+/* Mobile hamburger nav removed â€” keep selectors inert if markup remains elsewhere */
 .nav-toggle,
 .mobile-nav { display: none !important; }
 
@@ -985,7 +985,7 @@ label {
 }
 .mobile-bottom-book:hover { background: #0a7a94; }
 
-/* Header logo — desktop/tablet (Vaidam-style wide lockup) */
+/* Header logo â€” desktop/tablet (Vaidam-style wide lockup) */
 header .site-logo {
   min-width: 0;
   flex-shrink: 1;
@@ -1037,7 +1037,7 @@ header .site-logo-img {
     object-position: left center;
   }
 
-  /* Lock hero to slide-2.png aspect (1024×720) so slides don't resize the page */
+  /* Lock hero to slide-2.png aspect (1024Ã—720) so slides don't resize the page */
   .hero-slider {
     aspect-ratio: 1024 / 720;
     width: 100%;
@@ -1155,7 +1155,7 @@ header .site-logo-img {
 .type-small { font-size: var(--fs-small) !important; }
 .type-caption { font-size: var(--fs-caption) !important; }
 
-/* ---- Why Choose tabeebway.com ---- */
+/* ---- Why Choose VaidTrack.com ---- */
 #why-india .why-heading {
   font-size: clamp(1.55rem, 6.5vw, 2.1rem) !important;
   font-weight: 700 !important;

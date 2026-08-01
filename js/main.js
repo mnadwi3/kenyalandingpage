@@ -330,7 +330,67 @@
   });
 })();
 
-/* Clean section URLs: /treatment â†’ scroll to #treatment (no hash in address bar) */
+/* Mobile appointment form popup */
+(function () {
+  var modal = document.getElementById('appointment-modal');
+  if (!modal) return;
+
+  var openBtn = document.getElementById('open-appointment-modal');
+  var mq = window.matchMedia('(max-width: 1023px)');
+  var lastFocus = null;
+
+  function isResponsive() {
+    return mq.matches;
+  }
+
+  function openModal() {
+    if (!isResponsive()) return;
+    lastFocus = document.activeElement;
+    modal.hidden = false;
+    modal.setAttribute('aria-hidden', 'false');
+    document.body.classList.add('appt-modal-open');
+    var first = modal.querySelector('input, textarea, button');
+    if (first) setTimeout(function () { first.focus(); }, 50);
+  }
+
+  function closeModal() {
+    modal.hidden = true;
+    modal.setAttribute('aria-hidden', 'true');
+    document.body.classList.remove('appt-modal-open');
+    if (lastFocus && lastFocus.focus) lastFocus.focus();
+  }
+
+  window.openAppointmentModal = openModal;
+  window.closeAppointmentModal = closeModal;
+
+  if (openBtn) {
+    openBtn.addEventListener('click', function (e) {
+      e.preventDefault();
+      openModal();
+    });
+  }
+
+  modal.addEventListener('click', function (e) {
+    if (e.target.closest && e.target.closest('[data-appt-close]')) {
+      closeModal();
+    }
+  });
+
+  document.addEventListener('keydown', function (e) {
+    if (e.key === 'Escape' && !modal.hidden) closeModal();
+  });
+
+  var bottomBook = document.querySelector('.mobile-bottom-book');
+  if (bottomBook) {
+    bottomBook.addEventListener('click', function (e) {
+      if (!isResponsive()) return;
+      e.preventDefault();
+      openModal();
+    });
+  }
+})();
+
+/* Clean section URLs: /treatment → scroll to #treatment (no hash in address bar) */
 (function () {
   var SECTION_PATHS = {
     treatment: 'treatment',
@@ -357,6 +417,15 @@
   }
 
   function goSection(id, push) {
+    if (id === 'book-appointment' && window.matchMedia('(max-width: 1023px)').matches) {
+      if (typeof window.openAppointmentModal === 'function') {
+        window.openAppointmentModal();
+      }
+      if (push && window.history && history.pushState) {
+        history.pushState({ section: id }, '', '/' + id);
+      }
+      return;
+    }
     if (!scrollToId(id, 'smooth')) return;
     if (push && window.history && history.pushState) {
       history.pushState({ section: id }, '', '/' + id);
@@ -374,7 +443,11 @@
     }
   } else {
     var fromPath = pathToSection(location.pathname);
-    if (fromPath) {
+    if (fromPath === 'book-appointment' && window.matchMedia('(max-width: 1023px)').matches) {
+      setTimeout(function () {
+        if (typeof window.openAppointmentModal === 'function') window.openAppointmentModal();
+      }, 80);
+    } else if (fromPath) {
       setTimeout(function () { scrollToId(fromPath, 'auto'); }, 50);
     }
   }

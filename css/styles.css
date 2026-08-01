@@ -747,6 +747,69 @@ label {
 }
 .hero-dot.active { background: var(--primary); width: 1.5rem; }
 
+/* Appointment popup (mobile / tablet) */
+.appt-modal {
+  position: fixed;
+  inset: 0;
+  z-index: 80;
+  display: flex;
+  align-items: flex-end;
+  justify-content: center;
+  padding: 0;
+}
+.appt-modal[hidden] { display: none !important; }
+.appt-modal-backdrop {
+  position: absolute;
+  inset: 0;
+  background: rgba(11, 58, 97, 0.45);
+}
+.appt-modal-panel {
+  position: relative;
+  z-index: 1;
+  width: 100%;
+  max-width: 28rem;
+  margin: 0 auto;
+  max-height: min(92dvh, 40rem);
+  overflow: auto;
+  padding: 1rem 1rem calc(1rem + env(safe-area-inset-bottom, 0px));
+  animation: appt-modal-in 0.22s ease;
+}
+@media (min-width: 480px) {
+  .appt-modal {
+    align-items: center;
+    padding: 1.25rem;
+  }
+  .appt-modal-panel {
+    padding: 0;
+  }
+}
+.appt-modal-close {
+  position: absolute;
+  top: 1.35rem;
+  right: 1.35rem;
+  z-index: 2;
+  width: 2rem;
+  height: 2rem;
+  border: none;
+  border-radius: 999px;
+  background: var(--section-bg);
+  color: var(--text);
+  font-size: 1.35rem;
+  line-height: 1;
+  cursor: pointer;
+}
+.appt-modal-panel .appointment-card {
+  position: relative;
+  padding-top: 1.75rem;
+}
+@keyframes appt-modal-in {
+  from { opacity: 0; transform: translateY(12px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+body.appt-modal-open { overflow: hidden; }
+
+.hero-mobile-cta { display: none; }
+
 /* ---- How It Works ---- */
 #how-it-works {
   position: relative;
@@ -1063,49 +1126,6 @@ header .site-logo-img {
     object-position: left center;
   }
 
-  /* Soft gradient hero — keep stable height on mobile */
-  .hero-slider {
-    aspect-ratio: 1024 / 720;
-    width: 100%;
-    min-height: 22.5rem;
-    height: auto;
-    background: linear-gradient(180deg, #F5FBFA 0%, #D5EFEC 48%, #8CDAD4 100%);
-    overflow: hidden;
-  }
-  .hero-slide {
-    position: absolute;
-    inset: 0;
-    display: block;
-    min-height: 100%;
-    height: 100%;
-    background-size: cover;
-    background-position: center center;
-  }
-  .hero-slide.active {
-    display: block;
-  }
-  .hero-arrow { display: none; }
-  .hero-slide-content {
-    align-items: flex-start !important;
-    height: 100% !important;
-    min-height: 100% !important;
-    padding-top: 2rem !important;
-    padding-bottom: 2.35rem !important;
-  }
-  .hero-copy { margin-top: 0.35rem; }
-  .hero-copy p { font-size: 0.95rem; max-width: 22rem; margin-bottom: 1.15rem !important; }
-  .hero-copy h1,
-  .hero-copy h2 { font-size: clamp(1.85rem, 8vw, 2.25rem); margin-bottom: 0.75rem !important; }
-  .hero-dots {
-    position: absolute;
-    left: 0;
-    right: 0;
-    bottom: 0.7rem;
-    z-index: 5;
-    padding: 0;
-    margin: 0;
-  }
-
   .mobile-bottom-bar {
     display: flex;
     position: fixed;
@@ -1149,10 +1169,76 @@ header .site-logo-img {
 
 @media (max-width: 1023px) {
   #hero > .absolute.inset-0 { display: none !important; }
+
+  .hero-slider {
+    aspect-ratio: auto;
+    width: 100%;
+    min-height: calc(100svh - 4.25rem);
+    height: calc(100dvh - 4.25rem);
+    overflow: hidden;
+    background: linear-gradient(
+      180deg,
+      #FFFFFF 0%,
+      var(--accent-soft) 42%,
+      color-mix(in srgb, var(--primary) 22%, #FFFFFF) 100%
+    );
+  }
+  .hero-slide {
+    position: absolute;
+    inset: 0;
+    min-height: 100%;
+    height: 100%;
+  }
+  .hero-slide-content {
+    align-items: flex-start !important;
+    height: 100% !important;
+    min-height: 100% !important;
+    padding-top: 2rem !important;
+    padding-bottom: 6.5rem !important;
+  }
+  .hero-copy { margin-top: 0.35rem; }
+  .hero-copy p { font-size: 0.95rem; max-width: 22rem; margin-bottom: 1.15rem !important; }
+  .hero-copy h1,
+  .hero-copy h2 { font-size: clamp(1.85rem, 8vw, 2.25rem); margin-bottom: 0.75rem !important; }
+  .hero-mobile-cta {
+    display: flex;
+    position: absolute;
+    left: 0;
+    right: 0;
+    bottom: 1.15rem;
+    z-index: 6;
+    padding: 0 1rem;
+    pointer-events: none;
+  }
+  .hero-mobile-cta .book-appt-trigger {
+    pointer-events: auto;
+  }
+  .hero-dots {
+    bottom: 5.25rem;
+  }
+  .hero-arrow { display: none; }
+}
+@media (max-width: 767px) {
+  .hero-slider {
+    min-height: calc(100svh - 4.25rem);
+    height: calc(100dvh - 4.25rem);
+  }
+  .hero-mobile-cta {
+    bottom: calc(4.35rem + env(safe-area-inset-bottom, 0px));
+  }
+  .hero-dots {
+    bottom: calc(8.4rem + env(safe-area-inset-bottom, 0px));
+  }
+  .hero-slide-content {
+    padding-bottom: calc(9.5rem + env(safe-area-inset-bottom, 0px)) !important;
+  }
 }
 @media (min-width: 768px) and (max-width: 1023px) {
-  .hero-slider { min-height: clamp(480px, 70vh, 620px); }
-  .hero-slide-content { padding-top: 2.5rem; padding-bottom: 3rem; }
+  .hero-slider {
+    min-height: calc(100svh - 4.75rem);
+    height: calc(100dvh - 4.75rem);
+  }
+  .hero-slide-content { padding-top: 2.5rem; padding-bottom: 7rem !important; }
 }
 @media (max-width: 380px) {
   .hiw-step h3 { font-size: 0.75rem !important; }

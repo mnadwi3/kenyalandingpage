@@ -63,7 +63,7 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
 
-  <link rel="stylesheet" href="css/styles.css?v=20260802-hero-grad">
+  <link rel="stylesheet" href="css/styles.css?v=20260802-mobile-hero">
 </head>
 <body class="bg-white antialiased">
   <!-- Google Tag Manager (noscript) -->
@@ -185,20 +185,42 @@
         <button type="button" class="hero-dot" data-dot="1" aria-label="Go to slide 2"></button>
         <button type="button" class="hero-dot" data-dot="2" aria-label="Go to slide 3"></button>
       </div>
+
+      <!-- Mobile: Book An Appointment opens form popup -->
+      <div class="hero-mobile-cta lg:hidden">
+        <button
+          type="button"
+          id="open-appointment-modal"
+          class="book-appt-trigger w-full max-w-sm mx-auto flex items-center justify-center gap-2 bg-primary hover:bg-primary-dark text-white font-bold text-base px-5 py-3.5 rounded-xl shadow-card transition-colors"
+        >
+          Book An Appointment
+        </button>
+      </div>
     </section>
 
-    <!-- Mobile hero form -->
-    <div id="book-appointment" class="lg:hidden bg-soft px-4 py-6 -mt-1 scroll-mt-24">
-      <div class="max-w-sm mx-auto bg-white rounded-2xl shadow-card p-5 border border-slate-100 appointment-card">
-        <h3 class="text-primary mb-3 text-center">Book An Appointment</h3>
-        <form id="hero-form-mobile" class="space-y-3" novalidate>
-          <input type="text" name="name" required placeholder="Full name" autocomplete="name" aria-label="Name" class="w-full rounded-lg border border-slate-200 px-3.5 py-2.5 text-sm focus:outline-none focus:ring-2 focus:ring-primary/40 focus:border-primary">
-          <input type="tel" name="whatsapp" required placeholder="+XX XXXXXXXXXX" autocomplete="tel" inputmode="tel" aria-label="WhatsApp No" class="w-full rounded-lg border border-slate-200 px-3.5 py-2.5 text-sm focus:outline-none focus:ring-2 focus:ring-primary/40 focus:border-primary">
-          <input type="text" name="country" required placeholder="Your country" autocomplete="country-name" aria-label="Country" class="w-full rounded-lg border border-slate-200 px-3.5 py-2.5 text-sm focus:outline-none focus:ring-2 focus:ring-primary/40 focus:border-primary">
-          <textarea name="condition" required rows="3" placeholder="Briefly describe your condition, stage, and any specific questions..." aria-label="Condition Details" class="w-full rounded-lg border border-slate-200 px-3.5 py-2.5 text-sm focus:outline-none focus:ring-2 focus:ring-primary/40 focus:border-primary resize-y min-h-[4.5rem]"></textarea>
-          <button type="submit" class="w-full bg-primary hover:bg-primary-dark text-white font-bold py-3 rounded-lg text-sm">Book Now</button>
-        </form>
-        <p id="hero-form-mobile-success" class="hidden text-center text-sm text-success font-semibold mt-3">Thank you - we received your details and will contact you shortly.</p>
+    <!-- Scroll target for /book-appointment (form opens as popup on mobile) -->
+    <div id="book-appointment" class="lg:hidden scroll-mt-24 h-0 overflow-hidden" aria-hidden="true"></div>
+
+    <div id="appointment-modal" class="appt-modal" hidden aria-hidden="true">
+      <div class="appt-modal-backdrop" data-appt-close tabindex="-1" aria-hidden="true"></div>
+      <div
+        class="appt-modal-panel"
+        role="dialog"
+        aria-modal="true"
+        aria-labelledby="appt-modal-title"
+      >
+        <button type="button" class="appt-modal-close" data-appt-close aria-label="Close appointment form">&times;</button>
+        <div class="appointment-card bg-white rounded-2xl shadow-card p-5 border border-slate-100">
+          <h3 id="appt-modal-title" class="text-primary mb-3 text-center">Book An Appointment</h3>
+          <form id="hero-form-mobile" class="space-y-3" novalidate>
+            <input type="text" name="name" required placeholder="Full name" autocomplete="name" aria-label="Name" class="w-full rounded-lg border border-slate-200 px-3.5 py-2.5 text-sm focus:outline-none focus:ring-2 focus:ring-primary/40 focus:border-primary">
+            <input type="tel" name="whatsapp" required placeholder="+XX XXXXXXXXXX" autocomplete="tel" inputmode="tel" aria-label="WhatsApp No" class="w-full rounded-lg border border-slate-200 px-3.5 py-2.5 text-sm focus:outline-none focus:ring-2 focus:ring-primary/40 focus:border-primary">
+            <input type="text" name="country" required placeholder="Your country" autocomplete="country-name" aria-label="Country" class="w-full rounded-lg border border-slate-200 px-3.5 py-2.5 text-sm focus:outline-none focus:ring-2 focus:ring-primary/40 focus:border-primary">
+            <textarea name="condition" required rows="3" placeholder="Briefly describe your condition, stage, and any specific questions..." aria-label="Condition Details" class="w-full rounded-lg border border-slate-200 px-3.5 py-2.5 text-sm focus:outline-none focus:ring-2 focus:ring-primary/40 focus:border-primary resize-y min-h-[4.5rem]"></textarea>
+            <button type="submit" class="w-full bg-primary hover:bg-primary-dark text-white font-bold py-3 rounded-lg text-sm">Book Now</button>
+          </form>
+          <p id="hero-form-mobile-success" class="hidden text-center text-sm text-success font-semibold mt-3">Thank you - we received your details and will contact you shortly.</p>
+        </div>
       </div>
     </div>
 
@@ -868,6 +890,6 @@
     </a>
   </div>
 
-  <script src="js/main.js?v=20260801-journey"></script>
+  <script src="js/main.js?v=20260802-mobile-hero"></script>
 </body>
 </html>

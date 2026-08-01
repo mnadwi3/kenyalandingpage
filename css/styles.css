@@ -985,18 +985,54 @@ label {
 }
 .mobile-bottom-book:hover { background: #0a7a94; }
 
+/* Header logo — desktop/tablet (Vaidam-style wide lockup) */
+header .site-logo {
+  min-width: 0;
+  flex-shrink: 1;
+}
+header .site-logo img,
+header .site-logo-img {
+  display: block;
+  height: 2.6rem;
+  width: auto;
+  max-width: 15.75rem;
+  object-fit: contain;
+  object-position: left center;
+}
+@media (min-width: 1024px) {
+  header .site-logo img,
+  header .site-logo-img {
+    height: 2.85rem;
+    max-width: 17.55rem;
+  }
+}
+
 @media (max-width: 767px) {
   header .header-wa {
-    padding: 0.55rem 0.85rem;
-    min-height: 2.6rem;
+    padding: 0.5rem;
+    min-height: 2.4rem;
+    min-width: 2.4rem;
     border-radius: 0.5rem;
+    justify-content: center;
   }
-  header .header-wa-text { display: inline; }
-  header .site-logo { height: auto; width: auto; }
-  header .site-logo img {
-    height: 2.85rem;
+  header .header-wa-text { display: none; }
+  header .header-wa svg {
+    width: 1.35rem;
+    height: 1.35rem;
+  }
+  header .site-logo {
+    height: auto;
     width: auto;
-    max-width: 17.55rem;
+    min-width: 0;
+    flex: 1 1 auto;
+    max-width: calc(100% - 3.25rem);
+  }
+  header .site-logo img {
+    display: block;
+    height: auto;
+    width: min(100%, 13rem);
+    max-height: 2.35rem;
+    max-width: 100%;
     object-fit: contain;
     object-position: left center;
   }

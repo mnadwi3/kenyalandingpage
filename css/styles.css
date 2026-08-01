@@ -542,25 +542,8 @@ label {
   border-color: #7EB8C8;
   border-top-color: #097895;
 }
-.doc-icon {
-  width: 2.65rem;
-  height: 2.65rem;
-  border-radius: 999px;
-  background: #023B44;
-  color: #fff;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  margin: 0.05rem 0 0.45rem;
-  flex-shrink: 0;
-  font-size: 0.7rem;
-  font-weight: 700;
-  letter-spacing: 0.02em;
-  line-height: 1;
-  box-shadow: 0 4px 10px rgba(2, 59, 68, 0.2);
-}
 .doc-card h3 {
-  margin: 0 0 0.3rem;
+  margin: 0.15rem 0 0.3rem;
   font-size: 0.78rem !important;
   font-weight: 700 !important;
   line-height: 1.25 !important;
@@ -627,12 +610,6 @@ label {
     height: 100%;
     border-radius: 0.85rem;
   }
-  .doc-icon {
-    width: 3.25rem;
-    height: 3.25rem;
-    margin-bottom: 0.55rem;
-    font-size: 0.8rem;
-  }
   .doc-card h3 { font-size: 0.9rem !important; }
   .doc-card .doc-role {
     font-size: 0.7rem;
@@ -654,11 +631,6 @@ label {
 }
 @media (min-width: 1024px) {
   .doc-card { padding: 1.05rem 0.85rem 0.9rem; }
-  .doc-icon {
-    width: 3.5rem;
-    height: 3.5rem;
-    font-size: 0.85rem;
-  }
   .doc-card h3 { font-size: 0.95rem !important; }
   .doc-card .doc-role { font-size: 0.75rem; }
   .doc-card .doc-meta { font-size: 0.75rem; }

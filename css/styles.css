@@ -737,16 +737,23 @@ label {
     object-position: left center;
   }
 
+  /* Lock hero to slide-2.png aspect (1024×720) so slides don't resize the page */
   .hero-slider {
-    min-height: 0;
+    aspect-ratio: 1024 / 720;
+    width: 100%;
+    min-height: 22.5rem;
     height: auto;
-    background: transparent;
+    background: #023B44;
+    overflow: hidden;
   }
   .hero-slide {
-    position: relative;
-    inset: auto;
-    display: none;
-    min-height: 0;
+    position: absolute;
+    inset: 0;
+    display: block;
+    min-height: 100%;
+    height: 100%;
+    background-size: cover;
+    background-position: center center;
   }
   .hero-slide.active {
     display: block;
@@ -754,8 +761,8 @@ label {
   .hero-arrow { display: none; }
   .hero-slide-content {
     align-items: flex-start !important;
-    height: auto !important;
-    min-height: 0 !important;
+    height: 100% !important;
+    min-height: 100% !important;
     padding-top: 2rem !important;
     padding-bottom: 2.35rem !important;
   }

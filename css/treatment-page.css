@@ -1,9 +1,9 @@
 /* VaidTrack.com treatment pages - editorial layout
    Brand palette: primary blue, medical green (WhatsApp/success only) */
 :root {
-  --primary: #0B5ED7;
-  --primary-dark: #084298;
-  --primary-light: #3B82F6;
+  --primary: #0F4C81;
+  --primary-dark: #0B3A61;
+  --primary-light: #3A6F9A;
   --success: #16A34A;
   --success-hover: #15803D;
   --background: #FFFFFF;
@@ -15,16 +15,16 @@
   --bg: #FFFFFF;
   --bg-alt: #F8FAFC;
   --ink: #1E293B;
-  --deep: #0B5ED7;
-  --deep-light: #3B82F6;
-  --deep-dark: #084298;
-  --secondary: #084298;
-  --accent: #0B5ED7;
-  --accent-dark: #084298;
-  --accent-soft: #DBEAFE;
-  --gold: #0B5ED7;
-  --cta: #0B5ED7;
-  --cta-hover: #084298;
+  --deep: #0F4C81;
+  --deep-light: #3A6F9A;
+  --deep-dark: #0B3A61;
+  --secondary: #0B3A61;
+  --accent: #0F4C81;
+  --accent-dark: #0B3A61;
+  --accent-soft: #E8F0F6;
+  --gold: #0F4C81;
+  --cta: #0F4C81;
+  --cta-hover: #0B3A61;
   --muted: #64748B;
   --line: #E2E8F0;
   --white: #FFFFFF;
@@ -39,9 +39,9 @@
 
 /* Women's cancer pages share primary brand (no alternate palette) */
 body.tx-theme-women {
-  --accent: #0B5ED7;
-  --accent-dark: #084298;
-  --accent-soft: #DBEAFE;
+  --accent: #0F4C81;
+  --accent-dark: #0B3A61;
+  --accent-soft: #E8F0F6;
 }
 
 *, *::before, *::after { box-sizing: border-box; }

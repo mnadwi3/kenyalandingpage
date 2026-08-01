@@ -4,9 +4,9 @@
 
 :root {
   /* Brand color system - VaidTrack.com */
-  --primary: #0B5ED7;
-  --primary-dark: #084298;
-  --primary-light: #3B82F6;
+  --primary: #0F4C81;
+  --primary-dark: #0B3A61;
+  --primary-light: #3A6F9A;
   --success: #16A34A;
   --success-hover: #15803D;
   --background: #FFFFFF;
@@ -16,19 +16,19 @@
   --text-light: #64748B;
 
   /* Semantic aliases */
-  --secondary: #084298;
-  --accent: #0B5ED7;
-  --accent-soft: #DBEAFE;
-  --gold: #0B5ED7;
-  --cta: #0B5ED7;
-  --cta-hover: #084298;
+  --secondary: #0B3A61;
+  --accent: #0F4C81;
+  --accent-soft: #E8F0F6;
+  --gold: #0F4C81;
+  --cta: #0F4C81;
+  --cta-hover: #0B3A61;
   --soft: #F8FAFC;
   --ink: #1E293B;
   --wa: #16A34A;
   --wa-hover: #15803D;
   --white: #FFFFFF;
-  --shadow: rgba(11, 94, 215, 0.10);
-  --shadow-strong: rgba(8, 66, 152, 0.16);
+  --shadow: rgba(15, 76, 129, 0.10);
+  --shadow-strong: rgba(11, 58, 97, 0.14);
   --font-heading: "Inter", "Segoe UI", system-ui, sans-serif;
   --font-body: "Inter", "Segoe UI", system-ui, sans-serif;
 
@@ -754,8 +754,8 @@ label {
 #how-it-works {
   position: relative;
   background:
-    radial-gradient(ellipse 70% 80% at 100% 0%, rgba(11, 94, 215, 0.08), transparent 55%),
-    radial-gradient(ellipse 50% 60% at 0% 100%, rgba(8, 66, 152, 0.05), transparent 50%),
+    radial-gradient(ellipse 70% 80% at 100% 0%, rgba(15, 76, 129, 0.08), transparent 55%),
+    radial-gradient(ellipse 50% 60% at 0% 100%, rgba(11, 58, 97, 0.05), transparent 50%),
     var(--section-bg);
   overflow: hidden;
   padding: 3.25rem 0 3.5rem !important;
@@ -765,8 +765,8 @@ label {
   position: absolute;
   inset: 0;
   background-image:
-    linear-gradient(rgba(11,94,215,0.06) 1px, transparent 1px),
-    linear-gradient(90deg, rgba(11,94,215,0.06) 1px, transparent 1px);
+    linear-gradient(rgba(15,76,129,0.06) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(15,76,129,0.06) 1px, transparent 1px);
   background-size: 48px 48px;
   mask-image: linear-gradient(180deg, rgba(0,0,0,0.55), transparent 90%);
   pointer-events: none;
@@ -840,7 +840,7 @@ label {
     right: 8%;
     top: 2.15rem;
     height: 2px;
-    background: linear-gradient(90deg, transparent, rgba(11,94,215,0.25) 12%, rgba(11,94,215,0.25) 88%, transparent);
+    background: linear-gradient(90deg, transparent, rgba(15,76,129,0.22) 12%, rgba(15,76,129,0.22) 88%, transparent);
     pointer-events: none;
     z-index: 0;
   }

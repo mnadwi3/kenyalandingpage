@@ -104,8 +104,8 @@ Each page: hero, lead form (`#lead`), care content, doctors, FAQ, sticky WhatsAp
 
 | Token | Value | Use |
 |--------|--------|-----|
-| Primary | `#0B5ED7` | Buttons, links, accents |
-| Primary dark | `#084298` | Hover, secondary/headings |
+| Primary | `#0F4C81` | Buttons, links, accents |
+| Primary dark | `#0B3A61` | Hover, secondary/headings |
 | Success / WhatsApp | `#16A34A` | WhatsApp, success states |
 | Soft bg | `#F8FAFC` | Section backgrounds |
 | Border | `#E2E8F0` | Cards, inputs |

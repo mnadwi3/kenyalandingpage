@@ -432,7 +432,8 @@ ul { margin: 0; padding: 0; }
   .doccard .link { font-size: 12px; }
 }
 @media (min-width: 640px) { .docgrid { grid-template-columns: 1fr 1fr; gap: 20px; } }
-@media (min-width: 960px) { .docgrid { grid-template-columns: repeat(3, 1fr); } }
+@media (min-width: 900px) { .docgrid { grid-template-columns: repeat(3, 1fr); } }
+@media (min-width: 1100px) { .docgrid { grid-template-columns: repeat(4, 1fr); gap: 16px; } }
 
 /* Journey — horizontal timeline */
 .timeline {

@@ -716,17 +716,21 @@ body.sticky-at-end { padding-bottom: 10.5rem; }
 .reveal { opacity: 0; transform: translateY(14px); transition: opacity .5s var(--ease), transform .5s var(--ease); }
 .reveal.visible { opacity: 1; transform: none; }
 
+.navcta .btn-primary {
+  background: #fff;
+  color: var(--deep);
+  border-color: #fff;
+}
+.navcta .btn-primary:hover {
+  background: rgba(255,255,255,.9);
+  color: var(--deep-dark);
+}
+.navcta .navcta-short { display: none; }
 @media (max-width: 899px) {
   .navcta .btn-outline { display: none; }
   .navcta .navcta-full { display: none; }
   .navcta .navcta-short { display: inline; }
-  .navcta .btn-primary {
-    background: var(--accent);
-    color: #fff;
-    border-color: transparent;
-  }
 }
-.navcta .navcta-short { display: none; }
 @media (prefers-reduced-motion: reduce) {
   html { scroll-behavior: auto; }
   .reveal { opacity: 1; transform: none; transition: none; }

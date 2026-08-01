@@ -526,26 +526,28 @@ label {
   flex-direction: column;
   align-items: center;
   text-align: center;
-  background: #fff;
+  background: linear-gradient(180deg, #F0F7FA 0%, #FFFFFF 48%);
   border-radius: 0.75rem;
   padding: 0.85rem 0.5rem 0.65rem;
-  box-shadow: 0 4px 14px rgba(15, 23, 42, 0.05);
-  border: 1px solid #C5E0E8;
+  box-shadow: 0 4px 14px rgba(2, 59, 68, 0.06);
+  border: 1px solid #B7D4DE;
+  border-top: 3px solid #023B44;
   transition: transform 0.2s ease, box-shadow 0.2s ease, border-color 0.2s ease;
   min-width: 0;
   width: 100%;
 }
 .doc-card:hover {
   transform: translateY(-2px);
-  box-shadow: 0 8px 22px rgba(15, 23, 42, 0.1);
-  border-color: #9BC8D4;
+  box-shadow: 0 8px 22px rgba(2, 59, 68, 0.12);
+  border-color: #7EB8C8;
+  border-top-color: #097895;
 }
 .doc-icon {
   width: 2.65rem;
   height: 2.65rem;
   border-radius: 999px;
-  background: color-mix(in srgb, #076279 14%, #fff);
-  color: #076279;
+  background: #023B44;
+  color: #fff;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -555,6 +557,7 @@ label {
   font-weight: 700;
   letter-spacing: 0.02em;
   line-height: 1;
+  box-shadow: 0 4px 10px rgba(2, 59, 68, 0.2);
 }
 .doc-card h3 {
   margin: 0 0 0.3rem;
@@ -570,8 +573,9 @@ label {
   margin: 0 0 0.35rem;
   padding: 0.15rem 0.45rem;
   border-radius: 999px;
-  background: #E7F6F1;
-  color: #0F766E;
+  background: #F5ECD3;
+  color: #8A6A12;
+  border: 1px solid #E5D5A4;
   font-size: 0.625rem;
   font-weight: 600;
   line-height: 1.3;

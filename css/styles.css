@@ -951,6 +951,32 @@ label {
   }
 }
 
+.hiw-cta {
+  display: flex;
+  justify-content: center;
+  margin-top: 1.75rem;
+}
+.hiw-cta-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.4rem;
+  padding: 0.75rem 1.5rem;
+  border-radius: 0.65rem;
+  background: #fff;
+  color: #023B44;
+  font-size: 0.9375rem;
+  font-weight: 700;
+  text-decoration: none;
+  box-shadow: 0 8px 20px rgba(2, 59, 68, 0.18);
+  transition: transform 0.15s ease, background 0.15s ease, color 0.15s ease;
+}
+.hiw-cta-btn:hover {
+  background: #F0F9FB;
+  color: #076279;
+  transform: translateY(-1px);
+}
+
 /* Mobile hamburger nav removed — keep selectors inert if markup remains elsewhere */
 .nav-toggle,
 .mobile-nav { display: none !important; }
@@ -1075,7 +1101,6 @@ label {
 
   #doctors h2,
   #treatment h2,
-  #visa-travel h2,
   #testimonials h2,
   #faq h2,
   #location h2 {

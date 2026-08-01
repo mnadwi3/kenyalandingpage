@@ -79,9 +79,9 @@
   start();
 })();
 
-/* Order sections: Treatment → How It Works → Doctors → Visa & Travel → Testimonials → About Us → FAQ */
+/* Order sections: Treatment → Doctors → Journey (how-it-works) → Testimonials → About Us → FAQ */
 (function () {
-  var order = ['treatment', 'how-it-works', 'doctors', 'visa-travel', 'testimonials', 'about-us', 'faq'];
+  var order = ['treatment', 'doctors', 'how-it-works', 'testimonials', 'about-us', 'faq'];
   var anchor = document.getElementById('why-india');
   if (!anchor) return;
   var cursor = anchor;
@@ -340,7 +340,7 @@
     faq: 'faq',
     contact: 'contact',
     'book-appointment': 'book-appointment',
-    'visa-travel': 'visa-travel',
+    'visa-travel': 'how-it-works',
     'how-it-works': 'how-it-works'
   };
 

@@ -1014,7 +1014,7 @@ label {
 }
 .mobile-bottom-book:hover { background: var(--primary); }
 
-/* Header logo - desktop/tablet (Vaidam-style wide lockup) */
+/* Header logo - desktop/tablet (wordmark + tagline lockup) */
 header .site-logo {
   min-width: 0;
   flex-shrink: 1;
@@ -1022,17 +1022,17 @@ header .site-logo {
 header .site-logo img,
 header .site-logo-img {
   display: block;
-  height: 2.21rem;
+  height: 2.55rem;
   width: auto;
-  max-width: 13.4rem;
+  max-width: 15rem;
   object-fit: contain;
   object-position: left center;
 }
 @media (min-width: 1024px) {
   header .site-logo img,
   header .site-logo-img {
-    height: 2.42rem;
-    max-width: 14.92rem;
+    height: 2.8rem;
+    max-width: 16.5rem;
   }
 }
 
@@ -1059,8 +1059,8 @@ header .site-logo-img {
   header .site-logo img {
     display: block;
     height: auto;
-    width: min(100%, 11.05rem);
-    max-height: 2rem;
+    width: min(100%, 12.5rem);
+    max-height: 2.35rem;
     max-width: 100%;
     object-fit: contain;
     object-position: left center;

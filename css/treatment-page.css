@@ -106,9 +106,9 @@ ul { margin: 0; padding: 0; }
   display: flex; align-items: center; justify-content: space-between;
   gap: 1rem; width: min(100% - 2rem, var(--max)); margin-inline: auto;
 }
-.tp-logo { display: inline-flex; align-items: center; flex-shrink: 1; min-width: 0; max-width: min(58%, 15.7rem); }
+.tp-logo { display: inline-flex; align-items: center; flex-shrink: 1; min-width: 0; max-width: min(58%, 16.5rem); }
 .tp-logo img {
-  height: 37px; width: auto; max-width: 14.15rem;
+  height: 42px; width: auto; max-width: 15.5rem;
   object-fit: contain; object-position: left center;
 }
 .tp-nav { display: none; gap: 1.5rem; }
@@ -117,15 +117,15 @@ ul { margin: 0; padding: 0; }
 .navcta { display: flex; gap: 10px; align-items: center; flex-shrink: 0; }
 @media (min-width: 900px) {
   .tp-nav { display: flex; }
-  .tp-logo { max-width: 15.7rem; flex-shrink: 0; }
-  .tp-logo img { height: 37px; max-width: 14.15rem; }
+  .tp-logo { max-width: 16.5rem; flex-shrink: 0; }
+  .tp-logo img { height: 44px; max-width: 16rem; }
 }
 @media (max-width: 899px) {
   .tp-logo { max-width: calc(100% - 7.5rem); }
   .tp-logo img {
     height: auto;
-    width: min(100%, 11.05rem);
-    max-height: 29px;
+    width: min(100%, 12.5rem);
+    max-height: 36px;
     max-width: 100%;
   }
 }

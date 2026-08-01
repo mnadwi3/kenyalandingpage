@@ -95,7 +95,7 @@ ul { margin: 0; padding: 0; }
 }
 .tp-logo { display: inline-flex; align-items: center; flex-shrink: 0; }
 .tp-logo img {
-  height: 36px; width: auto; max-width: 15rem;
+  height: 28px; width: auto; max-width: 12rem;
   object-fit: contain; object-position: left center;
 }
 .tp-nav { display: none; gap: 1.5rem; }
@@ -104,7 +104,7 @@ ul { margin: 0; padding: 0; }
 .navcta { display: flex; gap: 10px; align-items: center; }
 @media (min-width: 900px) {
   .tp-nav { display: flex; }
-  .tp-logo img { height: 42px; max-width: 17rem; }
+  .tp-logo img { height: 32px; max-width: 13.5rem; }
 }
 
 /* Buttons */
@@ -718,7 +718,15 @@ body.sticky-at-end { padding-bottom: 10.5rem; }
 
 @media (max-width: 899px) {
   .navcta .btn-outline { display: none; }
+  .navcta .navcta-full { display: none; }
+  .navcta .navcta-short { display: inline; }
+  .navcta .btn-primary {
+    background: var(--accent);
+    color: #fff;
+    border-color: transparent;
+  }
 }
+.navcta .navcta-short { display: none; }
 @media (prefers-reduced-motion: reduce) {
   html { scroll-behavior: auto; }
   .reveal { opacity: 1; transform: none; transition: none; }

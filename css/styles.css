@@ -498,27 +498,6 @@ label {
   margin-right: auto;
 }
 
-@media (min-width: 1024px) {
-  .tx-card { padding: 1.5rem 1.25rem 1.25rem; }
-  .tx-icon {
-    width: 5rem;
-    height: 5rem;
-  }
-  .tx-icon svg {
-    width: 2.75rem;
-    height: 2.75rem;
-  }
-  .tx-card h3,
-  .tx-body h3 { font-size: 1.125rem !important; }
-  .tx-price { font-size: 0.9rem; }
-  .tx-card p,
-  .tx-body p { font-size: 0.9rem; }
-  .tx-book {
-    min-height: 2.75rem;
-    font-size: 1rem;
-  }
-}
-
 /* Scroll reveal */
 .reveal {
   opacity: 0;

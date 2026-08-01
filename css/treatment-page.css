@@ -17,7 +17,7 @@
   --muted: #5B6B70;
   --line: #D9E4E8;
   --white: #FFFFFF;
-  --header-h: 72px;
+  --header-h: 156px;
   --max: 1120px;
   --font: "Inter", "Segoe UI", system-ui, sans-serif;
   --mono: ui-monospace, "SFMono-Regular", Menlo, Consolas, monospace;
@@ -86,7 +86,9 @@ ul { margin: 0; padding: 0; }
   position: sticky; top: 0; z-index: 50;
   background: var(--deep);
   box-shadow: 0 4px 12px rgba(2, 59, 68, 0.18);
-  height: var(--header-h);
+  min-height: var(--header-h);
+  height: auto;
+  padding: 0.75rem 0;
   display: flex; align-items: center;
 }
 .tp-header .nav {
@@ -95,7 +97,7 @@ ul { margin: 0; padding: 0; }
 }
 .tp-logo { display: inline-flex; align-items: center; flex-shrink: 0; }
 .tp-logo img {
-  height: 40px; width: auto; max-width: 10.5rem;
+  height: 120px; width: auto; max-width: 31.5rem;
   object-fit: contain; object-position: left center;
 }
 .tp-nav { display: none; gap: 1.5rem; }
@@ -104,7 +106,7 @@ ul { margin: 0; padding: 0; }
 .navcta { display: flex; gap: 10px; align-items: center; }
 @media (min-width: 900px) {
   .tp-nav { display: flex; }
-  .tp-logo img { height: 46px; max-width: 12rem; }
+  .tp-logo img { height: 138px; max-width: 36rem; }
 }
 
 /* Buttons */

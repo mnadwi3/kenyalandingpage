@@ -641,7 +641,6 @@ ul { margin: 0; padding: 0; }
   gap: 0.4rem;
 }
 .sticky-bar .btn-wa-rect:hover { background: #1ebe57; color: #fff; }
-.sticky-bar .btn-wa-rect svg { width: 18px; height: 18px; flex-shrink: 0; }
 .sticky-bar-legal {
   display: none;
   flex: 1 1 100%;
@@ -701,8 +700,6 @@ body.sticky-at-end { padding-bottom: 10.5rem; }
   }
   .sticky-bar .btn-plan-full { display: none; }
   .sticky-bar .btn-plan-short { display: inline; }
-  .sticky-bar .btn-wa-label { display: none; }
-  .sticky-bar .btn-wa-rect { flex: 0 0 auto; padding-inline: 0.55rem; }
   .sticky-bar-legal {
     font-size: 10px;
     padding-top: 0.4rem;

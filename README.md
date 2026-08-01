@@ -104,11 +104,12 @@ Each page: hero, lead form (`#lead`), care content, doctors, FAQ, sticky WhatsAp
 
 | Token | Value | Use |
 |--------|--------|-----|
-| Primary | `#097895` | Buttons, accents |
-| Secondary | `#023B44` | Headings, doctor card accent |
-| Accent / light | `#0BA5C4` | Highlights |
-| Gold | `#D4A017` | Rules, specialty badges |
-| Soft bg | `#F7FAFB` / `#EAF4F7` | Section backgrounds |
+| Primary | `#0B5ED7` | Buttons, links, accents |
+| Primary dark | `#084298` | Hover, secondary/headings |
+| Success / WhatsApp | `#16A34A` | WhatsApp, success states |
+| Soft bg | `#F8FAFC` | Section backgrounds |
+| Border | `#E2E8F0` | Cards, inputs |
+| Text | `#1E293B` / `#64748B` | Primary / secondary text |
 | Font | Inter (Google Fonts) | UI |
 
 ---

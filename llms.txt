@@ -15,7 +15,7 @@ Repo: https://github.com/mnadwi3/kenyalandingpage
 /treatments/{cancer-slug} /privacy-policy /disclaimer
 
 ## Brand
-primary #097895 Ã‚Â· secondary #023B44 Ã‚Â· gold #D4A017 Ã‚Â· WhatsApp +91 8979983149
+primary #0B5ED7 · dark #084298 · success #16A34A · soft #F8FAFC · WhatsApp +91 8979983149
 
 ## Notes
 Doctor credentials and patient quotes may still be placeholders Ã¢â‚¬- verify before launch.

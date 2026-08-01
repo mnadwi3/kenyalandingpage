@@ -19,10 +19,10 @@
       theme: {
         extend: {
           colors: {
-            primary: '#097895',
-            secondary: '#023B44',
-            soft: '#F7FAFB',
-            ink: '#1A1A1A',
+            primary: '#0B5ED7',
+            secondary: '#084298',
+            soft: '#F8FAFC',
+            ink: '#1E293B',
           },
           fontFamily: {
             sans: ['Inter', 'Segoe UI', 'system-ui', 'sans-serif'],
@@ -36,6 +36,7 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
   <style>
+    :root { --primary:#0B5ED7; --primary-dark:#084298; --secondary:#084298; --section-bg:#F8FAFC; --border:#E2E8F0; --text:#1E293B; --text-light:#64748B; --background:#FFFFFF; --wa:#16A34A; }
     :root {
       --font-heading: "Inter", "Segoe UI", system-ui, sans-serif;
       --font-body: "Inter", "Segoe UI", system-ui, sans-serif;
@@ -79,7 +80,7 @@
       font-weight: var(--fw-regular);
       line-height: var(--lh-body);
       letter-spacing: var(--ls-body);
-      color: #1A1A1A;
+      color: var(--text);
     }
     h1, h2, h3 {
       font-family: var(--font-heading);
@@ -94,7 +95,7 @@
       font-size: 1.35rem;
       font-weight: var(--fw-bold);
       letter-spacing: var(--ls-heading);
-      color: #023B44;
+      color: var(--secondary);
       margin: 2rem 0 0.75rem;
       line-height: 1.25;
     }
@@ -103,13 +104,13 @@
       font-size: 1.05rem;
       font-weight: var(--fw-semibold);
       letter-spacing: var(--ls-heading);
-      color: #097895;
+      color: var(--primary, #0B5ED7);
       margin: 1.25rem 0 0.5rem;
       line-height: 1.25;
     }
     .prose-policy p, .prose-policy li {
       font-family: var(--font-body);
-      color: #3f4a4d;
+      color: var(--text-light);
       line-height: var(--lh-body);
       letter-spacing: var(--ls-body);
       font-size: var(--fs-small);
@@ -117,7 +118,7 @@
     .prose-policy ul { list-style: disc; padding-left: 1.25rem; margin: 0.5rem 0 1rem; }
     .prose-policy li { margin-bottom: 0.35rem; }
     .prose-policy hr { border: none; border-top: 1px solid #e5e7eb; margin: 1.75rem 0; }
-    .prose-policy strong { color: #1A1A1A; font-weight: var(--fw-semibold); }
+    .prose-policy strong { color: var(--text); font-weight: var(--fw-semibold); }
     .brand-name {
       font-family: var(--font-heading);
       font-weight: var(--fw-bold);

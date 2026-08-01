@@ -3,6 +3,32 @@
    ============================================ */
 
 :root {
+  /* Brand color system - VaidTrack.com */
+  --primary: #0B5ED7;
+  --primary-dark: #084298;
+  --primary-light: #3B82F6;
+  --success: #16A34A;
+  --success-hover: #15803D;
+  --background: #FFFFFF;
+  --section-bg: #F8FAFC;
+  --border: #E2E8F0;
+  --text: #1E293B;
+  --text-light: #64748B;
+
+  /* Semantic aliases */
+  --secondary: #084298;
+  --accent: #0B5ED7;
+  --accent-soft: #DBEAFE;
+  --gold: #0B5ED7;
+  --cta: #0B5ED7;
+  --cta-hover: #084298;
+  --soft: #F8FAFC;
+  --ink: #1E293B;
+  --wa: #16A34A;
+  --wa-hover: #15803D;
+  --white: #FFFFFF;
+  --shadow: rgba(11, 94, 215, 0.10);
+  --shadow-strong: rgba(8, 66, 152, 0.16);
   --font-heading: "Inter", "Segoe UI", system-ui, sans-serif;
   --font-body: "Inter", "Segoe UI", system-ui, sans-serif;
 
@@ -66,7 +92,8 @@ body {
   font-weight: var(--fw-regular);
   line-height: var(--lh-body);
   letter-spacing: var(--ls-body);
-  color: #1A1A1A;
+  color: var(--text);
+  background: var(--background);
   overflow-x: hidden;
 }
 
@@ -195,19 +222,19 @@ label {
   flex-direction: column;
   align-items: center;
   text-align: center;
-  background: #fff;
+  background: var(--background);
   border-radius: 0.75rem;
   padding: 0.85rem 0.5rem 0.65rem;
   box-shadow: 0 4px 14px rgba(15, 23, 42, 0.05);
-  border: 1px solid #C5E0E8;
+  border: 1px solid var(--border);
   transition: transform 0.2s ease, box-shadow 0.2s ease, border-color 0.2s ease;
   min-width: 0;
   width: 100%;
 }
 .tx-card:hover {
   transform: translateY(-2px);
-  box-shadow: 0 8px 22px rgba(15, 23, 42, 0.1);
-  border-color: #9BC8D4;
+  box-shadow: 0 8px 22px var(--shadow-strong);
+  border-color: var(--primary);
 }
 .tx-page-link {
   position: absolute;
@@ -216,9 +243,9 @@ label {
   width: 1.45rem;
   height: 1.45rem;
   border-radius: 999px;
-  border: 1.5px solid #CBD5E1;
-  color: #64748B;
-  background: #fff;
+  border: 1.5px solid var(--border);
+  color: var(--text-light);
+  background: var(--background);
   display: inline-flex;
   align-items: center;
   justify-content: center;
@@ -227,9 +254,9 @@ label {
   z-index: 2;
 }
 .tx-page-link:hover {
-  border-color: #097895;
-  color: #097895;
-  background: #F0F9FB;
+  border-color: var(--primary);
+  color: var(--primary);
+  background: var(--section-bg);
 }
 .tx-page-link svg {
   width: 0.7rem;
@@ -240,9 +267,9 @@ label {
   width: 2.65rem;
   height: 2.65rem;
   border-radius: 999px;
-  background: #EAF7F4;
-  background: color-mix(in srgb, var(--tx-color, #076279) 14%, #fff);
-  color: var(--tx-color, #076279);
+  background: var(--accent-soft);
+  background: color-mix(in srgb, var(--tx-color, var(--primary)) 14%, var(--background));
+  color: var(--tx-color, var(--primary));
   display: flex;
   align-items: center;
   justify-content: center;
@@ -267,7 +294,7 @@ label {
   font-size: 0.78rem !important;
   font-weight: 700 !important;
   line-height: 1.25 !important;
-  color: #023B44;
+  color: var(--secondary);
 }
 .tx-card h3 a,
 .tx-body h3 a {
@@ -276,7 +303,7 @@ label {
 }
 .tx-card h3 a:hover,
 .tx-body h3 a:hover {
-  color: #097895;
+  color: var(--primary);
 }
 .tx-price {
   display: inline-flex;
@@ -285,8 +312,8 @@ label {
   margin: 0 0 0.35rem;
   padding: 0.15rem 0.45rem;
   border-radius: 999px;
-  background: #E7F6F1;
-  color: #0F766E;
+  background: var(--accent-soft);
+  color: var(--success);
   font-size: 0.625rem;
   font-weight: 600;
   line-height: 1.3;
@@ -297,7 +324,7 @@ label {
   margin: 0 0 0.55rem;
   font-size: 0.65rem;
   line-height: 1.35;
-  color: #64748b;
+  color: var(--text-light);
 }
 .tx-book {
   display: inline-flex;
@@ -311,8 +338,8 @@ label {
   padding: 0.35rem 0.3rem;
   margin-top: 0;
   border-radius: 0.45rem;
-  background: #25D366;
-  color: #fff;
+  background: var(--wa);
+  color: var(--background);
   font-size: 0.62rem;
   font-weight: 700;
   line-height: 1.2;
@@ -323,7 +350,7 @@ label {
   overflow-wrap: anywhere;
   transition: background 0.15s ease;
 }
-.tx-book:hover { background: #1ebe57; }
+.tx-book:hover { background: var(--wa-hover); }
 .tx-book svg {
   display: none;
 }
@@ -423,10 +450,10 @@ label {
   }
 }
 .tx-detail-content {
-  background: #fff;
+  background: var(--background);
   border-radius: 1.25rem;
-  border: 1px solid #e2e8f0;
-  box-shadow: 0 4px 20px rgba(2, 59, 68, 0.06);
+  border: 1px solid var(--border);
+  box-shadow: 0 4px 20px var(--shadow);
   padding: 1.5rem 1.25rem;
 }
 @media (min-width: 640px) {
@@ -440,15 +467,15 @@ label {
   align-items: center;
   justify-content: center;
   margin-bottom: 1rem;
-  background: color-mix(in srgb, var(--tx-color, #076279) 14%, #fff);
-  color: var(--tx-color, #076279);
+  background: color-mix(in srgb, var(--tx-color, var(--primary)) 14%, var(--background));
+  color: var(--tx-color, var(--primary));
 }
 .tx-detail-content .tx-detail-icon svg {
   width: 2.4rem;
   height: 2.4rem;
 }
 .tx-detail-content h1 {
-  color: #023B44;
+  color: var(--secondary);
   margin: 0 0 0.5rem;
 }
 .tx-detail-content .tx-detail-price {
@@ -456,19 +483,19 @@ label {
   margin-bottom: 1rem;
   padding: 0.3rem 0.85rem;
   border-radius: 999px;
-  background: #E7F6F1;
-  color: #0F766E;
+  background: var(--accent-soft);
+  color: var(--success);
   font-size: 0.875rem;
   font-weight: 600;
 }
 .tx-detail-content h2 {
-  color: #023B44;
+  color: var(--secondary);
   font-size: 1.15rem !important;
   margin: 1.5rem 0 0.65rem;
 }
 .tx-detail-content p,
 .tx-detail-content li {
-  color: #475569;
+  color: var(--text-light);
   line-height: 1.7;
 }
 .tx-detail-content ul {
@@ -480,9 +507,9 @@ label {
   margin-top: 1.25rem;
   padding: 1rem 1.1rem;
   border-radius: 0.85rem;
-  border: 1.5px dashed #97C9D4;
-  background: #F3FAFC;
-  color: #476A73;
+  border: 1.5px dashed var(--border);
+  background: var(--section-bg);
+  color: var(--text-light);
   font-size: 0.9rem;
 }
 .tx-float-form {
@@ -526,28 +553,28 @@ label {
   flex-direction: column;
   align-items: center;
   text-align: center;
-  background: linear-gradient(180deg, #F0F7FA 0%, #FFFFFF 48%);
+  background: linear-gradient(180deg, var(--section-bg) 0%, var(--background) 48%);
   border-radius: 0.75rem;
   padding: 0.85rem 0.5rem 0.65rem;
-  box-shadow: 0 4px 14px rgba(2, 59, 68, 0.06);
-  border: 1px solid #B7D4DE;
-  border-top: 3px solid #023B44;
+  box-shadow: 0 4px 14px var(--shadow);
+  border: 1px solid var(--border);
+  border-top: 3px solid var(--secondary);
   transition: transform 0.2s ease, box-shadow 0.2s ease, border-color 0.2s ease;
   min-width: 0;
   width: 100%;
 }
 .doc-card:hover {
   transform: translateY(-2px);
-  box-shadow: 0 8px 22px rgba(2, 59, 68, 0.12);
-  border-color: #7EB8C8;
-  border-top-color: #097895;
+  box-shadow: 0 8px 22px var(--shadow-strong);
+  border-color: var(--primary-light);
+  border-top-color: var(--primary);
 }
 .doc-card h3 {
   margin: 0.15rem 0 0.3rem;
   font-size: 0.78rem !important;
   font-weight: 700 !important;
   line-height: 1.25 !important;
-  color: #023B44;
+  color: var(--secondary);
 }
 .doc-card .doc-role {
   display: inline-flex;
@@ -556,9 +583,9 @@ label {
   margin: 0 0 0.35rem;
   padding: 0.15rem 0.45rem;
   border-radius: 999px;
-  background: #F5ECD3;
-  color: #8A6A12;
-  border: 1px solid #E5D5A4;
+  background: var(--accent-soft);
+  color: var(--primary-dark);
+  border: 1px solid var(--border);
   font-size: 0.625rem;
   font-weight: 600;
   line-height: 1.3;
@@ -568,7 +595,7 @@ label {
   margin: 0 0 0.55rem;
   font-size: 0.65rem;
   line-height: 1.35;
-  color: #64748b;
+  color: var(--text-light);
   width: 100%;
 }
 .doc-card .doc-meta + .doc-meta {
@@ -589,15 +616,15 @@ label {
   padding: 0.35rem 0.3rem;
   margin-top: 0;
   border-radius: 0.45rem;
-  background: #25D366;
-  color: #fff;
+  background: var(--wa);
+  color: var(--background);
   font-size: 0.62rem;
   font-weight: 700;
   line-height: 1.2;
   text-decoration: none;
   transition: background 0.15s ease;
 }
-.doc-card .doc-wa:hover { background: #1ebe57; color: #fff; }
+.doc-card .doc-wa:hover { background: var(--wa-hover); color: var(--background); }
 .doc-card .doc-wa svg {
   width: 0.85rem;
   height: 0.85rem;
@@ -649,14 +676,14 @@ label {
 .reveal.visible { opacity: 1; transform: translateY(0); }
 
 /* ---- Hero slider ---- */
-.hero-slider { position: relative; min-height: clamp(560px, 88vh, 720px); overflow: hidden; background: #023B44; }
+.hero-slider { position: relative; min-height: clamp(560px, 88vh, 720px); overflow: hidden; background: var(--secondary); }
 .hero-slide {
   position: absolute; inset: 0;
   opacity: 0;
   visibility: hidden;
   pointer-events: none;
   transition: opacity 0.8s ease, visibility 0.8s;
-  background-color: #023B44;
+  background-color: var(--secondary);
   background-size: cover;
   background-position: 65% center;
   background-repeat: no-repeat;
@@ -689,10 +716,10 @@ label {
 }
 .hero-copy h1,
 .hero-copy h2 {
-  color: #fff !important;
+  color: var(--background) !important;
 }
 .hero-copy .hero-accent {
-  color: #F0C14A !important;
+  color: var(--primary-light) !important;
 }
 .hero-copy p {
   color: rgba(255, 255, 255, 0.94) !important;
@@ -702,12 +729,12 @@ label {
 .hero-arrow {
   position: absolute; top: 50%; z-index: 5; transform: translateY(-50%);
   width: 2.75rem; height: 2.75rem; border-radius: 9999px;
-  background: #097895; color: #fff; border: none; cursor: pointer;
+  background: var(--primary); color: var(--background); border: none; cursor: pointer;
   display: flex; align-items: center; justify-content: center;
   box-shadow: 0 4px 16px rgba(0,0,0,0.25);
   transition: background 0.2s ease, transform 0.2s ease;
 }
-.hero-arrow:hover { background: #0BA5C4; transform: translateY(-50%) scale(1.05); }
+.hero-arrow:hover { background: var(--primary-light); transform: translateY(-50%) scale(1.05); }
 .hero-arrow.prev { left: 0.75rem; }
 .hero-arrow.next { right: 0.75rem; }
 @media (min-width: 768px) {
@@ -721,15 +748,15 @@ label {
   background: rgba(255,255,255,0.45); cursor: pointer; padding: 0;
   transition: background 0.2s, width 0.2s;
 }
-.hero-dot.active { background: #fff; width: 1.5rem; }
+.hero-dot.active { background: var(--background); width: 1.5rem; }
 
 /* ---- How It Works ---- */
 #how-it-works {
   position: relative;
   background:
-    radial-gradient(ellipse 70% 80% at 100% 0%, rgba(11, 165, 196, 0.22), transparent 55%),
-    radial-gradient(ellipse 50% 60% at 0% 100%, rgba(2, 59, 68, 0.35), transparent 50%),
-    linear-gradient(135deg, #023B44 0%, #076279 48%, #0A8FA8 100%);
+    radial-gradient(ellipse 70% 80% at 100% 0%, rgba(11, 94, 215, 0.08), transparent 55%),
+    radial-gradient(ellipse 50% 60% at 0% 100%, rgba(8, 66, 152, 0.05), transparent 50%),
+    var(--section-bg);
   overflow: hidden;
   padding: 3.25rem 0 3.5rem !important;
 }
@@ -738,8 +765,8 @@ label {
   position: absolute;
   inset: 0;
   background-image:
-    linear-gradient(rgba(255,255,255,0.04) 1px, transparent 1px),
-    linear-gradient(90deg, rgba(255,255,255,0.04) 1px, transparent 1px);
+    linear-gradient(rgba(11,94,215,0.06) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(11,94,215,0.06) 1px, transparent 1px);
   background-size: 48px 48px;
   mask-image: linear-gradient(180deg, rgba(0,0,0,0.55), transparent 90%);
   pointer-events: none;
@@ -767,12 +794,12 @@ label {
   font-weight: 600;
   letter-spacing: 0.16em;
   text-transform: uppercase;
-  color: rgba(255, 255, 255, 0.72);
+  color: var(--primary);
 }
 .hiw-inner h2,
 .hiw-header h2 {
   margin: 0 0 0.65rem;
-  color: #fff !important;
+  color: var(--text) !important;
   font-size: clamp(1.35rem, 2.6vw, 1.85rem) !important;
   font-weight: 700 !important;
   line-height: 1.25 !important;
@@ -782,7 +809,7 @@ label {
   margin: 0;
   font-size: 0.9375rem;
   line-height: 1.5;
-  color: rgba(255, 255, 255, 0.78);
+  color: var(--text-light);
 }
 
 .hiw-grid {
@@ -813,7 +840,7 @@ label {
     right: 8%;
     top: 2.15rem;
     height: 2px;
-    background: linear-gradient(90deg, transparent, rgba(255,255,255,0.35) 12%, rgba(255,255,255,0.35) 88%, transparent);
+    background: linear-gradient(90deg, transparent, rgba(11,94,215,0.25) 12%, rgba(11,94,215,0.25) 88%, transparent);
     pointer-events: none;
     z-index: 0;
   }
@@ -826,19 +853,21 @@ label {
   flex-direction: column;
   align-items: center;
   text-align: center;
-  background: rgba(255, 255, 255, 0.1);
-  border: 1px solid rgba(255, 255, 255, 0.18);
+  background: var(--background);
+  border: 1px solid var(--border);
+  box-shadow: 0 4px 14px var(--shadow);
   border-radius: 1rem;
   padding: 1.15rem 0.75rem 1.05rem;
   backdrop-filter: blur(6px);
   -webkit-backdrop-filter: blur(6px);
-  transition: transform 0.2s ease, background 0.2s ease, border-color 0.2s ease;
+  transition: transform 0.2s ease, background 0.2s ease, border-color 0.2s ease, box-shadow 0.2s ease;
   min-width: 0;
 }
 .hiw-step:hover {
   transform: translateY(-3px);
-  background: rgba(255, 255, 255, 0.16);
-  border-color: rgba(255, 255, 255, 0.32);
+  background: var(--background);
+  border-color: var(--primary);
+  box-shadow: 0 8px 22px var(--shadow-strong);
 }
 
 .hiw-num {
@@ -848,8 +877,8 @@ label {
   width: 1.35rem;
   height: 1.35rem;
   border-radius: 999px;
-  background: rgba(255, 255, 255, 0.16);
-  color: #fff;
+  background: var(--accent-soft);
+  color: var(--primary);
   font-size: 0.65rem;
   font-weight: 700;
   display: grid;
@@ -861,13 +890,13 @@ label {
   width: 2.75rem;
   height: 2.75rem;
   border-radius: 999px;
-  background: #fff;
-  color: #076279;
+  background: var(--accent-soft);
+  color: var(--primary);
   display: flex;
   align-items: center;
   justify-content: center;
   margin: 0 0 0.75rem;
-  box-shadow: 0 6px 16px rgba(2, 59, 68, 0.18);
+  box-shadow: 0 6px 16px var(--shadow-strong);
   flex-shrink: 0;
 }
 .hiw-icon svg {
@@ -878,7 +907,7 @@ label {
 
 .hiw-step h3 {
   margin: 0 0 0.35rem;
-  color: #fff !important;
+  color: var(--text) !important;
   font-size: 0.8125rem !important;
   font-weight: 700 !important;
   line-height: 1.3 !important;
@@ -886,7 +915,7 @@ label {
 }
 .hiw-step p {
   margin: 0;
-  color: rgba(255, 255, 255, 0.72);
+  color: var(--text-light);
   font-size: 0.6875rem;
   line-height: 1.4;
   max-width: 11.5rem;
@@ -939,17 +968,17 @@ label {
   gap: 0.4rem;
   padding: 0.75rem 1.5rem;
   border-radius: 0.65rem;
-  background: #fff;
-  color: #023B44;
+  background: var(--primary);
+  color: var(--background);
   font-size: 0.9375rem;
   font-weight: 700;
   text-decoration: none;
-  box-shadow: 0 8px 20px rgba(2, 59, 68, 0.18);
+  box-shadow: 0 8px 20px var(--shadow-strong);
   transition: transform 0.15s ease, background 0.15s ease, color 0.15s ease;
 }
 .hiw-cta-btn:hover {
-  background: #F0F9FB;
-  color: #076279;
+  background: var(--primary-dark);
+  color: var(--background);
   transform: translateY(-1px);
 }
 
@@ -970,20 +999,20 @@ label {
   min-height: 3rem;
   padding: 0.7rem 0.75rem;
   border-radius: 0.5rem;
-  color: #fff;
+  color: var(--background);
   font-weight: 700;
   font-size: 0.95rem;
   text-decoration: none;
   box-shadow: 0 4px 14px rgba(0, 0, 0, 0.18);
 }
 .mobile-bottom-wa {
-  background: #25D366;
+  background: var(--wa);
 }
-.mobile-bottom-wa:hover { background: #1ebe57; }
+.mobile-bottom-wa:hover { background: var(--wa-hover); }
 .mobile-bottom-book {
-  background: #076279;
+  background: var(--primary-dark);
 }
-.mobile-bottom-book:hover { background: #0a7a94; }
+.mobile-bottom-book:hover { background: var(--primary); }
 
 /* Header logo - desktop/tablet (Vaidam-style wide lockup) */
 header .site-logo {
@@ -1043,7 +1072,7 @@ header .site-logo-img {
     width: 100%;
     min-height: 22.5rem;
     height: auto;
-    background: #023B44;
+    background: var(--secondary);
     overflow: hidden;
   }
   .hero-slide {
@@ -1099,13 +1128,13 @@ header .site-logo-img {
   }
 
   .trust-strip {
-    background: #EAF4F7 !important;
+    background: var(--section-bg) !important;
     padding-top: 0.75rem !important;
     padding-bottom: 0.75rem !important;
   }
   .trust-list { gap: 0.5rem !important; }
   .trust-item {
-    background: #023B44;
+    background: var(--secondary);
     border-radius: 0.75rem;
     padding: 0.65rem 0.85rem;
     font-size: 0.8125rem;
@@ -1172,11 +1201,11 @@ header .site-logo-img {
 }
 #why-india .why-heading-lead {
   display: block;
-  color: #023B44;
+  color: var(--secondary);
 }
 #why-india .why-heading-brand {
   display: block;
-  color: #097895;
+  color: var(--primary);
   font-size: 0.88em;
   line-height: 1.15;
   white-space: nowrap;
@@ -1208,10 +1237,10 @@ header .site-logo-img {
   }
 }
 #why-india .why-card--teal {
-  background: #E6F4F8;
+  background: var(--accent-soft);
 }
 #why-india .why-card--gold {
-  background: #FBF6E8;
+  background: var(--accent-soft);
 }
 
 /* ---- Brand mark ---- */

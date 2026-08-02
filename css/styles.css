@@ -534,29 +534,23 @@ label {
   margin-right: auto;
 }
 
-/* ---- Doctor cards (same footprint as .tx-card) ---- */
+/* ---- Doctor cards ---- */
 .doc-grid {
   display: grid;
   grid-template-columns: minmax(0, 1fr);
-  gap: 0.75rem;
+  gap: 0.85rem;
   align-items: start;
 }
 @media (min-width: 640px) {
   .doc-grid {
     grid-template-columns: repeat(2, minmax(0, 1fr));
-    gap: 0.85rem;
+    gap: 1rem;
   }
 }
-@media (min-width: 900px) {
+@media (min-width: 1024px) {
   .doc-grid {
     grid-template-columns: repeat(3, minmax(0, 1fr));
-    gap: 0.85rem;
-  }
-}
-@media (min-width: 1100px) {
-  .doc-grid {
-    grid-template-columns: repeat(4, minmax(0, 1fr));
-    gap: 0.85rem;
+    gap: 1.15rem;
   }
 }
 .doc-card {
@@ -566,8 +560,8 @@ label {
   align-items: center;
   text-align: center;
   background: linear-gradient(180deg, var(--section-bg) 0%, var(--background) 48%);
-  border-radius: 0.75rem;
-  padding: 0.85rem 0.5rem 0.65rem;
+  border-radius: 0.9rem;
+  padding: 1.15rem 0.9rem 1rem;
   box-shadow: 0 4px 14px var(--shadow);
   border: 1px solid var(--border);
   border-top: 3px solid var(--secondary);
@@ -582,36 +576,36 @@ label {
   border-top-color: var(--primary);
 }
 .doc-card h3 {
-  margin: 0.15rem 0 0.3rem;
-  font-size: 0.78rem !important;
+  margin: 0.15rem 0 0.4rem;
+  font-size: 1rem !important;
   font-weight: 700 !important;
-  line-height: 1.25 !important;
+  line-height: 1.3 !important;
   color: var(--secondary);
 }
 .doc-card .doc-role {
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  margin: 0 0 0.35rem;
-  padding: 0.15rem 0.45rem;
+  margin: 0 0 0.45rem;
+  padding: 0.2rem 0.65rem;
   border-radius: 999px;
   background: var(--accent-soft);
   color: var(--primary-dark);
   border: 1px solid var(--border);
-  font-size: 0.625rem;
+  font-size: 0.75rem;
   font-weight: 600;
   line-height: 1.3;
   max-width: 100%;
 }
 .doc-card .doc-meta {
   margin: 0 0 0.55rem;
-  font-size: 0.65rem;
-  line-height: 1.35;
+  font-size: 0.8125rem;
+  line-height: 1.45;
   color: var(--text-light);
   width: 100%;
 }
 .doc-card .doc-meta + .doc-meta {
-  margin-top: -0.35rem;
+  margin-top: -0.3rem;
 }
 .doc-card .doc-meta:last-of-type {
   flex: 1;
@@ -620,17 +614,17 @@ label {
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  gap: 0.25rem;
+  gap: 0.35rem;
   width: 100%;
   max-width: 100%;
   box-sizing: border-box;
-  min-height: 1.9rem;
-  padding: 0.35rem 0.3rem;
-  margin-top: 0;
-  border-radius: 0.45rem;
+  min-height: 2.4rem;
+  padding: 0.5rem 0.75rem;
+  margin-top: 0.35rem;
+  border-radius: 0.55rem;
   background: var(--wa);
   color: var(--background);
-  font-size: 0.62rem;
+  font-size: 0.8125rem;
   font-weight: 700;
   line-height: 1.2;
   text-decoration: none;
@@ -638,44 +632,44 @@ label {
 }
 .doc-card .doc-wa:hover { background: var(--wa-hover); color: var(--background); }
 .doc-card .doc-wa svg {
-  width: 0.85rem;
-  height: 0.85rem;
+  width: 1rem;
+  height: 1rem;
   flex-shrink: 0;
 }
 @media (min-width: 640px) {
-  .doc-grid { align-items: stretch; gap: 0.85rem; }
+  .doc-grid { align-items: stretch; }
   .doc-card {
-    padding: 1rem 0.75rem 0.85rem;
+    padding: 1.25rem 1rem 1.1rem;
     height: 100%;
-    border-radius: 0.85rem;
+    border-radius: 1rem;
   }
-  .doc-card h3 { font-size: 0.9rem !important; }
+  .doc-card h3 { font-size: 1.05rem !important; }
   .doc-card .doc-role {
-    font-size: 0.7rem;
-    padding: 0.18rem 0.55rem;
-    margin-bottom: 0.4rem;
+    font-size: 0.78rem;
+    padding: 0.22rem 0.7rem;
+    margin-bottom: 0.5rem;
   }
   .doc-card .doc-meta {
-    font-size: 0.72rem;
-    line-height: 1.4;
-    margin-bottom: 0.65rem;
+    font-size: 0.84rem;
+    line-height: 1.45;
+    margin-bottom: 0.55rem;
   }
-  .doc-card .doc-meta + .doc-meta { margin-top: -0.4rem; }
+  .doc-card .doc-meta + .doc-meta { margin-top: -0.3rem; }
   .doc-card .doc-wa {
     margin-top: auto;
-    font-size: 0.75rem;
-    min-height: 2.15rem;
-    padding: 0.4rem 0.55rem;
+    font-size: 0.875rem;
+    min-height: 2.5rem;
+    padding: 0.55rem 0.85rem;
   }
 }
 @media (min-width: 1024px) {
-  .doc-card { padding: 1.05rem 0.85rem 0.9rem; }
-  .doc-card h3 { font-size: 0.95rem !important; }
-  .doc-card .doc-role { font-size: 0.75rem; }
-  .doc-card .doc-meta { font-size: 0.75rem; }
+  .doc-card { padding: 1.4rem 1.15rem 1.2rem; }
+  .doc-card h3 { font-size: 1.125rem !important; }
+  .doc-card .doc-role { font-size: 0.8125rem; }
+  .doc-card .doc-meta { font-size: 0.875rem; }
   .doc-card .doc-wa {
-    min-height: 2.25rem;
-    font-size: 0.8rem;
+    min-height: 2.65rem;
+    font-size: 0.9rem;
   }
 }
 

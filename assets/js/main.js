@@ -145,9 +145,7 @@
   });
 })();
 
-/* Mobile nav removed */
-
-/* Forms â†’ Google Sheet, then generate_lead, then WhatsApp */
+/* Forms → Google Sheet, then generate_lead, then WhatsApp */
 (function () {
   var GAS_URL = 'https://script.google.com/macros/s/AKfycbzTo3v4gxY1FmMrSFndbYSDaWRhjL58uUzkicjfDW7xS1xdoL_Rxsq69juo2PcT3g2q_Q/exec';
   var WA_NUMBER = '918979983149';

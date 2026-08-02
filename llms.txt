@@ -4,11 +4,13 @@ Static cancer medical-tourism site: https://www.vaidtrack.com
 Repo: https://github.com/mnadwi3/kenyalandingpage
 
 ## Key files
-- index.html Ã¢â‚¬- homepage
-- css/styles.css Ã¢â‚¬- home styles (tx-card treatments, doc-card doctors, how-it-works journey)
-- js/main.js Ã¢â‚¬- slider, FAQ, forms, clean section URLs, DOM section order
-- treatments/*.html + css/treatment-page.css + js/treatment-page.js Ã¢â‚¬- per-cancer pages
-- .htaccess / _redirects Ã¢â‚¬- extensionless clean URLs
+- index.html — homepage
+- assets/css/styles.css — home styles (tx-card treatments, doc-card doctors, how-it-works journey)
+- assets/js/main.js — slider, FAQ, forms, clean section URLs, DOM section order
+- assets/js/doctors.js — fetches data/doctors/doctors.json and renders doctor cards
+- data/doctors/doctors.json — doctor profiles (images in images/doctors-images/)
+- treatments/*.html + assets/css/treatment-page.css + assets/js/treatment-page.js — per-cancer pages
+- .htaccess / _redirects — extensionless clean URLs
 
 ## Clean paths
 /treatment /doctors /how-it-works /visa-travel /testimonials /about-us /faq /contact /book-appointment  
@@ -18,5 +20,5 @@ Repo: https://github.com/mnadwi3/kenyalandingpage
 primary #0F4C81 · dark #0B3A61 · success #16A34A · soft #F8FAFC · WhatsApp +91 8979983149
 
 ## Notes
-Doctor credentials and patient quotes may still be placeholders Ã¢â‚¬- verify before launch.
+Doctor profiles are loaded from doctors.json — verify credentials before launch.
 Ads final URL: https://www.vaidtrack.com/

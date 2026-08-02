@@ -12,8 +12,9 @@ Static marketing site for **[VaidTrack.com](https://www.vaidtrack.com)** - medic
 | Layer | Choice |
 |--------|--------|
 | Markup | Static HTML (no build step) |
-| Styles | Tailwind CDN + `css/styles.css` + `css/treatment-page.css` |
-| Scripts | Vanilla JS - `js/main.js`, `js/treatment-page.js` |
+| Styles | Tailwind CDN + `assets/css/styles.css` + `assets/css/treatment-page.css` |
+| Scripts | Vanilla JS - `assets/js/main.js`, `assets/js/doctors.js`, `assets/js/treatment-page.js` |
+| Data | `data/doctors/doctors.json` (homepage + treatment doctor cards) |
 | Hosting | Apache (`.htaccess`) and/or Netlify-style (`_redirects`) |
 | Analytics | GTM `GTM-KZ86XPT5`, GA4 `G-5TBH8QQ2EQ` |
 | Lead CTA | WhatsApp `wa.me/918979983149` + on-page enquiry forms |
@@ -23,34 +24,54 @@ Static marketing site for **[VaidTrack.com](https://www.vaidtrack.com)** - medic
 ## Project structure
 
 ```
-â”œâ”€â”€ index.html              # Homepage
-â”œâ”€â”€ privacy-policy.html
-â”œâ”€â”€ disclaimer.html
-â”œâ”€â”€ css/
-â”‚   â”œâ”€â”€ styles.css          # Home + shared styles
-â”‚   â””â”€â”€ treatment-page.css  # Treatment detail pages
-â”œâ”€â”€ js/
-â”‚   â”œâ”€â”€ main.js             # Home: slider, FAQ, forms, clean URLs, section order
-â”‚   â””â”€â”€ treatment-page.js   # Treatment pages: sticky bar, FAQ, lead scroll
-â”œâ”€â”€ treatments/             # One HTML page per cancer type
-â”œâ”€â”€ images/                 # Logos, hero slides, hospital image
-â”œâ”€â”€ .htaccess               # Clean URLs + HTML extension redirects
-â”œâ”€â”€ _redirects              # Same for Netlify-like hosts
-â”œâ”€â”€ llms.txt                # Short AI/docs summary for GitMCP
-â””â”€â”€ .cursor/mcp.json        # Optional GitMCP docs server config
+├── index.html                 # Homepage
+├── privacy-policy.html
+├── disclaimer.html
+├── assets/
+│   ├── css/
+│   │   ├── styles.css         # Home + shared styles
+│   │   └── treatment-page.css # Treatment detail pages
+│   └── js/
+│       ├── main.js            # Home: slider, FAQ, forms, clean URLs, section order
+│       ├── doctors.js         # Loads doctors.json and renders cards
+│       └── treatment-page.js  # Treatment pages: sticky bar, FAQ, lead scroll
+├── data/
+│   └── doctors/
+│       └── doctors.json       # Single source of truth for doctor profiles
+├── images/
+│   ├── doctors-images/        # Doctor portraits (slug.jpg)
+│   ├── hero/                  # Hero slider slides
+│   ├── hospital/              # Hospital / care photos
+│   └── vaidtrack-wordmark.png # Brand logo (SEO / schema URL)
+├── treatments/                # One HTML page per cancer type
+├── _archive/                  # Unused brand sources and design files
+├── .htaccess                  # Clean URLs + HTML extension redirects
+├── _redirects                 # Same for Netlify-like hosts
+├── llms.txt                   # Short AI/docs summary for GitMCP
+└── .cursor/mcp.json           # Optional GitMCP docs server config
 ```
+
+---
+
+## Doctors data
+
+Doctor cards on the homepage and treatment pages are generated from `data/doctors/doctors.json` via `assets/js/doctors.js`.
+
+- Portrait files live in `images/doctors-images/` and match each doctor's `slug` (e.g. `dr-akshay-tiwari.jpg`).
+- Images are lazy-loaded on the homepage.
+- To add or edit a doctor, update `doctors.json` and place the matching image file — no HTML edits required.
 
 ---
 
 ## Homepage sections (`index.html`)
 
-Order is enforced in `js/main.js` (after `#why-india`):
+Order is enforced in `assets/js/main.js` (after `#why-india`):
 
 1. **Hero** (`#hero`) - slider + appointment forms
 2. **About** (`#about-us`)
 3. **Why choose** (`#why-india`)
 4. **Treatments** (`#treatment`) - `.tx-card` grid
-5. **Doctors** (`#doctors`) - `.doc-card` grid (8 specialists; verify credentials before launch)
+5. **Doctors** (`#doctors`) - `.doc-card` grid from JSON
 6. **Journey** (`#how-it-works`, also `#visa-travel`) - combined 6-step process + travel CTA
 7. **Testimonials** (`#testimonials`) - video slots
 8. **FAQ** (`#faq`)
@@ -60,7 +81,7 @@ Order is enforced in `js/main.js` (after `#why-india`):
 Card styling notes:
 
 - **Treatment cards** (`.tx-card`): white background, cyan border `#C5E0E8`
-- **Doctor cards** (`.doc-card`): soft teal gradient, deep teal top accent, gold specialty badge - no initials circles
+- **Doctor cards** (`.doc-card`): circular photo, specialty badge, dual CTAs
 
 ---
 
@@ -82,7 +103,7 @@ Avoid hash links for main sections. Prefer paths:
 | `/treatments/breast-cancer` | Treatment detail (etc.) |
 | `/privacy-policy`, `/disclaimer` | Legal pages |
 
-Rewrites live in `.htaccess` and `_redirects`. Home uses `<base href="/">` so assets resolve under section paths. Client scroll/history is handled in `js/main.js`.
+Rewrites live in `.htaccess` and `_redirects`. Home uses `<base href="/">` so assets resolve under section paths. Client scroll/history is handled in `assets/js/main.js`.
 
 **Google Ads final URL:** use `https://www.vaidtrack.com/` (not `index.html#top`).
 
@@ -96,7 +117,7 @@ Files under `treatments/*.html`, for example:
 - colorectal-cancer, bladder-cancer, blood-cancer, prostate-cancer
 - lung-cancer, head-and-neck-cancer, brain-cancer
 
-Each page: hero, lead form (`#lead`), care content, doctors, FAQ, sticky WhatsApp / Send Reports bar (`treatment-page.js`).
+Each page: hero, lead form (`#lead`), care content, doctors (from JSON), FAQ, sticky WhatsApp / Send Reports bar (`treatment-page.js`).
 
 ---
 
@@ -116,10 +137,9 @@ Each page: hero, lead form (`#lead`), care content, doctors, FAQ, sticky WhatsAp
 
 ## Local preview
 
-Open `index.html` in a browser, or serve the folder root so clean paths work:
+Serve the folder root so clean paths and JSON fetch work:
 
 ```bash
-# Example (any static server from repo root)
 npx --yes serve .
 ```
 
@@ -149,7 +169,7 @@ Config may live in `.cursor/mcp.json` (project) and/or `~/.cursor/mcp.json` (glo
 
 ## Placeholders / launch checklist
 
-- [ ] Verify all doctor names, experience, and education (marked in `index.html`)
+- [ ] Confirm doctor credentials in `data/doctors/doctors.json` before publishing
 - [ ] Replace placeholder testimonials / confirm patient quotes before publishing attributed stories
 - [ ] Confirm WhatsApp number and form endpoints
 - [ ] Confirm partner hospital naming / legal wording in footer & disclaimer

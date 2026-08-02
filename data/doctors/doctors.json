@@ -1,0 +1,93 @@
+[
+  {
+    "id": 1,
+    "slug": "dr-harit-kumar-chaturvedi",
+    "name": "Dr. Harit Kumar Chaturvedi",
+    "image": "images/doctors-images/dr-harit-kumar-chaturvedi.jpg",
+    "specialty": "Surgical Oncologist",
+    "experience": "38+ Years",
+    "qualification": "M.B.B.S, M.S. (General Surgery), M.Ch. (Surgical Oncology)",
+    "expertise": [
+      "Surgical Oncology",
+      "Breast Surgical Oncology",
+      "Head & Neck Oncology"
+    ],
+    "location": "New Delhi, India"
+  },
+  {
+    "id": 2,
+    "slug": "dr-ruquaya-ahmad-mir",
+    "name": "Dr. Ruquaya Ahmad Mir",
+    "image": "images/doctors-images/dr-ruquaya-ahmad-mir.jpg",
+    "specialty": "Surgical Oncologist",
+    "experience": "20+ Years",
+    "qualification": "MBBS, DNB",
+    "expertise": [
+      "Bladder Cancer",
+      "Breast Cancer",
+      "Colon Cancer"
+    ],
+    "location": "New Delhi, India"
+  },
+  {
+    "id": 3,
+    "slug": "dr-dipanjan-panda",
+    "name": "Dr. Dipanjan Panda",
+    "image": "images/doctors-images/dr-dipanjan-panda.jpg",
+    "specialty": "Medical Oncologist",
+    "experience": "10+ Years",
+    "qualification": "MBBS, MD, DM",
+    "expertise": [
+      "Actinic keratosis",
+      "Cholangiocarcinoma",
+      "Ovarian cysts"
+    ],
+    "location": "New Delhi, India"
+  },
+  {
+    "id": 4,
+    "slug": "dr-aspna-manocha-verma",
+    "name": "Dr. Sapna Manocha Verma",
+    "image": "images/doctors-images/dr-aspna-manocha-verma.jpg",
+    "specialty": "Radiation Oncologist",
+    "experience": "20+ Years",
+    "qualification": "MBBS, MD (Radiotherapy)",
+    "expertise": [
+      "Brain Tumor",
+      "Esophageal Cancer",
+      "Chondrosarcoma"
+    ],
+    "location": "New Delhi, India"
+  },
+  {
+    "id": 5,
+    "slug": "dr-ganesh-jadhav",
+    "name": "Dr. Ganesh Jadhav",
+    "image": "images/doctors-images/dr-ganesh-jadhav.jpg",
+    "specialty": "Radiation Oncologist",
+    "experience": "20+ Years",
+    "qualification": "MBBS, DMRT, MD, FICRO",
+    "expertise": [
+      "Brain Tumor",
+      "Esophageal Cancer",
+      "Chondrosarcoma",
+      "Colon Cancer"
+    ],
+    "location": "New Delhi, India"
+  },
+  {
+    "id": 6,
+    "slug": "dr-akshay-tiwari",
+    "name": "Dr. Akshay Tiwari",
+    "image": "images/doctors-images/dr-akshay-tiwari.jpg",
+    "specialty": "Orthopedic Oncologist",
+    "experience": "20+ Years",
+    "qualification": "MBBS, MS Orthopedics, Fellowship in Musculoskeletal Oncology",
+    "expertise": [
+      "Limb-Sparing Surgery",
+      "Reconstructive Orthopedic Surgery",
+      "Bone Tumors and Cysts"
+    ],
+    "location": "New Delhi, India"
+  }
+]

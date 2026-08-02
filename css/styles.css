@@ -687,6 +687,127 @@ label {
   }
 }
 
+/* ---- Mobile-only: premium single-column square cards ---- */
+@media (max-width: 767px) {
+  #treatment > .max-w-6xl,
+  #doctors > .max-w-6xl {
+    padding-left: 0.875rem;  /* ~14px side margins */
+    padding-right: 0.875rem;
+  }
+
+  .tx-grid,
+  .doc-grid {
+    grid-template-columns: minmax(0, 1fr);
+    gap: 1.35rem;
+    justify-items: stretch;
+    align-items: start;
+  }
+
+  .tx-card,
+  .doc-card {
+    width: 100%;
+    max-width: none;
+    aspect-ratio: 1 / 1;
+    height: auto;
+    border-radius: 1.25rem; /* 20px */
+    padding: 1.55rem 1.35rem 1.25rem;
+    box-shadow:
+      0 4px 10px rgba(15, 23, 42, 0.04),
+      0 14px 32px rgba(15, 23, 42, 0.08);
+    overflow: hidden;
+  }
+
+  .tx-card {
+    padding-top: 1.75rem;
+    justify-content: space-between;
+  }
+
+  .tx-page-link {
+    top: 0.85rem;
+    right: 0.85rem;
+    width: 1.85rem;
+    height: 1.85rem;
+  }
+  .tx-page-link svg {
+    width: 0.85rem;
+    height: 0.85rem;
+  }
+
+  .tx-icon {
+    width: 3.75rem;
+    height: 3.75rem;
+    margin: 0.35rem 0 0.75rem;
+    padding: 0.7rem;
+  }
+
+  .tx-body {
+    gap: 0;
+    justify-content: center;
+  }
+
+  .tx-card h3,
+  .tx-body h3 {
+    margin: 0 0 0.55rem;
+  }
+
+  .tx-price {
+    margin: 0 0 0.55rem;
+    padding: 0.28rem 0.7rem;
+  }
+
+  .tx-card p,
+  .tx-body p {
+    margin: 0 0 0.85rem;
+  }
+
+  .tx-book {
+    min-height: 2.85rem;
+    padding: 0.7rem 0.85rem;
+    border-radius: 0.7rem;
+    margin-top: auto;
+    gap: 0.35rem;
+  }
+
+  .doc-card {
+    padding: 1.65rem 1.35rem 1.3rem;
+    justify-content: space-between;
+  }
+
+  .doc-card h3 {
+    margin: 0.35rem 0 0.65rem;
+  }
+
+  .doc-card .doc-role {
+    margin: 0 0 0.7rem;
+    padding: 0.35rem 0.85rem;
+  }
+
+  .doc-card .doc-meta {
+    margin: 0 0 0.55rem;
+  }
+
+  .doc-card .doc-meta + .doc-meta {
+    margin-top: 0;
+  }
+
+  .doc-card .doc-meta:last-of-type {
+    margin-bottom: 0.85rem;
+  }
+
+  .doc-card .doc-wa {
+    min-height: 2.85rem;
+    padding: 0.7rem 0.85rem;
+    border-radius: 0.7rem;
+    margin-top: auto;
+    gap: 0.4rem;
+  }
+
+  .doc-card .doc-wa svg {
+    width: 1.05rem;
+    height: 1.05rem;
+  }
+}
+
 /* Scroll reveal */
 .reveal {
   opacity: 0;

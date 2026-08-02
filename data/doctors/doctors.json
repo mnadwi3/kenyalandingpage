@@ -89,5 +89,35 @@
       "Bone Tumors and Cysts"
     ],
     "location": "New Delhi, India"
+  },
+  {
+    "id": 7,
+    "slug": "dr-ramesh-sarin",
+    "name": "Dr. Ramesh Sarin",
+    "image": "images/doctors-images/dr-ramesh-sarin.jpg",
+    "specialty": "Surgical Oncologist",
+    "experience": "40+ Years",
+    "qualification": "MBBS, MS, FRCS",
+    "expertise": [
+      "Conservative Breast Surgery",
+      "Sentinel Node Biopsy",
+      "Breast Reconstructive Surgery"
+    ],
+    "location": "New Delhi, India"
+  },
+  {
+    "id": 8,
+    "slug": "dr-harsh-dua",
+    "name": "Dr. Harsh Dua",
+    "image": "images/doctors-images/dr-harsh-dua.jpg",
+    "specialty": "Medical Oncologist",
+    "experience": "35+ Years",
+    "qualification": "MBBS, MD",
+    "expertise": [
+      "Chemotherapy",
+      "Immunotherapy",
+      "Targeted Therapy"
+    ],
+    "location": "New Delhi, India"
   }
 ]

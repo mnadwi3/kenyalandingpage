@@ -227,6 +227,7 @@ label {
   display: flex;
   flex-direction: column;
   align-items: center;
+  justify-content: space-between;
   text-align: center;
   background: var(--background);
   border-radius: 0.75rem;
@@ -236,6 +237,10 @@ label {
   transition: transform 0.2s ease, box-shadow 0.2s ease, border-color 0.2s ease;
   min-width: 0;
   width: 100%;
+  aspect-ratio: 1 / 1;
+  height: auto;
+  overflow: hidden;
+  padding-top: 1.15rem;
 }
 .tx-card:hover {
   transform: translateY(-2px);
@@ -270,29 +275,36 @@ label {
   display: block;
 }
 .tx-icon {
-  width: 2.65rem;
-  height: 2.65rem;
+  width: 2.85rem;
+  height: 2.85rem;
   border-radius: 999px;
-  background: var(--accent-soft);
   background: color-mix(in srgb, var(--tx-color, var(--primary)) 14%, var(--background));
   color: var(--tx-color, var(--primary));
   display: flex;
   align-items: center;
   justify-content: center;
-  margin: 0.05rem 0 0.45rem;
+  margin: 0.35rem 0 0.5rem;
   flex-shrink: 0;
+  overflow: visible;
+  box-sizing: border-box;
+  padding: 0.45rem;
 }
 .tx-icon svg {
-  width: 1.35rem;
-  height: 1.35rem;
+  width: 100%;
+  height: 100%;
   display: block;
+  overflow: visible;
+  flex-shrink: 0;
 }
 .tx-body {
   width: 100%;
   display: flex;
   flex-direction: column;
   align-items: center;
+  justify-content: center;
   min-width: 0;
+  min-height: 0;
+  flex: 1;
 }
 .tx-card h3,
 .tx-body h3 {
@@ -331,6 +343,10 @@ label {
   font-size: 0.65rem;
   line-height: 1.35;
   color: var(--text-light);
+  display: -webkit-box;
+  -webkit-line-clamp: 3;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
 }
 .tx-book {
   display: inline-flex;
@@ -342,7 +358,8 @@ label {
   box-sizing: border-box;
   min-height: 1.9rem;
   padding: 0.35rem 0.3rem;
-  margin-top: 0;
+  margin-top: auto;
+  flex-shrink: 0;
   border-radius: 0.45rem;
   background: var(--wa);
   color: var(--background);
@@ -367,7 +384,6 @@ label {
   .tx-grid { align-items: stretch; gap: 0.85rem; }
   .tx-card {
     padding: 1rem 0.75rem 0.85rem;
-    height: 100%;
     border-radius: 0.85rem;
   }
   .tx-page-link {
@@ -378,13 +394,14 @@ label {
   }
   .tx-page-link svg { width: 0.75rem; height: 0.75rem; }
   .tx-icon {
-    width: 3.25rem;
-    height: 3.25rem;
-    margin-bottom: 0.55rem;
+    width: 3.5rem;
+    height: 3.5rem;
+    margin: 0.4rem 0 0.55rem;
+    padding: 0.55rem;
   }
   .tx-icon svg {
-    width: 1.7rem;
-    height: 1.7rem;
+    width: 100%;
+    height: 100%;
   }
   .tx-body { flex: 1; }
   .tx-card h3,
@@ -425,12 +442,13 @@ label {
 @media (min-width: 1024px) {
   .tx-card { padding: 1.05rem 0.85rem 0.9rem; }
   .tx-icon {
-    width: 3.5rem;
-    height: 3.5rem;
+    width: 3.75rem;
+    height: 3.75rem;
+    padding: 0.6rem;
   }
   .tx-icon svg {
-    width: 1.85rem;
-    height: 1.85rem;
+    width: 100%;
+    height: 100%;
   }
   .tx-card h3,
   .tx-body h3 { font-size: 0.95rem !important; }
@@ -558,6 +576,7 @@ label {
   display: flex;
   flex-direction: column;
   align-items: center;
+  justify-content: space-between;
   text-align: center;
   background: linear-gradient(180deg, var(--section-bg) 0%, var(--background) 48%);
   border-radius: 0.9rem;
@@ -568,6 +587,9 @@ label {
   transition: transform 0.2s ease, box-shadow 0.2s ease, border-color 0.2s ease;
   min-width: 0;
   width: 100%;
+  aspect-ratio: 1 / 1;
+  height: auto;
+  overflow: hidden;
 }
 .doc-card:hover {
   transform: translateY(-2px);
@@ -609,6 +631,7 @@ label {
 }
 .doc-card .doc-meta:last-of-type {
   flex: 1;
+  min-height: 0;
 }
 .doc-card .doc-wa {
   display: inline-flex;
@@ -620,7 +643,8 @@ label {
   box-sizing: border-box;
   min-height: 2.4rem;
   padding: 0.5rem 0.75rem;
-  margin-top: 0.35rem;
+  margin-top: auto;
+  flex-shrink: 0;
   border-radius: 0.55rem;
   background: var(--wa);
   color: var(--background);
@@ -640,7 +664,6 @@ label {
   .doc-grid { align-items: stretch; }
   .doc-card {
     padding: 1.25rem 1rem 1.1rem;
-    height: 100%;
     border-radius: 1rem;
   }
   .doc-card h3 { font-size: 1.05rem !important; }

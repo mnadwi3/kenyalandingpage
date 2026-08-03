@@ -215,12 +215,11 @@ final class DoctorRepository extends Model implements DoctorRepositoryInterface
         }
 
         if (!empty($filters['q'])) {
-            $clauses[] = '(d.name LIKE :q_name OR d.qualification LIKE :q_qual OR d.expertise LIKE :q_expertise OR d.registration_number LIKE :q_reg OR d.slug LIKE :q_slug)';
+            $clauses[] = '(d.name LIKE :q_name OR d.qualification LIKE :q_qual OR d.expertise LIKE :q_expertise OR d.slug LIKE :q_slug)';
             $like = '%' . $filters['q'] . '%';
             $params['q_name'] = $like;
             $params['q_qual'] = $like;
             $params['q_expertise'] = $like;
-            $params['q_reg'] = $like;
             $params['q_slug'] = $like;
         }
         if (!empty($filters['status']) && in_array($filters['status'], Doctor::STATUSES, true)) {

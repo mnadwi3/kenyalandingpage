@@ -9,7 +9,7 @@ if command -v service >/dev/null 2>&1; then
   sudo service mariadb start >/dev/null 2>&1 || true
 fi
 
-mkdir -p storage/logs storage/cache uploads public/uploads/doctors public/uploads/hospitals
+mkdir -p storage/logs storage/cache uploads public/uploads/doctors public/uploads/treatments public/uploads/hospitals
 chmod -R u+rwX storage uploads public/uploads 2>/dev/null || true
 
 HOST="${HOST:-127.0.0.1}"

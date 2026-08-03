@@ -1,0 +1,16 @@
+<?php
+
+declare(strict_types=1);
+
+namespace App\Models;
+
+use App\Core\Model;
+
+final class Treatment extends Model
+{
+    public const STATUSES = ['draft', 'active', 'inactive', 'archived'];
+
+    public const SORTABLE = [
+        'name', 'category', 'status', 'is_featured', 'sort_order', 'created_at', 'updated_at',
+    ];
+}

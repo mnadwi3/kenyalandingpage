@@ -294,7 +294,7 @@ label {
 .tx-icon.tx-icon--svg {
   width: 3.87rem; /* ~10% smaller than 4.3rem on mobile */
   height: 3.87rem;
-  margin: -0.25rem 0 0.15rem;
+  margin: -0.25rem 0 0.55rem;
   padding: 0;
   border-radius: 0;
   background: transparent;
@@ -367,8 +367,8 @@ label {
   width: 100%;
   max-width: 100%;
   box-sizing: border-box;
-  min-height: 2.15rem;
-  padding: 0.3rem 0.35rem;
+  min-height: 1.85rem;
+  padding: 0.28rem 0.35rem;
   margin-top: auto;
   flex-shrink: 0;
   border-radius: 0.4rem;
@@ -414,7 +414,7 @@ label {
   .tx-icon.tx-icon--svg {
     width: 4.8rem;
     height: 4.8rem;
-    margin: 0.05rem 0 0.2rem;
+    margin: 0.05rem 0 0.55rem;
     padding: 0;
     background: transparent;
   }
@@ -462,6 +462,7 @@ label {
   .tx-icon.tx-icon--svg {
     width: 5.1rem;
     height: 5.1rem;
+    margin: 0.05rem 0 0.55rem;
     padding: 0;
     background: transparent;
   }

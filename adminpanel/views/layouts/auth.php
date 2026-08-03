@@ -15,7 +15,7 @@
             <div class="auth-brand-inner">
                 <p class="brand-mark">VaidTrack</p>
                 <h1>Medical tourism, managed with clarity.</h1>
-                <p class="brand-copy">Secure admin access for doctors, treatments, hospitals, and patient enquiries.</p>
+                <p class="brand-copy">Secure admin access for doctors, treatments, hospitals, and specialties.</p>
             </div>
         </aside>
         <main class="auth-panel">

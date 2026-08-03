@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace App\Services;
 
 use App\Contracts\DoctorRepositoryInterface;
+use App\Core\Database;
 use App\Helpers\ImageUploader;
 use App\Helpers\Slug;
 use App\Helpers\Validator;
@@ -96,10 +97,13 @@ final class DoctorService
         if ($photoFile && ($photoFile['error'] ?? UPLOAD_ERR_NO_FILE) !== UPLOAD_ERR_NO_FILE) {
             $payload['photo'] = $this->images->upload($photoFile, 'doctors');
         }
-        $id = $this->doctors->create($payload);
-        $this->syncRelations($id, $relations);
 
-        return $id;
+        return Database::transaction(function () use ($payload, $relations): int {
+            $id = $this->doctors->create($payload);
+            $this->syncRelations($id, $relations);
+
+            return $id;
+        });
     }
 
     public function update(int $id, array $input, ?array $photoFile = null): void
@@ -117,8 +121,10 @@ final class DoctorService
             $this->images->delete($existing['photo'] ?? null);
             $payload['photo'] = null;
         }
-        $this->doctors->update($id, $payload);
-        $this->syncRelations($id, $relations);
+        Database::transaction(function () use ($id, $payload, $relations): void {
+            $this->doctors->update($id, $payload);
+            $this->syncRelations($id, $relations);
+        });
     }
 
     public function softDelete(int $id): void
@@ -147,23 +153,25 @@ final class DoctorService
             'name' => $doctor['name'] . ' (Copy)',
             'photo' => $this->images->copy((string) ($doctor['photo'] ?? ''), 'doctors'),
             'qualification' => $doctor['qualification'],
+            'years_of_experience' => $doctor['years_of_experience'],
             'expertise' => $doctor['expertise'] ?? $doctor['experience_summary'] ?? null,
             'education' => $doctor['education'],
-            'registration_number' => $doctor['registration_number'],
             'status' => 'draft',
             'is_featured' => 0,
             'seo_title' => $doctor['seo_title'],
             'seo_description' => $doctor['seo_description'],
         ];
-        $newId = $this->doctors->create($data);
-        $this->syncRelations($newId, [
-            'languages' => $doctor['language_ids'] ?? [],
-            'specialties' => $doctor['specialty_ids'] ?? [],
-            'treatments' => $doctor['treatment_ids'] ?? [],
-            'hospitals' => $doctor['hospital_ids'] ?? [],
-        ]);
+        return Database::transaction(function () use ($data, $doctor): int {
+            $newId = $this->doctors->create($data);
+            $this->syncRelations($newId, [
+                'languages' => $doctor['language_ids'] ?? [],
+                'specialties' => $doctor['specialty_ids'] ?? [],
+                'treatments' => $doctor['treatment_ids'] ?? [],
+                'hospitals' => $doctor['hospital_ids'] ?? [],
+            ]);
 
-        return $newId;
+            return $newId;
+        });
     }
 
     public function bulkSoftDelete(array $ids): int
@@ -202,9 +210,9 @@ final class DoctorService
                     'name' => $row['name'] ?? $row['full_name'] ?? '',
                     'slug' => $row['slug'] ?? '',
                     'qualification' => $row['qualification'] ?? '',
+                    'years_of_experience' => $row['years_of_experience'] ?? '',
                     'expertise' => $row['expertise'] ?? $row['experience'] ?? $row['experience_summary'] ?? '',
                     'education' => $row['education'] ?? '',
-                    'registration_number' => $row['registration_number'] ?? '',
                     'status' => strtolower($row['status'] ?? 'draft'),
                     'is_featured' => $row['is_featured'] ?? '0',
                     'seo_title' => $row['seo_title'] ?? '',
@@ -248,6 +256,7 @@ final class DoctorService
             ->required('name', 'Full name')
             ->maxLength('name', 150, 'Full name')
             ->in('status', Doctor::STATUSES, 'Status')
+            ->numeric('years_of_experience', 'Years of experience')
             ->maxLength('seo_title', 255, 'SEO title')
             ->maxLength('seo_description', 320, 'Meta description')
             ->maxLength('slug', 191, 'Slug');
@@ -262,14 +271,17 @@ final class DoctorService
             fn (string $s, ?int $ignore): bool => $this->doctors->slugExists($s, $ignore),
             $ignoreId
         );
+        $years = $input['years_of_experience'] ?? '';
+
+        $years = $input['years_of_experience'] ?? '';
 
         $payload = [
             'slug' => $slug,
             'name' => $name,
             'qualification' => $this->nullableString($input['qualification'] ?? null),
+            'years_of_experience' => $years === '' ? null : (int) $years,
             'expertise' => $this->nullableString($input['expertise'] ?? $input['experience_summary'] ?? $input['experience'] ?? null),
             'education' => $this->nullableString($input['education'] ?? null),
-            'registration_number' => $this->nullableString($input['registration_number'] ?? null),
             'status' => (string) $input['status'],
             'is_featured' => !empty($input['is_featured']) ? 1 : 0,
             'seo_title' => $this->nullableString($input['seo_title'] ?? null) ?? $name,

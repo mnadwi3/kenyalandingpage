@@ -42,4 +42,36 @@ final class Database
 
         return self::$pdo;
     }
+
+    /**
+     * Run a callback inside a DB transaction.
+     * Nesting reuses the active transaction (no savepoints).
+     *
+     * @template T
+     * @param callable(): T $callback
+     * @return T
+     */
+    public static function transaction(callable $callback): mixed
+    {
+        $pdo = self::connection();
+        $started = !$pdo->inTransaction();
+
+        if ($started) {
+            $pdo->beginTransaction();
+        }
+
+        try {
+            $result = $callback();
+            if ($started) {
+                $pdo->commit();
+            }
+
+            return $result;
+        } catch (\Throwable $e) {
+            if ($started && $pdo->inTransaction()) {
+                $pdo->rollBack();
+            }
+            throw $e;
+        }
+    }
 }

@@ -24,8 +24,8 @@
   --cta-hover: #0B3A61;
   --soft: #F8FAFC;
   --ink: #1E293B;
-  --wa: #16A34A;
-  --wa-hover: #15803D;
+  --wa: #15803D;
+  --wa-hover: #166534;
   --white: #FFFFFF;
   --shadow: rgba(15, 76, 129, 0.10);
   --shadow-strong: rgba(11, 58, 97, 0.14);
@@ -1387,6 +1387,9 @@ header .site-logo {
   min-width: 0;
   flex-shrink: 1;
 }
+header .site-logo picture {
+  display: contents;
+}
 header .site-logo img,
 header .site-logo-img {
   display: block;
@@ -1640,6 +1643,57 @@ header .site-logo-img {
   transition: opacity 0.3s ease, transform 0.3s ease;
 }
 #whatsapp-float.show { opacity: 1; pointer-events: auto; transform: translateY(0) scale(1); }
+
+/* ---- YouTube click-to-play facade (keeps layout; avoids eager player JS) ---- */
+.yt-facade {
+  position: relative;
+  display: block;
+  width: 100%;
+  height: 100%;
+  padding: 0;
+  border: 0;
+  cursor: pointer;
+  background: #0B3A61;
+  overflow: hidden;
+}
+.yt-facade img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+.yt-facade-play {
+  position: absolute;
+  inset: 0;
+  margin: auto;
+  width: 4rem;
+  height: 4rem;
+  border-radius: 9999px;
+  background: rgba(15, 76, 129, 0.92);
+  box-shadow: 0 8px 24px rgba(11, 58, 97, 0.35);
+  pointer-events: none;
+}
+.yt-facade-play::before {
+  content: '';
+  position: absolute;
+  top: 50%;
+  left: 54%;
+  transform: translate(-50%, -50%);
+  border-style: solid;
+  border-width: 0.7rem 0 0.7rem 1.15rem;
+  border-color: transparent transparent transparent #fff;
+}
+.yt-facade:focus-visible {
+  outline: 3px solid #0F4C81;
+  outline-offset: 2px;
+}
+.yt-facade iframe {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  border: 0;
+}
 
 /* ---- Reduced motion ---- */
 @media (prefers-reduced-motion: reduce) {

@@ -14,7 +14,15 @@
     var pct = max > 0 ? (h.scrollY / max) * 100 : 0;
     bar.style.width = pct + "%";
   }
-  window.addEventListener("scroll", onScrollProgress, { passive: true });
+  var progressTicking = false;
+  window.addEventListener("scroll", function () {
+    if (progressTicking) return;
+    progressTicking = true;
+    window.requestAnimationFrame(function () {
+      progressTicking = false;
+      onScrollProgress();
+    });
+  }, { passive: true });
   onScrollProgress();
 
   /* Reveal */

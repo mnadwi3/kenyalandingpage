@@ -12,6 +12,15 @@
     <?php if (($activeNav ?? '') === 'doctors'): ?>
         <link rel="stylesheet" href="<?= e(url('/assets/css/doctors.css')) ?>">
     <?php endif; ?>
+    <?php if (($activeNav ?? '') === 'treatments'): ?>
+        <link rel="stylesheet" href="<?= e(url('/assets/css/treatments.css')) ?>">
+    <?php endif; ?>
+    <?php if (($activeNav ?? '') === 'hospitals'): ?>
+        <link rel="stylesheet" href="<?= e(url('/assets/css/hospitals.css')) ?>">
+    <?php endif; ?>
+    <?php if (($activeNav ?? '') === 'specialties'): ?>
+        <link rel="stylesheet" href="<?= e(url('/assets/css/specialties.css')) ?>">
+    <?php endif; ?>
 </head>
 <body class="admin-body" data-theme="light">
     <?php require BASE_PATH . '/views/partials/header.php'; ?>
@@ -37,9 +46,20 @@
     </div>
 
     <script src="<?= e(url('/assets/js/admin.js')) ?>"></script>
-    <script src="<?= e(url('/assets/js/dashboard.js')) ?>"></script>
+    <?php if (($activeNav ?? '') === 'dashboard'): ?>
+        <script src="<?= e(url('/assets/js/dashboard.js')) ?>"></script>
+    <?php endif; ?>
     <?php if (($activeNav ?? '') === 'doctors'): ?>
         <script src="<?= e(url('/assets/js/doctors.js')) ?>"></script>
+    <?php endif; ?>
+    <?php if (($activeNav ?? '') === 'treatments'): ?>
+        <script src="<?= e(url('/assets/js/treatments.js')) ?>"></script>
+    <?php endif; ?>
+    <?php if (($activeNav ?? '') === 'hospitals'): ?>
+        <script src="<?= e(url('/assets/js/hospitals.js')) ?>"></script>
+    <?php endif; ?>
+    <?php if (($activeNav ?? '') === 'specialties'): ?>
+        <script src="<?= e(url('/assets/js/specialties.js')) ?>"></script>
     <?php endif; ?>
 </body>
 </html>

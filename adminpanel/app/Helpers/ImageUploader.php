@@ -15,9 +15,13 @@ final class ImageUploader
         'image/gif'  => 'gif',
     ];
 
+    private const ALLOWED_DIRECTORIES = ['doctors', 'hospitals', 'treatments'];
+
     /** @param array<string, mixed> $file */
     public function upload(array $file, string $directory, ?string $oldRelativePath = null): string
     {
+        $directory = $this->assertDirectory($directory);
+
         if (($file['error'] ?? UPLOAD_ERR_NO_FILE) === UPLOAD_ERR_NO_FILE) {
             throw new RuntimeException('No file uploaded.');
         }
@@ -35,13 +39,16 @@ final class ImageUploader
         if (!isset(self::ALLOWED[$mime])) {
             throw new RuntimeException('Only JPG, PNG, WEBP, or GIF images are allowed.');
         }
+        if (@getimagesize($tmp) === false) {
+            throw new RuntimeException('Uploaded file is not a valid image.');
+        }
         if (($file['size'] ?? 0) > 5 * 1024 * 1024) {
             throw new RuntimeException('Image must be under 5MB.');
         }
 
         $ext = self::ALLOWED[$mime];
         $filename = bin2hex(random_bytes(16)) . '.' . $ext;
-        $relativeDir = 'uploads/' . trim($directory, '/');
+        $relativeDir = 'uploads/' . $directory;
         $absoluteDir = BASE_PATH . '/public/' . $relativeDir;
 
         if (!is_dir($absoluteDir) && !mkdir($absoluteDir, 0755, true) && !is_dir($absoluteDir)) {
@@ -52,9 +59,7 @@ final class ImageUploader
         $relativePath = $relativeDir . '/' . $filename;
 
         if (!$this->compressAndSave($tmp, $absolutePath, $mime)) {
-            if (!move_uploaded_file($tmp, $absolutePath)) {
-                throw new RuntimeException('Failed to store uploaded image.');
-            }
+            throw new RuntimeException('Failed to process uploaded image.');
         }
 
         if ($oldRelativePath) {
@@ -66,28 +71,26 @@ final class ImageUploader
 
     public function delete(?string $relativePath): void
     {
-        if ($relativePath === null || $relativePath === '' || !str_starts_with($relativePath, 'uploads/')) {
-            return;
-        }
-        $absolute = BASE_PATH . '/public/' . ltrim($relativePath, '/');
-        if (is_file($absolute)) {
+        $absolute = $this->resolveSafeUploadPath($relativePath);
+        if ($absolute !== null && is_file($absolute)) {
             @unlink($absolute);
         }
     }
 
     public function copy(string $relativePath, string $directory): ?string
     {
-        if ($relativePath === '' || !str_starts_with($relativePath, 'uploads/')) {
-            return null;
-        }
-        $source = BASE_PATH . '/public/' . ltrim($relativePath, '/');
-        if (!is_file($source)) {
+        $directory = $this->assertDirectory($directory);
+        $source = $this->resolveSafeUploadPath($relativePath);
+        if ($source === null || !is_file($source)) {
             return null;
         }
 
-        $ext = pathinfo($source, PATHINFO_EXTENSION) ?: 'jpg';
+        $ext = strtolower(pathinfo($source, PATHINFO_EXTENSION) ?: 'jpg');
+        if (!in_array($ext, array_values(self::ALLOWED), true)) {
+            return null;
+        }
         $filename = bin2hex(random_bytes(16)) . '.' . $ext;
-        $relativeDir = 'uploads/' . trim($directory, '/');
+        $relativeDir = 'uploads/' . $directory;
         $absoluteDir = BASE_PATH . '/public/' . $relativeDir;
         if (!is_dir($absoluteDir)) {
             mkdir($absoluteDir, 0755, true);
@@ -96,6 +99,54 @@ final class ImageUploader
         $destAbsolute = BASE_PATH . '/public/' . $destRelative;
 
         return copy($source, $destAbsolute) ? $destRelative : null;
+    }
+
+    private function assertDirectory(string $directory): string
+    {
+        $directory = trim($directory, '/');
+        if (!in_array($directory, self::ALLOWED_DIRECTORIES, true)) {
+            throw new RuntimeException('Invalid upload directory.');
+        }
+
+        return $directory;
+    }
+
+    private function resolveSafeUploadPath(?string $relativePath): ?string
+    {
+        if ($relativePath === null || $relativePath === '') {
+            return null;
+        }
+        $relativePath = str_replace('\\', '/', $relativePath);
+        if (str_contains($relativePath, "\0") || str_contains($relativePath, '..')) {
+            return null;
+        }
+        if (!str_starts_with($relativePath, 'uploads/')) {
+            return null;
+        }
+
+        $uploadsRoot = realpath(BASE_PATH . '/public/uploads');
+        if ($uploadsRoot === false) {
+            return null;
+        }
+
+        $absolute = BASE_PATH . '/public/' . ltrim($relativePath, '/');
+        $real = realpath($absolute);
+        if ($real === false) {
+            // File may not exist yet for delete no-ops; still reject escape attempts by prefix check.
+            $normalized = str_replace('\\', '/', $absolute);
+            $rootNormalized = str_replace('\\', '/', $uploadsRoot);
+            if (!str_starts_with($normalized, $rootNormalized . '/') && $normalized !== $rootNormalized) {
+                return null;
+            }
+
+            return $absolute;
+        }
+
+        if (!str_starts_with($real, $uploadsRoot . DIRECTORY_SEPARATOR) && $real !== $uploadsRoot) {
+            return null;
+        }
+
+        return $real;
     }
 
     private function compressAndSave(string $tmp, string $destination, string $mime): bool

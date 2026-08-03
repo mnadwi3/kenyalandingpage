@@ -26,6 +26,7 @@ final class DoctorController extends Controller
 
     public function index(): void
     {
+        Auth::requirePermission('doctors.view');
         $result = $this->doctors->list($_GET);
         View::renderInLayout('doctors/index', 'admin', [
             'title' => 'Doctors',
@@ -48,11 +49,13 @@ final class DoctorController extends Controller
 
     public function create(): void
     {
+        Auth::requirePermission('doctors.create');
         $this->renderForm(null, Session::getFlash('old') ?? []);
     }
 
     public function store(): void
     {
+        Auth::requirePermission('doctors.create');
         $this->validateCsrf();
         try {
             $id = $this->doctors->create($_POST, $_FILES['photo'] ?? null);
@@ -67,6 +70,7 @@ final class DoctorController extends Controller
 
     public function edit(string $id): void
     {
+        Auth::requirePermission('doctors.update');
         $doctor = $this->doctors->find((int) $id, true);
         if ($doctor === null) {
             flash('error', 'Doctor not found.');
@@ -78,6 +82,7 @@ final class DoctorController extends Controller
 
     public function update(string $id): void
     {
+        Auth::requirePermission('doctors.update');
         $this->validateCsrf();
         $doctorId = (int) $id;
         try {
@@ -93,6 +98,7 @@ final class DoctorController extends Controller
 
     public function destroy(string $id): void
     {
+        Auth::requirePermission('doctors.delete');
         $this->validateCsrf();
         $this->doctors->softDelete((int) $id);
         flash('success', 'Doctor moved to trash.');
@@ -101,6 +107,7 @@ final class DoctorController extends Controller
 
     public function restore(string $id): void
     {
+        Auth::requirePermission('doctors.update');
         $this->validateCsrf();
         $this->doctors->restore((int) $id);
         flash('success', 'Doctor restored.');
@@ -109,6 +116,7 @@ final class DoctorController extends Controller
 
     public function duplicate(string $id): void
     {
+        Auth::requirePermission('doctors.create');
         $this->validateCsrf();
         try {
             $newId = $this->doctors->duplicate((int) $id);
@@ -125,6 +133,11 @@ final class DoctorController extends Controller
         $this->validateCsrf();
         $ids = array_map('intval', (array) ($_POST['ids'] ?? []));
         $action = (string) ($_POST['bulk_action'] ?? '');
+        if ($action === 'delete') {
+            Auth::requirePermission('doctors.delete');
+        } else {
+            Auth::requirePermission('doctors.update');
+        }
         $count = match ($action) {
             'delete' => $this->doctors->bulkSoftDelete($ids),
             'restore' => $this->doctors->bulkRestore($ids),
@@ -137,21 +150,25 @@ final class DoctorController extends Controller
 
     public function exportCsv(): void
     {
+        Auth::requirePermission('doctors.view');
         $this->download('doctors.csv', 'text/csv; charset=utf-8', $this->exporter->toCsv($this->doctors->exportRows($this->exportFilters())));
     }
 
     public function exportJson(): void
     {
+        Auth::requirePermission('doctors.view');
         $this->download('doctors.json', 'application/json; charset=utf-8', $this->exporter->toJson($this->doctors->exportRows($this->exportFilters())));
     }
 
     public function exportExcel(): void
     {
+        Auth::requirePermission('doctors.view');
         $this->download('doctors.xls', 'application/vnd.ms-excel; charset=utf-8', $this->exporter->toExcelXml($this->doctors->exportRows($this->exportFilters())));
     }
 
     public function importForm(): void
     {
+        Auth::requirePermission('doctors.create');
         View::renderInLayout('doctors/import', 'admin', [
             'title' => 'Import Doctors',
             'activeNav' => 'doctors',
@@ -168,6 +185,7 @@ final class DoctorController extends Controller
 
     public function import(): void
     {
+        Auth::requirePermission('doctors.create');
         $this->validateCsrf();
         $file = $_FILES['csv_file'] ?? null;
         if (!$file || ($file['error'] ?? UPLOAD_ERR_NO_FILE) !== UPLOAD_ERR_OK) {
@@ -184,7 +202,7 @@ final class DoctorController extends Controller
             }
         }
         flash($result['failed'] > 0 ? 'error' : 'success', $message);
-        redirect('/doctors');
+        redirect($result['failed'] > 0 ? '/doctors/import' : '/doctors');
     }
 
     private function renderForm(?array $doctor, array $values): void

@@ -39,7 +39,7 @@
 
   function doctorImagePath(doctor) {
     if (doctor.image) return String(doctor.image).replace(/^\//, '');
-    if (doctor.slug) return IMAGE_BASE + doctor.slug + '.jpg';
+    if (doctor.slug) return IMAGE_BASE + doctor.slug + '.webp';
     return '';
   }
 

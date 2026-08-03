@@ -5,4 +5,7 @@ storage/cache/*
 !storage/cache/.gitkeep
 uploads/*
 !uploads/.gitkeep
+public/uploads/**
+!public/uploads/.gitkeep
+!public/uploads/.htaccess
 node_modules/

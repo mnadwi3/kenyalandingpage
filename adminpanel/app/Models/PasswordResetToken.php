@@ -40,6 +40,7 @@ final class PasswordResetToken extends Model
              WHERE t.token_hash = :hash
                AND t.used_at IS NULL
                AND t.expires_at > NOW(3)
+               AND u.status = \'active\'
              LIMIT 1'
         );
         $stmt->execute(['hash' => hash('sha256', $plainToken)]);

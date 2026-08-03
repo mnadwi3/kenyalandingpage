@@ -2,22 +2,21 @@
 /**
  * @var array|null $user
  * @var list<array<string, mixed>> $stats
- * @var list<array<string, mixed>> $recent_enquiries
+ * @var list<array<string, mixed>> $recent_doctors
  * @var list<array<string, mixed>> $recent_activities
  * @var array<string, mixed> $chart
  * @var list<array<string, mixed>> $quick_actions
  */
 
-$enquiryRows = [];
-foreach ($recent_enquiries as $enquiry) {
-    $status = (string) ($enquiry['status'] ?? 'new');
-    $enquiryRows[] = [
-        e((string) ($enquiry['patient_name'] ?? '—')),
-        e((string) ($enquiry['treatment_name'] ?? '—')),
-        e((string) ($enquiry['hospital_name'] ?? '—')),
-        e((string) ($enquiry['country_name'] ?? '—')),
+$doctorRows = [];
+foreach ($recent_doctors as $doctor) {
+    $status = (string) ($doctor['status'] ?? 'draft');
+    $doctorRows[] = [
+        e((string) ($doctor['name'] ?? '—')),
+        e((string) ($doctor['qualification'] ?? '—')),
+        !empty($doctor['is_featured']) ? '<span class="badge badge-featured">Featured</span>' : '<span class="muted">—</span>',
         '<span class="status-pill status-' . e($status) . '">' . e($status) . '</span>',
-        e(format_datetime($enquiry['created_at'] ?? null)),
+        e(format_datetime($doctor['updated_at'] ?? null)),
     ];
 }
 ?>
@@ -25,7 +24,7 @@ foreach ($recent_enquiries as $enquiry) {
 <section class="page-intro">
     <div>
         <h1>Dashboard</h1>
-        <p>Overview of platform health. Content counts unlock as modules are installed.</p>
+        <p>Overview of doctors, treatments, hospitals, and specialties.</p>
     </div>
 </section>
 
@@ -62,10 +61,10 @@ foreach ($recent_enquiries as $enquiry) {
 
         <div class="dashboard-grid dashboard-grid-bottom">
             <?php component('data-table', [
-                'title'   => 'Recent enquiries',
-                'columns' => ['Patient', 'Treatment', 'Hospital', 'Country', 'Status', 'Created'],
-                'rows'    => $enquiryRows,
-                'empty'   => 'No enquiries yet. Leads will appear here after the Enquiries module (Phase 7).',
+                'title'   => 'Recent doctors',
+                'columns' => ['Doctor', 'Qualification', 'Featured', 'Status', 'Updated'],
+                'rows'    => $doctorRows,
+                'empty'   => 'No doctors yet. Add a doctor to get started.',
             ]); ?>
 
             <?php component('quick-actions', ['actions' => $quick_actions]); ?>

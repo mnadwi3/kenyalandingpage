@@ -1,22 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <!-- Google Tag Manager -->
-  <script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
-  new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
-  j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
-  'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
-  })(window,document,'script','dataLayer','GTM-KZ86XPT5');</script>
-  <!-- End Google Tag Manager -->
-  <!-- GA4 via gtag (send_page_view off - GTM already sends pageviews; ensures generate_lead reaches GA4/Ads) -->
-  <script async src="https://www.googletagmanager.com/gtag/js?id=G-5TBH8QQ2EQ"></script>
-  <script>
-    window.dataLayer = window.dataLayer || [];
-    function gtag(){dataLayer.push(arguments);}
-    window.gtag = gtag;
-    gtag('js', new Date());
-    gtag('config', 'G-5TBH8QQ2EQ', { send_page_view: false });
-  </script>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Cancer Treatment in India | VaidTrack.com</title>
@@ -25,45 +9,26 @@
   <link rel="canonical" href="https://www.vaidtrack.com/">
   <base href="/">
 
-  <script src="https://cdn.tailwindcss.com"></script>
+  <!-- Preconnect only for delayed analytics hosts -->
+  <link rel="dns-prefetch" href="https://www.googletagmanager.com">
+  <link rel="preconnect" href="https://www.googletagmanager.com" crossorigin>
+
+  <!-- Self-hosted Inter (font-display: swap) -->
+  <link rel="preload" href="/assets/fonts/inter-latin.woff2" as="font" type="font/woff2" crossorigin>
+  <link rel="stylesheet" href="/assets/css/fonts-inter.css?v=20260803-perf">
+
+  <!-- Preload LCP logo -->
+  <link rel="preload" href="/images/vaidtrack-wordmark.webp?v=20260803-perf" as="image" type="image/webp" fetchpriority="high">
+
+  <!-- Static purged Tailwind (replaces render-blocking CDN runtime) -->
+  <link rel="stylesheet" href="/assets/css/tailwind.min.css?v=20260803-perf">
+  <link rel="stylesheet" href="/assets/css/styles.css?v=20260803-perf">
+
+  <!-- Analytics stub; full GTM/GA load deferred until idle/interaction -->
   <script>
-    /* Brand palette: deep healthcare navy, medical green, clinical neutrals */
-    tailwind.config = {
-      theme: {
-        extend: {
-          colors: {
-            primary: '#0F4C81',
-            'primary-light': '#3A6F9A',
-            'primary-dark': '#0B3A61',
-            secondary: '#0B3A61',
-            accent: '#0F4C81',
-            gold: '#0F4C81',
-            cta: '#0F4C81',
-            'cta-hover': '#0B3A61',
-            soft: '#F8FAFC',
-            ink: '#1E293B',
-            success: '#16A34A',
-            border: '#E2E8F0',
-          },
-          fontFamily: {
-            sans: ['Inter', 'Segoe UI', 'system-ui', 'sans-serif'],
-            display: ['Inter', 'Segoe UI', 'system-ui', 'sans-serif'],
-            heading: ['Inter', 'Segoe UI', 'system-ui', 'sans-serif'],
-          },
-          boxShadow: {
-            soft: '0 4px 20px rgba(15, 76, 129, 0.08)',
-            card: '0 8px 30px rgba(11, 58, 97, 0.12)',
-          },
-        },
-      },
-    };
+    window.dataLayer = window.dataLayer || [];
+    window.gtag = window.gtag || function () { window.dataLayer.push(arguments); };
   </script>
-
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
-
-  <link rel="stylesheet" href="assets/css/styles.css?v=20260802-refactor">
 </head>
 <body class="bg-white antialiased">
   <!-- Google Tag Manager (noscript) -->
@@ -75,7 +40,7 @@
   <header class="sticky top-0 z-50 bg-primary shadow-md">
     <div class="max-w-6xl mx-auto px-4 sm:px-6 h-[4.25rem] sm:h-[4.75rem] flex items-center justify-between gap-3">
       <a href="/" class="site-logo shrink-0 inline-flex items-center" aria-label="Home">
-        <img src="images/vaidtrack-wordmark.png?v=20260802-navy" alt="VaidTrack.com - For Medical Solutions" width="1024" height="203" class="site-logo-img w-auto object-contain object-left" decoding="async">
+        <picture><source srcset="images/vaidtrack-wordmark.webp?v=20260803-perf" type="image/webp"><img src="images/vaidtrack-wordmark.png?v=20260803-perf" alt="VaidTrack.com - For Medical Solutions" width="220" height="44" class="site-logo-img w-auto object-contain object-left" decoding="async" fetchpriority="high"></picture>
       </a>
 
       <nav class="hidden md:flex items-center gap-2.5 lg:gap-4 text-[0.73rem] lg:text-[0.7875rem] text-white/90 whitespace-nowrap" aria-label="Primary">
@@ -107,7 +72,7 @@
     <!-- ========== 1. HERO SLIDER ========== -->
     <section class="hero-slider" id="hero" aria-roledescription="carousel" aria-label="Highlights">
       <!-- Slide 1 - modern oncology facility -->
-      <div class="hero-slide active" data-slide="0" style="background-image:url('images/hero/slide-1.png'); background-position: center center;" role="group" aria-roledescription="slide" aria-label="1 of 3">
+      <div class="hero-slide active" data-slide="0"  role="group" aria-roledescription="slide" aria-label="1 of 3">
         <div class="hero-slide-content max-w-6xl mx-auto px-4 sm:px-6 h-full min-h-[inherit] flex items-start lg:items-center pt-6 pb-14 sm:py-14 lg:py-16">
           <div class="grid lg:grid-cols-2 gap-8 lg:gap-10 items-center w-full">
             <div class="hero-copy text-white max-w-xl">
@@ -126,7 +91,7 @@
       </div>
 
       <!-- Slide 2 - expert medical team -->
-      <div class="hero-slide" data-slide="1" style="background-image:url('images/hero/slide-2.png'); background-position: center center;" role="group" aria-roledescription="slide" aria-label="2 of 3" aria-hidden="true">
+      <div class="hero-slide" data-slide="1"  role="group" aria-roledescription="slide" aria-label="2 of 3" aria-hidden="true">
         <div class="hero-slide-content max-w-6xl mx-auto px-4 sm:px-6 h-full min-h-[inherit] flex items-start lg:items-center pt-6 pb-14 sm:py-14 lg:py-16">
           <div class="hero-copy text-white max-w-xl">
             <span class="inline-block bg-primary text-white text-xs font-bold tracking-wider uppercase px-3 py-1.5 rounded mb-4 shadow-md">Expert Oncologists</span>
@@ -141,7 +106,7 @@
       </div>
 
       <!-- Slide 3 - premium hospital campus -->
-      <div class="hero-slide" data-slide="2" style="background-image:url('images/hero/slide-3.png'); background-position: center center;" role="group" aria-roledescription="slide" aria-label="3 of 3" aria-hidden="true">
+      <div class="hero-slide" data-slide="2"  role="group" aria-roledescription="slide" aria-label="3 of 3" aria-hidden="true">
         <div class="hero-slide-content max-w-6xl mx-auto px-4 sm:px-6 h-full min-h-[inherit] flex items-start lg:items-center pt-6 pb-14 sm:py-14 lg:py-16">
           <div class="hero-copy text-white max-w-xl">
             <span class="inline-block bg-primary text-white text-xs font-bold tracking-wider uppercase px-3 py-1.5 rounded mb-4 shadow-md">End-to-End Support</span>
@@ -233,14 +198,12 @@
       <div class="max-w-6xl mx-auto px-4 sm:px-6">
         <div class="grid lg:grid-cols-2 gap-10 lg:gap-14 items-center reveal">
           <div class="rounded-2xl overflow-hidden shadow-card ring-1 ring-slate-100 aspect-[4/3] lg:aspect-auto lg:min-h-[320px]">
-            <img
-              src="images/hospital/hospital-care.jpg"
-              alt="Modern hospital care facility"
+            <picture><source srcset="images/hospital/hospital-care.webp?v=20260803-perf" type="image/webp"><img src="images/hospital/hospital-care.jpg?v=20260803-perf" alt="Modern hospital care facility"
               class="w-full h-full object-cover"
               loading="lazy"
               width="1600"
-              height="1067"
-            >
+              height="1089"
+             decoding="async"></picture>
           </div>
           <div>
             <h2 class="text-2xl sm:text-3xl font-bold mb-4 leading-tight">
@@ -589,14 +552,12 @@
         </div>
         <div class="reveal bg-white rounded-2xl shadow-card overflow-hidden border border-slate-100 grid md:grid-cols-2">
           <div class="min-h-[240px] md:min-h-[320px]">
-            <img
-              src="images/hospital/apollo-delhi.png"
-              alt="Partner cancer hospital in Delhi"
+            <picture><source srcset="images/hospital/apollo-delhi.webp?v=20260803-perf" type="image/webp"><img src="images/hospital/apollo-delhi.png?v=20260803-perf" alt="Partner cancer hospital in Delhi"
               class="w-full h-full object-cover"
               loading="lazy"
-              width="900"
-              height="640"
-            >
+              width="1024"
+              height="530"
+             decoding="async"></picture>
           </div>
           <div class="bg-[var(--section-bg)] p-6 sm:p-8 flex flex-col justify-center">
             <span class="inline-flex items-center gap-1.5 self-start text-xs font-semibold uppercase tracking-wide text-primary bg-primary/10 px-3 py-1.5 rounded-full mb-4">
@@ -817,7 +778,8 @@
     </a>
   </div>
 
-  <script src="assets/js/doctors.js?v=20260802-refactor"></script>
-  <script src="assets/js/main.js?v=20260802-refactor"></script>
+  <script src="assets/js/analytics.js?v=20260803-perf" defer></script>
+  <script src="assets/js/doctors.js?v=20260803-perf" defer></script>
+  <script src="assets/js/main.js?v=20260803-perf" defer></script>
 </body>
 </html>

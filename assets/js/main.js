@@ -116,11 +116,19 @@
   var btn = document.getElementById('whatsapp-float');
   var hero = document.getElementById('hero');
   if (!btn || !hero) return;
+  var ticking = false;
   function update() {
+    ticking = false;
     var bottom = hero.offsetTop + hero.offsetHeight;
     btn.classList.toggle('show', window.scrollY > bottom - 80);
   }
-  window.addEventListener('scroll', update, { passive: true });
+  function onScroll() {
+    if (!ticking) {
+      ticking = true;
+      window.requestAnimationFrame(update);
+    }
+  }
+  window.addEventListener('scroll', onScroll, { passive: true });
   update();
 })();
 

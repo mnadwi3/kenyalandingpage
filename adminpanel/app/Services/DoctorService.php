@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace App\Services;
 
 use App\Contracts\DoctorRepositoryInterface;
+use App\Core\Database;
 use App\Helpers\ImageUploader;
 use App\Helpers\Slug;
 use App\Helpers\Validator;
@@ -96,10 +97,13 @@ final class DoctorService
         if ($photoFile && ($photoFile['error'] ?? UPLOAD_ERR_NO_FILE) !== UPLOAD_ERR_NO_FILE) {
             $payload['photo'] = $this->images->upload($photoFile, 'doctors');
         }
-        $id = $this->doctors->create($payload);
-        $this->syncRelations($id, $relations);
 
-        return $id;
+        return Database::transaction(function () use ($payload, $relations): int {
+            $id = $this->doctors->create($payload);
+            $this->syncRelations($id, $relations);
+
+            return $id;
+        });
     }
 
     public function update(int $id, array $input, ?array $photoFile = null): void
@@ -117,8 +121,10 @@ final class DoctorService
             $this->images->delete($existing['photo'] ?? null);
             $payload['photo'] = null;
         }
-        $this->doctors->update($id, $payload);
-        $this->syncRelations($id, $relations);
+        Database::transaction(function () use ($id, $payload, $relations): void {
+            $this->doctors->update($id, $payload);
+            $this->syncRelations($id, $relations);
+        });
     }
 
     public function softDelete(int $id): void
@@ -155,15 +161,17 @@ final class DoctorService
             'seo_title' => $doctor['seo_title'],
             'seo_description' => $doctor['seo_description'],
         ];
-        $newId = $this->doctors->create($data);
-        $this->syncRelations($newId, [
-            'languages' => $doctor['language_ids'] ?? [],
-            'specialties' => $doctor['specialty_ids'] ?? [],
-            'treatments' => $doctor['treatment_ids'] ?? [],
-            'hospitals' => $doctor['hospital_ids'] ?? [],
-        ]);
+        return Database::transaction(function () use ($data, $doctor): int {
+            $newId = $this->doctors->create($data);
+            $this->syncRelations($newId, [
+                'languages' => $doctor['language_ids'] ?? [],
+                'specialties' => $doctor['specialty_ids'] ?? [],
+                'treatments' => $doctor['treatment_ids'] ?? [],
+                'hospitals' => $doctor['hospital_ids'] ?? [],
+            ]);
 
-        return $newId;
+            return $newId;
+        });
     }
 
     public function bulkSoftDelete(array $ids): int
@@ -263,6 +271,8 @@ final class DoctorService
             fn (string $s, ?int $ignore): bool => $this->doctors->slugExists($s, $ignore),
             $ignoreId
         );
+        $years = $input['years_of_experience'] ?? '';
+
         $years = $input['years_of_experience'] ?? '';
 
         $payload = [

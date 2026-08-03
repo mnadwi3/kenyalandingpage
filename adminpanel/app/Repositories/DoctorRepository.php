@@ -103,7 +103,7 @@ final class DoctorRepository extends Model implements DoctorRepositoryInterface
     public function restore(int $id): void
     {
         self::db()->prepare(
-            "UPDATE doctors SET deleted_at = NULL, status = 'draft', updated_at = NOW(3) WHERE id = :id"
+            "UPDATE doctors SET deleted_at = NULL, status = 'draft', updated_at = NOW(3) WHERE id = :id AND deleted_at IS NOT NULL"
         )->execute(['id' => $id]);
     }
 
@@ -129,7 +129,7 @@ final class DoctorRepository extends Model implements DoctorRepositoryInterface
         }
         $in = $this->inClause($ids);
         $stmt = self::db()->prepare(
-            "UPDATE doctors SET deleted_at = NULL, status = 'draft', updated_at = NOW(3) WHERE id IN ({$in['sql']})"
+            "UPDATE doctors SET deleted_at = NULL, status = 'draft', updated_at = NOW(3) WHERE id IN ({$in['sql']}) AND deleted_at IS NOT NULL"
         );
         $stmt->execute($in['params']);
 

@@ -107,7 +107,7 @@ final class SpecialtyRepository extends Model implements SpecialtyRepositoryInte
     public function restore(int $id): void
     {
         self::db()->prepare(
-            "UPDATE specialties SET deleted_at = NULL, status = 'draft', updated_at = NOW(3) WHERE id = :id"
+            "UPDATE specialties SET deleted_at = NULL, status = 'draft', updated_at = NOW(3) WHERE id = :id AND deleted_at IS NOT NULL"
         )->execute(['id' => $id]);
     }
 
@@ -133,7 +133,7 @@ final class SpecialtyRepository extends Model implements SpecialtyRepositoryInte
         }
         $in = $this->inClause($ids);
         $stmt = self::db()->prepare(
-            "UPDATE specialties SET deleted_at = NULL, status = 'draft', updated_at = NOW(3) WHERE id IN ({$in['sql']})"
+            "UPDATE specialties SET deleted_at = NULL, status = 'draft', updated_at = NOW(3) WHERE id IN ({$in['sql']}) AND deleted_at IS NOT NULL"
         );
         $stmt->execute($in['params']);
 

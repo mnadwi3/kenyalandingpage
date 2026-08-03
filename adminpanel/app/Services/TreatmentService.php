@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace App\Services;
 
 use App\Contracts\TreatmentRepositoryInterface;
+use App\Core\Database;
 use App\Helpers\ImageUploader;
 use App\Helpers\Slug;
 use App\Helpers\Validator;
@@ -97,10 +98,13 @@ final class TreatmentService
         if ($imageFile && ($imageFile['error'] ?? UPLOAD_ERR_NO_FILE) !== UPLOAD_ERR_NO_FILE) {
             $payload['featured_image'] = $this->images->upload($imageFile, 'treatments');
         }
-        $id = $this->treatments->create($payload);
-        $this->syncRelations($id, $relations);
 
-        return $id;
+        return Database::transaction(function () use ($payload, $relations): int {
+            $id = $this->treatments->create($payload);
+            $this->syncRelations($id, $relations);
+
+            return $id;
+        });
     }
 
     public function update(int $id, array $input, ?array $imageFile = null): void
@@ -122,8 +126,10 @@ final class TreatmentService
             $this->images->delete($existing['featured_image'] ?? null);
             $payload['featured_image'] = null;
         }
-        $this->treatments->update($id, $payload);
-        $this->syncRelations($id, $relations);
+        Database::transaction(function () use ($id, $payload, $relations): void {
+            $this->treatments->update($id, $payload);
+            $this->syncRelations($id, $relations);
+        });
     }
 
     public function softDelete(int $id): void
@@ -165,13 +171,15 @@ final class TreatmentService
             'seo_title' => $treatment['seo_title'] ?? null,
             'seo_description' => $treatment['seo_description'] ?? null,
         ];
-        $newId = $this->treatments->create($data);
-        $this->syncRelations($newId, [
-            'doctors' => $treatment['doctor_ids'] ?? [],
-            'hospitals' => $treatment['hospital_ids'] ?? [],
-        ]);
+        return Database::transaction(function () use ($data, $treatment): int {
+            $newId = $this->treatments->create($data);
+            $this->syncRelations($newId, [
+                'doctors' => $treatment['doctor_ids'] ?? [],
+                'hospitals' => $treatment['hospital_ids'] ?? [],
+            ]);
 
-        return $newId;
+            return $newId;
+        });
     }
 
     public function bulkSoftDelete(array $ids): int

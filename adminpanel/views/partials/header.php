@@ -15,13 +15,13 @@ $notificationCount = count($notifications);
         </button>
         <a href="<?= e(url('/dashboard')) ?>" class="brand-mark">VaidTrack</a>
         <span class="header-divider"></span>
-        <form class="header-search" action="<?= e(url('/dashboard')) ?>" method="get" role="search">
+        <form class="header-search" action="<?= e(url('/doctors')) ?>" method="get" role="search">
             <label class="sr-only" for="global-search">Search</label>
             <input
                 id="global-search"
                 type="search"
                 name="q"
-                placeholder="Search doctors, treatments, hospitals…"
+                placeholder="Search doctors…"
                 value="<?= e($_GET['q'] ?? '') ?>"
                 data-global-search
             >

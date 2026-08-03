@@ -56,14 +56,7 @@ final class DashboardRepository implements DashboardRepositoryInterface
             if ($activeOnly) {
                 $sql .= " WHERE status = 'active'";
                 if (in_array($table, ['doctors', 'treatments', 'hospitals', 'specialties'], true)) {
-                    try {
-                        $check = Database::connection()->query("SHOW COLUMNS FROM `{$table}` LIKE 'deleted_at'");
-                        if ($check && $check->fetch()) {
-                            $sql .= ' AND deleted_at IS NULL';
-                        }
-                    } catch (Throwable) {
-                        // Column may not exist yet.
-                    }
+                    $sql .= ' AND deleted_at IS NULL';
                 }
             }
 

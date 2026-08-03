@@ -40,6 +40,12 @@ interface HospitalRepositoryInterface
 
     public function internationalServiceCodes(int $hospitalId): array;
 
+    /** @param list<int> $hospitalIds @return array<int, list<string>> */
+    public function accreditationCodesByHospitalIds(array $hospitalIds): array;
+
+    /** @param list<int> $hospitalIds @return array<int, list<string>> */
+    public function internationalServiceCodesByHospitalIds(array $hospitalIds): array;
+
     public function treatmentIds(int $hospitalId): array;
 
     public function relatedTreatments(int $hospitalId): array;

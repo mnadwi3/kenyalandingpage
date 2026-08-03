@@ -10,6 +10,6 @@ final class Doctor extends Model
 {
     public const STATUSES = ['draft', 'active', 'inactive', 'archived'];
     public const SORTABLE = [
-        'name', 'status', 'is_featured', 'created_at', 'updated_at',
+        'name', 'status', 'is_featured', 'years_of_experience', 'created_at', 'updated_at',
     ];
 }

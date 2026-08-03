@@ -103,7 +103,7 @@ final class HospitalRepository extends Model implements HospitalRepositoryInterf
     public function restore(int $id): void
     {
         self::db()->prepare(
-            "UPDATE hospitals SET deleted_at = NULL, status = 'draft', updated_at = NOW(3) WHERE id = :id"
+            "UPDATE hospitals SET deleted_at = NULL, status = 'draft', updated_at = NOW(3) WHERE id = :id AND deleted_at IS NOT NULL"
         )->execute(['id' => $id]);
     }
 
@@ -129,7 +129,7 @@ final class HospitalRepository extends Model implements HospitalRepositoryInterf
         }
         $in = $this->inClause($ids);
         $stmt = self::db()->prepare(
-            "UPDATE hospitals SET deleted_at = NULL, status = 'draft', updated_at = NOW(3) WHERE id IN ({$in['sql']})"
+            "UPDATE hospitals SET deleted_at = NULL, status = 'draft', updated_at = NOW(3) WHERE id IN ({$in['sql']}) AND deleted_at IS NOT NULL"
         );
         $stmt->execute($in['params']);
 
@@ -207,20 +207,84 @@ final class HospitalRepository extends Model implements HospitalRepositoryInterf
 
     public function accreditationCodes(int $hospitalId): array
     {
-        $stmt = self::db()->prepare('SELECT code FROM hospital_accreditation WHERE hospital_id = :hospital_id');
-        $stmt->execute(['hospital_id' => $hospitalId]);
+        $map = $this->accreditationCodesByHospitalIds([$hospitalId]);
 
-        return array_map('strval', $stmt->fetchAll(PDO::FETCH_COLUMN) ?: []);
+        return $map[$hospitalId] ?? [];
     }
 
     public function internationalServiceCodes(int $hospitalId): array
     {
-        $stmt = self::db()->prepare(
-            'SELECT service_code FROM hospital_international_service WHERE hospital_id = :hospital_id'
-        );
-        $stmt->execute(['hospital_id' => $hospitalId]);
+        $map = $this->internationalServiceCodesByHospitalIds([$hospitalId]);
 
-        return array_map('strval', $stmt->fetchAll(PDO::FETCH_COLUMN) ?: []);
+        return $map[$hospitalId] ?? [];
+    }
+
+    /**
+     * @param list<int> $hospitalIds
+     * @return array<int, list<string>>
+     */
+    public function accreditationCodesByHospitalIds(array $hospitalIds): array
+    {
+        return $this->codesGroupedByHospital(
+            $hospitalIds,
+            'hospital_accreditation',
+            'code'
+        );
+    }
+
+    /**
+     * @param list<int> $hospitalIds
+     * @return array<int, list<string>>
+     */
+    public function internationalServiceCodesByHospitalIds(array $hospitalIds): array
+    {
+        return $this->codesGroupedByHospital(
+            $hospitalIds,
+            'hospital_international_service',
+            'service_code'
+        );
+    }
+
+    /**
+     * @param list<int> $hospitalIds
+     * @return array<int, list<string>>
+     */
+    private function codesGroupedByHospital(array $hospitalIds, string $table, string $codeColumn): array
+    {
+        $hospitalIds = array_values(array_unique(array_filter(
+            array_map('intval', $hospitalIds),
+            static fn (int $id): bool => $id > 0
+        )));
+        $result = [];
+        foreach ($hospitalIds as $id) {
+            $result[$id] = [];
+        }
+        if ($hospitalIds === []) {
+            return $result;
+        }
+
+        $placeholders = [];
+        $params = [];
+        foreach ($hospitalIds as $i => $id) {
+            $key = 'id' . $i;
+            $placeholders[] = ':' . $key;
+            $params[$key] = $id;
+        }
+
+        $sql = sprintf(
+            'SELECT hospital_id, %s AS code FROM %s WHERE hospital_id IN (%s)',
+            $codeColumn,
+            $table,
+            implode(', ', $placeholders)
+        );
+        $stmt = self::db()->prepare($sql);
+        $stmt->execute($params);
+        foreach ($stmt->fetchAll() ?: [] as $row) {
+            $hid = (int) $row['hospital_id'];
+            $result[$hid][] = (string) $row['code'];
+        }
+
+        return $result;
     }
 
     public function treatmentIds(int $hospitalId): array
@@ -268,6 +332,7 @@ final class HospitalRepository extends Model implements HospitalRepositoryInterf
              INNER JOIN doctors d ON d.id = dh.doctor_id
              WHERE dh.hospital_id = :hospital_id
                AND s.status = 'active'
+               AND s.deleted_at IS NULL
                AND d.status = 'active'
                AND d.deleted_at IS NULL
              ORDER BY s.name ASC"

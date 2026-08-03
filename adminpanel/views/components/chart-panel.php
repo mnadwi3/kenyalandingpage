@@ -18,7 +18,7 @@ $chart = $chart ?? ['title' => 'Chart', 'labels' => [], 'values' => [], 'is_plac
     </div>
     <div class="chart-wrap">
         <canvas
-            id="enquiriesChart"
+            id="overviewChart"
             width="640"
             height="260"
             data-chart='<?= e(json_encode([

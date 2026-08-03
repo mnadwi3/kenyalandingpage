@@ -24,21 +24,21 @@ final class DashboardController extends Controller
         $overview = $this->dashboard->overview();
 
         View::renderInLayout('dashboard/index', 'admin', [
-            'title'             => 'Dashboard',
-            'activeNav'         => 'dashboard',
-            'breadcrumbs'       => [
+            'title' => 'Dashboard',
+            'activeNav' => 'dashboard',
+            'breadcrumbs' => [
                 ['label' => 'Admin', 'href' => url('/dashboard')],
                 ['label' => 'Dashboard'],
             ],
-            'user'              => Auth::user(),
-            'csrf'              => Csrf::field(),
-            'stats'             => $overview['stats'],
-            'recent_enquiries'  => $overview['recent_enquiries'],
+            'user' => Auth::user(),
+            'csrf' => Csrf::field(),
+            'stats' => $overview['stats'],
+            'recent_doctors' => $overview['recent_doctors'],
             'recent_activities' => $overview['recent_activities'],
-            'chart'             => $overview['chart'],
-            'quick_actions'     => $overview['quick_actions'],
-            'notifications'     => $overview['notifications'],
-            'modules'           => $overview['modules'],
+            'chart' => $overview['chart'],
+            'quick_actions' => $overview['quick_actions'],
+            'notifications' => $overview['notifications'],
+            'modules' => $overview['modules'],
         ]);
     }
 
@@ -46,7 +46,7 @@ final class DashboardController extends Controller
     public function data(): void
     {
         $this->json([
-            'ok'   => true,
+            'ok' => true,
             'data' => $this->dashboard->overview(),
         ]);
     }

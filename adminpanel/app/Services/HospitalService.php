@@ -300,7 +300,7 @@ final class HospitalService
             'hospital_type' => $hospital['hospital_type'] ?? null,
             'location' => $hospital['location'] ?? '',
             'short_description' => $hospital['short_description'] ?? '',
-            'book_appointment_url' => '/enquiries/create?hospital=' . rawurlencode((string) ($hospital['slug'] ?? '')),
+            'book_appointment_url' => null,
             'whatsapp_url' => null,
             'view_more_url' => $hospital['public_url'] ?? $this->publicPath((string) ($hospital['slug'] ?? '')),
         ];
@@ -317,7 +317,7 @@ final class HospitalService
             'related_specialties' => $hospital['related_specialties'] ?? [],
             'contact_form' => [
                 'enabled' => true,
-                'action' => '/enquiries',
+                'action' => null,
                 'fields' => ['name', 'email', 'phone', 'message', 'hospital_slug'],
             ],
             'seo' => [

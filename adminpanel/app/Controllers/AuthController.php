@@ -150,7 +150,7 @@ final class AuthController extends Controller
     }
 
     /**
-     * Deliver reset link. Uses log file until SMTP settings (Phase 8) are available.
+     * Deliver reset link. Uses log file until SMTP is configured.
      * When APP_DEBUG is true, the link is also flashed once for local testing.
      */
     private function deliverResetLink(string $email, string $resetUrl): void

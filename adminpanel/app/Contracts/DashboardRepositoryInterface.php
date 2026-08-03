@@ -16,10 +16,7 @@ interface DashboardRepositoryInterface
     public function countEntities(string $table, bool $activeOnly = true): int;
 
     /** @return list<array<string, mixed>> */
-    public function recentEnquiries(int $limit = 8): array;
-
-    /** @return list<array{label: string, value: int}> Last N days enquiry counts. */
-    public function enquiryCountsByDay(int $days = 7): array;
+    public function recentDoctors(int $limit = 8): array;
 
     /** @return list<array<string, mixed>> Real auth events only (e.g. recent logins). */
     public function recentLogins(int $limit = 8): array;

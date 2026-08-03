@@ -89,7 +89,7 @@ $accreditations = is_array($hospital['accreditations'] ?? null) ? $hospital['acc
         </ul>
     <?php endif; ?>
     <h2>Contact form</h2>
-    <p class="meta">Form endpoint prepared: <?= e((string) ($page['contact_form']['action'] ?? '/enquiries')) ?></p>
+    <p class="meta">Contact form data prepared for frontend integration.</p>
     <div class="card-preview">
         <strong>Homepage card data ready:</strong>
         logo, cover, name, verification, accreditation logos, year, beds, type, location, short description, Book Appointment / WhatsApp / View More URLs.

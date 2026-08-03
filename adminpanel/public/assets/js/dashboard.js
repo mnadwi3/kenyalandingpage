@@ -14,7 +14,7 @@
   // Brief skeleton for perceived polish; content is already server-rendered.
   window.setTimeout(reveal, 350);
 
-  const canvas = document.getElementById('enquiriesChart');
+  const canvas = document.getElementById('overviewChart');
   if (!canvas || !canvas.getContext) return;
 
   let payload = { labels: [], values: [], placeholder: true };

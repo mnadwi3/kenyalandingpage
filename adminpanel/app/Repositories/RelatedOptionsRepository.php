@@ -17,7 +17,18 @@ final class RelatedOptionsRepository extends Model
 
     public function specialties(): array
     {
-        return $this->fetchOptions('specialties');
+        if (!$this->tableExists('specialties')) {
+            return [];
+        }
+        try {
+            return self::db()->query(
+                "SELECT id, name FROM specialties
+                 WHERE status = 'active' AND deleted_at IS NULL
+                 ORDER BY name ASC"
+            )->fetchAll() ?: [];
+        } catch (Throwable) {
+            return $this->fetchOptions('specialties');
+        }
     }
 
     public function treatments(): array

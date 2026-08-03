@@ -1,0 +1,28 @@
+.page-intro-row{display:flex;align-items:flex-start;justify-content:space-between;gap:1rem;flex-wrap:wrap}
+.page-actions{display:flex;flex-wrap:wrap;gap:.5rem}
+.filter-panel,.bulk-bar,.specialty-form,.panel{margin-bottom:1rem}
+.filter-panel{background:var(--surface);border:1px solid var(--border);border-radius:var(--radius);box-shadow:var(--shadow);padding:1rem}
+.filter-grid{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:.85rem}
+.filter-grid-simple{grid-template-columns:repeat(3,minmax(0,1fr))}
+.filter-actions{display:flex;gap:.5rem;margin-top:.85rem}
+.filter-panel select,.specialty-form select,.specialty-form input[type=text],.specialty-form input[type=search],.bulk-bar select{width:100%;border:1px solid var(--border);border-radius:10px;padding:.7rem .85rem;font:inherit;color:var(--text);background:var(--surface)}
+.bulk-bar{display:flex;flex-wrap:wrap;align-items:center;gap:.75rem;margin-bottom:.75rem}
+.bulk-bar select{width:auto;min-width:180px}
+.bulk-select-all{display:inline-flex;align-items:center;gap:.4rem;color:var(--muted)}
+.actions-cell{display:flex;flex-wrap:wrap;gap:.55rem;align-items:center}
+.link-btn{border:0;background:transparent;color:var(--primary);cursor:pointer;font:inherit;padding:0}
+.link-btn.danger{color:var(--danger)}
+.hidden-form{display:none}
+.pagination{display:flex;flex-wrap:wrap;gap:.35rem;margin:1rem 0 2rem}
+.page-link{min-width:36px;height:36px;display:inline-grid;place-items:center;border-radius:8px;border:1px solid var(--border);color:var(--muted);text-decoration:none;background:var(--surface)}
+.page-link.is-active,.page-link:hover{color:var(--primary);border-color:rgba(15,76,129,.35);text-decoration:none}
+.form-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:1rem}
+.form-grid-simple{grid-template-columns:repeat(3,minmax(0,1fr))}
+.form-hint{margin:1rem 0 0}
+.form-footer{display:flex;justify-content:flex-end;margin-top:1rem}
+.specialty-form{padding:1.15rem}
+.status-draft{background:#f8fafc;color:#475569}
+.status-active{background:#ecfdf5;color:#047857}
+.status-inactive{background:#fff7ed;color:#c2410c}
+.status-archived{background:#f1f5f9;color:#64748b}
+@media (max-width:1100px){.filter-grid,.filter-grid-simple,.form-grid,.form-grid-simple{grid-template-columns:1fr}}

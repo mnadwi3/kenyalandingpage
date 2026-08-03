@@ -18,6 +18,9 @@
     <?php if (($activeNav ?? '') === 'hospitals'): ?>
         <link rel="stylesheet" href="<?= e(url('/assets/css/hospitals.css')) ?>">
     <?php endif; ?>
+    <?php if (($activeNav ?? '') === 'specialties'): ?>
+        <link rel="stylesheet" href="<?= e(url('/assets/css/specialties.css')) ?>">
+    <?php endif; ?>
 </head>
 <body class="admin-body" data-theme="light">
     <?php require BASE_PATH . '/views/partials/header.php'; ?>
@@ -52,6 +55,9 @@
     <?php endif; ?>
     <?php if (($activeNav ?? '') === 'hospitals'): ?>
         <script src="<?= e(url('/assets/js/hospitals.js')) ?>"></script>
+    <?php endif; ?>
+    <?php if (($activeNav ?? '') === 'specialties'): ?>
+        <script src="<?= e(url('/assets/js/specialties.js')) ?>"></script>
     <?php endif; ?>
 </body>
 </html>

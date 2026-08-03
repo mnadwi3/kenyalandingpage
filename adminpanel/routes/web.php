@@ -9,6 +9,7 @@ use App\Controllers\HospitalController;
 use App\Controllers\PublicDoctorController;
 use App\Controllers\PublicHospitalController;
 use App\Controllers\PublicTreatmentController;
+use App\Controllers\SpecialtyController;
 use App\Controllers\TreatmentController;
 use App\Middleware\AuthMiddleware;
 use App\Middleware\GuestMiddleware;
@@ -83,3 +84,17 @@ $router->post('/hospitals/{id}/restore', [HospitalController::class, 'restore'],
 $router->post('/hospitals/{id}/duplicate', [HospitalController::class, 'duplicate'], [AuthMiddleware::class]);
 
 $router->get('/hospitals/{slug}', [PublicHospitalController::class, 'show']);
+
+$router->get('/specialties', [SpecialtyController::class, 'index'], [AuthMiddleware::class]);
+$router->get('/specialties/create', [SpecialtyController::class, 'create'], [AuthMiddleware::class]);
+$router->post('/specialties', [SpecialtyController::class, 'store'], [AuthMiddleware::class]);
+$router->get('/specialties/import', [SpecialtyController::class, 'importForm'], [AuthMiddleware::class]);
+$router->post('/specialties/import', [SpecialtyController::class, 'import'], [AuthMiddleware::class]);
+$router->get('/specialties/export/csv', [SpecialtyController::class, 'exportCsv'], [AuthMiddleware::class]);
+$router->get('/specialties/export/json', [SpecialtyController::class, 'exportJson'], [AuthMiddleware::class]);
+$router->get('/specialties/export/excel', [SpecialtyController::class, 'exportExcel'], [AuthMiddleware::class]);
+$router->post('/specialties/bulk', [SpecialtyController::class, 'bulk'], [AuthMiddleware::class]);
+$router->get('/specialties/{id}/edit', [SpecialtyController::class, 'edit'], [AuthMiddleware::class]);
+$router->post('/specialties/{id}', [SpecialtyController::class, 'update'], [AuthMiddleware::class]);
+$router->post('/specialties/{id}/delete', [SpecialtyController::class, 'destroy'], [AuthMiddleware::class]);
+$router->post('/specialties/{id}/restore', [SpecialtyController::class, 'restore'], [AuthMiddleware::class]);

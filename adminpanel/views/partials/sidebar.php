@@ -7,7 +7,7 @@ $links = [
     ['key' => 'doctors', 'label' => 'Doctors', 'href' => url('/doctors'), 'ready' => true],
     ['key' => 'treatments', 'label' => 'Treatments', 'href' => url('/treatments'), 'ready' => true],
     ['key' => 'hospitals', 'label' => 'Hospitals', 'href' => url('/hospitals'), 'ready' => true],
-    ['key' => 'specialties', 'label' => 'Specialties', 'href' => '#', 'ready' => false, 'phase' => 6],
+    ['key' => 'specialties', 'label' => 'Specialties', 'href' => url('/specialties'), 'ready' => true],
     ['key' => 'enquiries', 'label' => 'Enquiries', 'href' => '#', 'ready' => false, 'phase' => 7],
     ['key' => 'settings', 'label' => 'Settings', 'href' => '#', 'ready' => false, 'phase' => 8],
 ];

@@ -5,7 +5,7 @@ $activeNav = $activeNav ?? 'dashboard';
 $links = [
     ['key' => 'dashboard', 'label' => 'Dashboard', 'href' => url('/dashboard'), 'ready' => true],
     ['key' => 'doctors', 'label' => 'Doctors', 'href' => url('/doctors'), 'ready' => true],
-    ['key' => 'treatments', 'label' => 'Treatments', 'href' => '#', 'ready' => false, 'phase' => 4],
+    ['key' => 'treatments', 'label' => 'Treatments', 'href' => url('/treatments'), 'ready' => true],
     ['key' => 'hospitals', 'label' => 'Hospitals', 'href' => '#', 'ready' => false, 'phase' => 5],
     ['key' => 'specialties', 'label' => 'Specialties', 'href' => '#', 'ready' => false, 'phase' => 6],
     ['key' => 'enquiries', 'label' => 'Enquiries', 'href' => '#', 'ready' => false, 'phase' => 7],

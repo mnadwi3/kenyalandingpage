@@ -12,6 +12,9 @@
     <?php if (($activeNav ?? '') === 'doctors'): ?>
         <link rel="stylesheet" href="<?= e(url('/assets/css/doctors.css')) ?>">
     <?php endif; ?>
+    <?php if (($activeNav ?? '') === 'treatments'): ?>
+        <link rel="stylesheet" href="<?= e(url('/assets/css/treatments.css')) ?>">
+    <?php endif; ?>
 </head>
 <body class="admin-body" data-theme="light">
     <?php require BASE_PATH . '/views/partials/header.php'; ?>
@@ -40,6 +43,9 @@
     <script src="<?= e(url('/assets/js/dashboard.js')) ?>"></script>
     <?php if (($activeNav ?? '') === 'doctors'): ?>
         <script src="<?= e(url('/assets/js/doctors.js')) ?>"></script>
+    <?php endif; ?>
+    <?php if (($activeNav ?? '') === 'treatments'): ?>
+        <script src="<?= e(url('/assets/js/treatments.js')) ?>"></script>
     <?php endif; ?>
 </body>
 </html>

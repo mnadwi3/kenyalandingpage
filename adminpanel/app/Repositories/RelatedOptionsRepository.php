@@ -22,12 +22,39 @@ final class RelatedOptionsRepository extends Model
 
     public function treatments(): array
     {
-        return $this->fetchOptions('treatments');
+        if (!$this->tableExists('treatments')) {
+            return [];
+        }
+        try {
+            return self::db()->query(
+                "SELECT id, name FROM treatments
+                 WHERE status = 'active' AND deleted_at IS NULL
+                 ORDER BY name ASC"
+            )->fetchAll() ?: [];
+        } catch (Throwable) {
+            return $this->fetchOptions('treatments');
+        }
     }
 
     public function hospitals(): array
     {
         return $this->fetchOptions('hospitals');
+    }
+
+    public function doctors(): array
+    {
+        if (!$this->tableExists('doctors')) {
+            return [];
+        }
+        try {
+            return self::db()->query(
+                "SELECT id, name FROM doctors
+                 WHERE status = 'active' AND deleted_at IS NULL
+                 ORDER BY name ASC"
+            )->fetchAll() ?: [];
+        } catch (Throwable) {
+            return [];
+        }
     }
 
     private function fetchOptions(string $table): array

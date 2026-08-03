@@ -107,6 +107,7 @@ ul { margin: 0; padding: 0; }
   gap: 1rem; width: min(100% - 2rem, var(--max)); margin-inline: auto;
 }
 .tp-logo { display: inline-flex; align-items: center; flex-shrink: 1; min-width: 0; max-width: min(58%, 13.2rem); }
+.tp-logo picture { display: contents; }
 .tp-logo img {
   height: 34px; width: auto; max-width: 12.4rem;
   object-fit: contain; object-position: left center;

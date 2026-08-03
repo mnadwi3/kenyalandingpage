@@ -290,6 +290,23 @@ label {
   overflow: visible;
   flex-shrink: 0;
 }
+/* Custom treatment artwork: transparent SVG, ~2x size, card size unchanged */
+.tx-icon.tx-icon--svg {
+  width: 3.87rem; /* ~10% smaller than 4.3rem on mobile */
+  height: 3.87rem;
+  margin: -0.25rem 0 0.15rem;
+  padding: 0;
+  border-radius: 0;
+  background: transparent;
+  overflow: visible;
+}
+.tx-icon.tx-icon--svg img,
+.tx-icon.tx-icon--svg svg {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  display: block;
+}
 .tx-body {
   width: 100%;
   display: flex;
@@ -394,6 +411,13 @@ label {
     margin: 0.2rem 0 0.35rem;
     padding: 0.4rem;
   }
+  .tx-icon.tx-icon--svg {
+    width: 4.8rem;
+    height: 4.8rem;
+    margin: 0.05rem 0 0.2rem;
+    padding: 0;
+    background: transparent;
+  }
   .tx-icon svg {
     width: 100%;
     height: 100%;
@@ -434,6 +458,12 @@ label {
     width: 2.55rem;
     height: 2.55rem;
     padding: 0.42rem;
+  }
+  .tx-icon.tx-icon--svg {
+    width: 5.1rem;
+    height: 5.1rem;
+    padding: 0;
+    background: transparent;
   }
   .tx-icon svg {
     width: 100%;

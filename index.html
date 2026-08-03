@@ -52,12 +52,8 @@ header .site-logo img,header .site-logo-img{display:block;height:2.04rem;width:a
   unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
 }
 </style>
-  <link rel="stylesheet" href="/assets/css/tailwind.min.css?v=20260803-perf3" media="print" onload="this.media='all'">
-  <link rel="stylesheet" href="/assets/css/styles.min.css?v=20260803-perf3" media="print" onload="this.media='all'">
-  <noscript>
-    <link rel="stylesheet" href="/assets/css/tailwind.min.css?v=20260803-perf3">
-    <link rel="stylesheet" href="/assets/css/styles.min.css?v=20260803-perf3">
-  </noscript>
+  <link rel="stylesheet" href="/assets/css/tailwind.min.css?v=20260803-perf3">
+  <link rel="stylesheet" href="/assets/css/styles.min.css?v=20260803-perf3">
 
   <!-- Analytics stub; full GTM/GA load deferred until idle/interaction -->
   <script>
@@ -236,12 +232,15 @@ header .site-logo img,header .site-logo-img{display:block;height:2.04rem;width:a
       <div class="max-w-6xl mx-auto px-4 sm:px-6">
         <div class="grid lg:grid-cols-2 gap-10 lg:gap-14 items-center reveal">
           <div class="rounded-2xl overflow-hidden shadow-card ring-1 ring-slate-100 aspect-[4/3] lg:aspect-auto lg:min-h-[320px]">
-            <picture><source srcset="images/hospital/hospital-care.webp?v=20260803-perf3" type="image/webp"><img src="images/hospital/hospital-care.jpg?v=20260803-perf3" alt="Modern hospital care facility"
+            <picture>
+              <source type="image/webp" srcset="images/hospital/hospital-care-480.webp?v=20260803-perf3 480w, images/hospital/hospital-care-800.webp?v=20260803-perf3 800w, images/hospital/hospital-care.webp?v=20260803-perf3 1600w" sizes="(max-width: 1023px) 92vw, 560px">
+              <img src="images/hospital/hospital-care.jpg?v=20260803-perf3" alt="Modern hospital care facility"
               class="w-full h-full object-cover"
+              width="800"
+              height="545"
               loading="lazy"
-              width="1600"
-              height="1089"
-             decoding="async"></picture>
+              decoding="async">
+            </picture>
           </div>
           <div>
             <h2 class="text-2xl sm:text-3xl font-bold mb-4 leading-tight">
@@ -590,12 +589,15 @@ header .site-logo img,header .site-logo-img{display:block;height:2.04rem;width:a
         </div>
         <div class="reveal bg-white rounded-2xl shadow-card overflow-hidden border border-slate-100 grid md:grid-cols-2">
           <div class="min-h-[240px] md:min-h-[320px]">
-            <picture><source srcset="images/hospital/apollo-delhi.webp?v=20260803-perf3" type="image/webp"><img src="images/hospital/apollo-delhi.png?v=20260803-perf3" alt="Partner cancer hospital in Delhi"
-              class="w-full h-full object-cover"
+            <picture>
+              <source type="image/webp" srcset="images/hospital/apollo-delhi-480.webp?v=20260803-perf3 480w, images/hospital/apollo-delhi-800.webp?v=20260803-perf3 800w, images/hospital/apollo-delhi.webp?v=20260803-perf3 1024w" sizes="(max-width: 640px) 92vw, 480px">
+              <img src="images/hospital/apollo-delhi.png?v=20260803-perf3" alt="Partner cancer hospital in Delhi"
+              class="w-full h-48 object-cover"
+              width="800"
+              height="414"
               loading="lazy"
-              width="1024"
-              height="530"
-             decoding="async"></picture>
+              decoding="async">
+            </picture>
           </div>
           <div class="bg-[var(--section-bg)] p-6 sm:p-8 flex flex-col justify-center">
             <span class="inline-flex items-center gap-1.5 self-start text-xs font-semibold uppercase tracking-wide text-primary bg-primary/10 px-3 py-1.5 rounded-full mb-4">

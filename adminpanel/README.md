@@ -1,48 +1,57 @@
-# VaidTrack Admin — Phase 1 (Authentication)
+# VaidTrack Admin — Local Development
 
-MVC admin panel foundation with secure authentication.
+Vanilla PHP 8 MVC admin panel (Authentication + Dashboard). No Composer.
 
-## What Phase 1 includes
+## Stack detected
 
-- MVC bootstrap (Router, Controllers, Models, Views, Middleware)
-- Auth tables: `roles`, `permissions`, `role_permissions`, `users`, `password_reset_tokens`
-- Login / Logout
-- Forgot + Reset password
-- Secure sessions, CSRF, password hashing, RBAC helpers
-- Minimal authenticated dashboard placeholder (metrics = Phase 2)
+| Layer | Choice |
+|--------|--------|
+| Runtime | PHP 8.3 built-in server (`php -S`) |
+| Database | MariaDB / MySQL |
+| Front controller | `public/index.php` + `public/router.php` |
+| Config | `.env` |
 
-## Setup
+Apache/XAMPP/Laragon also work if the vhost document root is `adminpanel/public`.
 
-1. Create MySQL database and import:
-
-```bash
-mysql -u root -p < database/migrations/001_auth_schema.sql
-mysql -u root -p < database/seeds/001_admin_user.sql
-```
-
-2. Copy `.env.example` to `.env` and set `APP_URL`, DB credentials.
-
-3. Point the web server document root to `public/` (Apache with mod_rewrite, or):
+## Quick start
 
 ```bash
-php -S localhost:8080 -t public
+cd adminpanel
+sudo service mariadb start   # if needed
+./scripts/start-dev.sh
 ```
 
-4. Open `http://localhost:8080/login`
+Open **http://127.0.0.1:8080/login**
 
 **Default admin**
 
 - Email: `admin@vaidtrack.com`
 - Password: `ChangeMe123!`
 
-Change this password after first login.
+## First-time database setup
+
+```bash
+cd adminpanel
+mysql -u root -p < database/migrations/001_auth_schema.sql
+mysql -u root -p < database/seeds/001_admin_user.sql
+cp -n .env.example .env
+# Edit DB_* and APP_URL=http://127.0.0.1:8080
+```
+
+Default local `.env` credentials used in this environment:
+
+- DB name: `vaidtrack`
+- DB user / pass: `vaidtrack` / `vaidtrack`
+
+## Required PHP extensions
+
+`pdo_mysql`, `mbstring`, `gd`, `fileinfo`, `curl`, `zip`, `xml`, `session`, `json`
+
+## Writable paths
+
+- `storage/logs`, `storage/cache`
+- `uploads/`, `public/uploads/`, `public/uploads/doctors/`
 
 ## Password reset (local)
 
-Until SMTP settings (Phase 8), reset links are written to `storage/logs/password_resets.log`.  
-With `APP_DEBUG=true`, the link is also shown once on the forgot-password page.
-
-## Next phase
-
-Phase 2 — Dashboard (complete).  
-Phase 3 — Doctors module.
+Reset links go to `storage/logs/password_resets.log`. With `APP_DEBUG=true`, the link is also shown once on the forgot-password page.

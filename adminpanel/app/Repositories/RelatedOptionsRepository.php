@@ -27,7 +27,18 @@ final class RelatedOptionsRepository extends Model
 
     public function hospitals(): array
     {
-        return $this->fetchOptions('hospitals');
+        if (!$this->tableExists('hospitals')) {
+            return [];
+        }
+        try {
+            return self::db()->query(
+                "SELECT id, name FROM hospitals
+                 WHERE status = 'active' AND deleted_at IS NULL
+                 ORDER BY name ASC"
+            )->fetchAll() ?: [];
+        } catch (Throwable) {
+            return $this->fetchOptions('hospitals');
+        }
     }
 
     private function fetchOptions(string $table): array

@@ -5,7 +5,7 @@ ROOT="$(cd "$(dirname "$0")/.." && pwd)"
 cd "$ROOT"
 
 echo "==> Ensuring writable directories"
-mkdir -p storage/logs storage/cache uploads public/uploads/doctors
+mkdir -p storage/logs storage/cache uploads public/uploads/doctors public/uploads/hospitals
 chmod -R u+rwX storage uploads public/uploads
 
 if [[ ! -f .env ]]; then

@@ -490,9 +490,11 @@
     var id = btn.getAttribute('data-youtube-id');
     if (!id) return;
     var title = btn.getAttribute('aria-label') || 'Patient story video';
+    var start = btn.getAttribute('data-youtube-start');
+    var startParam = start && /^\d+$/.test(start) ? '&start=' + start : '';
     var iframe = document.createElement('iframe');
     iframe.className = 'w-full h-full';
-    iframe.src = 'https://www.youtube-nocookie.com/embed/' + encodeURIComponent(id) + '?autoplay=1&rel=0';
+    iframe.src = 'https://www.youtube-nocookie.com/embed/' + encodeURIComponent(id) + '?autoplay=1&rel=0' + startParam;
     iframe.title = title;
     iframe.allow = 'accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share';
     iframe.setAttribute('allowfullscreen', '');

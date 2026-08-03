@@ -59,6 +59,47 @@ final class Validator
         return $this;
     }
 
+    public function maxLength(string $field, int $max, string $label): self
+    {
+        $value = (string) ($this->data[$field] ?? '');
+        if ($value !== '' && mb_strlen($value) > $max) {
+            $this->errors[$field] = "{$label} must be at most {$max} characters.";
+        }
+
+        return $this;
+    }
+
+    /** @param list<string> $allowed */
+    public function in(string $field, array $allowed, string $label): self
+    {
+        $value = (string) ($this->data[$field] ?? '');
+        if ($value !== '' && !in_array($value, $allowed, true)) {
+            $this->errors[$field] = "{$label} is invalid.";
+        }
+
+        return $this;
+    }
+
+    public function numeric(string $field, string $label): self
+    {
+        $value = $this->data[$field] ?? null;
+        if ($value !== null && $value !== '' && !is_numeric($value)) {
+            $this->errors[$field] = "{$label} must be a number.";
+        }
+
+        return $this;
+    }
+
+    public function url(string $field, string $label): self
+    {
+        $value = trim((string) ($this->data[$field] ?? ''));
+        if ($value !== '' && !filter_var($value, FILTER_VALIDATE_URL)) {
+            $this->errors[$field] = "{$label} must be a valid URL.";
+        }
+
+        return $this;
+    }
+
     public function fails(): bool
     {
         return $this->errors !== [];

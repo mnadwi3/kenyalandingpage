@@ -21,7 +21,12 @@ abstract class Controller
         if (!Csrf::validate(is_string($token) ? $token : null)) {
             http_response_code(419);
             flash('error', 'Session expired. Please try again.');
-            redirect('/login');
+            $referer = $_SERVER['HTTP_REFERER'] ?? '';
+            if (is_string($referer) && $referer !== '') {
+                header('Location: ' . $referer);
+                exit;
+            }
+            redirect('/dashboard');
         }
     }
 

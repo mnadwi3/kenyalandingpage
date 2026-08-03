@@ -109,6 +109,14 @@ function component(string $name, array $data = []): void
 }
 
 /**
+ * Build a public asset/upload URL.
+ */
+function asset(string $path): string
+{
+    return url('/' . ltrim($path, '/'));
+}
+
+/**
  * Format a datetime string for admin UI.
  */
 function format_datetime(?string $value, string $format = 'M j, Y H:i'): string

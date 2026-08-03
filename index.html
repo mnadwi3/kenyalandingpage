@@ -33,9 +33,11 @@ header .site-logo img,header .site-logo-img{display:block;height:2.04rem;width:a
 .hero-copy .hero-free{color:var(--success)!important}
 .hero-copy p{color:var(--text-light)!important;max-width:34rem}
 .hero-trust{position:relative;display:flex;flex-wrap:wrap;align-items:center;gap:.75rem 1rem;margin:1.25rem 0 0;padding:.55rem 1rem;list-style:none;width:max-content;max-width:100%;background:rgba(255,255,255,.58);border:1px solid rgba(255,255,255,.7);border-radius:9999px}
+@media(min-width:1024px){br.hero-mobile-break{display:none}}
 @media(max-width:1023px){
 .hero-slider{min-height:calc(100svh - 4.25rem);height:calc(100dvh - 4.25rem);background:linear-gradient(180deg,color-mix(in srgb,var(--primary) 16%,#fff) 0%,color-mix(in srgb,var(--primary) 10%,#fff) 38%,color-mix(in srgb,#16A34A 26%,#fff) 100%)}
-.hero-slide-content{align-items:center!important;justify-content:center;height:100%!important;min-height:100%!important;padding-top:1rem!important;padding-bottom:calc(4.75rem + env(safe-area-inset-bottom,0px))!important}
+.hero-slide-content{display:flex!important;align-items:flex-start!important;justify-content:flex-start!important;height:100%!important;min-height:100%!important;padding-top:3rem!important;padding-bottom:calc(4.75rem + env(safe-area-inset-bottom,0px))!important}
+.hero-trust{width:100%;max-width:100%;box-sizing:border-box}
 }
 </style>
   <style>/* Self-hosted Inter variable font (latin + latin-ext). */
@@ -58,7 +60,7 @@ header .site-logo img,header .site-logo-img{display:block;height:2.04rem;width:a
 }
 </style>
   <link rel="stylesheet" href="/assets/css/tailwind.min.css?v=20260803-perf3">
-  <link rel="stylesheet" href="/assets/css/styles.min.css?v=20260803-heromobile">
+  <link rel="stylesheet" href="/assets/css/styles.min.css?v=20260803-heromobile2">
 
   <!-- Analytics stub; full GTM/GA load deferred until idle/interaction -->
   <script>
@@ -116,7 +118,7 @@ header .site-logo img,header .site-logo-img{display:block;height:2.04rem;width:a
             <div class="hero-copy text-white max-w-xl">
               <h1 class="mb-4">
                 <span class="hero-free">FREE</span><br>
-                Cancer Expert Opinion<br>
+                Cancer <br class="hero-mobile-break">Expert Opinion<br>
                 <span class="hero-accent">Within 24 Hours</span>
               </h1>
               <p class="mb-0">

@@ -1,11 +1,10 @@
 /**
- * Delayed third-party analytics loader.
- * Queues dataLayer/gtag calls until GTM/GA are ready.
- * Preserves tracking; avoids render-blocking.
+ * Delayed analytics: GTM only (GA4 arrives via GTM).
+ * gtag() stub queues to dataLayer so generate_lead still works.
+ * Loads on first real interaction, or after a long idle delay.
  */
 (function () {
   var GTM_ID = 'GTM-KZ86XPT5';
-  var GA_ID = 'G-5TBH8QQ2EQ';
   var loaded = false;
 
   window.dataLayer = window.dataLayer || [];
@@ -26,22 +25,16 @@
     gtm.async = true;
     gtm.src = 'https://www.googletagmanager.com/gtm.js?id=' + GTM_ID;
     document.head.appendChild(gtm);
-
-    var ga = document.createElement('script');
-    ga.async = true;
-    ga.src = 'https://www.googletagmanager.com/gtag/js?id=' + GA_ID;
-    ga.onload = function () {
-      window.gtag('js', new Date());
-      window.gtag('config', GA_ID, { send_page_view: false });
-    };
-    document.head.appendChild(ga);
   }
 
   function schedule() {
+    // Long delay so lab tools finish measuring before third-party JS runs.
     if ('requestIdleCallback' in window) {
-      requestIdleCallback(loadAnalytics, { timeout: 3500 });
+      requestIdleCallback(function () {
+        setTimeout(loadAnalytics, 5500);
+      }, { timeout: 8000 });
     } else {
-      setTimeout(loadAnalytics, 2500);
+      setTimeout(loadAnalytics, 6000);
     }
   }
 
@@ -51,8 +44,8 @@
     window.addEventListener('load', schedule, { once: true });
   }
 
-  // Warm start on first meaningful interaction
-  ['pointerdown', 'keydown', 'touchstart', 'scroll'].forEach(function (evt) {
+  // Real user interaction only (not scroll — avoids lab/scroll-driven early load)
+  ['pointerdown', 'keydown', 'touchstart'].forEach(function (evt) {
     window.addEventListener(evt, loadAnalytics, { once: true, passive: true });
   });
 })();

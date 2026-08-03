@@ -147,9 +147,9 @@ final class DoctorService
             'name' => $doctor['name'] . ' (Copy)',
             'photo' => $this->images->copy((string) ($doctor['photo'] ?? ''), 'doctors'),
             'qualification' => $doctor['qualification'],
+            'years_of_experience' => $doctor['years_of_experience'],
             'expertise' => $doctor['expertise'] ?? $doctor['experience_summary'] ?? null,
             'education' => $doctor['education'],
-            'registration_number' => $doctor['registration_number'],
             'status' => 'draft',
             'is_featured' => 0,
             'seo_title' => $doctor['seo_title'],
@@ -202,9 +202,9 @@ final class DoctorService
                     'name' => $row['name'] ?? $row['full_name'] ?? '',
                     'slug' => $row['slug'] ?? '',
                     'qualification' => $row['qualification'] ?? '',
+                    'years_of_experience' => $row['years_of_experience'] ?? '',
                     'expertise' => $row['expertise'] ?? $row['experience'] ?? $row['experience_summary'] ?? '',
                     'education' => $row['education'] ?? '',
-                    'registration_number' => $row['registration_number'] ?? '',
                     'status' => strtolower($row['status'] ?? 'draft'),
                     'is_featured' => $row['is_featured'] ?? '0',
                     'seo_title' => $row['seo_title'] ?? '',
@@ -248,6 +248,7 @@ final class DoctorService
             ->required('name', 'Full name')
             ->maxLength('name', 150, 'Full name')
             ->in('status', Doctor::STATUSES, 'Status')
+            ->numeric('years_of_experience', 'Years of experience')
             ->maxLength('seo_title', 255, 'SEO title')
             ->maxLength('seo_description', 320, 'Meta description')
             ->maxLength('slug', 191, 'Slug');
@@ -262,14 +263,15 @@ final class DoctorService
             fn (string $s, ?int $ignore): bool => $this->doctors->slugExists($s, $ignore),
             $ignoreId
         );
+        $years = $input['years_of_experience'] ?? '';
 
         $payload = [
             'slug' => $slug,
             'name' => $name,
             'qualification' => $this->nullableString($input['qualification'] ?? null),
+            'years_of_experience' => $years === '' ? null : (int) $years,
             'expertise' => $this->nullableString($input['expertise'] ?? $input['experience_summary'] ?? $input['experience'] ?? null),
             'education' => $this->nullableString($input['education'] ?? null),
-            'registration_number' => $this->nullableString($input['registration_number'] ?? null),
             'status' => (string) $input['status'],
             'is_featured' => !empty($input['is_featured']) ? 1 : 0,
             'seo_title' => $this->nullableString($input['seo_title'] ?? null) ?? $name,

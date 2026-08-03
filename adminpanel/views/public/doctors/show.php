@@ -28,6 +28,9 @@ $expertise = (string) ($doctor['expertise'] ?? $doctor['experience_summary'] ?? 
     <?php endif; ?>
     <h1><?= e((string) $doctor['name']) ?></h1>
     <p class="meta"><?= e((string) ($doctor['qualification'] ?? '')) ?></p>
+    <?php if ($doctor['years_of_experience'] !== null && $doctor['years_of_experience'] !== ''): ?>
+        <p class="meta"><?= e((string) $doctor['years_of_experience']) ?> years of experience</p>
+    <?php endif; ?>
     <p class="meta">Public URL: <?= e((string) $doctor['public_url']) ?></p>
     <?php if ($expertise !== ''): ?>
         <h2>Expertise</h2>

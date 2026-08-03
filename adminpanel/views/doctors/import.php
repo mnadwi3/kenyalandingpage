@@ -13,7 +13,7 @@ $importErrors = \App\Core\Session::getFlash('import_errors') ?? [];
     <form method="post" action="<?= e(url('/doctors/import')) ?>" enctype="multipart/form-data" class="stack-form">
         <?= $csrf ?>
         <label class="field"><span>CSV file</span><input type="file" name="csv_file" accept=".csv,text/csv" required></label>
-        <p class="muted">Headers: name, slug, qualification, expertise, education, registration_number, status, seo_title…</p>
+        <p class="muted">Headers: name, slug, qualification, years_of_experience, expertise, education, status, seo_title…</p>
         <button type="submit" class="btn btn-primary">Import</button>
     </form>
 </section>

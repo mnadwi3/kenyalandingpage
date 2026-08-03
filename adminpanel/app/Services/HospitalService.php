@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace App\Services;
 
 use App\Contracts\HospitalRepositoryInterface;
+use App\Core\Database;
 use App\Helpers\ImageUploader;
 use App\Helpers\Slug;
 use App\Helpers\Validator;
@@ -102,10 +103,13 @@ final class HospitalService
         if ($coverFile && ($coverFile['error'] ?? UPLOAD_ERR_NO_FILE) !== UPLOAD_ERR_NO_FILE) {
             $payload['cover_image'] = $this->images->upload($coverFile, 'hospitals');
         }
-        $id = $this->hospitals->create($payload);
-        $this->syncRelations($id, $relations);
 
-        return $id;
+        return Database::transaction(function () use ($payload, $relations): int {
+            $id = $this->hospitals->create($payload);
+            $this->syncRelations($id, $relations);
+
+            return $id;
+        });
     }
 
     public function update(int $id, array $input, ?array $logoFile = null, ?array $coverFile = null): void
@@ -130,8 +134,10 @@ final class HospitalService
             $this->images->delete($existing['cover_image'] ?? null);
             $payload['cover_image'] = null;
         }
-        $this->hospitals->update($id, $payload);
-        $this->syncRelations($id, $relations);
+        Database::transaction(function () use ($id, $payload, $relations): void {
+            $this->hospitals->update($id, $payload);
+            $this->syncRelations($id, $relations);
+        });
     }
 
     public function softDelete(int $id): void
@@ -173,14 +179,16 @@ final class HospitalService
             'seo_title' => $hospital['seo_title'] ?? null,
             'seo_description' => $hospital['seo_description'] ?? null,
         ];
-        $newId = $this->hospitals->create($data);
-        $this->syncRelations($newId, [
-            'accreditations' => $hospital['accreditation_codes'] ?? [],
-            'international_services' => $hospital['international_service_codes'] ?? [],
-            'treatments' => $hospital['treatment_ids'] ?? [],
-        ]);
+        return Database::transaction(function () use ($data, $hospital): int {
+            $newId = $this->hospitals->create($data);
+            $this->syncRelations($newId, [
+                'accreditations' => $hospital['accreditation_codes'] ?? [],
+                'international_services' => $hospital['international_service_codes'] ?? [],
+                'treatments' => $hospital['treatment_ids'] ?? [],
+            ]);
 
-        return $newId;
+            return $newId;
+        });
     }
 
     public function bulkSoftDelete(array $ids): int
@@ -201,10 +209,13 @@ final class HospitalService
     public function exportRows(array $filters): array
     {
         $rows = $this->hospitals->exportRows($filters);
+        $ids = array_map(static fn (array $row): int => (int) $row['id'], $rows);
+        $accreditations = $this->hospitals->accreditationCodesByHospitalIds($ids);
+        $services = $this->hospitals->internationalServiceCodesByHospitalIds($ids);
         foreach ($rows as &$row) {
             $id = (int) $row['id'];
-            $row['accreditation_codes'] = $this->hospitals->accreditationCodes($id);
-            $row['international_service_codes'] = $this->hospitals->internationalServiceCodes($id);
+            $row['accreditation_codes'] = $accreditations[$id] ?? [];
+            $row['international_service_codes'] = $services[$id] ?? [];
         }
         unset($row);
 

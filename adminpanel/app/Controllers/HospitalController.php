@@ -26,6 +26,7 @@ final class HospitalController extends Controller
 
     public function index(): void
     {
+        Auth::requirePermission('hospitals.view');
         $result = $this->hospitals->list($_GET);
         View::renderInLayout('hospitals/index', 'admin', [
             'title' => 'Hospitals',
@@ -48,11 +49,13 @@ final class HospitalController extends Controller
 
     public function create(): void
     {
+        Auth::requirePermission('hospitals.create');
         $this->renderForm(null, Session::getFlash('old') ?? []);
     }
 
     public function store(): void
     {
+        Auth::requirePermission('hospitals.create');
         $this->validateCsrf();
         try {
             $id = $this->hospitals->create($_POST, $_FILES['logo'] ?? null, $_FILES['cover_image'] ?? null);
@@ -67,6 +70,7 @@ final class HospitalController extends Controller
 
     public function edit(string $id): void
     {
+        Auth::requirePermission('hospitals.update');
         $hospital = $this->hospitals->find((int) $id, true);
         if ($hospital === null) {
             flash('error', 'Hospital not found.');
@@ -78,6 +82,7 @@ final class HospitalController extends Controller
 
     public function update(string $id): void
     {
+        Auth::requirePermission('hospitals.update');
         $this->validateCsrf();
         $hospitalId = (int) $id;
         try {
@@ -93,6 +98,7 @@ final class HospitalController extends Controller
 
     public function destroy(string $id): void
     {
+        Auth::requirePermission('hospitals.delete');
         $this->validateCsrf();
         $this->hospitals->softDelete((int) $id);
         flash('success', 'Hospital moved to trash.');
@@ -101,6 +107,7 @@ final class HospitalController extends Controller
 
     public function restore(string $id): void
     {
+        Auth::requirePermission('hospitals.update');
         $this->validateCsrf();
         $this->hospitals->restore((int) $id);
         flash('success', 'Hospital restored.');
@@ -109,6 +116,7 @@ final class HospitalController extends Controller
 
     public function duplicate(string $id): void
     {
+        Auth::requirePermission('hospitals.create');
         $this->validateCsrf();
         try {
             $newId = $this->hospitals->duplicate((int) $id);
@@ -125,6 +133,11 @@ final class HospitalController extends Controller
         $this->validateCsrf();
         $ids = array_map('intval', (array) ($_POST['ids'] ?? []));
         $action = (string) ($_POST['bulk_action'] ?? '');
+        if ($action === 'delete') {
+            Auth::requirePermission('hospitals.delete');
+        } else {
+            Auth::requirePermission('hospitals.update');
+        }
         $count = match ($action) {
             'delete' => $this->hospitals->bulkSoftDelete($ids),
             'restore' => $this->hospitals->bulkRestore($ids),
@@ -137,21 +150,25 @@ final class HospitalController extends Controller
 
     public function exportCsv(): void
     {
+        Auth::requirePermission('hospitals.view');
         $this->download('hospitals.csv', 'text/csv; charset=utf-8', $this->exporter->toCsv($this->hospitals->exportRows($this->exportFilters())));
     }
 
     public function exportJson(): void
     {
+        Auth::requirePermission('hospitals.view');
         $this->download('hospitals.json', 'application/json; charset=utf-8', $this->exporter->toJson($this->hospitals->exportRows($this->exportFilters())));
     }
 
     public function exportExcel(): void
     {
+        Auth::requirePermission('hospitals.view');
         $this->download('hospitals.xls', 'application/vnd.ms-excel; charset=utf-8', $this->exporter->toExcelXml($this->hospitals->exportRows($this->exportFilters())));
     }
 
     public function importForm(): void
     {
+        Auth::requirePermission('hospitals.create');
         View::renderInLayout('hospitals/import', 'admin', [
             'title' => 'Import Hospitals',
             'activeNav' => 'hospitals',
@@ -168,6 +185,7 @@ final class HospitalController extends Controller
 
     public function import(): void
     {
+        Auth::requirePermission('hospitals.create');
         $this->validateCsrf();
         $file = $_FILES['csv_file'] ?? null;
         if (!$file || ($file['error'] ?? UPLOAD_ERR_NO_FILE) !== UPLOAD_ERR_OK) {
@@ -184,7 +202,7 @@ final class HospitalController extends Controller
             }
         }
         flash($result['failed'] > 0 ? 'error' : 'success', $message);
-        redirect('/hospitals');
+        redirect($result['failed'] > 0 ? '/hospitals/import' : '/hospitals');
     }
 
     private function renderForm(?array $hospital, array $values): void

@@ -26,6 +26,7 @@ final class SpecialtyController extends Controller
 
     public function index(): void
     {
+        Auth::requirePermission('specialties.view');
         $result = $this->specialties->list($_GET);
         View::renderInLayout('specialties/index', 'admin', [
             'title' => 'Specialties',
@@ -48,11 +49,13 @@ final class SpecialtyController extends Controller
 
     public function create(): void
     {
+        Auth::requirePermission('specialties.create');
         $this->renderForm(null, Session::getFlash('old') ?? []);
     }
 
     public function store(): void
     {
+        Auth::requirePermission('specialties.create');
         $this->validateCsrf();
         try {
             $id = $this->specialties->create($_POST);
@@ -67,6 +70,7 @@ final class SpecialtyController extends Controller
 
     public function edit(string $id): void
     {
+        Auth::requirePermission('specialties.update');
         $specialty = $this->specialties->find((int) $id, true);
         if ($specialty === null) {
             flash('error', 'Specialty not found.');
@@ -78,6 +82,7 @@ final class SpecialtyController extends Controller
 
     public function update(string $id): void
     {
+        Auth::requirePermission('specialties.update');
         $this->validateCsrf();
         $specialtyId = (int) $id;
         try {
@@ -93,6 +98,7 @@ final class SpecialtyController extends Controller
 
     public function destroy(string $id): void
     {
+        Auth::requirePermission('specialties.delete');
         $this->validateCsrf();
         $this->specialties->softDelete((int) $id);
         flash('success', 'Specialty moved to trash.');
@@ -101,6 +107,7 @@ final class SpecialtyController extends Controller
 
     public function restore(string $id): void
     {
+        Auth::requirePermission('specialties.update');
         $this->validateCsrf();
         $this->specialties->restore((int) $id);
         flash('success', 'Specialty restored.');
@@ -112,6 +119,11 @@ final class SpecialtyController extends Controller
         $this->validateCsrf();
         $ids = array_map('intval', (array) ($_POST['ids'] ?? []));
         $action = (string) ($_POST['bulk_action'] ?? '');
+        if ($action === 'delete') {
+            Auth::requirePermission('specialties.delete');
+        } else {
+            Auth::requirePermission('specialties.update');
+        }
         $count = match ($action) {
             'delete' => $this->specialties->bulkSoftDelete($ids),
             'restore' => $this->specialties->bulkRestore($ids),
@@ -124,21 +136,25 @@ final class SpecialtyController extends Controller
 
     public function exportCsv(): void
     {
+        Auth::requirePermission('specialties.view');
         $this->download('specialties.csv', 'text/csv; charset=utf-8', $this->exporter->toCsv($this->specialties->exportRows($this->exportFilters())));
     }
 
     public function exportJson(): void
     {
+        Auth::requirePermission('specialties.view');
         $this->download('specialties.json', 'application/json; charset=utf-8', $this->exporter->toJson($this->specialties->exportRows($this->exportFilters())));
     }
 
     public function exportExcel(): void
     {
+        Auth::requirePermission('specialties.view');
         $this->download('specialties.xls', 'application/vnd.ms-excel; charset=utf-8', $this->exporter->toExcelXml($this->specialties->exportRows($this->exportFilters())));
     }
 
     public function importForm(): void
     {
+        Auth::requirePermission('specialties.create');
         View::renderInLayout('specialties/import', 'admin', [
             'title' => 'Import Specialties',
             'activeNav' => 'specialties',
@@ -155,6 +171,7 @@ final class SpecialtyController extends Controller
 
     public function import(): void
     {
+        Auth::requirePermission('specialties.create');
         $this->validateCsrf();
         $file = $_FILES['csv_file'] ?? null;
         if (!$file || ($file['error'] ?? UPLOAD_ERR_NO_FILE) !== UPLOAD_ERR_OK) {
@@ -171,7 +188,7 @@ final class SpecialtyController extends Controller
             }
         }
         flash($result['failed'] > 0 ? 'error' : 'success', $message);
-        redirect('/specialties');
+        redirect($result['failed'] > 0 ? '/specialties/import' : '/specialties');
     }
 
     private function renderForm(?array $specialty, array $values): void

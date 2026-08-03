@@ -46,7 +46,9 @@
     </div>
 
     <script src="<?= e(url('/assets/js/admin.js')) ?>"></script>
-    <script src="<?= e(url('/assets/js/dashboard.js')) ?>"></script>
+    <?php if (($activeNav ?? '') === 'dashboard'): ?>
+        <script src="<?= e(url('/assets/js/dashboard.js')) ?>"></script>
+    <?php endif; ?>
     <?php if (($activeNav ?? '') === 'doctors'): ?>
         <script src="<?= e(url('/assets/js/doctors.js')) ?>"></script>
     <?php endif; ?>

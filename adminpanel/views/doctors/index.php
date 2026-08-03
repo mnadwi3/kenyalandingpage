@@ -111,6 +111,7 @@ $sortUrl = static function (string $column) use ($queryBase, $sort, $direction):
                             <th>Doctor</th>
                             <th><a href="<?= e($sortUrl('status')) ?>">Status</a></th>
                             <th><a href="<?= e($sortUrl('is_featured')) ?>">Featured</a></th>
+                            <th><a href="<?= e($sortUrl('years_of_experience')) ?>">Years</a></th>
                             <th>Expertise</th>
                             <th><a href="<?= e($sortUrl('updated_at')) ?>">Updated</a></th>
                             <th>Actions</th>
@@ -136,6 +137,7 @@ $sortUrl = static function (string $column) use ($queryBase, $sort, $direction):
                                 </td>
                                 <td><span class="status-pill status-<?= e((string) $doctor['status']) ?>"><?= e((string) $doctor['status']) ?></span></td>
                                 <td><?= !empty($doctor['is_featured']) ? '<span class="badge badge-featured">Featured</span>' : '<span class="muted">—</span>' ?></td>
+                                <td><?= e((string) ($doctor['years_of_experience'] ?? '—')) ?></td>
                                 <td><?php
                                     $expertise = (string) ($doctor['expertise'] ?? $doctor['experience_summary'] ?? '');
                                     echo e($expertise !== '' ? mb_strimwidth($expertise, 0, 80, '…') : '—');

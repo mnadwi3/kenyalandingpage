@@ -64,7 +64,7 @@ $expertiseValue = (string) ($values['expertise'] ?? $values['experience_summary'
         <div class="tab-panel" data-tab-panel="professional">
             <div class="form-grid">
                 <label class="field"><span>Qualification</span><input type="text" name="qualification" value="<?= $val('qualification') ?>"></label>
-                <label class="field"><span>Registration number</span><input type="text" name="registration_number" value="<?= $val('registration_number') ?>"></label>
+                <label class="field"><span>Years of experience</span><input type="number" min="0" max="80" name="years_of_experience" value="<?= $val('years_of_experience') ?>"></label>
                 <label class="field full"><span>Expertise</span><textarea name="expertise" rows="4" placeholder="e.g. Knee Replacement&#10;Hip Replacement&#10;Sports Injury&#10;Arthroscopy"><?= e($expertiseValue) ?></textarea></label>
                 <label class="field full"><span>Education</span><textarea name="education" rows="4"><?= $val('education') ?></textarea></label>
             </div>

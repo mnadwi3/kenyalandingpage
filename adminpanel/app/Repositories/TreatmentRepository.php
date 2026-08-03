@@ -114,7 +114,7 @@ final class TreatmentRepository extends Model implements TreatmentRepositoryInte
     public function restore(int $id): void
     {
         self::db()->prepare(
-            "UPDATE treatments SET deleted_at = NULL, status = 'draft', updated_at = NOW(3) WHERE id = :id"
+            "UPDATE treatments SET deleted_at = NULL, status = 'draft', updated_at = NOW(3) WHERE id = :id AND deleted_at IS NOT NULL"
         )->execute(['id' => $id]);
     }
 
@@ -140,7 +140,7 @@ final class TreatmentRepository extends Model implements TreatmentRepositoryInte
         }
         $in = $this->inClause($ids);
         $stmt = self::db()->prepare(
-            "UPDATE treatments SET deleted_at = NULL, status = 'draft', updated_at = NOW(3) WHERE id IN ({$in['sql']})"
+            "UPDATE treatments SET deleted_at = NULL, status = 'draft', updated_at = NOW(3) WHERE id IN ({$in['sql']}) AND deleted_at IS NOT NULL"
         );
         $stmt->execute($in['params']);
 

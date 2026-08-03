@@ -26,6 +26,7 @@ final class TreatmentController extends Controller
 
     public function index(): void
     {
+        Auth::requirePermission('treatments.view');
         $result = $this->treatments->list($_GET);
         View::renderInLayout('treatments/index', 'admin', [
             'title' => 'Treatments',
@@ -48,11 +49,13 @@ final class TreatmentController extends Controller
 
     public function create(): void
     {
+        Auth::requirePermission('treatments.create');
         $this->renderForm(null, Session::getFlash('old') ?? []);
     }
 
     public function store(): void
     {
+        Auth::requirePermission('treatments.create');
         $this->validateCsrf();
         try {
             $id = $this->treatments->create($_POST, $_FILES['featured_image'] ?? null);
@@ -67,6 +70,7 @@ final class TreatmentController extends Controller
 
     public function edit(string $id): void
     {
+        Auth::requirePermission('treatments.update');
         $treatment = $this->treatments->find((int) $id, true);
         if ($treatment === null) {
             flash('error', 'Treatment not found.');
@@ -78,6 +82,7 @@ final class TreatmentController extends Controller
 
     public function update(string $id): void
     {
+        Auth::requirePermission('treatments.update');
         $this->validateCsrf();
         $treatmentId = (int) $id;
         try {
@@ -93,6 +98,7 @@ final class TreatmentController extends Controller
 
     public function destroy(string $id): void
     {
+        Auth::requirePermission('treatments.delete');
         $this->validateCsrf();
         $this->treatments->softDelete((int) $id);
         flash('success', 'Treatment moved to trash.');
@@ -101,6 +107,7 @@ final class TreatmentController extends Controller
 
     public function restore(string $id): void
     {
+        Auth::requirePermission('treatments.update');
         $this->validateCsrf();
         $this->treatments->restore((int) $id);
         flash('success', 'Treatment restored.');
@@ -109,6 +116,7 @@ final class TreatmentController extends Controller
 
     public function duplicate(string $id): void
     {
+        Auth::requirePermission('treatments.create');
         $this->validateCsrf();
         try {
             $newId = $this->treatments->duplicate((int) $id);
@@ -125,6 +133,11 @@ final class TreatmentController extends Controller
         $this->validateCsrf();
         $ids = array_map('intval', (array) ($_POST['ids'] ?? []));
         $action = (string) ($_POST['bulk_action'] ?? '');
+        if ($action === 'delete') {
+            Auth::requirePermission('treatments.delete');
+        } else {
+            Auth::requirePermission('treatments.update');
+        }
         $count = match ($action) {
             'delete' => $this->treatments->bulkSoftDelete($ids),
             'restore' => $this->treatments->bulkRestore($ids),
@@ -137,21 +150,25 @@ final class TreatmentController extends Controller
 
     public function exportCsv(): void
     {
+        Auth::requirePermission('treatments.view');
         $this->download('treatments.csv', 'text/csv; charset=utf-8', $this->exporter->toCsv($this->treatments->exportRows($this->exportFilters())));
     }
 
     public function exportJson(): void
     {
+        Auth::requirePermission('treatments.view');
         $this->download('treatments.json', 'application/json; charset=utf-8', $this->exporter->toJson($this->treatments->exportRows($this->exportFilters())));
     }
 
     public function exportExcel(): void
     {
+        Auth::requirePermission('treatments.view');
         $this->download('treatments.xls', 'application/vnd.ms-excel; charset=utf-8', $this->exporter->toExcelXml($this->treatments->exportRows($this->exportFilters())));
     }
 
     public function importForm(): void
     {
+        Auth::requirePermission('treatments.create');
         View::renderInLayout('treatments/import', 'admin', [
             'title' => 'Import Treatments',
             'activeNav' => 'treatments',
@@ -168,6 +185,7 @@ final class TreatmentController extends Controller
 
     public function import(): void
     {
+        Auth::requirePermission('treatments.create');
         $this->validateCsrf();
         $file = $_FILES['csv_file'] ?? null;
         if (!$file || ($file['error'] ?? UPLOAD_ERR_NO_FILE) !== UPLOAD_ERR_OK) {
@@ -184,7 +202,7 @@ final class TreatmentController extends Controller
             }
         }
         flash($result['failed'] > 0 ? 'error' : 'success', $message);
-        redirect('/treatments');
+        redirect($result['failed'] > 0 ? '/treatments/import' : '/treatments');
     }
 
     private function renderForm(?array $treatment, array $values): void

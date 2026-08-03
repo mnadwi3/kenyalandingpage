@@ -19,8 +19,17 @@ VALUES
   (UUID(), 'doctors', 'update', 'Update Doctors', 'doctors.update', NULL),
   (UUID(), 'doctors', 'delete', 'Delete Doctors', 'doctors.delete', NULL),
   (UUID(), 'treatments', 'view', 'View Treatments', 'treatments.view', NULL),
+  (UUID(), 'treatments', 'create', 'Create Treatments', 'treatments.create', NULL),
+  (UUID(), 'treatments', 'update', 'Update Treatments', 'treatments.update', NULL),
+  (UUID(), 'treatments', 'delete', 'Delete Treatments', 'treatments.delete', NULL),
   (UUID(), 'hospitals', 'view', 'View Hospitals', 'hospitals.view', NULL),
-  (UUID(), 'specialties', 'view', 'View Specialties', 'specialties.view', NULL)
+  (UUID(), 'hospitals', 'create', 'Create Hospitals', 'hospitals.create', NULL),
+  (UUID(), 'hospitals', 'update', 'Update Hospitals', 'hospitals.update', NULL),
+  (UUID(), 'hospitals', 'delete', 'Delete Hospitals', 'hospitals.delete', NULL),
+  (UUID(), 'specialties', 'view', 'View Specialties', 'specialties.view', NULL),
+  (UUID(), 'specialties', 'create', 'Create Specialties', 'specialties.create', NULL),
+  (UUID(), 'specialties', 'update', 'Update Specialties', 'specialties.update', NULL),
+  (UUID(), 'specialties', 'delete', 'Delete Specialties', 'specialties.delete', NULL)
 ON DUPLICATE KEY UPDATE name = VALUES(name);
 
 -- Grant all permissions to admin role (super_admin bypasses checks in app)
@@ -37,7 +46,13 @@ SELECT r.id, p.id
 FROM roles r
 CROSS JOIN permissions p
 WHERE r.slug = 'editor'
-  AND p.slug IN ('dashboard.view', 'doctors.view', 'doctors.create', 'doctors.update', 'treatments.view', 'hospitals.view', 'specialties.view')
+  AND p.slug IN (
+    'dashboard.view',
+    'doctors.view', 'doctors.create', 'doctors.update',
+    'treatments.view', 'treatments.create', 'treatments.update',
+    'hospitals.view', 'hospitals.create', 'hospitals.update',
+    'specialties.view', 'specialties.create', 'specialties.update'
+  )
 ON DUPLICATE KEY UPDATE role_id = role_id;
 
 -- password = ChangeMe123!  (bcrypt)

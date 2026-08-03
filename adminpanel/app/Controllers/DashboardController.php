@@ -21,6 +21,7 @@ final class DashboardController extends Controller
 
     public function index(): void
     {
+        Auth::requirePermission('dashboard.view');
         $overview = $this->dashboard->overview();
 
         View::renderInLayout('dashboard/index', 'admin', [
@@ -45,6 +46,7 @@ final class DashboardController extends Controller
     /** JSON payload for progressive loading / refresh. */
     public function data(): void
     {
+        Auth::requirePermission('dashboard.view');
         $this->json([
             'ok' => true,
             'data' => $this->dashboard->overview(),

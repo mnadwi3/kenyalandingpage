@@ -73,7 +73,8 @@
         window.VaidTrackToast('Enter a search term.', 'info');
         return;
       }
-      window.VaidTrackToast('Global search unlocks when content modules are available.', 'info');
+      const target = `/doctors?q=${encodeURIComponent(q)}`;
+      window.location.href = target;
     });
   }
 

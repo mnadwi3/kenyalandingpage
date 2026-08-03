@@ -56,8 +56,8 @@ final class DoctorExportService
     public function headers(): array
     {
         return [
-            'uuid', 'slug', 'name', 'qualification', 'expertise', 'education',
-            'registration_number', 'status', 'is_featured',
+            'uuid', 'slug', 'name', 'qualification', 'years_of_experience', 'expertise', 'education',
+            'status', 'is_featured',
             'seo_title', 'seo_description', 'public_url', 'created_at',
         ];
     }
@@ -71,9 +71,9 @@ final class DoctorExportService
             $slug,
             $row['name'] ?? '',
             $row['qualification'] ?? '',
+            $row['years_of_experience'] ?? '',
             $row['expertise'] ?? $row['experience_summary'] ?? '',
             $row['education'] ?? '',
-            $row['registration_number'] ?? '',
             $row['status'] ?? '',
             (int) ($row['is_featured'] ?? 0),
             $row['seo_title'] ?? '',

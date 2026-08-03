@@ -12,6 +12,7 @@ $checkedIds = static function (string $key) use ($values): array {
 
     return is_array($raw) ? $raw : [];
 };
+$expertiseValue = (string) ($values['expertise'] ?? $values['experience_summary'] ?? '');
 ?>
 <section class="page-intro page-intro-row">
     <div>
@@ -39,13 +40,6 @@ $checkedIds = static function (string $key) use ($values): array {
             <div class="form-grid">
                 <label class="field"><span>Full name *</span><input type="text" name="name" value="<?= $val('name') ?>" required data-slug-source></label>
                 <label class="field"><span>Slug</span><input type="text" name="slug" value="<?= $val('slug') ?>" data-slug-target placeholder="auto-generated"></label>
-                <label class="field"><span>Gender</span>
-                    <select name="gender">
-                        <?php foreach ($options['genders'] as $gender): ?>
-                            <option value="<?= e($gender) ?>" <?= ($values['gender'] ?? 'unspecified') === $gender ? 'selected' : '' ?>><?= e(ucfirst($gender)) ?></option>
-                        <?php endforeach; ?>
-                    </select>
-                </label>
                 <label class="field"><span>Status</span>
                     <select name="status">
                         <?php foreach ($options['statuses'] as $status): ?>
@@ -64,23 +58,15 @@ $checkedIds = static function (string $key) use ($values): array {
                     <?php endif; ?>
                     <input type="file" name="photo" accept="image/jpeg,image/png,image/webp,image/gif">
                 </div>
-                <label class="field full"><span>Biography</span><textarea name="biography" rows="6"><?= $val('biography') ?></textarea></label>
-                <label class="field full"><span>Video URL (YouTube)</span><input type="url" name="video_url" value="<?= $val('video_url') ?>"></label>
             </div>
         </div>
 
         <div class="tab-panel" data-tab-panel="professional">
             <div class="form-grid">
                 <label class="field"><span>Qualification</span><input type="text" name="qualification" value="<?= $val('qualification') ?>"></label>
-                <label class="field"><span>Designation</span><input type="text" name="designation" value="<?= $val('designation') ?>"></label>
-                <label class="field"><span>Years of experience</span><input type="number" min="0" max="80" name="years_of_experience" value="<?= $val('years_of_experience') ?>"></label>
                 <label class="field"><span>Registration number</span><input type="text" name="registration_number" value="<?= $val('registration_number') ?>"></label>
-                <label class="field"><span>Consultation fee</span><input type="number" step="0.01" min="0" name="consultation_fee" value="<?= $val('consultation_fee') ?>"></label>
-                <label class="field"><span>Currency</span><input type="text" name="consultation_currency" maxlength="3" value="<?= $val('consultation_currency', 'USD') ?>"></label>
-                <label class="field full"><span>Experience</span><textarea name="experience_summary" rows="4"><?= $val('experience_summary') ?></textarea></label>
+                <label class="field full"><span>Expertise</span><textarea name="expertise" rows="4" placeholder="e.g. Knee Replacement&#10;Hip Replacement&#10;Sports Injury&#10;Arthroscopy"><?= e($expertiseValue) ?></textarea></label>
                 <label class="field full"><span>Education</span><textarea name="education" rows="4"><?= $val('education') ?></textarea></label>
-                <label class="field full"><span>Awards</span><textarea name="awards" rows="3"><?= $val('awards') ?></textarea></label>
-                <label class="field full"><span>Memberships</span><textarea name="memberships" rows="3"><?= $val('memberships') ?></textarea></label>
             </div>
         </div>
 
@@ -111,11 +97,11 @@ $checkedIds = static function (string $key) use ($values): array {
                     <?php endif; ?>
                     <div>
                         <h2 data-preview-name><?= e((string) ($values['name'] ?? 'Doctor name')) ?></h2>
-                        <p class="muted" data-preview-designation><?= e((string) ($values['designation'] ?? 'Designation')) ?></p>
+                        <p class="muted" data-preview-qualification><?= e((string) ($values['qualification'] ?? 'Qualification')) ?></p>
                         <p class="muted" data-preview-slug><?= e((string) ($values['slug'] ?? 'slug')) ?></p>
                     </div>
                 </div>
-                <p data-preview-bio><?= e((string) ($values['biography'] ?? 'Biography preview will appear here.')) ?></p>
+                <p data-preview-expertise><?= e($expertiseValue !== '' ? $expertiseValue : 'Expertise preview will appear here.') ?></p>
             </article>
         </div>
     </div>

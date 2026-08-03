@@ -33,18 +33,11 @@ $sortUrl = static function (string $column) use ($queryBase, $sort, $direction):
 
 <form method="get" action="<?= e(url('/doctors')) ?>" class="filter-panel">
     <div class="filter-grid">
-        <label class="field"><span>Search</span><input type="search" name="q" value="<?= e((string) ($filters['q'] ?? '')) ?>" placeholder="Name, designation…"></label>
+        <label class="field"><span>Search</span><input type="search" name="q" value="<?= e((string) ($filters['q'] ?? '')) ?>" placeholder="Name, qualification, expertise…"></label>
         <label class="field"><span>Status</span>
             <select name="status"><option value="">All</option>
                 <?php foreach ($options['statuses'] as $status): ?>
                     <option value="<?= e($status) ?>" <?= ($filters['status'] ?? '') === $status ? 'selected' : '' ?>><?= e(ucfirst($status)) ?></option>
-                <?php endforeach; ?>
-            </select>
-        </label>
-        <label class="field"><span>Gender</span>
-            <select name="gender"><option value="">All</option>
-                <?php foreach ($options['genders'] as $gender): ?>
-                    <option value="<?= e($gender) ?>" <?= ($filters['gender'] ?? '') === $gender ? 'selected' : '' ?>><?= e(ucfirst($gender)) ?></option>
                 <?php endforeach; ?>
             </select>
         </label>
@@ -118,7 +111,7 @@ $sortUrl = static function (string $column) use ($queryBase, $sort, $direction):
                             <th>Doctor</th>
                             <th><a href="<?= e($sortUrl('status')) ?>">Status</a></th>
                             <th><a href="<?= e($sortUrl('is_featured')) ?>">Featured</a></th>
-                            <th><a href="<?= e($sortUrl('years_of_experience')) ?>">Experience</a></th>
+                            <th>Expertise</th>
                             <th><a href="<?= e($sortUrl('updated_at')) ?>">Updated</a></th>
                             <th>Actions</th>
                         </tr>
@@ -137,13 +130,16 @@ $sortUrl = static function (string $column) use ($queryBase, $sort, $direction):
                                         <?php endif; ?>
                                         <div>
                                             <strong><?= e((string) $doctor['name']) ?></strong>
-                                            <div class="muted"><?= e((string) ($doctor['designation'] ?: $doctor['slug'])) ?></div>
+                                            <div class="muted"><?= e((string) ($doctor['qualification'] ?: $doctor['slug'])) ?></div>
                                         </div>
                                     </div>
                                 </td>
                                 <td><span class="status-pill status-<?= e((string) $doctor['status']) ?>"><?= e((string) $doctor['status']) ?></span></td>
                                 <td><?= !empty($doctor['is_featured']) ? '<span class="badge badge-featured">Featured</span>' : '<span class="muted">—</span>' ?></td>
-                                <td><?= e((string) ($doctor['years_of_experience'] ?? '—')) ?></td>
+                                <td><?php
+                                    $expertise = (string) ($doctor['expertise'] ?? $doctor['experience_summary'] ?? '');
+                                    echo e($expertise !== '' ? mb_strimwidth($expertise, 0, 80, '…') : '—');
+                                ?></td>
                                 <td><?= e(format_datetime($doctor['updated_at'] ?? null)) ?></td>
                                 <td class="actions-cell">
                                     <a href="<?= e(url('/doctors/' . (int) $doctor['id'] . '/edit')) ?>">Edit</a>

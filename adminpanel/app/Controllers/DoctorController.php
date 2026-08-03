@@ -211,7 +211,6 @@ final class DoctorController extends Controller
         return [
             'q' => trim($this->string('q')),
             'status' => $this->string('status'),
-            'gender' => $this->string('gender'),
             'is_featured' => $_GET['is_featured'] ?? '',
             'specialty_id' => $_GET['specialty_id'] ?? '',
             'hospital_id' => $_GET['hospital_id'] ?? '',

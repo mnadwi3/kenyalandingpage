@@ -56,10 +56,8 @@ final class DoctorExportService
     public function headers(): array
     {
         return [
-            'uuid', 'slug', 'name', 'gender', 'qualification', 'designation',
-            'years_of_experience', 'experience_summary', 'biography', 'education',
-            'awards', 'memberships', 'registration_number', 'consultation_fee',
-            'consultation_currency', 'video_url', 'status', 'is_featured',
+            'uuid', 'slug', 'name', 'qualification', 'expertise', 'education',
+            'registration_number', 'status', 'is_featured',
             'seo_title', 'seo_description', 'public_url', 'created_at',
         ];
     }
@@ -69,14 +67,18 @@ final class DoctorExportService
         $slug = (string) ($row['slug'] ?? '');
 
         return [
-            $row['uuid'] ?? '', $slug, $row['name'] ?? '', $row['gender'] ?? '',
-            $row['qualification'] ?? '', $row['designation'] ?? '',
-            $row['years_of_experience'] ?? '', $row['experience_summary'] ?? '',
-            $row['biography'] ?? '', $row['education'] ?? '', $row['awards'] ?? '',
-            $row['memberships'] ?? '', $row['registration_number'] ?? '',
-            $row['consultation_fee'] ?? '', $row['consultation_currency'] ?? '',
-            $row['video_url'] ?? '', $row['status'] ?? '', (int) ($row['is_featured'] ?? 0),
-            $row['seo_title'] ?? '', $row['seo_description'] ?? '', '/doctors/' . $slug,
+            $row['uuid'] ?? '',
+            $slug,
+            $row['name'] ?? '',
+            $row['qualification'] ?? '',
+            $row['expertise'] ?? $row['experience_summary'] ?? '',
+            $row['education'] ?? '',
+            $row['registration_number'] ?? '',
+            $row['status'] ?? '',
+            (int) ($row['is_featured'] ?? 0),
+            $row['seo_title'] ?? '',
+            $row['seo_description'] ?? '',
+            '/doctors/' . $slug,
             $row['created_at'] ?? '',
         ];
     }

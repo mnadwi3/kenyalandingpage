@@ -1,6 +1,7 @@
 <?php
 /** @var array<string,mixed> $doctor */
 /** @var string $title */
+$expertise = (string) ($doctor['expertise'] ?? $doctor['experience_summary'] ?? '');
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -26,9 +27,16 @@
         <img src="<?= e(asset((string) $doctor['photo'])) ?>" alt="<?= e((string) $doctor['name']) ?>">
     <?php endif; ?>
     <h1><?= e((string) $doctor['name']) ?></h1>
-    <p class="meta"><?= e((string) ($doctor['designation'] ?? '')) ?></p>
+    <p class="meta"><?= e((string) ($doctor['qualification'] ?? '')) ?></p>
     <p class="meta">Public URL: <?= e((string) $doctor['public_url']) ?></p>
-    <?php if (!empty($doctor['biography'])): ?><p><?= nl2br(e((string) $doctor['biography'])) ?></p><?php endif; ?>
+    <?php if ($expertise !== ''): ?>
+        <h2>Expertise</h2>
+        <p><?= nl2br(e($expertise)) ?></p>
+    <?php endif; ?>
+    <?php if (!empty($doctor['education'])): ?>
+        <h2>Education</h2>
+        <p><?= nl2br(e((string) $doctor['education'])) ?></p>
+    <?php endif; ?>
     <div class="note">Data endpoint prepared for frontend integration (Phase 9).</div>
 </main>
 </body>

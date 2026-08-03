@@ -39,7 +39,6 @@ final class DoctorService
         $filters = [
             'q'            => trim((string) ($query['q'] ?? '')),
             'status'       => (string) ($query['status'] ?? ''),
-            'gender'       => (string) ($query['gender'] ?? ''),
             'is_featured'  => $query['is_featured'] ?? '',
             'specialty_id' => $query['specialty_id'] ?? '',
             'hospital_id'  => $query['hospital_id'] ?? '',
@@ -70,7 +69,6 @@ final class DoctorService
             'treatments'  => $this->options->treatments(),
             'hospitals'   => $this->options->hospitals(),
             'statuses'    => Doctor::STATUSES,
-            'genders'     => Doctor::GENDERS,
         ];
     }
 
@@ -147,20 +145,11 @@ final class DoctorService
             'uuid' => uuid(),
             'slug' => $slug,
             'name' => $doctor['name'] . ' (Copy)',
-            'gender' => $doctor['gender'],
             'photo' => $this->images->copy((string) ($doctor['photo'] ?? ''), 'doctors'),
             'qualification' => $doctor['qualification'],
-            'designation' => $doctor['designation'],
-            'years_of_experience' => $doctor['years_of_experience'],
-            'experience_summary' => $doctor['experience_summary'],
-            'biography' => $doctor['biography'],
+            'expertise' => $doctor['expertise'] ?? $doctor['experience_summary'] ?? null,
             'education' => $doctor['education'],
-            'awards' => $doctor['awards'],
-            'memberships' => $doctor['memberships'],
             'registration_number' => $doctor['registration_number'],
-            'consultation_fee' => $doctor['consultation_fee'],
-            'consultation_currency' => $doctor['consultation_currency'],
-            'video_url' => $doctor['video_url'],
             'status' => 'draft',
             'is_featured' => 0,
             'seo_title' => $doctor['seo_title'],
@@ -212,27 +201,15 @@ final class DoctorService
                 $input = [
                     'name' => $row['name'] ?? $row['full_name'] ?? '',
                     'slug' => $row['slug'] ?? '',
-                    'gender' => strtolower($row['gender'] ?? 'unspecified'),
                     'qualification' => $row['qualification'] ?? '',
-                    'designation' => $row['designation'] ?? '',
-                    'years_of_experience' => $row['years_of_experience'] ?? '',
-                    'experience_summary' => $row['experience'] ?? $row['experience_summary'] ?? '',
-                    'biography' => $row['biography'] ?? '',
+                    'expertise' => $row['expertise'] ?? $row['experience'] ?? $row['experience_summary'] ?? '',
                     'education' => $row['education'] ?? '',
-                    'awards' => $row['awards'] ?? '',
-                    'memberships' => $row['memberships'] ?? '',
                     'registration_number' => $row['registration_number'] ?? '',
-                    'consultation_fee' => $row['consultation_fee'] ?? '',
-                    'consultation_currency' => $row['consultation_currency'] ?? 'USD',
-                    'video_url' => $row['video_url'] ?? '',
                     'status' => strtolower($row['status'] ?? 'draft'),
                     'is_featured' => $row['is_featured'] ?? '0',
                     'seo_title' => $row['seo_title'] ?? '',
                     'seo_description' => $row['seo_description'] ?? '',
                 ];
-                if (!in_array($input['gender'], Doctor::GENDERS, true)) {
-                    $input['gender'] = 'unspecified';
-                }
                 if (!in_array($input['status'], Doctor::STATUSES, true)) {
                     $input['status'] = 'draft';
                 }
@@ -250,6 +227,9 @@ final class DoctorService
     private function hydrate(array $doctor): array
     {
         $id = (int) $doctor['id'];
+        if (!isset($doctor['expertise']) && isset($doctor['experience_summary'])) {
+            $doctor['expertise'] = $doctor['experience_summary'];
+        }
         $doctor['language_ids'] = $this->doctors->languageIds($id);
         $doctor['specialty_ids'] = $this->doctors->specialtyIds($id);
         $doctor['treatment_ids'] = $this->doctors->treatmentIds($id);
@@ -261,23 +241,16 @@ final class DoctorService
 
     private function validatedPayload(array $input, ?int $ignoreId = null): array
     {
-        $input['gender'] = ($input['gender'] ?? '') !== '' ? $input['gender'] : 'unspecified';
         $input['status'] = ($input['status'] ?? '') !== '' ? $input['status'] : 'draft';
 
         $validator = new Validator($input);
         $validator
             ->required('name', 'Full name')
             ->maxLength('name', 150, 'Full name')
-            ->in('gender', Doctor::GENDERS, 'Gender')
             ->in('status', Doctor::STATUSES, 'Status')
-            ->numeric('years_of_experience', 'Years of experience')
-            ->numeric('consultation_fee', 'Consultation fee')
             ->maxLength('seo_title', 255, 'SEO title')
             ->maxLength('seo_description', 320, 'Meta description')
             ->maxLength('slug', 191, 'Slug');
-        if (!empty($input['video_url'])) {
-            $validator->url('video_url', 'Video URL');
-        }
         if ($validator->fails()) {
             throw new RuntimeException($validator->firstError());
         }
@@ -289,25 +262,14 @@ final class DoctorService
             fn (string $s, ?int $ignore): bool => $this->doctors->slugExists($s, $ignore),
             $ignoreId
         );
-        $years = $input['years_of_experience'] ?? '';
-        $fee = $input['consultation_fee'] ?? '';
 
         $payload = [
             'slug' => $slug,
             'name' => $name,
-            'gender' => (string) $input['gender'],
             'qualification' => $this->nullableString($input['qualification'] ?? null),
-            'designation' => $this->nullableString($input['designation'] ?? null),
-            'years_of_experience' => $years === '' ? null : (int) $years,
-            'experience_summary' => $this->nullableString($input['experience_summary'] ?? $input['experience'] ?? null),
-            'biography' => $this->nullableString($input['biography'] ?? null),
+            'expertise' => $this->nullableString($input['expertise'] ?? $input['experience_summary'] ?? $input['experience'] ?? null),
             'education' => $this->nullableString($input['education'] ?? null),
-            'awards' => $this->nullableString($input['awards'] ?? null),
-            'memberships' => $this->nullableString($input['memberships'] ?? null),
             'registration_number' => $this->nullableString($input['registration_number'] ?? null),
-            'consultation_fee' => $fee === '' ? null : number_format((float) $fee, 2, '.', ''),
-            'consultation_currency' => strtoupper((string) ($input['consultation_currency'] ?? 'USD')) ?: 'USD',
-            'video_url' => $this->nullableString($input['video_url'] ?? null),
             'status' => (string) $input['status'],
             'is_featured' => !empty($input['is_featured']) ? 1 : 0,
             'seo_title' => $this->nullableString($input['seo_title'] ?? null) ?? $name,

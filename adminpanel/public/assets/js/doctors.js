@@ -49,13 +49,13 @@
     const previewName = document.querySelector('[data-preview-name]');
     if (previewName) previewName.textContent = source.value || 'Doctor name';
   });
-  form.querySelector('[name="designation"]')?.addEventListener('input', (event) => {
-    const preview = document.querySelector('[data-preview-designation]');
-    if (preview) preview.textContent = event.target.value || 'Designation';
+  form.querySelector('[name="qualification"]')?.addEventListener('input', (event) => {
+    const preview = document.querySelector('[data-preview-qualification]');
+    if (preview) preview.textContent = event.target.value || 'Qualification';
   });
-  form.querySelector('[name="biography"]')?.addEventListener('input', (event) => {
-    const preview = document.querySelector('[data-preview-bio]');
-    if (preview) preview.textContent = event.target.value || 'Biography preview will appear here.';
+  form.querySelector('[name="expertise"]')?.addEventListener('input', (event) => {
+    const preview = document.querySelector('[data-preview-expertise]');
+    if (preview) preview.textContent = event.target.value || 'Expertise preview will appear here.';
   });
   target?.addEventListener('input', () => {
     const preview = document.querySelector('[data-preview-slug]');

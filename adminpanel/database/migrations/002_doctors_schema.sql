@@ -87,7 +87,7 @@ CREATE TABLE IF NOT EXISTS doctors (
   qualification VARCHAR(255) NULL,
   designation VARCHAR(150) NULL,
   years_of_experience SMALLINT UNSIGNED NULL,
-  experience_summary TEXT NULL,
+  expertise TEXT NULL,
   biography MEDIUMTEXT NULL,
   education TEXT NULL,
   awards TEXT NULL,

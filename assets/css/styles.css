@@ -391,6 +391,24 @@ label {
 .tx-book-full { display: none; }
 .tx-book-short { display: inline; }
 
+/* Mobile only: more breathing room between title / price / CTA. Desktop (>=640px) untouched. */
+@media (max-width: 639px) {
+  .tx-card {
+    aspect-ratio: 0.88 / 1;
+  }
+  .tx-card h3,
+  .tx-body h3 {
+    margin-bottom: 0.4rem;
+  }
+  .tx-price {
+    margin-bottom: 0.45rem;
+  }
+  .tx-card p,
+  .tx-body p {
+    margin-bottom: 0.4rem;
+  }
+}
+
 @media (min-width: 640px) {
   .tx-grid { align-items: stretch; }
   .tx-card {

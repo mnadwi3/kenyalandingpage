@@ -1417,6 +1417,25 @@ header .site-logo-img {
     object-position: left center;
   }
 
+  #doctors h2,
+  #treatment h2,
+  #testimonials h2,
+  #faq h2,
+  #location h2 {
+    overflow-wrap: anywhere;
+    word-break: break-word;
+  }
+}
+
+@media (min-width: 1024px) {
+  br.hero-mobile-break { display: none; }
+}
+
+@media (max-width: 1023px) {
+  #hero > .absolute.inset-0 { display: none !important; }
+
+  /* Sticky mobile/tablet booking bar - matches the modal's own max-width:1023px
+     trigger logic in main.js, and the lg:hidden breakpoint on the bar itself. */
   .mobile-bottom-bar {
     display: flex;
     position: fixed;
@@ -1434,23 +1453,6 @@ header .site-logo-img {
   body {
     padding-bottom: calc(4.5rem + env(safe-area-inset-bottom, 0px));
   }
-
-  #doctors h2,
-  #treatment h2,
-  #testimonials h2,
-  #faq h2,
-  #location h2 {
-    overflow-wrap: anywhere;
-    word-break: break-word;
-  }
-}
-
-@media (min-width: 1024px) {
-  br.hero-mobile-break { display: none; }
-}
-
-@media (max-width: 1023px) {
-  #hero > .absolute.inset-0 { display: none !important; }
 
   .hero-slider {
     aspect-ratio: auto;

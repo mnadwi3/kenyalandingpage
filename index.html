@@ -229,13 +229,28 @@
     }
   </style>
   <style>
-    header nav.nav-primary a { font-size: 0.861rem; }
-    @media (min-width: 1024px) {
-      header nav.nav-primary a { font-size: 0.911rem; }
+    header nav.nav-primary a {
+      font-size: 0.861rem;
     }
-    header .site-logo-img { height: 1.734rem; max-width: 10.2rem; }
+
     @media (min-width: 1024px) {
-      header .site-logo img, header .site-logo-img { height: 1.904rem; max-width: 11.22rem; }
+      header nav.nav-primary a {
+        font-size: 0.911rem;
+      }
+    }
+
+    header .site-logo-img {
+      height: 1.734rem;
+      max-width: 10.2rem;
+    }
+
+    @media (min-width: 1024px) {
+
+      header .site-logo img,
+      header .site-logo-img {
+        height: 1.904rem;
+        max-width: 11.22rem;
+      }
     }
   </style>
   <style>
@@ -288,9 +303,8 @@
         </picture>
       </a>
 
-      <nav
-        class="hidden md:flex items-center text-white/85 whitespace-nowrap nav-primary"
-        style="gap:20px" aria-label="Primary">
+      <nav class="hidden md:flex items-center text-white/85 whitespace-nowrap nav-primary" style="gap:20px"
+        aria-label="Primary">
         <a href="/" class="hover:text-white transition-colors">Home</a>
         <a href="/treatment" class="hover:text-white transition-colors">Treatments</a>
         <a href="/doctors" class="hover:text-white transition-colors">Doctors</a>
@@ -714,117 +728,118 @@
         </div>
       </div>
       <div class="w-full hospitals-main">
-      <div class="hospitals-viewport reveal">
-        <div class="hospitals-track" id="hospitals-track">
-          <!-- Card 1: Apollo Hospital, Delhi -->
-          <div class="hospital-card bg-white rounded-2xl shadow-card overflow-hidden border border-slate-100">
-            <div class="hospital-card-img">
-              <picture>
-                <source type="image/webp"
-                  srcset="images/hospital/apollo-delhi-480.webp?v=20260803-perf3 480w, images/hospital/apollo-delhi-800.webp?v=20260803-perf3 800w, images/hospital/apollo-delhi.webp?v=20260803-perf3 1024w"
-                  sizes="500px">
-                <img src="images/hospital/apollo-delhi.png?v=20260803-perf3" alt="Apollo Hospital, Delhi"
-                  class="w-full h-full object-cover" width="500" height="250" loading="lazy" decoding="async">
-              </picture>
+        <div class="hospitals-viewport reveal">
+          <div class="hospitals-track" id="hospitals-track">
+            <!-- Card 1: Apollo Hospital, Delhi -->
+            <div class="hospital-card bg-white rounded-2xl shadow-card overflow-hidden border border-slate-100">
+              <div class="hospital-card-img">
+                <picture>
+                  <source type="image/webp"
+                    srcset="images/hospital/apollo-delhi-480.webp?v=20260803-perf3 480w, images/hospital/apollo-delhi-800.webp?v=20260803-perf3 800w, images/hospital/apollo-delhi.webp?v=20260803-perf3 1024w"
+                    sizes="500px">
+                  <img src="images/hospital/apollo-delhi.png?v=20260803-perf3" alt="Apollo Hospital, Delhi"
+                    class="w-full h-full object-cover" width="500" height="250" loading="lazy" decoding="async">
+                </picture>
+              </div>
+              <div class="hospital-card-info bg-[var(--section-bg)] p-6 flex flex-col justify-center">
+                <h3 class="font-display text-xl sm:text-2xl font-bold text-primary mb-2">Apollo Hospital, Delhi</h3>
+                <div class="w-12 h-1 bg-gold rounded-full mb-4" aria-hidden="true"></div>
+                <p class="text-sm font-semibold text-secondary mb-1">Address</p>
+                <p class="text-slate-600 text-sm leading-relaxed">
+                  Sarita Vihar, Delhi Mathura Road,<br>
+                  New Delhi - 110076,<br>
+                  Delhi, India
+                </p>
+              </div>
             </div>
-            <div class="hospital-card-info bg-[var(--section-bg)] p-6 flex flex-col justify-center">
-              <h3 class="font-display text-xl sm:text-2xl font-bold text-primary mb-2">Apollo Hospital, Delhi</h3>
-              <div class="w-12 h-1 bg-gold rounded-full mb-4" aria-hidden="true"></div>
-              <p class="text-sm font-semibold text-secondary mb-1">Address</p>
-              <p class="text-slate-600 text-sm leading-relaxed">
-                Sarita Vihar, Delhi Mathura Road,<br>
-                New Delhi - 110076,<br>
-                Delhi, India
-              </p>
+            <!-- Card 2: replace image/name/address with hospital details -->
+            <div class="hospital-card bg-white rounded-2xl shadow-card overflow-hidden border border-slate-100">
+              <div class="hospital-card-img">
+                <img src="images/hospital/max-hospital.jpg" alt="Partner hospital" class="w-full h-full object-cover"
+                  width="500" height="250" loading="lazy" decoding="async">
+              </div>
+              <div class="hospital-card-info bg-[var(--section-bg)] p-6 flex flex-col justify-center">
+                <h3 class="font-display text-xl sm:text-2xl font-bold text-primary mb-2">Max Super Speciality Hospital (
+                  All Max Chain)</h3>
+                <div class="w-12 h-1 bg-gold rounded-full mb-4" aria-hidden="true"></div>
+                <p class="text-sm font-semibold text-secondary mb-1">Address</p>
+                <p class="text-slate-600 text-sm leading-relaxed">
+                  1 2, Press Enclave Marg, Saket Institutional Area, Saket, New Delhi,<br>
+                  , Delhi - 110017,<br>
+                  India
+                </p>
+              </div>
             </div>
-          </div>
-          <!-- Card 2: replace image/name/address with hospital details -->
-          <div class="hospital-card bg-white rounded-2xl shadow-card overflow-hidden border border-slate-100">
-            <div class="hospital-card-img">
-              <img src="images/hospital/hospital-care.webp" alt="Partner hospital" class="w-full h-full object-cover"
-                width="500" height="250" loading="lazy" decoding="async">
+            <!-- Card 3: replace image/name/address with hospital details -->
+            <div class="hospital-card bg-white rounded-2xl shadow-card overflow-hidden border border-slate-100">
+              <div class="hospital-card-img">
+                <img src="images/hospital/hospital-care.webp" alt="Partner hospital" class="w-full h-full object-cover"
+                  width="500" height="250" loading="lazy" decoding="async">
+              </div>
+              <div class="hospital-card-info bg-[var(--section-bg)] p-6 flex flex-col justify-center">
+                <h3 class="font-display text-xl sm:text-2xl font-bold text-primary mb-2">Hospital Name</h3>
+                <div class="w-12 h-1 bg-gold rounded-full mb-4" aria-hidden="true"></div>
+                <p class="text-sm font-semibold text-secondary mb-1">Address</p>
+                <p class="text-slate-600 text-sm leading-relaxed">
+                  Address line 1,<br>
+                  City - Pincode,<br>
+                  India
+                </p>
+              </div>
             </div>
-            <div class="hospital-card-info bg-[var(--section-bg)] p-6 flex flex-col justify-center">
-              <h3 class="font-display text-xl sm:text-2xl font-bold text-primary mb-2">Hospital Name</h3>
-              <div class="w-12 h-1 bg-gold rounded-full mb-4" aria-hidden="true"></div>
-              <p class="text-sm font-semibold text-secondary mb-1">Address</p>
-              <p class="text-slate-600 text-sm leading-relaxed">
-                Address line 1,<br>
-                City - Pincode,<br>
-                India
-              </p>
+            <!-- Card 4: replace image/name/address with hospital details -->
+            <div class="hospital-card bg-white rounded-2xl shadow-card overflow-hidden border border-slate-100">
+              <div class="hospital-card-img">
+                <img src="images/hospital/hospital-care.webp" alt="Partner hospital" class="w-full h-full object-cover"
+                  width="500" height="250" loading="lazy" decoding="async">
+              </div>
+              <div class="hospital-card-info bg-[var(--section-bg)] p-6 flex flex-col justify-center">
+                <h3 class="font-display text-xl sm:text-2xl font-bold text-primary mb-2">Hospital Name</h3>
+                <div class="w-12 h-1 bg-gold rounded-full mb-4" aria-hidden="true"></div>
+                <p class="text-sm font-semibold text-secondary mb-1">Address</p>
+                <p class="text-slate-600 text-sm leading-relaxed">
+                  Address line 1,<br>
+                  City - Pincode,<br>
+                  India
+                </p>
+              </div>
             </div>
-          </div>
-          <!-- Card 3: replace image/name/address with hospital details -->
-          <div class="hospital-card bg-white rounded-2xl shadow-card overflow-hidden border border-slate-100">
-            <div class="hospital-card-img">
-              <img src="images/hospital/hospital-care.webp" alt="Partner hospital" class="w-full h-full object-cover"
-                width="500" height="250" loading="lazy" decoding="async">
+            <!-- Card 5: replace image/name/address with hospital details -->
+            <div class="hospital-card bg-white rounded-2xl shadow-card overflow-hidden border border-slate-100">
+              <div class="hospital-card-img">
+                <img src="images/hospital/hospital-care.webp" alt="Partner hospital" class="w-full h-full object-cover"
+                  width="500" height="250" loading="lazy" decoding="async">
+              </div>
+              <div class="hospital-card-info bg-[var(--section-bg)] p-6 flex flex-col justify-center">
+                <h3 class="font-display text-xl sm:text-2xl font-bold text-primary mb-2">Hospital Name</h3>
+                <div class="w-12 h-1 bg-gold rounded-full mb-4" aria-hidden="true"></div>
+                <p class="text-sm font-semibold text-secondary mb-1">Address</p>
+                <p class="text-slate-600 text-sm leading-relaxed">
+                  Address line 1,<br>
+                  City - Pincode,<br>
+                  India
+                </p>
+              </div>
             </div>
-            <div class="hospital-card-info bg-[var(--section-bg)] p-6 flex flex-col justify-center">
-              <h3 class="font-display text-xl sm:text-2xl font-bold text-primary mb-2">Hospital Name</h3>
-              <div class="w-12 h-1 bg-gold rounded-full mb-4" aria-hidden="true"></div>
-              <p class="text-sm font-semibold text-secondary mb-1">Address</p>
-              <p class="text-slate-600 text-sm leading-relaxed">
-                Address line 1,<br>
-                City - Pincode,<br>
-                India
-              </p>
-            </div>
-          </div>
-          <!-- Card 4: replace image/name/address with hospital details -->
-          <div class="hospital-card bg-white rounded-2xl shadow-card overflow-hidden border border-slate-100">
-            <div class="hospital-card-img">
-              <img src="images/hospital/hospital-care.webp" alt="Partner hospital" class="w-full h-full object-cover"
-                width="500" height="250" loading="lazy" decoding="async">
-            </div>
-            <div class="hospital-card-info bg-[var(--section-bg)] p-6 flex flex-col justify-center">
-              <h3 class="font-display text-xl sm:text-2xl font-bold text-primary mb-2">Hospital Name</h3>
-              <div class="w-12 h-1 bg-gold rounded-full mb-4" aria-hidden="true"></div>
-              <p class="text-sm font-semibold text-secondary mb-1">Address</p>
-              <p class="text-slate-600 text-sm leading-relaxed">
-                Address line 1,<br>
-                City - Pincode,<br>
-                India
-              </p>
-            </div>
-          </div>
-          <!-- Card 5: replace image/name/address with hospital details -->
-          <div class="hospital-card bg-white rounded-2xl shadow-card overflow-hidden border border-slate-100">
-            <div class="hospital-card-img">
-              <img src="images/hospital/hospital-care.webp" alt="Partner hospital" class="w-full h-full object-cover"
-                width="500" height="250" loading="lazy" decoding="async">
-            </div>
-            <div class="hospital-card-info bg-[var(--section-bg)] p-6 flex flex-col justify-center">
-              <h3 class="font-display text-xl sm:text-2xl font-bold text-primary mb-2">Hospital Name</h3>
-              <div class="w-12 h-1 bg-gold rounded-full mb-4" aria-hidden="true"></div>
-              <p class="text-sm font-semibold text-secondary mb-1">Address</p>
-              <p class="text-slate-600 text-sm leading-relaxed">
-                Address line 1,<br>
-                City - Pincode,<br>
-                India
-              </p>
-            </div>
-          </div>
-          <!-- Card 6: replace image/name/address with hospital details -->
-          <div class="hospital-card bg-white rounded-2xl shadow-card overflow-hidden border border-slate-100">
-            <div class="hospital-card-img">
-              <img src="images/hospital/hospital-care.webp" alt="Partner hospital" class="w-full h-full object-cover"
-                width="500" height="250" loading="lazy" decoding="async">
-            </div>
-            <div class="hospital-card-info bg-[var(--section-bg)] p-6 flex flex-col justify-center">
-              <h3 class="font-display text-xl sm:text-2xl font-bold text-primary mb-2">Hospital Name</h3>
-              <div class="w-12 h-1 bg-gold rounded-full mb-4" aria-hidden="true"></div>
-              <p class="text-sm font-semibold text-secondary mb-1">Address</p>
-              <p class="text-slate-600 text-sm leading-relaxed">
-                Address line 1,<br>
-                City - Pincode,<br>
-                India
-              </p>
+            <!-- Card 6: replace image/name/address with hospital details -->
+            <div class="hospital-card bg-white rounded-2xl shadow-card overflow-hidden border border-slate-100">
+              <div class="hospital-card-img">
+                <img src="images/hospital/hospital-care.webp" alt="Partner hospital" class="w-full h-full object-cover"
+                  width="500" height="250" loading="lazy" decoding="async">
+              </div>
+              <div class="hospital-card-info bg-[var(--section-bg)] p-6 flex flex-col justify-center">
+                <h3 class="font-display text-xl sm:text-2xl font-bold text-primary mb-2">Hospital Name</h3>
+                <div class="w-12 h-1 bg-gold rounded-full mb-4" aria-hidden="true"></div>
+                <p class="text-sm font-semibold text-secondary mb-1">Address</p>
+                <p class="text-slate-600 text-sm leading-relaxed">
+                  Address line 1,<br>
+                  City - Pincode,<br>
+                  India
+                </p>
+              </div>
             </div>
           </div>
         </div>
-      </div>
       </div>
     </section>
     <style>

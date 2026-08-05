@@ -2,7 +2,6 @@
 -- Default login: admin@vaidtrack.com / ChangeMe123!
 -- CHANGE THIS PASSWORD immediately after first login.
 
-USE vaidtrack;
 
 INSERT INTO roles (uuid, name, slug, description, is_system, status)
 VALUES

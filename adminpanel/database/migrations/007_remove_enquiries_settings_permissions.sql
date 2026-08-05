@@ -1,6 +1,5 @@
 -- Remove unused Enquiries and Settings permissions
 SET NAMES utf8mb4;
-USE vaidtrack;
 
 DELETE rp FROM role_permissions rp
 INNER JOIN permissions p ON p.id = rp.permission_id

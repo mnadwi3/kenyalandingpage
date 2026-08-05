@@ -2,7 +2,6 @@
 -- Super Admin bypasses permission checks in the application layer.
 -- Admin receives all permissions; Editor receives view + create + update (no delete).
 
-USE vaidtrack;
 
 INSERT INTO permissions (uuid, module, action, name, slug, description)
 VALUES

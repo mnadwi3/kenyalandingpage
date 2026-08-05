@@ -1,7 +1,6 @@
 -- VaidTrack Phase 6: Specialties module — soft delete support only
 SET NAMES utf8mb4;
 SET FOREIGN_KEY_CHECKS = 0;
-USE vaidtrack;
 
 ALTER TABLE specialties
   ADD COLUMN deleted_at DATETIME(3) NULL AFTER seo_description,

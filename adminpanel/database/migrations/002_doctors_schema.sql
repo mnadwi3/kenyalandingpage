@@ -1,7 +1,6 @@
 -- VaidTrack Phase 3: Doctors module
 SET NAMES utf8mb4;
 SET FOREIGN_KEY_CHECKS = 0;
-USE vaidtrack;
 
 CREATE TABLE IF NOT EXISTS languages (
   id BIGINT UNSIGNED NOT NULL AUTO_INCREMENT,

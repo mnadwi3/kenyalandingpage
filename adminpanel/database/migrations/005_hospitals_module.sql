@@ -1,7 +1,6 @@
 -- VaidTrack Phase 5: Hospitals module — expand existing hospitals table
 SET NAMES utf8mb4;
 SET FOREIGN_KEY_CHECKS = 0;
-USE vaidtrack;
 
 ALTER TABLE hospitals
   ADD COLUMN cover_image VARCHAR(500) NULL AFTER logo,

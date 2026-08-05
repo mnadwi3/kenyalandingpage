@@ -1,5 +1,3 @@
-USE vaidtrack;
-
 INSERT INTO languages (code, name, status) VALUES
   ('en', 'English', 'active'),
   ('hi', 'Hindi', 'active'),

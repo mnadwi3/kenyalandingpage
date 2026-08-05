@@ -2,14 +2,10 @@
 -- Engine: InnoDB | Charset: utf8mb4 | Collation: utf8mb4_unicode_ci
 -- Additive table beyond core architecture: password_reset_tokens (required for Forgot Password)
 
+-- Runs against the database already selected by the hosting connection
+-- (Hostinger shared hosting does not permit CREATE DATABASE / USE).
 SET NAMES utf8mb4;
 SET FOREIGN_KEY_CHECKS = 0;
-
-CREATE DATABASE IF NOT EXISTS vaidtrack
-  CHARACTER SET utf8mb4
-  COLLATE utf8mb4_unicode_ci;
-
-USE vaidtrack;
 
 CREATE TABLE IF NOT EXISTS roles (
   id BIGINT UNSIGNED NOT NULL AUTO_INCREMENT,

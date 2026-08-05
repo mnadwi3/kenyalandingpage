@@ -2,7 +2,6 @@
 -- Powers the public JSON API that syncs the admin panel with the static frontend.
 SET NAMES utf8mb4;
 SET FOREIGN_KEY_CHECKS = 0;
-USE vaidtrack;
 
 CREATE TABLE IF NOT EXISTS testimonials (
   id BIGINT UNSIGNED NOT NULL AUTO_INCREMENT,

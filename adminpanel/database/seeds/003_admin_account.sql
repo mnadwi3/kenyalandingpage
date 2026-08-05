@@ -3,7 +3,6 @@
 -- Hash generated with the app's own method: password_hash($plain, PASSWORD_DEFAULT)
 -- Safe to re-run: upserts by email's unique key (uq_users_email).
 
-USE vaidtrack;
 
 INSERT INTO users (uuid, role_id, name, email, password_hash, status, password_changed_at)
 SELECT

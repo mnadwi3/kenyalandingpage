@@ -8,6 +8,9 @@ $links = [
     ['key' => 'treatments', 'label' => 'Treatments', 'href' => url('/treatments')],
     ['key' => 'hospitals', 'label' => 'Hospitals', 'href' => url('/hospitals')],
     ['key' => 'specialties', 'label' => 'Specialties', 'href' => url('/specialties')],
+    ['key' => 'testimonials', 'label' => 'Testimonials', 'href' => url('/testimonials')],
+    ['key' => 'faqs', 'label' => 'FAQs', 'href' => url('/faqs')],
+    ['key' => 'settings', 'label' => 'Hero Content', 'href' => url('/settings/hero')],
 ];
 ?>
 <aside class="admin-sidebar" data-sidebar>

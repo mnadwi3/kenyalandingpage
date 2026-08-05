@@ -15,7 +15,7 @@ final class ImageUploader
         'image/gif'  => 'gif',
     ];
 
-    private const ALLOWED_DIRECTORIES = ['doctors', 'hospitals', 'treatments'];
+    private const ALLOWED_DIRECTORIES = ['doctors', 'hospitals', 'treatments', 'site'];
 
     /** @param array<string, mixed> $file */
     public function upload(array $file, string $directory, ?string $oldRelativePath = null): string

@@ -343,11 +343,11 @@
                 Cancer <br class="hero-mobile-break">Expert Opinion<br>
                 <span class="hero-accent">Within 24 Hours</span>
               </h1>
-              <p class="mb-0">
+              <p class="mb-0" id="hero-subheadline">
                 From expert opinion and hospital selection to medical visa, travel, treatment, accommodation, and
                 follow-up, we coordinate every step of your journey.
               </p>
-              <ul class="hero-trust" aria-label="Trust highlights">
+              <ul class="hero-trust" aria-label="Trust highlights" id="hero-trust-list">
                 <li>
                   <svg fill="none" stroke="currentColor" stroke-width="1.7" viewBox="0 0 24 24" aria-hidden="true">
                     <path stroke-linecap="round" stroke-linejoin="round"
@@ -462,7 +462,7 @@
             pathway guidance.</p>
         </div>
 
-        <div class="tx-grid">
+        <div class="tx-grid" id="tx-grid">
           <article class="tx-card reveal">
             <a class="tx-page-link" href="/treatments/breast-cancer" aria-label="Open Breast Cancer details page"><svg
                 viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" aria-hidden="true">
@@ -944,31 +944,42 @@
       (function () {
         var track = document.getElementById('hospitals-track');
         if (!track) return;
-        if (!track.dataset.cloned) {
-          track.innerHTML += track.innerHTML;
-          track.dataset.cloned = 'true';
-        }
-        var originalCount = track.children.length / 2;
-        var index = 0;
+        var intervalId = null;
 
-        function step() {
-          var card = track.children[0];
-          if (!card) return;
-          var gap = parseFloat(getComputedStyle(track).gap) || 24;
-          var cardWidth = card.getBoundingClientRect().width;
-          index++;
-          track.style.transition = 'transform 0.8s ease';
-          track.style.transform = 'translateX(-' + (index * (cardWidth + gap)) + 'px)';
-          if (index >= originalCount) {
-            setTimeout(function () {
-              track.style.transition = 'none';
-              track.style.transform = 'translateX(0)';
-              index = 0;
-            }, 850);
+        // Restartable so cms.js can re-init the loop after replacing the
+        // card list with live data (card count/width may differ).
+        function start() {
+          if (intervalId) clearInterval(intervalId);
+          track.style.transition = 'none';
+          track.style.transform = 'translateX(0)';
+          track.dataset.cloned = '';
+          var baseHtml = track.innerHTML;
+          track.innerHTML = baseHtml + baseHtml;
+          var originalCount = track.children.length / 2;
+          var index = 0;
+
+          function step() {
+            var card = track.children[0];
+            if (!card) return;
+            var gap = parseFloat(getComputedStyle(track).gap) || 24;
+            var cardWidth = card.getBoundingClientRect().width;
+            index++;
+            track.style.transition = 'transform 0.8s ease';
+            track.style.transform = 'translateX(-' + (index * (cardWidth + gap)) + 'px)';
+            if (index >= originalCount) {
+              setTimeout(function () {
+                track.style.transition = 'none';
+                track.style.transform = 'translateX(0)';
+                index = 0;
+              }, 850);
+            }
           }
+
+          intervalId = setInterval(step, 6500);
         }
 
-        setInterval(step, 6500);
+        window.__startHospitalsCarousel = start;
+        start();
       })();
     </script>
 
@@ -1069,7 +1080,7 @@
           <p class="text-slate-600 text-sm mt-3">Hear from international patients who trusted us to coordinate their
             treatment journey in India.</p>
         </div>
-        <div class="grid sm:grid-cols-2 gap-5 lg:gap-6">
+        <div class="grid sm:grid-cols-2 gap-5 lg:gap-6" id="testimonials-grid">
           <div class="reveal aspect-video rounded-2xl overflow-hidden bg-secondary border border-slate-200 shadow-soft">
             <button type="button" class="yt-facade" data-youtube-id="kDikrM_2Qa4"
               aria-label="Play Patient story video 1">
@@ -1550,6 +1561,7 @@
 
     <script src="assets/js/analytics.js?v=20260803-perf3" defer></script>
     <script src="assets/js/doctors.js?v=20260803-perf3" defer></script>
+    <script src="assets/js/cms.js?v=1" defer></script>
     <script src="assets/js/main.min.js?v=20260803-hero1" defer></script>
 </body>
 

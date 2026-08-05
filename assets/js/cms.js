@@ -1,0 +1,204 @@
+/* ============================================
+   VaidTrack.com - CMS sync (treatments, hospitals,
+   testimonials, FAQs, hero) from the admin panel API.
+
+   Same pattern as doctors.js: fetch JSON, render into
+   existing mount points, keep hardcoded markup as a
+   fallback if the API is unreachable.
+   ============================================ */
+(function () {
+  // Same server as the site; adjust if the admin panel is mounted elsewhere.
+  var API_BASE = '/adminpanel';
+
+  function escapeHtml(str) {
+    return String(str == null ? '' : str)
+      .replace(/&/g, '&amp;')
+      .replace(/</g, '&lt;')
+      .replace(/>/g, '&gt;')
+      .replace(/"/g, '&quot;')
+      .replace(/'/g, '&#39;');
+  }
+
+  function fetchJson(path) {
+    return fetch(API_BASE + path, { credentials: 'omit' }).then(function (res) {
+      if (!res.ok) throw new Error(path + ' failed (' + res.status + ')');
+      return res.json();
+    });
+  }
+
+  function observeReveal(nodes) {
+    if (!nodes || !nodes.length) return;
+    if (!('IntersectionObserver' in window)) {
+      nodes.forEach(function (n) { n.classList.add('visible'); });
+      return;
+    }
+    var io = new IntersectionObserver(function (entries) {
+      entries.forEach(function (entry) {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('visible');
+          io.unobserve(entry.target);
+        }
+      });
+    }, { threshold: 0.12, rootMargin: '0px 0px -40px 0px' });
+    nodes.forEach(function (n) { io.observe(n); });
+  }
+
+  /* ---------- Hero ---------- */
+  function renderHero(hero) {
+    if (!hero) return;
+    var sub = document.getElementById('hero-subheadline');
+    if (sub && hero.subheadline) sub.textContent = hero.subheadline;
+
+    var list = document.getElementById('hero-trust-list');
+    if (list && Array.isArray(hero.trust_points) && hero.trust_points.length) {
+      var items = list.querySelectorAll('li span:last-child');
+      hero.trust_points.forEach(function (text, i) {
+        if (items[i]) items[i].textContent = text;
+      });
+    }
+  }
+
+  /* ---------- Treatments ---------- */
+  function renderTreatmentCard(t) {
+    var url = t.url || ('/treatments/' + t.slug + '.html');
+    var iconHtml = t.image
+      ? '<img src="' + escapeHtml(t.image) + '" alt="" width="128" height="128" loading="lazy" decoding="async">'
+      : '<span>' + escapeHtml((t.name || 'T').charAt(0)) + '</span>';
+
+    return (
+      '<article class="tx-card reveal">' +
+        '<a class="tx-page-link" href="' + escapeHtml(url) + '" aria-label="Open ' + escapeHtml(t.name) + ' details page">' +
+          '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" aria-hidden="true">' +
+            '<path stroke-linecap="round" stroke-linejoin="round" d="M7 17L17 7M10 7h7v7" /></svg></a>' +
+        '<div class="tx-icon tx-icon--svg" style="--tx-color:var(--primary)" aria-hidden="true">' + iconHtml + '</div>' +
+        '<div class="tx-body">' +
+          '<h3><a href="' + escapeHtml(url) + '">' + escapeHtml(t.name) + '</a></h3>' +
+          (t.category ? '<span class="tx-price">' + escapeHtml(t.category) + '</span>' : '') +
+          '<p>' + escapeHtml(t.overview || '') + '</p>' +
+        '</div>' +
+        '<a class="tx-book" href="' + escapeHtml(url) + '" aria-label="Learn more about ' + escapeHtml(t.name) + '">' +
+          '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" aria-hidden="true">' +
+            '<path stroke-linecap="round" stroke-linejoin="round" d="M7 17L17 7M10 7h7v7" /></svg></a>' +
+      '</article>'
+    );
+  }
+
+  function renderTreatments(list) {
+    var grid = document.getElementById('tx-grid');
+    if (!grid || !Array.isArray(list) || !list.length) return;
+    grid.innerHTML = list.map(renderTreatmentCard).join('');
+    observeReveal(grid.querySelectorAll('.reveal'));
+  }
+
+  /* ---------- Hospitals ---------- */
+  function renderHospitalCard(h) {
+    var img = h.cover_image || h.logo || '';
+    var imgHtml = img
+      ? '<img src="' + escapeHtml(img) + '" alt="' + escapeHtml(h.name) + '" class="w-full h-full object-cover" width="500" height="250" loading="lazy" decoding="async">'
+      : '';
+
+    return (
+      '<div class="hospital-card bg-white rounded-2xl shadow-card overflow-hidden border border-slate-100">' +
+        '<div class="hospital-card-img">' + imgHtml + '</div>' +
+        '<div class="hospital-card-info bg-[var(--section-bg)] p-6 flex flex-col justify-center">' +
+          '<h3 class="font-display text-xl sm:text-2xl font-bold text-primary mb-2">' + escapeHtml(h.name) + '</h3>' +
+          '<div class="w-12 h-1 bg-gold rounded-full mb-4" aria-hidden="true"></div>' +
+          (h.location ? '<p class="text-sm font-semibold text-secondary mb-1">Location</p><p class="text-slate-600 text-sm leading-relaxed">' + escapeHtml(h.location) + '</p>' : '') +
+        '</div>' +
+      '</div>'
+    );
+  }
+
+  function renderHospitals(list) {
+    var track = document.getElementById('hospitals-track');
+    if (!track || !Array.isArray(list) || !list.length) return;
+    track.innerHTML = list.map(renderHospitalCard).join('');
+    // The inline carousel script clones/animates this track at parse time
+    // using the original card count; restart it so it re-measures the
+    // live card list instead of animating against stale geometry.
+    if (typeof window.__startHospitalsCarousel === 'function') {
+      window.__startHospitalsCarousel();
+    }
+  }
+
+  /* ---------- Testimonials ---------- */
+  function renderTestimonialCard(t, i) {
+    var ytId = t.youtube_id || '';
+    var thumb = t.thumbnail || (ytId ? 'https://i.ytimg.com/vi_webp/' + ytId + '/hqdefault.webp' : '');
+
+    return (
+      '<div class="reveal aspect-video rounded-2xl overflow-hidden bg-secondary border border-slate-200 shadow-soft">' +
+        '<button type="button" class="yt-facade" data-youtube-id="' + escapeHtml(ytId) + '" aria-label="Play ' + escapeHtml(t.patient_name || 'patient story video ' + (i + 1)) + '">' +
+          (thumb ? '<img src="' + escapeHtml(thumb) + '" alt="" width="480" height="360" loading="lazy" decoding="async">' : '') +
+          '<span class="yt-facade-play" aria-hidden="true"></span>' +
+        '</button>' +
+      '</div>'
+    );
+  }
+
+  function renderTestimonials(list) {
+    var grid = document.getElementById('testimonials-grid');
+    if (!grid || !Array.isArray(list) || !list.length) return;
+    grid.innerHTML = list.map(renderTestimonialCard).join('');
+    observeReveal(grid.querySelectorAll('.reveal'));
+  }
+
+  /* ---------- FAQs ---------- */
+  function renderFaqItem(f) {
+    return (
+      '<div class="faq-item group border border-slate-200 rounded-2xl bg-white overflow-hidden transition-all duration-300 hover:border-primary/30 hover:shadow-xl hover:shadow-primary/5">' +
+        '<button type="button" class="faq-trigger w-full flex items-center justify-between gap-4 text-left px-5 sm:px-7 py-5 sm:py-6 font-semibold text-secondary transition-colors duration-200 group-hover:text-primary" aria-expanded="false">' +
+          '<span>' + escapeHtml(f.question) + '</span>' +
+          '<span class="faq-chevron-wrap shrink-0 flex items-center justify-center w-9 h-9 rounded-full bg-slate-50 text-primary transition-colors duration-300 group-hover:bg-primary/10">' +
+            '<svg class="faq-chevron w-4 h-4 transition-transform duration-300 ease-out" fill="none" stroke="currentColor" stroke-width="2.25" viewBox="0 0 24 24">' +
+              '<path stroke-linecap="round" stroke-linejoin="round" d="M19 9l-7 7-7-7" /></svg>' +
+          '</span>' +
+        '</button>' +
+        '<div class="faq-answer"><div class="faq-answer-inner px-5 sm:px-7 pb-5 sm:pb-6 text-sm sm:text-base text-slate-600 leading-relaxed border-t border-slate-100 pt-4">' +
+          '<p>' + escapeHtml(f.answer || '') + '</p>' +
+        '</div></div>' +
+      '</div>'
+    );
+  }
+
+  function bindFaqAccordion(container) {
+    var items = container.querySelectorAll('.faq-item');
+    items.forEach(function (item) {
+      var trigger = item.querySelector('.faq-trigger');
+      if (!trigger) return;
+      trigger.addEventListener('click', function () {
+        var isOpen = item.classList.contains('open');
+        items.forEach(function (other) {
+          other.classList.remove('open');
+          var t = other.querySelector('.faq-trigger');
+          if (t) t.setAttribute('aria-expanded', 'false');
+        });
+        if (!isOpen) {
+          item.classList.add('open');
+          trigger.setAttribute('aria-expanded', 'true');
+        }
+      });
+    });
+  }
+
+  function renderFaqs(list) {
+    var container = document.getElementById('faq-list');
+    if (!container || !Array.isArray(list) || !list.length) return;
+    container.innerHTML = list.map(renderFaqItem).join('');
+    bindFaqAccordion(container);
+  }
+
+  function init() {
+    fetchJson('/api/hero.json').then(renderHero).catch(function () {});
+    fetchJson('/api/treatments.json').then(renderTreatments).catch(function () {});
+    fetchJson('/api/hospitals.json').then(renderHospitals).catch(function () {});
+    fetchJson('/api/testimonials.json').then(renderTestimonials).catch(function () {});
+    fetchJson('/api/faqs.json').then(renderFaqs).catch(function () {});
+  }
+
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', init);
+  } else {
+    init();
+  }
+})();

@@ -2,7 +2,9 @@
    VaidTrack.com - Dynamic doctor cards from JSON
    ============================================ */
 (function () {
-  var DOCTORS_URL = '/data/doctors/doctors.json';
+  // Same server as the site; adjust if the admin panel is mounted elsewhere.
+  var DOCTORS_URL = '/adminpanel/api/doctors.json';
+  var DOCTORS_FALLBACK_URL = '/data/doctors/doctors.json';
   var IMAGE_BASE = 'images/doctors-images/';
   var WA_NUMBER = '918979983149';
 
@@ -156,16 +158,25 @@
     }
   }
 
-  function loadDoctors() {
-    return fetch(DOCTORS_URL, { credentials: 'same-origin' })
+  function fetchDoctorList(url) {
+    return fetch(url, { credentials: 'omit' })
       .then(function (res) {
-        if (!res.ok) throw new Error('Failed to load doctors.json (' + res.status + ')');
+        if (!res.ok) throw new Error('Failed to load ' + url + ' (' + res.status + ')');
         return res.json();
       })
       .then(function (data) {
-        if (!Array.isArray(data)) throw new Error('doctors.json must be an array');
+        if (!Array.isArray(data)) throw new Error(url + ' must be an array');
         return data.filter(function (d) { return d && d.name; });
       });
+  }
+
+  function loadDoctors() {
+    return fetchDoctorList(DOCTORS_URL).catch(function (err) {
+      if (typeof console !== 'undefined' && console.warn) {
+        console.warn('[doctors] admin API unavailable, falling back to static JSON', err);
+      }
+      return fetchDoctorList(DOCTORS_FALLBACK_URL);
+    });
   }
 
   function init() {

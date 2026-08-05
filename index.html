@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+﻿<!DOCTYPE html>
 <html lang="en">
 
 <head>
@@ -229,6 +229,16 @@
     }
   </style>
   <style>
+    header nav.nav-primary a { font-size: 0.861rem; }
+    @media (min-width: 1024px) {
+      header nav.nav-primary a { font-size: 0.911rem; }
+    }
+    header .site-logo-img { height: 1.734rem; max-width: 10.2rem; }
+    @media (min-width: 1024px) {
+      header .site-logo img, header .site-logo-img { height: 1.904rem; max-width: 11.22rem; }
+    }
+  </style>
+  <style>
     /* Self-hosted Inter variable font (latin + latin-ext). */
     @font-face {
       font-family: 'Inter';
@@ -279,11 +289,12 @@
       </a>
 
       <nav
-        class="hidden md:flex items-center gap-2.5 lg:gap-4 text-[0.73rem] lg:text-[0.7875rem] text-white whitespace-nowrap"
-        aria-label="Primary">
+        class="hidden md:flex items-center text-white/85 whitespace-nowrap nav-primary"
+        style="gap:20px" aria-label="Primary">
         <a href="/" class="hover:text-white transition-colors">Home</a>
         <a href="/treatment" class="hover:text-white transition-colors">Treatments</a>
         <a href="/doctors" class="hover:text-white transition-colors">Doctors</a>
+        <a href="/#location" class="hover:text-white transition-colors">Hospitals</a>
         <a href="/testimonials" class="hover:text-white transition-colors">Testimonials</a>
         <a href="/about-us" class="hover:text-white transition-colors">About Us</a>
         <a href="/faq" class="hover:text-white transition-colors">FAQ</a>
@@ -629,6 +640,268 @@
         <div class="doc-grid" aria-live="polite"></div>
       </div>
     </section>
+    <!-- ========== LOCATION - Partner Hospitals ========== -->
+    <section id="location" class="bg-soft scroll-mt-24 location-section">
+      <div class="w-full px-4 sm:px-6">
+        <div class="text-center mb-10 reveal">
+          <p class="text-sm font-semibold uppercase tracking-wider text-primary mb-2">Hospitals</p>
+          <h2 class="font-display text-3xl sm:text-4xl font-bold text-primary">Our Partner Hospitals</h2>
+          <div class="w-14 h-1 bg-gold rounded-full mx-auto mt-3" aria-hidden="true"></div>
+        </div>
+      </div>
+      <div class="w-full hospitals-main">
+      <div class="hospitals-viewport reveal">
+        <div class="hospitals-track" id="hospitals-track">
+          <!-- Card 1: Apollo Hospital, Delhi -->
+          <div class="hospital-card bg-white rounded-2xl shadow-card overflow-hidden border border-slate-100">
+            <div class="hospital-card-img">
+              <picture>
+                <source type="image/webp"
+                  srcset="images/hospital/apollo-delhi-480.webp?v=20260803-perf3 480w, images/hospital/apollo-delhi-800.webp?v=20260803-perf3 800w, images/hospital/apollo-delhi.webp?v=20260803-perf3 1024w"
+                  sizes="500px">
+                <img src="images/hospital/apollo-delhi.png?v=20260803-perf3" alt="Apollo Hospital, Delhi"
+                  class="w-full h-full object-cover" width="500" height="250" loading="lazy" decoding="async">
+              </picture>
+            </div>
+            <div class="hospital-card-info bg-[var(--section-bg)] p-6 flex flex-col justify-center">
+              <h3 class="font-display text-xl sm:text-2xl font-bold text-primary mb-2">Apollo Hospital, Delhi</h3>
+              <div class="w-12 h-1 bg-gold rounded-full mb-4" aria-hidden="true"></div>
+              <p class="text-sm font-semibold text-secondary mb-1">Address</p>
+              <p class="text-slate-600 text-sm leading-relaxed">
+                Sarita Vihar, Delhi Mathura Road,<br>
+                New Delhi - 110076,<br>
+                Delhi, India
+              </p>
+            </div>
+          </div>
+          <!-- Card 2: replace image/name/address with hospital details -->
+          <div class="hospital-card bg-white rounded-2xl shadow-card overflow-hidden border border-slate-100">
+            <div class="hospital-card-img">
+              <img src="images/hospital/hospital-care.webp" alt="Partner hospital" class="w-full h-full object-cover"
+                width="500" height="250" loading="lazy" decoding="async">
+            </div>
+            <div class="hospital-card-info bg-[var(--section-bg)] p-6 flex flex-col justify-center">
+              <h3 class="font-display text-xl sm:text-2xl font-bold text-primary mb-2">Hospital Name</h3>
+              <div class="w-12 h-1 bg-gold rounded-full mb-4" aria-hidden="true"></div>
+              <p class="text-sm font-semibold text-secondary mb-1">Address</p>
+              <p class="text-slate-600 text-sm leading-relaxed">
+                Address line 1,<br>
+                City - Pincode,<br>
+                India
+              </p>
+            </div>
+          </div>
+          <!-- Card 3: replace image/name/address with hospital details -->
+          <div class="hospital-card bg-white rounded-2xl shadow-card overflow-hidden border border-slate-100">
+            <div class="hospital-card-img">
+              <img src="images/hospital/hospital-care.webp" alt="Partner hospital" class="w-full h-full object-cover"
+                width="500" height="250" loading="lazy" decoding="async">
+            </div>
+            <div class="hospital-card-info bg-[var(--section-bg)] p-6 flex flex-col justify-center">
+              <h3 class="font-display text-xl sm:text-2xl font-bold text-primary mb-2">Hospital Name</h3>
+              <div class="w-12 h-1 bg-gold rounded-full mb-4" aria-hidden="true"></div>
+              <p class="text-sm font-semibold text-secondary mb-1">Address</p>
+              <p class="text-slate-600 text-sm leading-relaxed">
+                Address line 1,<br>
+                City - Pincode,<br>
+                India
+              </p>
+            </div>
+          </div>
+          <!-- Card 4: replace image/name/address with hospital details -->
+          <div class="hospital-card bg-white rounded-2xl shadow-card overflow-hidden border border-slate-100">
+            <div class="hospital-card-img">
+              <img src="images/hospital/hospital-care.webp" alt="Partner hospital" class="w-full h-full object-cover"
+                width="500" height="250" loading="lazy" decoding="async">
+            </div>
+            <div class="hospital-card-info bg-[var(--section-bg)] p-6 flex flex-col justify-center">
+              <h3 class="font-display text-xl sm:text-2xl font-bold text-primary mb-2">Hospital Name</h3>
+              <div class="w-12 h-1 bg-gold rounded-full mb-4" aria-hidden="true"></div>
+              <p class="text-sm font-semibold text-secondary mb-1">Address</p>
+              <p class="text-slate-600 text-sm leading-relaxed">
+                Address line 1,<br>
+                City - Pincode,<br>
+                India
+              </p>
+            </div>
+          </div>
+          <!-- Card 5: replace image/name/address with hospital details -->
+          <div class="hospital-card bg-white rounded-2xl shadow-card overflow-hidden border border-slate-100">
+            <div class="hospital-card-img">
+              <img src="images/hospital/hospital-care.webp" alt="Partner hospital" class="w-full h-full object-cover"
+                width="500" height="250" loading="lazy" decoding="async">
+            </div>
+            <div class="hospital-card-info bg-[var(--section-bg)] p-6 flex flex-col justify-center">
+              <h3 class="font-display text-xl sm:text-2xl font-bold text-primary mb-2">Hospital Name</h3>
+              <div class="w-12 h-1 bg-gold rounded-full mb-4" aria-hidden="true"></div>
+              <p class="text-sm font-semibold text-secondary mb-1">Address</p>
+              <p class="text-slate-600 text-sm leading-relaxed">
+                Address line 1,<br>
+                City - Pincode,<br>
+                India
+              </p>
+            </div>
+          </div>
+          <!-- Card 6: replace image/name/address with hospital details -->
+          <div class="hospital-card bg-white rounded-2xl shadow-card overflow-hidden border border-slate-100">
+            <div class="hospital-card-img">
+              <img src="images/hospital/hospital-care.webp" alt="Partner hospital" class="w-full h-full object-cover"
+                width="500" height="250" loading="lazy" decoding="async">
+            </div>
+            <div class="hospital-card-info bg-[var(--section-bg)] p-6 flex flex-col justify-center">
+              <h3 class="font-display text-xl sm:text-2xl font-bold text-primary mb-2">Hospital Name</h3>
+              <div class="w-12 h-1 bg-gold rounded-full mb-4" aria-hidden="true"></div>
+              <p class="text-sm font-semibold text-secondary mb-1">Address</p>
+              <p class="text-slate-600 text-sm leading-relaxed">
+                Address line 1,<br>
+                City - Pincode,<br>
+                India
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
+      </div>
+    </section>
+    <style>
+      .location-section {
+        padding-top: 194px;
+        padding-bottom: 194px;
+      }
+
+      @media (min-width: 640px) {
+        .location-section {
+          padding-top: 210px;
+          padding-bottom: 210px;
+        }
+      }
+
+      .hospitals-main {
+        padding-left: 4%;
+        padding-right: 4%;
+        box-sizing: border-box;
+      }
+
+      @media (max-width: 1024px) {
+        .hospitals-main {
+          padding-left: 6%;
+          padding-right: 6%;
+        }
+      }
+
+      @media (max-width: 640px) {
+        .hospitals-main {
+          padding-left: 3%;
+          padding-right: 3%;
+        }
+      }
+
+      .hospitals-viewport {
+        overflow: hidden;
+        width: 100%;
+        padding: 30px;
+        box-sizing: border-box;
+      }
+
+      .hospitals-track {
+        display: flex;
+        gap: 24px;
+        width: max-content;
+        transition: transform 0.8s ease;
+      }
+
+      .hospital-card {
+        flex: 0 0 300px;
+        width: 300px;
+        height: 350px;
+        display: flex;
+        flex-direction: column;
+        overflow: hidden;
+      }
+
+      .hospital-card-img {
+        flex: 0 0 175px;
+        height: 175px;
+        overflow: hidden;
+      }
+
+      .hospital-card-info {
+        flex: 1 1 auto;
+        min-height: 0;
+        overflow: hidden;
+        padding: 16px !important;
+      }
+
+      .hospital-card-info span {
+        margin-bottom: 0.5rem !important;
+      }
+
+      .hospital-card-info h3 {
+        font-size: 1rem !important;
+        line-height: 1.25 !important;
+        margin-bottom: 0.25rem !important;
+      }
+
+      .hospital-card-info .h-1 {
+        margin-bottom: 0.5rem !important;
+      }
+
+      .hospital-card-info p {
+        margin-bottom: 0.15rem !important;
+        font-size: 0.75rem !important;
+        line-height: 1.3 !important;
+      }
+
+      @media (max-width: 768px) {
+        .hospital-card {
+          flex: 0 0 300px;
+          width: 300px;
+          height: 350px;
+        }
+
+        .hospitals-viewport {
+          padding-left: calc((100% - 300px) / 2);
+          padding-right: calc((100% - 300px) / 2);
+        }
+      }
+
+      @media (prefers-reduced-motion: reduce) {
+        .hospitals-track {
+          transition: none;
+        }
+      }
+    </style>
+    <script>
+      (function () {
+        var track = document.getElementById('hospitals-track');
+        if (!track) return;
+        if (!track.dataset.cloned) {
+          track.innerHTML += track.innerHTML;
+          track.dataset.cloned = 'true';
+        }
+        var originalCount = track.children.length / 2;
+        var index = 0;
+
+        function step() {
+          var card = track.children[0];
+          if (!card) return;
+          var gap = parseFloat(getComputedStyle(track).gap) || 24;
+          var cardWidth = card.getBoundingClientRect().width;
+          index++;
+          track.style.transition = 'transform 0.8s ease';
+          track.style.transform = 'translateX(-' + (index * (cardWidth + gap)) + 'px)';
+          if (index >= originalCount) {
+            setTimeout(function () {
+              track.style.transition = 'none';
+              track.style.transform = 'translateX(0)';
+              index = 0;
+            }, 850);
+          }
+        }
+
+        setInterval(step, 6500);
+      })();
+    </script>
 
     <!-- ========== JOURNEY: How it works + Visa & Travel (combined) ========== -->
     <section id="how-it-works" class="scroll-mt-24" aria-labelledby="hiw-heading">
@@ -1019,258 +1292,6 @@
       </div>
     </section>
 
-    <!-- ========== LOCATION - Partner Hospitals ========== -->
-    <section id="location" class="py-16 sm:py-20 bg-soft">
-      <div class="max-w-6xl mx-auto px-4 sm:px-6">
-        <div class="text-center mb-10 reveal">
-          <p class="text-sm font-semibold uppercase tracking-wider text-primary mb-2">Hospitals</p>
-          <h2 class="font-display text-3xl sm:text-4xl font-bold text-primary">Our Partner Hospitals</h2>
-          <div class="w-14 h-1 bg-gold rounded-full mx-auto mt-3" aria-hidden="true"></div>
-        </div>
-      </div>
-      <div class="max-w-6xl mx-auto hospitals-main">
-      <div class="hospitals-viewport reveal">
-        <div class="hospitals-track" id="hospitals-track">
-          <!-- Card 1: Apollo Hospital, Delhi -->
-          <div class="hospital-card bg-white rounded-2xl shadow-card overflow-hidden border border-slate-100">
-            <div class="hospital-card-img">
-              <picture>
-                <source type="image/webp"
-                  srcset="images/hospital/apollo-delhi-480.webp?v=20260803-perf3 480w, images/hospital/apollo-delhi-800.webp?v=20260803-perf3 800w, images/hospital/apollo-delhi.webp?v=20260803-perf3 1024w"
-                  sizes="500px">
-                <img src="images/hospital/apollo-delhi.png?v=20260803-perf3" alt="Apollo Hospital, Delhi"
-                  class="w-full h-full object-cover" width="500" height="250" loading="lazy" decoding="async">
-              </picture>
-            </div>
-            <div class="hospital-card-info bg-[var(--section-bg)] p-6 flex flex-col justify-center">
-              <h3 class="font-display text-xl sm:text-2xl font-bold text-primary mb-2">Apollo Hospital, Delhi</h3>
-              <div class="w-12 h-1 bg-gold rounded-full mb-4" aria-hidden="true"></div>
-              <p class="text-sm font-semibold text-secondary mb-1">Address</p>
-              <p class="text-slate-600 text-sm leading-relaxed">
-                Sarita Vihar, Delhi Mathura Road,<br>
-                New Delhi - 110076,<br>
-                Delhi, India
-              </p>
-            </div>
-          </div>
-          <!-- Card 2: replace image/name/address with hospital details -->
-          <div class="hospital-card bg-white rounded-2xl shadow-card overflow-hidden border border-slate-100">
-            <div class="hospital-card-img">
-              <img src="images/hospital/hospital-care.webp" alt="Partner hospital" class="w-full h-full object-cover"
-                width="500" height="250" loading="lazy" decoding="async">
-            </div>
-            <div class="hospital-card-info bg-[var(--section-bg)] p-6 flex flex-col justify-center">
-              <h3 class="font-display text-xl sm:text-2xl font-bold text-primary mb-2">Hospital Name</h3>
-              <div class="w-12 h-1 bg-gold rounded-full mb-4" aria-hidden="true"></div>
-              <p class="text-sm font-semibold text-secondary mb-1">Address</p>
-              <p class="text-slate-600 text-sm leading-relaxed">
-                Address line 1,<br>
-                City - Pincode,<br>
-                India
-              </p>
-            </div>
-          </div>
-          <!-- Card 3: replace image/name/address with hospital details -->
-          <div class="hospital-card bg-white rounded-2xl shadow-card overflow-hidden border border-slate-100">
-            <div class="hospital-card-img">
-              <img src="images/hospital/hospital-care.webp" alt="Partner hospital" class="w-full h-full object-cover"
-                width="500" height="250" loading="lazy" decoding="async">
-            </div>
-            <div class="hospital-card-info bg-[var(--section-bg)] p-6 flex flex-col justify-center">
-              <h3 class="font-display text-xl sm:text-2xl font-bold text-primary mb-2">Hospital Name</h3>
-              <div class="w-12 h-1 bg-gold rounded-full mb-4" aria-hidden="true"></div>
-              <p class="text-sm font-semibold text-secondary mb-1">Address</p>
-              <p class="text-slate-600 text-sm leading-relaxed">
-                Address line 1,<br>
-                City - Pincode,<br>
-                India
-              </p>
-            </div>
-          </div>
-          <!-- Card 4: replace image/name/address with hospital details -->
-          <div class="hospital-card bg-white rounded-2xl shadow-card overflow-hidden border border-slate-100">
-            <div class="hospital-card-img">
-              <img src="images/hospital/hospital-care.webp" alt="Partner hospital" class="w-full h-full object-cover"
-                width="500" height="250" loading="lazy" decoding="async">
-            </div>
-            <div class="hospital-card-info bg-[var(--section-bg)] p-6 flex flex-col justify-center">
-              <h3 class="font-display text-xl sm:text-2xl font-bold text-primary mb-2">Hospital Name</h3>
-              <div class="w-12 h-1 bg-gold rounded-full mb-4" aria-hidden="true"></div>
-              <p class="text-sm font-semibold text-secondary mb-1">Address</p>
-              <p class="text-slate-600 text-sm leading-relaxed">
-                Address line 1,<br>
-                City - Pincode,<br>
-                India
-              </p>
-            </div>
-          </div>
-          <!-- Card 5: replace image/name/address with hospital details -->
-          <div class="hospital-card bg-white rounded-2xl shadow-card overflow-hidden border border-slate-100">
-            <div class="hospital-card-img">
-              <img src="images/hospital/hospital-care.webp" alt="Partner hospital" class="w-full h-full object-cover"
-                width="500" height="250" loading="lazy" decoding="async">
-            </div>
-            <div class="hospital-card-info bg-[var(--section-bg)] p-6 flex flex-col justify-center">
-              <h3 class="font-display text-xl sm:text-2xl font-bold text-primary mb-2">Hospital Name</h3>
-              <div class="w-12 h-1 bg-gold rounded-full mb-4" aria-hidden="true"></div>
-              <p class="text-sm font-semibold text-secondary mb-1">Address</p>
-              <p class="text-slate-600 text-sm leading-relaxed">
-                Address line 1,<br>
-                City - Pincode,<br>
-                India
-              </p>
-            </div>
-          </div>
-          <!-- Card 6: replace image/name/address with hospital details -->
-          <div class="hospital-card bg-white rounded-2xl shadow-card overflow-hidden border border-slate-100">
-            <div class="hospital-card-img">
-              <img src="images/hospital/hospital-care.webp" alt="Partner hospital" class="w-full h-full object-cover"
-                width="500" height="250" loading="lazy" decoding="async">
-            </div>
-            <div class="hospital-card-info bg-[var(--section-bg)] p-6 flex flex-col justify-center">
-              <h3 class="font-display text-xl sm:text-2xl font-bold text-primary mb-2">Hospital Name</h3>
-              <div class="w-12 h-1 bg-gold rounded-full mb-4" aria-hidden="true"></div>
-              <p class="text-sm font-semibold text-secondary mb-1">Address</p>
-              <p class="text-slate-600 text-sm leading-relaxed">
-                Address line 1,<br>
-                City - Pincode,<br>
-                India
-              </p>
-            </div>
-          </div>
-        </div>
-      </div>
-      </div>
-    </section>
-    <style>
-      .hospitals-main {
-        padding-left: 4%;
-        padding-right: 4%;
-        box-sizing: border-box;
-      }
-
-      @media (max-width: 1024px) {
-        .hospitals-main {
-          padding-left: 6%;
-          padding-right: 6%;
-        }
-      }
-
-      @media (max-width: 640px) {
-        .hospitals-main {
-          padding-left: 3%;
-          padding-right: 3%;
-        }
-      }
-
-      .hospitals-viewport {
-        overflow: hidden;
-        width: 100%;
-        padding: 30px;
-        border: 1px solid #e2e8f0;
-        border-radius: 1rem;
-        box-sizing: border-box;
-      }
-
-      .hospitals-track {
-        display: flex;
-        gap: 24px;
-        width: max-content;
-        transition: transform 0.8s ease;
-      }
-
-      .hospital-card {
-        flex: 0 0 300px;
-        width: 300px;
-        height: 350px;
-        display: flex;
-        flex-direction: column;
-        overflow: hidden;
-      }
-
-      .hospital-card-img {
-        flex: 0 0 175px;
-        height: 175px;
-        overflow: hidden;
-      }
-
-      .hospital-card-info {
-        flex: 1 1 auto;
-        min-height: 0;
-        overflow: hidden;
-        padding: 16px !important;
-      }
-
-      .hospital-card-info span {
-        margin-bottom: 0.5rem !important;
-      }
-
-      .hospital-card-info h3 {
-        font-size: 1rem !important;
-        line-height: 1.25 !important;
-        margin-bottom: 0.25rem !important;
-      }
-
-      .hospital-card-info .h-1 {
-        margin-bottom: 0.5rem !important;
-      }
-
-      .hospital-card-info p {
-        margin-bottom: 0.15rem !important;
-        font-size: 0.75rem !important;
-        line-height: 1.3 !important;
-      }
-
-      @media (max-width: 768px) {
-        .hospital-card {
-          flex: 0 0 300px;
-          width: 300px;
-          height: 350px;
-        }
-
-        .hospitals-viewport {
-          padding-left: calc((100% - 300px) / 2);
-          padding-right: calc((100% - 300px) / 2);
-        }
-      }
-
-      @media (prefers-reduced-motion: reduce) {
-        .hospitals-track {
-          transition: none;
-        }
-      }
-    </style>
-    <script>
-      (function () {
-        var track = document.getElementById('hospitals-track');
-        if (!track) return;
-        if (!track.dataset.cloned) {
-          track.innerHTML += track.innerHTML;
-          track.dataset.cloned = 'true';
-        }
-        var originalCount = track.children.length / 2;
-        var index = 0;
-
-        function step() {
-          var card = track.children[0];
-          if (!card) return;
-          var gap = parseFloat(getComputedStyle(track).gap) || 24;
-          var cardWidth = card.getBoundingClientRect().width;
-          index++;
-          track.style.transition = 'transform 0.8s ease';
-          track.style.transform = 'translateX(-' + (index * (cardWidth + gap)) + 'px)';
-          if (index >= originalCount) {
-            setTimeout(function () {
-              track.style.transition = 'none';
-              track.style.transform = 'translateX(0)';
-              index = 0;
-            }, 850);
-          }
-        }
-
-        setInterval(step, 6500);
-      })();
-    </script>
 
     <!-- ========== 6. FAQ ========== -->
     <section id="faq" class="py-16 sm:py-24 bg-soft scroll-mt-24 relative overflow-hidden">

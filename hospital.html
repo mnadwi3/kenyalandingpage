@@ -12,82 +12,128 @@
   <link rel="preload" href="/assets/fonts/inter-latin.woff2" as="font" type="font/woff2" crossorigin>
   <link rel="stylesheet" href="/assets/css/tailwind.min.css?v=20260803-perf3">
   <link rel="stylesheet" href="/assets/css/styles.min.css?v=20260805-faqcards8">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Source+Serif+4:opsz,wght@8..60,500;8..60,600;8..60,700&display=swap" rel="stylesheet">
   <script>
     window.dataLayer = window.dataLayer || [];
     window.gtag = window.gtag || function () { window.dataLayer.push(arguments); };
   </script>
   <style>
+    /* ==========================================================
+       Design tokens — refined within the existing VaidTrack brand
+       (blue #0F4C81 / navy #0B3A61 / gold #C9A24B), not a new
+       identity. Neutrals are given a faint blue hue-bias rather
+       than left as flat grey, and a serif display face (Source
+       Serif 4) is paired with the site's existing Inter body type
+       to read as a clinical-authority publication rather than a
+       generic SaaS template.
+       ========================================================== */
     :root {
       --hp-primary: var(--primary, #0F4C81);
       --hp-secondary: var(--secondary, #0B3A61);
-      --hp-gold: var(--gold, #C9A24B);
-      --hp-ink: #1E293B;
-      --hp-muted: #64748B;
-      --hp-border: #EEF2F6;
-      --hp-soft: #F8FAFC;
+      /* NOTE: the site's own --gold variable (assets/css/styles.css:22)
+         is actually #0F4C81 — identical to --primary, not an actual gold
+         tone — so every var(--gold) usage sitewide (e.g. .bg-gold heading
+         underlines) silently renders blue instead of gold. That's a
+         pre-existing sitewide bug, not something to fix here without your
+         go-ahead since it'd change other pages too. Hardcoding the real
+         gold value locally so this page's CTA looks intentional. */
+      --hp-gold: #C9A24B;
+      --hp-ink: #16233A;
+      --hp-muted: #59677D;
+      --hp-border: #E7EDF3;
+      --hp-hairline: rgba(15, 76, 129, 0.14);
+      --hp-surface: #FCFCFA;
+      --hp-tint: #EFF4F9;
+      --hp-display: 'Source Serif 4', Georgia, serif;
     }
 
-    .hp-wrap { max-width: 72rem; margin: 0 auto; padding-left: 1rem; padding-right: 1rem; }
-    @media (min-width: 640px) { .hp-wrap { padding-left: 1.5rem; padding-right: 1.5rem; } }
+    .hp-wrap { max-width: 72rem; margin: 0 auto; padding-left: 1.25rem; padding-right: 1.25rem; }
+    @media (min-width: 640px) { .hp-wrap { padding-left: 2rem; padding-right: 2rem; } }
 
-    .hp-section { padding-top: 3rem; padding-bottom: 3rem; }
+    .hp-narrow { max-width: 34rem; }
+
+    .hp-section { padding-top: 4.5rem; padding-bottom: 4.5rem; }
+    @media (max-width: 640px) { .hp-section { padding-top: 3rem; padding-bottom: 3rem; } }
+
+    .hp-eyebrow {
+      font-size: 0.72rem;
+      font-weight: 700;
+      letter-spacing: 0.11em;
+      text-transform: uppercase;
+      color: var(--hp-primary);
+      margin-bottom: 0.6rem;
+    }
+
     .hp-section-title {
-      font-size: 1.375rem;
-      font-weight: 800;
-      color: var(--hp-secondary);
-      margin-bottom: 1.5rem;
+      font-family: var(--hp-display);
+      font-size: 1.65rem;
+      font-weight: 600;
+      color: var(--hp-ink);
       letter-spacing: -0.01em;
+      text-wrap: balance;
     }
-    @media (min-width: 640px) { .hp-section-title { font-size: 1.625rem; } }
+    @media (min-width: 640px) { .hp-section-title { font-size: 2rem; } }
+
+    .hp-section-head { margin-bottom: 2rem; }
+    .hp-section-head-row { display: flex; align-items: flex-end; justify-content: space-between; gap: 1.5rem; flex-wrap: wrap; }
+
+    /* Reveal-on-scroll: local, tiny, respects reduced motion */
+    .hp-reveal { opacity: 0; transform: translateY(14px); transition: opacity 0.6s ease, transform 0.6s ease; }
+    .hp-reveal.is-visible { opacity: 1; transform: none; }
+    @media (prefers-reduced-motion: reduce) {
+      .hp-reveal { opacity: 1; transform: none; transition: none; }
+    }
 
     /* ---------- Hero ---------- */
+    .hp-hero-band { background: var(--hp-secondary); }
     .hp-hero {
       position: relative;
-      border-radius: 1.25rem;
-      overflow: hidden;
-      min-height: 380px;
+      min-height: 460px;
       display: flex;
-      align-items: flex-end;
-      background: linear-gradient(120deg, var(--hp-secondary), #103a63);
-      box-shadow: 0 18px 40px -18px rgba(11, 58, 97, 0.45);
+      align-items: center;
+      overflow: hidden;
     }
+    @media (min-width: 900px) { .hp-hero { min-height: 520px; } }
 
-    .hp-hero img {
-      position: absolute;
-      inset: 0;
-      width: 100%;
-      height: 100%;
-      object-fit: cover;
-      z-index: 0;
-    }
-
-    .hp-hero::after {
+    /* Photo spans the full hero (both the text side and the "image side")
+       instead of being confined to a solid-color block on the left — a
+       lighter translucent wash sits over it so the photo stays visible
+       through the text area rather than being hidden behind opaque navy. */
+    .hp-hero-media { position: absolute; inset: 0; z-index: 0; overflow: hidden; }
+    .hp-hero-media img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; }
+    .hp-hero-media::after {
       content: '';
       position: absolute;
       inset: 0;
-      background: linear-gradient(100deg, rgba(11,58,97,0.94) 0%, rgba(11,58,97,0.68) 48%, rgba(11,58,97,0.18) 100%);
-      z-index: 1;
+      background: linear-gradient(100deg, rgba(11,58,97,0.62) 0%, rgba(11,58,97,0.42) 45%, rgba(11,58,97,0.22) 70%, rgba(11,58,97,0.32) 100%);
+    }
+    @media (max-width: 899px) {
+      .hp-hero-media::after { background: linear-gradient(180deg, rgba(11,58,97,0.35) 0%, rgba(11,58,97,0.78) 100%); }
     }
 
-    .hp-hero-content {
+    .hp-hero-copy {
       position: relative;
       z-index: 2;
-      padding: 2.25rem;
       color: #fff;
-      max-width: 640px;
+      padding: 3rem 1.25rem 3rem;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      text-shadow: 0 2px 16px rgba(4, 18, 34, 0.55);
     }
-    @media (max-width: 640px) { .hp-hero-content { padding: 1.5rem; } }
+    @media (min-width: 640px) { .hp-hero-copy { padding: 3.5rem 2rem; } }
+    @media (min-width: 900px) { .hp-hero-copy { padding: 4rem 2rem; max-width: 36rem; } }
 
     .hp-accreditation-pills {
       display: flex;
-      justify-content: flex-start;
       align-items: center;
       gap: 12px;
-      margin-bottom: 1.35rem;
+      margin-bottom: 1.5rem;
       max-width: 100%;
       overflow-x: auto;
-      overflow-y: visible;
-      padding: 6px 2px 10px;
+      padding: 4px 2px 8px;
       -ms-overflow-style: none;
       scrollbar-width: none;
     }
@@ -97,109 +143,109 @@
       position: relative;
       display: inline-flex;
       align-items: center;
-      justify-content: flex-start;
       flex-shrink: 0;
-      gap: 0.6rem;
-      height: 44px;
-      background: rgba(255,255,255,0.12);
-      -webkit-backdrop-filter: blur(16px);
-      backdrop-filter: blur(16px);
-      border: 1px solid rgba(255,255,255,0.2);
+      gap: 0.55rem;
+      height: 40px;
+      background: rgba(255,255,255,0.1);
+      -webkit-backdrop-filter: blur(14px);
+      backdrop-filter: blur(14px);
+      border: 1px solid rgba(255,255,255,0.22);
       border-radius: 999px;
-      padding: 0 18px;
-      font-size: 13px;
+      padding: 0 16px;
+      font-size: 12px;
       font-weight: 700;
-      letter-spacing: 0.3px;
+      letter-spacing: 0.04em;
+      text-transform: uppercase;
       color: #fff;
-      line-height: 1;
-      box-shadow: 0 8px 24px -8px rgba(3, 12, 26, 0.55), inset 0 1px 0 rgba(255,255,255,0.08);
-      cursor: pointer;
-      transition: transform 300ms ease, box-shadow 300ms ease, background 300ms ease;
+      transition: transform 250ms ease, background 250ms ease, box-shadow 250ms ease;
+      cursor: default;
     }
+    .hp-accreditation-pill:hover { transform: translateY(-2px); background: rgba(255,255,255,0.16); box-shadow: 0 10px 22px -12px rgba(3,12,26,0.6); }
+    .hp-accreditation-pill .hp-pill-check { flex-shrink: 0; color: rgba(255,255,255,0.8); }
 
-    .hp-accreditation-pill::before {
-      content: '';
-      position: absolute;
-      inset: -10px;
-      border-radius: 999px;
-      background: radial-gradient(circle, rgba(11, 94, 215, 0.45) 0%, rgba(11, 94, 215, 0) 70%);
-      opacity: 0;
-      transition: opacity 300ms ease;
-      z-index: -1;
-      pointer-events: none;
+    .hp-name {
+      font-family: var(--hp-display);
+      font-size: 2rem;
+      font-weight: 600;
+      margin-bottom: 0.7rem;
+      letter-spacing: -0.01em;
+      line-height: 1.1;
+      text-wrap: balance;
     }
+    @media (min-width: 640px) { .hp-name { font-size: 2.75rem; } }
 
-    .hp-accreditation-pill:hover,
-    .hp-accreditation-pill:focus-visible {
-      transform: translateY(-3px) scale(1.03);
-      box-shadow: 0 16px 32px -10px rgba(3, 12, 26, 0.65), inset 0 1px 0 rgba(255,255,255,0.14);
-      background: rgba(255,255,255,0.16);
-    }
+    .hp-location { display: flex; align-items: center; gap: 0.45rem; color: rgba(255,255,255,0.78); margin-bottom: 1rem; font-size: 0.9rem; }
+    .hp-short-desc { color: rgba(255,255,255,0.88); font-size: 1rem; line-height: 1.65; margin-bottom: 1.85rem; max-width: 34rem; }
 
-    .hp-accreditation-pill:hover::before,
-    .hp-accreditation-pill:focus-visible::before {
-      opacity: 1;
-    }
-
-    .hp-accreditation-pill:focus-visible {
-      outline: 2px solid #fff;
-      outline-offset: 2px;
-    }
-
-    .hp-accreditation-pill .hp-pill-check { flex-shrink: 0; display: block; color: rgba(255,255,255,0.85); }
-    .hp-accreditation-pill span { display: inline-block; white-space: nowrap; color: #fff; }
-
-    @media (max-width: 640px) {
-      .hp-accreditation-pills { flex-wrap: nowrap; }
-    }
-
-    .hp-name { font-size: 1.75rem; font-weight: 800; margin-bottom: 0.6rem; letter-spacing: -0.01em; line-height: 1.15; }
-    @media (min-width: 640px) { .hp-name { font-size: 2.5rem; } }
-
-    .hp-location { display: flex; align-items: center; gap: 0.4rem; color: rgba(255,255,255,0.85); margin-bottom: 0.85rem; font-size: 0.9rem; }
-    .hp-short-desc { color: rgba(255,255,255,0.92); font-size: 0.95rem; line-height: 1.55; margin-bottom: 1.5rem; max-width: 34rem; }
-
-    .hp-hero-actions { display: flex; flex-wrap: wrap; gap: 0.75rem; }
+    .hp-hero-actions { display: flex; flex-wrap: wrap; gap: 0.85rem; }
     .hp-btn {
       display: inline-flex;
       align-items: center;
       gap: 0.5rem;
       font-weight: 700;
       font-size: 0.875rem;
-      padding: 0.8rem 1.4rem;
-      border-radius: 0.6rem;
-      transition: transform 0.15s ease, box-shadow 0.15s ease, opacity 0.15s ease;
+      padding: 0.85rem 1.5rem;
+      border-radius: 0.5rem;
+      transition: transform 0.15s ease, box-shadow 0.15s ease, background 0.15s ease;
       text-decoration: none;
     }
     .hp-btn:hover { transform: translateY(-1px); }
-    .hp-btn-gold { background: var(--hp-gold); color: #fff; box-shadow: 0 10px 20px -12px rgba(15,23,42,0.35); }
-    .hp-btn-outline { border: 1.5px solid rgba(255,255,255,0.65); color: #fff; }
-    .hp-btn-outline:hover { background: rgba(255,255,255,0.12); }
+    .hp-btn-gold { background: var(--hp-gold); color: #fff; box-shadow: 0 10px 22px -12px rgba(15,23,42,0.4); }
+    .hp-btn-gold:hover { background: #b8923f; }
     .hp-btn-primary { background: var(--hp-primary); color: #fff; }
     .hp-btn-primary:hover { background: var(--hp-secondary); }
     .hp-btn-wa { background: #25D366; color: #fff; }
     .hp-btn-wa:hover { background: #1EBE5A; }
 
-    /* ---------- Quick facts ---------- */
-    .hp-quick-facts { display: grid; grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)); gap: 1rem; }
-    .hp-quick-fact {
-      text-align: center;
+    /* ---------- Quick facts: editorial stat strip, not widget cards ---------- */
+    .hp-stat-strip {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
       background: #fff;
       border: 1px solid var(--hp-border);
-      border-radius: 0.9rem;
-      padding: 1.5rem 0.75rem;
-      transition: box-shadow 0.15s ease, transform 0.15s ease;
+      border-radius: 1rem;
+      overflow: hidden;
+      box-shadow: 0 24px 50px -34px rgba(11,58,97,0.3);
     }
-    .hp-quick-fact:hover { box-shadow: 0 12px 24px -14px rgba(15,76,129,0.35); transform: translateY(-2px); }
-    .hp-quick-fact img { width: 75px; height: 75px; object-fit: contain; margin: 0 auto 0.75rem; }
-    .hp-fact-value { font-size: 1.3rem; font-weight: 800; color: var(--hp-primary); letter-spacing: -0.01em; }
-    .hp-fact-label { font-size: 0.75rem; color: var(--hp-primary); margin-top: 0.15rem; }
+    @media (min-width: 700px) { .hp-stat-strip { grid-template-columns: repeat(3, 1fr); } }
+    @media (min-width: 1000px) { .hp-stat-strip { grid-template-columns: repeat(6, 1fr); } }
+
+    .hp-stat {
+      padding: 1.75rem 1.25rem;
+      text-align: center;
+      border-right: 1px solid var(--hp-hairline);
+      border-bottom: 1px solid var(--hp-hairline);
+    }
+    .hp-stat:nth-child(2n) { border-right: none; }
+    @media (min-width: 700px) { .hp-stat:nth-child(2n) { border-right: 1px solid var(--hp-hairline); } .hp-stat:nth-child(3n) { border-right: none; } }
+    @media (min-width: 1000px) { .hp-stat:nth-child(3n) { border-right: 1px solid var(--hp-hairline); } .hp-stat:nth-child(6n) { border-right: none; } .hp-stat { border-bottom: none; } }
+
+    .hp-stat-icon { width: 34px; height: 34px; object-fit: contain; margin: 0 auto 0.7rem; }
+    .hp-stat-value {
+      font-family: var(--hp-display);
+      font-size: 1.65rem;
+      font-weight: 600;
+      color: var(--hp-primary);
+      letter-spacing: -0.01em;
+      font-variant-numeric: tabular-nums;
+      line-height: 1.1;
+    }
+    .hp-stat-label { font-size: 0.72rem; color: var(--hp-muted); margin-top: 0.35rem; letter-spacing: 0.02em; }
 
     /* ---------- About ---------- */
-    .hp-about-grid { display: grid; gap: 2rem; align-items: stretch; }
-    @media (min-width: 992px) { .hp-about-grid { grid-template-columns: 1.1fr 0.9fr; } }
-    .hp-about-body { color: var(--hp-muted); font-size: 0.95rem; line-height: 1.7; }
-    .hp-about-body p { margin-bottom: 0.9rem; }
+    .hp-about-grid { display: grid; gap: 2.5rem; align-items: stretch; }
+    @media (min-width: 992px) { .hp-about-grid { grid-template-columns: 1.15fr 0.85fr; } }
+    .hp-about-body { color: var(--hp-ink); font-size: 1rem; line-height: 1.8; max-width: 42rem; }
+    .hp-about-body p { margin-bottom: 1.1rem; }
+    .hp-about-body p:first-of-type::first-letter {
+      font-family: var(--hp-display);
+      font-size: 3.2rem;
+      font-weight: 600;
+      float: left;
+      line-height: 0.85;
+      padding: 0.1rem 0.35rem 0 0;
+      color: var(--hp-primary);
+    }
 
     /* Pinning is done in JS (not CSS position:sticky) because the site sets
        overflow-x:hidden on <html>, which breaks position:sticky in most
@@ -210,76 +256,100 @@
     .hp-sticky-form { width: 100%; }
     .hp-sticky-form.is-fixed { position: fixed; top: 96px; }
     .hp-sticky-form.is-bottom { position: absolute; left: 0; bottom: 0; top: auto; }
-    .hp-sticky-form .hp-card-panel { box-shadow: 0 20px 40px -22px rgba(15,23,42,0.25); }
-    .hp-sticky-form h3 { font-size: 1.05rem; font-weight: 800; color: var(--hp-secondary); margin-bottom: 0.35rem; }
-    .hp-sticky-form p { font-size: 0.82rem; color: var(--hp-muted); margin-bottom: 1.1rem; }
+    .hp-sticky-form .hp-card-panel { box-shadow: 0 26px 54px -30px rgba(11,58,97,0.35); }
+    .hp-sticky-form h3 { font-family: var(--hp-display); font-size: 1.2rem; font-weight: 600; color: var(--hp-ink); margin-bottom: 0.4rem; }
+    .hp-sticky-form p { font-size: 0.85rem; color: var(--hp-muted); margin-bottom: 1.25rem; line-height: 1.5; }
     @media (max-width: 991px) {
       .hp-sticky-form.is-fixed, .hp-sticky-form.is-bottom { position: static !important; }
     }
 
     /* ---------- Specialties ---------- */
-    .hp-specialty-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(140px, 1fr)); gap: 1rem; }
+    .hp-specialty-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(150px, 1fr)); gap: 1.1rem; }
     .hp-specialty-card {
       text-align: center;
       border: 1px solid var(--hp-border);
-      border-radius: 0.9rem;
-      padding: 1.4rem 0.75rem;
+      border-radius: 1rem;
+      padding: 1.6rem 1rem;
       background: #fff;
-      transition: box-shadow 0.15s ease, transform 0.15s ease, border-color 0.15s ease;
+      transition: box-shadow 0.2s ease, transform 0.2s ease, border-color 0.2s ease;
     }
-    .hp-specialty-card:hover { box-shadow: 0 12px 24px -14px rgba(15,76,129,0.3); transform: translateY(-2px); border-color: rgba(15,76,129,0.25); }
-    .hp-specialty-card img { width: 30px; height: 30px; object-fit: contain; margin: 0 auto 0.65rem; }
-    .hp-specialty-name { font-size: 0.85rem; font-weight: 700; color: var(--hp-secondary); }
+    .hp-specialty-card:hover { box-shadow: 0 18px 34px -20px rgba(15,76,129,0.35); transform: translateY(-3px); border-color: rgba(15,76,129,0.28); }
+    .hp-specialty-icon {
+      width: 56px;
+      height: 56px;
+      border-radius: 50%;
+      background: var(--hp-tint);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin: 0 auto 0.85rem;
+    }
+    .hp-specialty-icon img { width: 26px; height: 26px; object-fit: contain; }
+    .hp-specialty-name { font-size: 0.85rem; font-weight: 700; color: var(--hp-ink); }
 
     /* ---------- Doctors ---------- */
-    .hp-doctor-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(230px, 1fr)); gap: 1.25rem; }
+    .hp-doctor-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(240px, 1fr)); gap: 1.35rem; }
     .hp-doctor-card {
       border: 1px solid var(--hp-border);
-      border-radius: 1rem;
-      padding: 1.3rem;
+      border-radius: 1.1rem;
+      padding: 1.4rem;
       display: flex;
-      gap: 0.9rem;
+      gap: 1rem;
       align-items: flex-start;
       background: #fff;
-      transition: box-shadow 0.15s ease, transform 0.15s ease;
+      transition: box-shadow 0.2s ease, transform 0.2s ease;
     }
-    .hp-doctor-card:hover { box-shadow: 0 14px 28px -16px rgba(15,23,42,0.25); transform: translateY(-2px); }
+    .hp-doctor-card:hover { box-shadow: 0 20px 40px -22px rgba(15,23,42,0.3); transform: translateY(-3px); }
     .hp-doctor-photo, .hp-doctor-photo-fallback {
-      width: 60px;
-      height: 60px;
+      width: 64px;
+      height: 64px;
       border-radius: 50%;
       object-fit: cover;
-      background: var(--hp-border);
+      background: var(--hp-tint);
       flex-shrink: 0;
+      border: 2px solid #fff;
+      box-shadow: 0 0 0 1px var(--hp-border);
     }
-    .hp-doctor-name { font-weight: 700; color: var(--hp-secondary); font-size: 0.95rem; }
-    .hp-doctor-qual { font-size: 0.78rem; color: var(--hp-muted); margin-top: 0.15rem; }
-    .hp-doctor-link { font-size: 0.78rem; color: var(--hp-primary); font-weight: 700; display: inline-block; margin-top: 0.6rem; text-decoration: none; }
+    .hp-doctor-name { font-weight: 700; color: var(--hp-ink); font-size: 0.98rem; }
+    .hp-doctor-qual { font-size: 0.78rem; color: var(--hp-muted); margin-top: 0.2rem; }
+    .hp-doctor-link { font-size: 0.78rem; color: var(--hp-primary); font-weight: 700; display: inline-block; margin-top: 0.7rem; text-decoration: none; }
     .hp-doctor-link:hover { text-decoration: underline; }
 
-    /* ---------- Contact / enquiry ---------- */
-    .hp-contact-list { list-style: none; padding: 0; margin: 0 0 1.25rem; }
-    .hp-contact-list li { display: flex; align-items: center; gap: 0.6rem; font-size: 0.9rem; color: #334155; margin-bottom: 0.65rem; }
-    .hp-contact-list li svg { color: var(--hp-primary); flex-shrink: 0; }
+    /* ---------- Contact ---------- */
+    .hp-contact-list { list-style: none; padding: 0; margin: 0 0 1.4rem; }
+    .hp-contact-list li { display: flex; align-items: center; gap: 0.75rem; font-size: 0.92rem; color: var(--hp-ink); margin-bottom: 0.85rem; }
+    .hp-contact-icon {
+      width: 34px;
+      height: 34px;
+      border-radius: 50%;
+      background: var(--hp-tint);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+      color: var(--hp-primary);
+    }
 
     .hp-enquiry-form { display: grid; grid-template-columns: 1fr 1fr; gap: 0.85rem; }
     @media (max-width: 560px) { .hp-enquiry-form { grid-template-columns: 1fr; } }
     .hp-enquiry-form input,
     .hp-enquiry-form textarea {
       width: 100%;
-      border: 1px solid #dbe3ec;
+      border: 1px solid var(--hp-border);
       border-radius: 0.6rem;
       padding: 0.7rem 0.9rem;
       font-size: 0.875rem;
       color: var(--hp-ink);
-      background: #fff;
+      background: var(--hp-surface);
       box-sizing: border-box;
+      font-family: inherit;
     }
     .hp-enquiry-form input:focus,
     .hp-enquiry-form textarea:focus {
       outline: none;
       border-color: var(--hp-primary);
       box-shadow: 0 0 0 3px rgba(15,76,129,0.12);
+      background: #fff;
     }
     .hp-enquiry-form .hp-full { grid-column: 1 / -1; }
     .hp-enquiry-submit {
@@ -295,10 +365,17 @@
       transition: background 0.15s ease;
     }
     .hp-enquiry-submit:hover { background: var(--hp-secondary); }
+    .hp-enquiry-submit:focus-visible,
+    .hp-btn:focus-visible,
+    .hp-accreditation-pill:focus-visible {
+      outline: 2px solid var(--hp-gold);
+      outline-offset: 2px;
+    }
 
-    .hp-card-panel { background: #fff; border-radius: 1.1rem; border: 1px solid var(--hp-border); padding: 1.75rem; }
+    .hp-card-panel { background: #fff; border-radius: 1.15rem; border: 1px solid var(--hp-border); padding: 1.85rem; }
 
-    #hp-loading, #hp-not-found { padding-top: 4rem; padding-bottom: 4rem; text-align: center; }
+    #hp-loading, #hp-not-found { padding-top: 5rem; padding-bottom: 5rem; text-align: center; }
+    #hp-loading { color: var(--hp-muted); }
   </style>
 </head>
 
@@ -347,18 +424,18 @@
   </header>
 
   <main id="top">
-    <div id="hp-loading" class="hp-wrap text-slate-500">Loading hospital&hellip;</div>
+    <div id="hp-loading" class="hp-wrap">Loading hospital&hellip;</div>
     <div id="hp-not-found" class="hp-wrap hidden">
-      <h1 style="font-size:1.5rem;font-weight:800;color:var(--hp-secondary);margin-bottom:0.5rem;">Hospital not found</h1>
+      <h1 style="font-family:var(--hp-display);font-size:1.6rem;font-weight:600;color:var(--hp-ink);margin-bottom:0.5rem;">Hospital not found</h1>
       <p style="color:var(--hp-muted);margin-bottom:1.5rem;">This hospital may have been removed or the link is incorrect.</p>
       <a href="/hospitals" class="hp-btn hp-btn-primary">Browse all hospitals</a>
     </div>
 
     <div id="hp-content" class="hidden">
-      <section class="hp-wrap" style="padding-top:2rem;">
+      <!-- ===== Hero ===== -->
+      <section class="hp-hero-band">
         <div class="hp-hero">
-          <img id="hp-hero-img" src="" alt="">
-          <div class="hp-hero-content">
+          <div class="hp-hero-copy">
             <div id="hp-accreditation-pills" class="hp-accreditation-pills"></div>
             <h1 id="hp-name" class="hp-name"></h1>
             <p id="hp-location" class="hp-location"></p>
@@ -368,18 +445,25 @@
               <a id="hp-whatsapp-btn" href="https://wa.me/918979983149" target="_blank" rel="noopener noreferrer" class="hp-btn hp-btn-wa">Chat on WhatsApp</a>
             </div>
           </div>
+          <div class="hp-hero-media">
+            <img id="hp-hero-img" src="" alt="">
+          </div>
         </div>
       </section>
 
-      <section class="hp-wrap hp-section">
-        <h2 class="hp-section-title">Quick Facts</h2>
-        <div id="hp-quick-facts" class="hp-quick-facts"></div>
+      <!-- ===== Quick facts stat strip (overlaps hero seam) ===== -->
+      <section class="hp-wrap" style="margin-top:-2.5rem; position:relative; z-index:3; padding-bottom:0;">
+        <div id="hp-quick-facts" class="hp-stat-strip hp-reveal"></div>
       </section>
 
-      <section class="hp-wrap hp-section" style="padding-top:0;">
-        <h2 class="hp-section-title">About Hospital</h2>
+      <!-- ===== About ===== -->
+      <section class="hp-wrap hp-section">
+        <div class="hp-section-head hp-reveal">
+          <p class="hp-eyebrow">About the hospital</p>
+          <h2 class="hp-section-title">A closer look</h2>
+        </div>
         <div class="hp-about-grid">
-          <div id="hp-about" class="hp-about-body"></div>
+          <div id="hp-about" class="hp-about-body hp-reveal"></div>
           <div id="hp-sticky-form-outer" class="hp-sticky-form-outer">
             <div id="hp-sticky-form" class="hp-sticky-form">
               <div class="hp-card-panel">
@@ -399,31 +483,43 @@
         </div>
       </section>
 
-      <section id="hp-specialties-section" class="hp-wrap hp-section hidden" style="padding-top:0;">
-        <h2 class="hp-section-title">Specialties</h2>
-        <div id="hp-specialties" class="hp-specialty-grid"></div>
+      <!-- ===== Specialties ===== -->
+      <section id="hp-specialties-section" style="background:var(--hp-tint);" class="hp-section hidden">
+        <div class="hp-wrap">
+          <div class="hp-section-head hp-reveal">
+            <p class="hp-eyebrow">Areas of care</p>
+            <h2 class="hp-section-title">Specialties</h2>
+          </div>
+          <div id="hp-specialties" class="hp-specialty-grid hp-reveal"></div>
+        </div>
       </section>
 
-      <section id="hp-doctors-section" class="hp-wrap hp-section hidden" style="padding-top:0;">
-        <h2 class="hp-section-title">Top Doctors</h2>
-        <div id="hp-doctors" class="hp-doctor-grid"></div>
+      <!-- ===== Doctors ===== -->
+      <section id="hp-doctors-section" class="hp-wrap hp-section hidden">
+        <div class="hp-section-head hp-reveal">
+          <p class="hp-eyebrow">Meet the team</p>
+          <h2 class="hp-section-title">Top Doctors</h2>
+        </div>
+        <div id="hp-doctors" class="hp-doctor-grid hp-reveal"></div>
       </section>
 
-      <section style="background:var(--hp-soft);padding-top:3rem;padding-bottom:3rem;">
-        <div class="hp-wrap" style="max-width:32rem;">
+      <!-- ===== Contact ===== -->
+      <section style="background:var(--hp-tint);padding-top:4rem;padding-bottom:4rem;">
+        <div class="hp-wrap hp-narrow hp-reveal">
           <div class="hp-card-panel">
-            <h2 style="font-size:1.15rem;font-weight:800;color:var(--hp-secondary);margin-bottom:1.1rem;">Contact Information</h2>
+            <p class="hp-eyebrow" style="margin-bottom:0.35rem;">Get in touch</p>
+            <h2 style="font-family:var(--hp-display);font-size:1.4rem;font-weight:600;color:var(--hp-ink);margin-bottom:1.2rem;">Contact Information</h2>
             <ul class="hp-contact-list">
               <li>
-                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path stroke-linecap="round" stroke-linejoin="round" d="M22 16.92v3a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07 19.5 19.5 0 01-6-6 19.79 19.79 0 01-3.07-8.67A2 2 0 014.11 2h3a2 2 0 012 1.72c.127.96.362 1.903.7 2.81a2 2 0 01-.45 2.11L8.09 9.91a16 16 0 006 6l1.27-1.27a2 2 0 012.11-.45c.907.338 1.85.573 2.81.7A2 2 0 0122 16.92z"/></svg>
+                <span class="hp-contact-icon"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path stroke-linecap="round" stroke-linejoin="round" d="M22 16.92v3a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07 19.5 19.5 0 01-6-6 19.79 19.79 0 01-3.07-8.67A2 2 0 014.11 2h3a2 2 0 012 1.72c.127.96.362 1.903.7 2.81a2 2 0 01-.45 2.11L8.09 9.91a16 16 0 006 6l1.27-1.27a2 2 0 012.11-.45c.907.338 1.85.573 2.81.7A2 2 0 0122 16.92z"/></svg></span>
                 +91-8979983149
               </li>
               <li>
-                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path stroke-linecap="round" stroke-linejoin="round" d="M4 4h16v16H4z" opacity="0"/><path stroke-linecap="round" stroke-linejoin="round" d="M22 6l-10 7L2 6M4 4h16a2 2 0 012 2v12a2 2 0 01-2 2H4a2 2 0 01-2-2V6a2 2 0 012-2z"/></svg>
+                <span class="hp-contact-icon"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path stroke-linecap="round" stroke-linejoin="round" d="M22 6l-10 7L2 6M4 4h16a2 2 0 012 2v12a2 2 0 01-2 2H4a2 2 0 01-2-2V6a2 2 0 012-2z"/></svg></span>
                 mnadwi3@gmail.com
               </li>
               <li>
-                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path stroke-linecap="round" stroke-linejoin="round" d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0118 0z"/><circle cx="12" cy="10" r="3"/></svg>
+                <span class="hp-contact-icon"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path stroke-linecap="round" stroke-linejoin="round" d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0118 0z"/><circle cx="12" cy="10" r="3"/></svg></span>
                 <span id="hp-address"></span>
               </li>
             </ul>
@@ -516,7 +612,7 @@
         if (Array.isArray(h.accreditation_logos)) {
           pills.innerHTML = h.accreditation_logos.map(function (a) {
             return '<span class="hp-accreditation-pill" tabindex="0"><span>' + escapeHtml(a.label) + ' Accredited</span>' +
-              '<svg class="hp-pill-check" width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" aria-hidden="true"><path stroke-linecap="round" stroke-linejoin="round" d="M20 6L9 17l-5-5"/></svg></span>';
+              '<svg class="hp-pill-check" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" aria-hidden="true"><path stroke-linecap="round" stroke-linejoin="round" d="M20 6L9 17l-5-5"/></svg></span>';
           }).join('');
         }
 
@@ -531,10 +627,10 @@
         var factsWrap = document.getElementById('hp-quick-facts');
         if (Array.isArray(h.quick_facts)) {
           factsWrap.innerHTML = h.quick_facts.filter(function (f) { return f.value !== null && f.value !== '' && f.value !== undefined; }).map(function (f) {
-            var icon = f.icon ? '<img src="' + escapeHtml(f.icon) + '" alt="">' : '';
-            return '<div class="hp-quick-fact">' + icon +
-              '<div class="hp-fact-value">' + escapeHtml(f.value) + '</div>' +
-              '<div class="hp-fact-label">' + escapeHtml(f.label) + '</div></div>';
+            var icon = f.icon ? '<img class="hp-stat-icon" src="' + escapeHtml(f.icon) + '" alt="">' : '';
+            return '<div class="hp-stat">' + icon +
+              '<div class="hp-stat-value">' + escapeHtml(f.value) + '</div>' +
+              '<div class="hp-stat-label">' + escapeHtml(f.label) + '</div></div>';
           }).join('');
         }
 
@@ -545,7 +641,7 @@
           document.getElementById('hp-specialties-section').classList.remove('hidden');
           document.getElementById('hp-specialties').innerHTML = h.specialties.map(function (s) {
             var icon = s.icon ? '<img src="' + escapeHtml(s.icon) + '" alt="">' : '';
-            return '<div class="hp-specialty-card">' + icon + '<div class="hp-specialty-name">' + escapeHtml(s.name) + '</div></div>';
+            return '<div class="hp-specialty-card"><div class="hp-specialty-icon">' + icon + '</div><div class="hp-specialty-name">' + escapeHtml(s.name) + '</div></div>';
           }).join('');
         }
 
@@ -566,9 +662,11 @@
         var addressParts = [h.address_line1, h.address_line2, h.location].filter(Boolean);
         document.getElementById('hp-address').textContent = addressParts.join(', ');
 
-        // Content just became visible/sized; (re)measure for the pinned form.
+        // Content just became visible/sized; (re)measure for the pinned form
+        // and arm the scroll-reveal observer for the newly-populated blocks.
         updateStickyForm();
         setTimeout(updateStickyForm, 200);
+        armReveal();
       }
 
       function bindEnquiryForm(form) {
@@ -587,6 +685,23 @@
       }
 
       bindEnquiryForm(document.getElementById('hp-sidebar-form'));
+
+      function armReveal() {
+        var nodes = document.querySelectorAll('.hp-reveal:not(.is-visible)');
+        if (!('IntersectionObserver' in window) || !nodes.length) {
+          nodes.forEach(function (n) { n.classList.add('is-visible'); });
+          return;
+        }
+        var observer = new IntersectionObserver(function (entries) {
+          entries.forEach(function (entry) {
+            if (entry.isIntersecting) {
+              entry.target.classList.add('is-visible');
+              observer.unobserve(entry.target);
+            }
+          });
+        }, { rootMargin: '0px 0px -60px 0px', threshold: 0.05 });
+        nodes.forEach(function (n) { observer.observe(n); });
+      }
     })();
 
     /* Manual scroll-pinning for the sidebar form (position:sticky is

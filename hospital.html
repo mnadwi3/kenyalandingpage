@@ -200,14 +200,14 @@
     @media (min-width: 992px) { .hp-about-grid { grid-template-columns: 1.1fr 0.9fr; } }
     .hp-about-body { color: var(--hp-muted); font-size: 0.95rem; line-height: 1.7; }
     .hp-about-body p { margin-bottom: 0.9rem; }
-    .hp-about-image {
-      width: 100%;
-      height: 100%;
-      max-height: 380px;
-      object-fit: cover;
-      border-radius: 1.1rem;
-      box-shadow: 0 20px 40px -22px rgba(15,23,42,0.35);
+
+    .hp-sticky-form {
+      position: sticky;
+      top: 96px;
     }
+    .hp-sticky-form .hp-card-panel { box-shadow: 0 20px 40px -22px rgba(15,23,42,0.25); }
+    .hp-sticky-form h3 { font-size: 1.05rem; font-weight: 800; color: var(--hp-secondary); margin-bottom: 0.35rem; }
+    .hp-sticky-form p { font-size: 0.82rem; color: var(--hp-muted); margin-bottom: 1.1rem; }
 
     /* ---------- Specialties ---------- */
     .hp-specialty-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(140px, 1fr)); gap: 1rem; }
@@ -374,8 +374,19 @@
         <h2 class="hp-section-title">About Hospital</h2>
         <div class="hp-about-grid">
           <div id="hp-about" class="hp-about-body"></div>
-          <div id="hp-about-image-wrap">
-            <img id="hp-about-image" src="" alt="" class="hp-about-image">
+          <div class="hp-sticky-form">
+            <div class="hp-card-panel">
+              <h3>Get a Free Second Opinion</h3>
+              <p>Share your details and our care team will get back to you within 24 hours.</p>
+              <form id="hp-sidebar-form" class="hp-enquiry-form">
+                <input type="text" name="name" placeholder="Full Name" required class="hp-full">
+                <input type="text" name="country" placeholder="Country">
+                <input type="tel" name="phone" placeholder="Phone / WhatsApp" required>
+                <input type="email" name="email" placeholder="Email Address" class="hp-full">
+                <textarea name="message" placeholder="Your Message" rows="3" class="hp-full"></textarea>
+                <button type="submit" class="hp-enquiry-submit">Request Free Consultation</button>
+              </form>
+            </div>
           </div>
         </div>
       </section>
@@ -533,15 +544,6 @@
         var aboutEl = document.getElementById('hp-about');
         aboutEl.innerHTML = h.about_html || ('<p>' + escapeHtml(h.description || '') + '</p>');
 
-        var aboutImgWrap = document.getElementById('hp-about-image-wrap');
-        var aboutImg = document.getElementById('hp-about-image');
-        if (h.logo || h.cover_image) {
-          aboutImg.src = h.logo || h.cover_image;
-          aboutImg.alt = h.name || '';
-        } else {
-          aboutImgWrap.classList.add('hidden');
-        }
-
         if (Array.isArray(h.specialties) && h.specialties.length) {
           document.getElementById('hp-specialties-section').classList.remove('hidden');
           document.getElementById('hp-specialties').innerHTML = h.specialties.map(function (s) {
@@ -568,18 +570,23 @@
         document.getElementById('hp-address').textContent = addressParts.join(', ');
       }
 
-      var enquiryForm = document.getElementById('hp-enquiry-form');
-      enquiryForm.addEventListener('submit', function (event) {
-        event.preventDefault();
-        var data = new FormData(enquiryForm);
-        var lines = ['Enquiry for ' + (document.getElementById('hp-name').textContent || 'hospital') + ':'];
-        ['name', 'country', 'phone', 'email', 'message'].forEach(function (key) {
-          var value = (data.get(key) || '').toString().trim();
-          if (value) lines.push(key + ': ' + value);
+      function bindEnquiryForm(form) {
+        if (!form) return;
+        form.addEventListener('submit', function (event) {
+          event.preventDefault();
+          var data = new FormData(form);
+          var lines = ['Enquiry for ' + (document.getElementById('hp-name').textContent || 'hospital') + ':'];
+          ['name', 'country', 'phone', 'email', 'message'].forEach(function (key) {
+            var value = (data.get(key) || '').toString().trim();
+            if (value) lines.push(key + ': ' + value);
+          });
+          var url = 'https://wa.me/918979983149?text=' + encodeURIComponent(lines.join('\n'));
+          window.open(url, '_blank', 'noopener');
         });
-        var url = 'https://wa.me/918979983149?text=' + encodeURIComponent(lines.join('\n'));
-        window.open(url, '_blank', 'noopener');
-      });
+      }
+
+      bindEnquiryForm(document.getElementById('hp-enquiry-form'));
+      bindEnquiryForm(document.getElementById('hp-sidebar-form'));
     })();
   </script>
 </body>

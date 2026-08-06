@@ -954,13 +954,36 @@
         // Restartable so cms.js can re-init the loop after replacing the
         // card list with live data (card count/width may differ).
         function start() {
-          if (intervalId) clearInterval(intervalId);
+          if (intervalId) { clearInterval(intervalId); intervalId = null; }
           track.style.transition = 'none';
           track.style.transform = 'translateX(0)';
-          track.dataset.cloned = '';
-          var baseHtml = track.innerHTML;
-          track.innerHTML = baseHtml + baseHtml;
-          var originalCount = track.children.length / 2;
+
+          // Strip any clone nodes a previous start() call appended. These
+          // are tagged individually (not tracked via a flag on `track`,
+          // which would go stale: cms.js replaces track's children via
+          // innerHTML when live data loads, but that doesn't touch
+          // attributes on `track` itself, so a flag could wrongly say
+          // "still cloned" for content that's actually already fresh).
+          Array.prototype.slice.call(track.querySelectorAll('[data-carousel-clone]')).forEach(function (el) {
+            el.remove();
+          });
+
+          var originalCount = track.children.length;
+
+          // 1-2 hospitals: nothing to loop. Show them as-is with no
+          // clones and no sliding animation — cloning here would make
+          // the same hospital visibly appear twice on screen at once.
+          if (originalCount <= 2) {
+            return;
+          }
+
+          var realCards = Array.prototype.slice.call(track.children);
+          realCards.forEach(function (card) {
+            var clone = card.cloneNode(true);
+            clone.setAttribute('data-carousel-clone', 'true');
+            clone.setAttribute('aria-hidden', 'true');
+            track.appendChild(clone);
+          });
           var index = 0;
 
           function step() {

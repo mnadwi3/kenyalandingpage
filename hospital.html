@@ -122,6 +122,13 @@
       flex-direction: column;
       justify-content: center;
       text-shadow: 0 2px 16px rgba(4, 18, 34, 0.55);
+      /* .hp-hero-copy is the flex item of .hp-hero (display:flex). Flex
+         items default to min-width:auto, so on narrow screens the
+         accreditation pills row (nowrap content) was forcing this column
+         wider than the viewport, silently clipped by .hp-hero's
+         overflow:hidden — buttons/text got cut off on mobile. min-width:0
+         lets it actually shrink to the available width. */
+      min-width: 0;
     }
     @media (min-width: 640px) { .hp-hero-copy { padding: 3.5rem 2rem; } }
     @media (min-width: 900px) { .hp-hero-copy { padding: 4rem 2rem; max-width: 36rem; } }
@@ -131,7 +138,9 @@
       align-items: center;
       gap: 12px;
       margin-bottom: 1.5rem;
+      width: 100%;
       max-width: 100%;
+      min-width: 0;
       overflow-x: auto;
       padding: 4px 2px 8px;
       -ms-overflow-style: none;

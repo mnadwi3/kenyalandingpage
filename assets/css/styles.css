@@ -359,6 +359,16 @@ label {
   -webkit-box-orient: vertical;
   overflow: hidden;
 }
+.hospital-card-about {
+  display: -webkit-box;
+  -webkit-line-clamp: 4;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+.hospital-card-accreditations img {
+  height: 1.75rem;
+  width: auto;
+}
 .tx-book {
   display: inline-flex;
   align-items: center;

@@ -188,9 +188,12 @@ final class HospitalService
             'established_year' => $hospital['established_year'] ?? null,
             'number_of_beds' => $hospital['number_of_beds'] ?? null,
             'hospital_type' => $hospital['hospital_type'] ?? null,
+            'address_line1' => $hospital['address_line1'] ?? null,
+            'address_line2' => $hospital['address_line2'] ?? null,
             'city' => $hospital['city'] ?? null,
             'state' => $hospital['state'] ?? null,
             'country' => $hospital['country'] ?? null,
+            'pincode' => $hospital['pincode'] ?? null,
             'status' => 'draft',
             'is_featured' => 0,
             'is_verified' => (int) ($hospital['is_verified'] ?? 0),
@@ -240,6 +243,11 @@ final class HospitalService
         return $rows;
     }
 
+    public function accreditationCodesByHospitalIds(array $ids): array
+    {
+        return $this->hospitals->accreditationCodesByHospitalIds($ids);
+    }
+
     public function publicPath(string $slug): string
     {
         return '/hospitals/' . ltrim($slug, '/');
@@ -261,9 +269,12 @@ final class HospitalService
                     'established_year' => $row['established_year'] ?? '',
                     'number_of_beds' => $row['number_of_beds'] ?? $row['beds'] ?? '',
                     'hospital_type' => $row['hospital_type'] ?? $row['type'] ?? '',
+                    'address_line1' => $row['address_line1'] ?? $row['address'] ?? '',
+                    'address_line2' => $row['address_line2'] ?? '',
                     'city' => $row['city'] ?? '',
                     'state' => $row['state'] ?? '',
                     'country' => $row['country'] ?? '',
+                    'pincode' => $row['pincode'] ?? $row['zip'] ?? '',
                     'status' => strtolower($row['status'] ?? 'draft'),
                     'is_featured' => $row['is_featured'] ?? '0',
                     'is_verified' => $row['is_verified'] ?? '0',
@@ -327,6 +338,11 @@ final class HospitalService
             'established_year' => $hospital['established_year'] ?? null,
             'number_of_beds' => $hospital['number_of_beds'] ?? null,
             'hospital_type' => $hospital['hospital_type'] ?? null,
+            'address_line1' => $hospital['address_line1'] ?? null,
+            'address_line2' => $hospital['address_line2'] ?? null,
+            'city' => $hospital['city'] ?? null,
+            'country' => $hospital['country'] ?? null,
+            'pincode' => $hospital['pincode'] ?? null,
             'location' => $hospital['location'] ?? '',
             'short_description' => $hospital['short_description'] ?? '',
             'book_appointment_url' => null,
@@ -363,14 +379,19 @@ final class HospitalService
         $input['status'] = ($input['status'] ?? '') !== '' ? $input['status'] : 'draft';
 
         $validator = new Validator($input);
+        $input['about'] = $input['about'] ?? $input['description'] ?? '';
         $validator
             ->required('name', 'Hospital name')
             ->maxLength('name', 200, 'Hospital name')
+            ->required('about', 'About hospital')
             ->in('status', Hospital::STATUSES, 'Status')
             ->maxLength('hospital_type', 100, 'Hospital type')
+            ->maxLength('address_line1', 191, 'Address line 1')
+            ->maxLength('address_line2', 191, 'Address line 2')
             ->maxLength('city', 120, 'City')
             ->maxLength('state', 120, 'State')
             ->maxLength('country', 120, 'Country')
+            ->maxLength('pincode', 20, 'Pincode')
             ->maxLength('seo_title', 255, 'SEO title')
             ->maxLength('seo_description', 320, 'Meta description')
             ->maxLength('slug', 191, 'Slug');
@@ -405,9 +426,12 @@ final class HospitalService
             'established_year' => $year === '' || $year === null ? null : (int) $year,
             'number_of_beds' => $beds === '' || $beds === null ? null : (int) $beds,
             'hospital_type' => $this->nullableString($input['hospital_type'] ?? null),
+            'address_line1' => $this->nullableString($input['address_line1'] ?? null),
+            'address_line2' => $this->nullableString($input['address_line2'] ?? null),
             'city' => $this->nullableString($input['city'] ?? null),
             'state' => $this->nullableString($input['state'] ?? null),
             'country' => $this->nullableString($input['country'] ?? null),
+            'pincode' => $this->nullableString($input['pincode'] ?? null),
             'status' => (string) $input['status'],
             'is_featured' => !empty($input['is_featured']) ? 1 : 0,
             'is_verified' => !empty($input['is_verified']) ? 1 : 0,

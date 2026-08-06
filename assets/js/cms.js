@@ -98,10 +98,29 @@
       : '';
 
     var description = (h.description || '').trim();
-    if (description.length > 160) description = description.slice(0, 157).trim() + '…';
+    if (description.length > 220) description = description.slice(0, 217).trim() + '…';
     var descriptionHtml = description
-      ? '<p class="text-slate-600 text-sm leading-relaxed mb-3">' + escapeHtml(description) + '</p>'
+      ? '<p class="text-slate-600 text-sm leading-relaxed mb-3 hospital-card-about">' + escapeHtml(description) + '</p>'
       : '';
+
+    var addressLines = [h.address_line1, h.address_line2].filter(Boolean).map(escapeHtml).join('<br>');
+    var addressHtml = addressLines
+      ? '<p class="text-slate-600 text-sm leading-relaxed mb-2">' + addressLines + '</p>'
+      : '';
+
+    var cityLine = [h.city, h.pincode, h.country].filter(Boolean).map(escapeHtml).join(', ');
+    var cityLineHtml = cityLine
+      ? '<p class="text-slate-600 text-sm leading-relaxed mb-3">' + cityLine + '</p>'
+      : '';
+
+    var accreditationHtml = '';
+    if (Array.isArray(h.accreditation_logos) && h.accreditation_logos.length) {
+      accreditationHtml = '<div class="hospital-card-accreditations flex items-center gap-3 mt-1">' +
+        h.accreditation_logos.map(function (a) {
+          return '<img src="' + escapeHtml(a.logo) + '" alt="' + escapeHtml(a.label) + '" title="' + escapeHtml(a.label) + '" loading="lazy" decoding="async">';
+        }).join('') +
+        '</div>';
+    }
 
     return (
       '<div class="hospital-card bg-white rounded-2xl shadow-card overflow-hidden border border-slate-100">' +
@@ -110,7 +129,9 @@
           '<h3 class="font-display text-xl sm:text-2xl font-bold text-primary mb-2">' + escapeHtml(h.name) + '</h3>' +
           '<div class="w-12 h-1 bg-gold rounded-full mb-4" aria-hidden="true"></div>' +
           descriptionHtml +
-          (h.location ? '<p class="text-sm font-semibold text-secondary mb-1">Location</p><p class="text-slate-600 text-sm leading-relaxed">' + escapeHtml(h.location) + '</p>' : '') +
+          addressHtml +
+          cityLineHtml +
+          accreditationHtml +
         '</div>' +
       '</div>'
     );

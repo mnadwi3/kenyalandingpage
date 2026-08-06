@@ -24,6 +24,8 @@ final class PublicContentController extends Controller
     private TestimonialRepository $testimonials;
     private FaqRepository $faqs;
     private SiteSettingRepository $settings;
+    /** @var array<int, list<string>> */
+    private array $hospitalAccreditations = [];
 
     public function __construct(
         ?TreatmentService $treatments = null,
@@ -60,6 +62,8 @@ final class PublicContentController extends Controller
     public function hospitalsList(): void
     {
         $rows = $this->hospitals->list(['status' => 'active', 'per_page' => 100])['hospitals'];
+        $ids = array_map(static fn (array $row): int => (int) $row['id'], $rows);
+        $this->hospitalAccreditations = $this->hospitals->accreditationCodesByHospitalIds($ids);
         $this->cached($this->mapList($rows, [$this, 'mapHospital']));
     }
 
@@ -123,14 +127,27 @@ final class PublicContentController extends Controller
             trim((string) ($h['country'] ?? '')),
         ], static fn (string $part): bool => $part !== ''));
 
+        $accreditationCodes = $this->hospitalAccreditations[(int) $h['id']] ?? [];
+        $accreditationLogos = array_values(array_filter(array_map(
+            static function (string $code): ?array {
+                $meta = \App\Models\Hospital::ACCREDITATIONS[$code] ?? null;
+
+                return $meta === null ? null : ['code' => $code, 'label' => $meta['label'], 'logo' => $meta['logo']];
+            },
+            $accreditationCodes
+        )));
+
         return [
             'id' => (int) $h['id'],
             'slug' => (string) $h['slug'],
             'name' => (string) $h['name'],
             'description' => $h['description'] ?? $h['about'] ?? null,
+            'address_line1' => $h['address_line1'] ?? null,
+            'address_line2' => $h['address_line2'] ?? null,
             'city' => $h['city'] ?? null,
             'state' => $h['state'] ?? null,
             'country' => $h['country'] ?? null,
+            'pincode' => $h['pincode'] ?? null,
             'location' => $location !== '' ? $location : null,
             'logo' => $this->imageUrl($h['logo'] ?? null),
             'cover_image' => $this->imageUrl($h['cover_image'] ?? null),
@@ -139,6 +156,7 @@ final class PublicContentController extends Controller
             'hospital_type' => $h['hospital_type'] ?? null,
             'is_featured' => (bool) ($h['is_featured'] ?? false),
             'is_verified' => (bool) ($h['is_verified'] ?? false),
+            'accreditation_logos' => $accreditationLogos,
             'seo_title' => $h['seo_title'] ?? $h['name'],
             'seo_description' => $h['seo_description'] ?? null,
         ];

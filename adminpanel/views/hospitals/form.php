@@ -93,7 +93,7 @@ $autoSpecialties = is_array($hospital) && is_array($hospital['related_specialtie
 
         <div class="tab-panel" data-tab-panel="basic">
             <div class="form-grid">
-                <label class="field full"><span>About hospital</span><textarea name="about" rows="5" data-preview-about><?= e($about) ?></textarea></label>
+                <label class="field full"><span>About hospital *</span><textarea name="about" rows="5" required data-preview-about><?= e($about) ?></textarea></label>
                 <label class="field"><span>Established year</span><input type="number" min="1800" max="<?= (int) date('Y') + 1 ?>" name="established_year" value="<?= $val('established_year') ?>"></label>
                 <label class="field"><span>Number of beds</span><input type="number" min="0" name="number_of_beds" value="<?= $val('number_of_beds') ?>"></label>
                 <label class="field"><span>Hospital type</span>
@@ -104,8 +104,11 @@ $autoSpecialties = is_array($hospital) && is_array($hospital['related_specialtie
                         <?php endforeach; ?>
                     </select>
                 </label>
+                <label class="field full"><span>Address line 1</span><input type="text" name="address_line1" value="<?= $val('address_line1') ?>"></label>
+                <label class="field full"><span>Address line 2</span><input type="text" name="address_line2" value="<?= $val('address_line2') ?>"></label>
                 <label class="field"><span>City</span><input type="text" name="city" value="<?= $val('city') ?>"></label>
                 <label class="field"><span>State</span><input type="text" name="state" value="<?= $val('state') ?>"></label>
+                <label class="field"><span>Pincode</span><input type="text" name="pincode" value="<?= $val('pincode') ?>"></label>
                 <label class="field"><span>Country</span><input type="text" name="country" value="<?= $val('country') ?>"></label>
             </div>
         </div>

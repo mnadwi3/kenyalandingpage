@@ -258,8 +258,6 @@
     .hp-doctor-link:hover { text-decoration: underline; }
 
     /* ---------- Contact / enquiry ---------- */
-    .hp-contact-grid { display: grid; gap: 2.5rem; }
-    @media (min-width: 992px) { .hp-contact-grid { grid-template-columns: 0.85fr 1.15fr; } }
     .hp-contact-list { list-style: none; padding: 0; margin: 0 0 1.25rem; }
     .hp-contact-list li { display: flex; align-items: center; gap: 0.6rem; font-size: 0.9rem; color: #334155; margin-bottom: 0.65rem; }
     .hp-contact-list li svg { color: var(--hp-primary); flex-shrink: 0; }
@@ -412,7 +410,7 @@
       </section>
 
       <section style="background:var(--hp-soft);padding-top:3rem;padding-bottom:3rem;">
-        <div class="hp-wrap hp-contact-grid">
+        <div class="hp-wrap" style="max-width:32rem;">
           <div class="hp-card-panel">
             <h2 style="font-size:1.15rem;font-weight:800;color:var(--hp-secondary);margin-bottom:1.1rem;">Contact Information</h2>
             <ul class="hp-contact-list">
@@ -422,7 +420,7 @@
               </li>
               <li>
                 <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path stroke-linecap="round" stroke-linejoin="round" d="M4 4h16v16H4z" opacity="0"/><path stroke-linecap="round" stroke-linejoin="round" d="M22 6l-10 7L2 6M4 4h16a2 2 0 012 2v12a2 2 0 01-2 2H4a2 2 0 01-2-2V6a2 2 0 012-2z"/></svg>
-                query@tabeebway.com
+                mnadwi3@gmail.com
               </li>
               <li>
                 <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path stroke-linecap="round" stroke-linejoin="round" d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0118 0z"/><circle cx="12" cy="10" r="3"/></svg>
@@ -430,17 +428,6 @@
               </li>
             </ul>
             <a href="https://wa.me/918979983149" target="_blank" rel="noopener noreferrer" class="hp-btn hp-btn-wa">Chat on WhatsApp</a>
-          </div>
-          <div class="hp-card-panel">
-            <h2 style="font-size:1.15rem;font-weight:800;color:var(--hp-secondary);margin-bottom:1.1rem;">Send Us an Enquiry</h2>
-            <form id="hp-enquiry-form" class="hp-enquiry-form">
-              <input type="text" name="name" placeholder="Full Name" required>
-              <input type="text" name="country" placeholder="Country">
-              <input type="tel" name="phone" placeholder="Phone / WhatsApp" required>
-              <input type="email" name="email" placeholder="Email Address">
-              <textarea name="message" placeholder="Your Message" rows="3" class="hp-full"></textarea>
-              <button type="submit" class="hp-enquiry-submit">Request Free Consultation</button>
-            </form>
           </div>
         </div>
       </section>
@@ -599,7 +586,6 @@
         });
       }
 
-      bindEnquiryForm(document.getElementById('hp-enquiry-form'));
       bindEnquiryForm(document.getElementById('hp-sidebar-form'));
     })();
 

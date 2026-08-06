@@ -611,29 +611,38 @@
       var panel = document.getElementById('hp-sticky-form');
       var TOP_OFFSET = 96;
 
+      function clearInlineStyles() {
+        panel.style.width = '';
+        panel.style.left = '';
+      }
+
       function update() {
         if (!outer || !panel) return;
         if (window.innerWidth < 992) {
           panel.classList.remove('is-fixed', 'is-bottom');
-          panel.style.width = '';
+          clearInlineStyles();
           outer.style.height = '';
           return;
         }
+        // outer never leaves normal flow, so its rect always reflects the
+        // true scroll-tracked position of the right column — safe to read
+        // regardless of which state `panel` (fixed/absolute) is currently in.
         var outerRect = outer.getBoundingClientRect();
         var panelHeight = panel.offsetHeight;
         outer.style.height = panelHeight + 'px';
 
         if (outerRect.top > TOP_OFFSET) {
           panel.classList.remove('is-fixed', 'is-bottom');
-          panel.style.width = '';
+          clearInlineStyles();
         } else if (outerRect.bottom < TOP_OFFSET + panelHeight) {
           panel.classList.remove('is-fixed');
           panel.classList.add('is-bottom');
-          panel.style.width = '';
+          clearInlineStyles();
         } else {
           panel.classList.remove('is-bottom');
           panel.classList.add('is-fixed');
           panel.style.width = outerRect.width + 'px';
+          panel.style.left = outerRect.left + 'px';
         }
       }
 

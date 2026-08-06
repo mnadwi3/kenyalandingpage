@@ -196,7 +196,7 @@
     .hp-fact-label { font-size: 0.75rem; color: var(--hp-primary); margin-top: 0.15rem; }
 
     /* ---------- About ---------- */
-    .hp-about-grid { display: grid; gap: 2rem; align-items: start; }
+    .hp-about-grid { display: grid; gap: 2rem; align-items: stretch; }
     @media (min-width: 992px) { .hp-about-grid { grid-template-columns: 1.1fr 0.9fr; } }
     .hp-about-body { color: var(--hp-muted); font-size: 0.95rem; line-height: 1.7; }
     .hp-about-body p { margin-bottom: 0.9rem; }
@@ -621,15 +621,17 @@
         if (window.innerWidth < 992) {
           panel.classList.remove('is-fixed', 'is-bottom');
           clearInlineStyles();
-          outer.style.height = '';
           return;
         }
-        // outer never leaves normal flow, so its rect always reflects the
-        // true scroll-tracked position of the right column — safe to read
-        // regardless of which state `panel` (fixed/absolute) is currently in.
+        // `outer` is a grid item stretched (CSS align-items:stretch) to the
+        // height of its sibling column (the About text) — its own height is
+        // NOT set from JS, so there's real scroll room between "top reached"
+        // and "bottom reached" for the panel to actually be pinned in
+        // between. It never leaves normal flow, so its rect always reflects
+        // the true scroll-tracked position of the right column regardless
+        // of which state `panel` (fixed/absolute) is currently in.
         var outerRect = outer.getBoundingClientRect();
         var panelHeight = panel.offsetHeight;
-        outer.style.height = panelHeight + 'px';
 
         if (outerRect.top > TOP_OFFSET) {
           panel.classList.remove('is-fixed', 'is-bottom');

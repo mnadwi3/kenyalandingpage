@@ -58,7 +58,7 @@ final class SpecialtyController extends Controller
         Auth::requirePermission('specialties.create');
         $this->validateCsrf();
         try {
-            $id = $this->specialties->create($_POST);
+            $id = $this->specialties->create($_POST, $_FILES['icon'] ?? null);
             flash('success', 'Specialty created successfully.');
             redirect('/specialties/' . $id . '/edit');
         } catch (RuntimeException $e) {
@@ -86,7 +86,7 @@ final class SpecialtyController extends Controller
         $this->validateCsrf();
         $specialtyId = (int) $id;
         try {
-            $this->specialties->update($specialtyId, $_POST);
+            $this->specialties->update($specialtyId, $_POST, $_FILES['icon'] ?? null);
             flash('success', 'Specialty updated successfully.');
             redirect('/specialties/' . $specialtyId . '/edit');
         } catch (RuntimeException $e) {

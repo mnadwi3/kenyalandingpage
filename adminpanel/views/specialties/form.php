@@ -17,7 +17,7 @@ $val = static fn (string $key, mixed $default = ''): string => e((string) ($valu
     </div>
 </section>
 
-<form method="post" action="<?= e($action) ?>" class="specialty-form panel" data-specialty-form>
+<form method="post" action="<?= e($action) ?>" enctype="multipart/form-data" class="specialty-form panel" data-specialty-form>
     <?= $csrf ?>
     <div class="form-grid form-grid-simple">
         <label class="field"><span>Specialty name *</span><input type="text" name="name" value="<?= $val('name') ?>" required data-slug-source maxlength="150"></label>
@@ -29,7 +29,17 @@ $val = static fn (string $key, mixed $default = ''): string => e((string) ($valu
                 <?php endforeach; ?>
             </select>
         </label>
+        <div class="field">
+            <span>Icon</span>
+            <?php if (!empty($specialty['image'])): ?>
+                <div class="photo-preview">
+                    <img src="<?= e(asset((string) $specialty['image'])) ?>" alt="" style="width:40px;height:40px;object-fit:contain;">
+                    <label class="checkbox-field"><input type="checkbox" name="remove_icon" value="1"><span>Remove current icon</span></label>
+                </div>
+            <?php endif; ?>
+            <input type="file" name="icon" accept="image/jpeg,image/png,image/webp,image/gif">
+        </div>
     </div>
-    <p class="muted form-hint">Doctors and treatments reference specialties automatically. No relationship assignment is needed here.</p>
+    <p class="muted form-hint">Doctors and treatments reference specialties automatically. No relationship assignment is needed here. The icon is shown on hospital pages and specialty listings.</p>
     <div class="form-footer"><button type="submit" class="btn btn-primary"><?= $isEdit ? 'Save changes' : 'Create specialty' ?></button></div>
 </form>

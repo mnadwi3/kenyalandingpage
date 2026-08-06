@@ -56,6 +56,26 @@
         <script src="<?= e(url('/assets/js/treatments.js')) ?>"></script>
     <?php endif; ?>
     <?php if (($activeNav ?? '') === 'hospitals'): ?>
+        <script src="https://cdn.jsdelivr.net/npm/tinymce@6/tinymce.min.js" referrerpolicy="origin"></script>
+        <script>
+            if (window.tinymce && document.getElementById('about-editor')) {
+                tinymce.init({
+                    selector: '#about-editor',
+                    height: 320,
+                    menubar: false,
+                    plugins: 'lists link image',
+                    toolbar: 'blocks | bold italic underline | bullist numlist | alignleft aligncenter alignright | link image',
+                    branding: false,
+                    setup: function (editor) {
+                        editor.on('change keyup', function () {
+                            editor.save();
+                            var preview = document.querySelector('[data-preview-about-text]');
+                            if (preview) preview.textContent = editor.getContent({ format: 'text' }) || 'About preview will appear here.';
+                        });
+                    }
+                });
+            }
+        </script>
         <script src="<?= e(url('/assets/js/hospitals.js')) ?>"></script>
     <?php endif; ?>
     <?php if (($activeNav ?? '') === 'specialties'): ?>

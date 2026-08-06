@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace App\Services;
 
 use App\Contracts\SpecialtyRepositoryInterface;
+use App\Helpers\ImageUploader;
 use App\Helpers\Slug;
 use App\Helpers\Validator;
 use App\Models\Specialty;
@@ -15,10 +16,12 @@ use RuntimeException;
 final class SpecialtyService
 {
     private SpecialtyRepositoryInterface $specialties;
+    private ImageUploader $images;
 
-    public function __construct(?SpecialtyRepositoryInterface $specialties = null)
+    public function __construct(?SpecialtyRepositoryInterface $specialties = null, ?ImageUploader $images = null)
     {
         $this->specialties = $specialties ?? new SpecialtyRepository();
+        $this->images = $images ?? new ImageUploader();
     }
 
     public function list(array $query): array
@@ -53,17 +56,31 @@ final class SpecialtyService
         return $this->specialties->findById($id, $withTrashed);
     }
 
-    public function create(array $input): int
+    public function create(array $input, ?array $iconFile = null): int
     {
-        return $this->specialties->create($this->validatedPayload($input));
+        $payload = $this->validatedPayload($input);
+        if ($iconFile && ($iconFile['error'] ?? UPLOAD_ERR_NO_FILE) !== UPLOAD_ERR_NO_FILE) {
+            $payload['image'] = $this->images->upload($iconFile, 'specialties');
+        }
+
+        return $this->specialties->create($payload);
     }
 
-    public function update(int $id, array $input): void
+    public function update(int $id, array $input, ?array $iconFile = null): void
     {
-        if ($this->specialties->findById($id, true) === null) {
+        $existing = $this->specialties->findById($id, true);
+        if ($existing === null) {
             throw new RuntimeException('Specialty not found.');
         }
-        $this->specialties->update($id, $this->validatedPayload($input, $id));
+        $payload = $this->validatedPayload($input, $id);
+        if ($iconFile && ($iconFile['error'] ?? UPLOAD_ERR_NO_FILE) !== UPLOAD_ERR_NO_FILE) {
+            $payload['image'] = $this->images->upload($iconFile, 'specialties', $existing['image'] ?? null);
+        }
+        if (!empty($input['remove_icon']) && empty($payload['image'])) {
+            $this->images->delete($existing['image'] ?? null);
+            $payload['image'] = null;
+        }
+        $this->specialties->update($id, $payload);
     }
 
     public function softDelete(int $id): void

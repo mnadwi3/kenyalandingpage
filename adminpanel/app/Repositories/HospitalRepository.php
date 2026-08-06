@@ -305,6 +305,54 @@ final class HospitalRepository extends Model implements HospitalRepositoryInterf
         return array_map('intval', $stmt->fetchAll(PDO::FETCH_COLUMN) ?: []);
     }
 
+    public function specialtyIds(int $hospitalId): array
+    {
+        $stmt = self::db()->prepare('SELECT specialty_id FROM hospital_specialty WHERE hospital_id = :hospital_id');
+        $stmt->execute(['hospital_id' => $hospitalId]);
+
+        return array_map('intval', $stmt->fetchAll(PDO::FETCH_COLUMN) ?: []);
+    }
+
+    public function syncSpecialties(int $hospitalId, array $specialtyIds): void
+    {
+        self::db()->prepare('DELETE FROM hospital_specialty WHERE hospital_id = :hospital_id')
+            ->execute(['hospital_id' => $hospitalId]);
+        $specialtyIds = array_values(array_unique(array_filter(array_map('intval', $specialtyIds))));
+        if ($specialtyIds === []) {
+            return;
+        }
+        $stmt = self::db()->prepare(
+            'INSERT INTO hospital_specialty (hospital_id, specialty_id, created_at) VALUES (:hospital_id, :specialty_id, NOW(3))'
+        );
+        foreach ($specialtyIds as $specialtyId) {
+            $stmt->execute(['hospital_id' => $hospitalId, 'specialty_id' => $specialtyId]);
+        }
+    }
+
+    public function doctorIds(int $hospitalId): array
+    {
+        $stmt = self::db()->prepare('SELECT doctor_id FROM doctor_hospital WHERE hospital_id = :hospital_id');
+        $stmt->execute(['hospital_id' => $hospitalId]);
+
+        return array_map('intval', $stmt->fetchAll(PDO::FETCH_COLUMN) ?: []);
+    }
+
+    public function syncDoctors(int $hospitalId, array $doctorIds): void
+    {
+        self::db()->prepare('DELETE FROM doctor_hospital WHERE hospital_id = :hospital_id')
+            ->execute(['hospital_id' => $hospitalId]);
+        $doctorIds = array_values(array_unique(array_filter(array_map('intval', $doctorIds))));
+        if ($doctorIds === []) {
+            return;
+        }
+        $stmt = self::db()->prepare(
+            'INSERT INTO doctor_hospital (doctor_id, hospital_id, created_at) VALUES (:doctor_id, :hospital_id, NOW(3))'
+        );
+        foreach ($doctorIds as $doctorId) {
+            $stmt->execute(['doctor_id' => $doctorId, 'hospital_id' => $hospitalId]);
+        }
+    }
+
     public function relatedTreatments(int $hospitalId): array
     {
         try {
@@ -335,16 +383,12 @@ final class HospitalRepository extends Model implements HospitalRepositoryInterf
     public function relatedSpecialties(int $hospitalId): array
     {
         $stmt = self::db()->prepare(
-            "SELECT DISTINCT s.id, s.slug, s.name
+            "SELECT DISTINCT s.id, s.slug, s.name, s.image
              FROM specialties s
-             INNER JOIN doctor_specialty ds ON ds.specialty_id = s.id
-             INNER JOIN doctor_hospital dh ON dh.doctor_id = ds.doctor_id
-             INNER JOIN doctors d ON d.id = dh.doctor_id
-             WHERE dh.hospital_id = :hospital_id
+             INNER JOIN hospital_specialty hs ON hs.specialty_id = s.id
+             WHERE hs.hospital_id = :hospital_id
                AND s.status = 'active'
                AND s.deleted_at IS NULL
-               AND d.status = 'active'
-               AND d.deleted_at IS NULL
              ORDER BY s.name ASC"
         );
         $stmt->execute(['hospital_id' => $hospitalId]);

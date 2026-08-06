@@ -65,10 +65,75 @@ final class PublicContentController extends Controller
 
     public function hospitalsList(): void
     {
-        $rows = $this->hospitals->list(['status' => 'active', 'per_page' => 100])['hospitals'];
+        $page = max(1, (int) ($_GET['page'] ?? 1));
+        $perPage = min(100, max(1, (int) ($_GET['per_page'] ?? 100)));
+        $result = $this->hospitals->list(['status' => 'active', 'page' => $page, 'per_page' => $perPage]);
+        $rows = $result['hospitals'];
         $ids = array_map(static fn (array $row): int => (int) $row['id'], $rows);
         $this->hospitalAccreditations = $this->hospitals->accreditationCodesByHospitalIds($ids);
-        $this->cached($this->mapList($rows, [$this, 'mapHospital']));
+        $items = $this->mapList($rows, [$this, 'mapHospital']);
+        $this->cached([
+            'items' => $items,
+            'page' => $page,
+            'per_page' => $perPage,
+            'total' => $result['paginator']->total ?? count($items),
+            'has_more' => $page * $perPage < ($result['paginator']->total ?? count($items)),
+        ]);
+    }
+
+    public function hospitalBySlug(string $slug): void
+    {
+        header('Access-Control-Allow-Origin: *');
+        $hospital = $this->hospitals->findBySlug($slug);
+        if ($hospital === null) {
+            $this->json(['error' => 'Not found'], 404);
+        }
+        $this->hospitalAccreditations = $this->hospitals->accreditationCodesByHospitalIds([(int) $hospital['id']]);
+        $mapped = $this->mapHospital($hospital);
+        $page = $hospital['page'] ?? [];
+        $mapped['about_html'] = $page['about'] ?? null;
+        $mapped['hero_image_alt'] = $page['hero_image_alt'] ?? $mapped['name'];
+        $mapped['website'] = $page['website'] ?? null;
+        $mapped['quick_facts'] = array_map(
+            static fn (array $f): array => [
+                'code' => $f['code'],
+                'label' => $f['label'],
+                'value' => $f['value'],
+                'icon' => $f['icon'] !== '' ? asset($f['icon']) : null,
+            ],
+            $page['quick_facts'] ?? []
+        );
+        $mapped['specialties'] = array_map(
+            fn (array $s): array => [
+                'id' => $s['id'],
+                'slug' => $s['slug'],
+                'name' => $s['name'],
+                'icon' => !empty($s['icon']) ? $this->imageUrl($s['icon']) : null,
+            ],
+            $page['related_specialties'] ?? []
+        );
+        $mapped['doctors'] = array_map(
+            fn (array $d): array => [
+                'id' => (int) $d['id'],
+                'slug' => $d['slug'],
+                'name' => $d['name'],
+                'photo' => $this->imageUrl($d['photo'] ?? null),
+                'qualification' => $d['qualification'] ?? null,
+                'expertise' => $d['expertise'] ?? null,
+            ],
+            $page['featured_doctors'] ?? []
+        );
+        $mapped['related_treatments'] = array_map(
+            fn (array $t): array => [
+                'id' => (int) $t['id'],
+                'slug' => $t['slug'],
+                'name' => $t['name'],
+                'image' => $this->imageUrl($t['featured_image'] ?? null),
+            ],
+            $page['related_treatments'] ?? []
+        );
+        $mapped['seo'] = $page['seo'] ?? null;
+        $this->cached($mapped);
     }
 
     public function doctorsList(): void
@@ -150,6 +215,8 @@ final class PublicContentController extends Controller
             'slug' => (string) $h['slug'],
             'name' => (string) $h['name'],
             'description' => $h['description'] ?? $h['about'] ?? null,
+            'short_description' => $h['short_description'] ?? null,
+            'hero_image_alt' => $h['hero_image_alt'] ?? $h['name'] ?? null,
             'address_line1' => $h['address_line1'] ?? null,
             'address_line2' => $h['address_line2'] ?? null,
             'city' => $h['city'] ?? null,
@@ -167,6 +234,7 @@ final class PublicContentController extends Controller
             'accreditation_logos' => $accreditationLogos,
             'seo_title' => $h['seo_title'] ?? $h['name'],
             'seo_description' => $h['seo_description'] ?? null,
+            'url' => '/hospital?slug=' . rawurlencode((string) $h['slug']),
         ];
     }
 

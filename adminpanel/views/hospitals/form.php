@@ -15,8 +15,6 @@ $checkedIds = static function (string $key) use ($values): array {
 $about = (string) ($values['about'] ?? $values['description'] ?? '');
 $accreditationCodes = $checkedIds('accreditation_codes');
 $serviceCodes = $checkedIds('international_service_codes');
-$autoDoctors = is_array($hospital) && is_array($hospital['featured_doctors'] ?? null) ? $hospital['featured_doctors'] : [];
-$autoSpecialties = is_array($hospital) && is_array($hospital['related_specialties'] ?? null) ? $hospital['related_specialties'] : [];
 ?>
 <section class="page-intro page-intro-row">
     <div>
@@ -65,7 +63,7 @@ $autoSpecialties = is_array($hospital) && is_array($hospital['related_specialtie
                     <input type="file" name="logo" accept="image/jpeg,image/png,image/webp,image/gif">
                 </div>
                 <div class="field">
-                    <span>Cover image</span>
+                    <span>Hero image (cover)</span>
                     <?php if (!empty($values['cover_image'])): ?>
                         <div class="photo-preview">
                             <img class="cover-preview" src="<?= e(asset((string) $values['cover_image'])) ?>" alt="">
@@ -74,6 +72,8 @@ $autoSpecialties = is_array($hospital) && is_array($hospital['related_specialtie
                     <?php endif; ?>
                     <input type="file" name="cover_image" accept="image/jpeg,image/png,image/webp,image/gif">
                 </div>
+                <label class="field"><span>Hero image alt text</span><input type="text" name="hero_image_alt" value="<?= $val('hero_image_alt') ?>" placeholder="Describe the hero image"></label>
+                <label class="field"><span>Website</span><input type="url" name="website" value="<?= $val('website') ?>" placeholder="https://example.com"></label>
                 <fieldset class="field full accreditation-fieldset">
                     <legend>Accreditation</legend>
                     <div class="checkbox-grid">
@@ -93,9 +93,8 @@ $autoSpecialties = is_array($hospital) && is_array($hospital['related_specialtie
 
         <div class="tab-panel" data-tab-panel="basic">
             <div class="form-grid">
-                <label class="field full"><span>About hospital *</span><textarea name="about" rows="5" required data-preview-about><?= e($about) ?></textarea></label>
-                <label class="field"><span>Established year</span><input type="number" min="1800" max="<?= (int) date('Y') + 1 ?>" name="established_year" value="<?= $val('established_year') ?>"></label>
-                <label class="field"><span>Number of beds</span><input type="number" min="0" name="number_of_beds" value="<?= $val('number_of_beds') ?>"></label>
+                <label class="field full"><span>Short description</span><textarea name="short_description" rows="2" maxlength="320" placeholder="One or two lines shown on hospital cards"><?= $val('short_description') ?></textarea></label>
+                <label class="field full"><span>About hospital *</span><textarea name="about" id="about-editor" rows="8" required data-preview-about><?= e($about) ?></textarea></label>
                 <label class="field"><span>Hospital type</span>
                     <select name="hospital_type">
                         <option value="">Select type</option>
@@ -111,6 +110,19 @@ $autoSpecialties = is_array($hospital) && is_array($hospital['related_specialtie
                 <label class="field"><span>Pincode</span><input type="text" name="pincode" value="<?= $val('pincode') ?>"></label>
                 <label class="field"><span>Country</span><input type="text" name="country" value="<?= $val('country') ?>"></label>
             </div>
+
+            <fieldset class="field full">
+                <legend>Quick Facts</legend>
+                <div class="form-grid">
+                    <label class="field"><span>Established (year)</span><input type="number" min="1800" max="<?= (int) date('Y') + 1 ?>" name="established_year" value="<?= $val('established_year') ?>" placeholder="e.g. 2009"></label>
+                    <label class="field"><span>Beds</span><input type="number" min="0" name="number_of_beds" value="<?= $val('number_of_beds') ?>" placeholder="e.g. 1200"></label>
+                    <label class="field"><span>ICU Beds</span><input type="number" min="0" name="icu_beds" value="<?= $val('icu_beds') ?>" placeholder="e.g. 250"></label>
+                    <label class="field"><span>Operation Theatres</span><input type="number" min="0" name="operation_theatres" value="<?= $val('operation_theatres') ?>" placeholder="e.g. 35"></label>
+                    <label class="field"><span>International Patients (Per Year)</span><input type="number" min="0" name="international_patients_per_year" value="<?= $val('international_patients_per_year') ?>" placeholder="e.g. 20000"></label>
+                    <label class="field"><span>Airport Distance</span><input type="text" name="airport_distance" value="<?= $val('airport_distance') ?>" placeholder="e.g. 18 km"></label>
+                </div>
+                <p class="muted form-hint">Icons for these 6 facts are managed under <a href="<?= e(url('/settings/icons')) ?>" target="_blank" rel="noopener">Settings &rarr; Icons</a>.</p>
+            </fieldset>
         </div>
 
         <div class="tab-panel" data-tab-panel="services">
@@ -127,30 +139,30 @@ $autoSpecialties = is_array($hospital) && is_array($hospital['related_specialtie
         <div class="tab-panel" data-tab-panel="relationships">
             <div class="relation-grid">
                 <?php component('multi-select', ['name' => 'treatment_ids[]', 'label' => 'Related treatments', 'options' => $options['treatments'], 'selected' => $checkedIds('treatment_ids')]); ?>
-                <div class="auto-relations">
-                    <h3>Related specialties (automatic)</h3>
-                    <p class="muted">Derived from doctors linked to this hospital. Not edited here.</p>
-                    <?php if ($autoSpecialties === []): ?>
-                        <p class="muted">No specialties yet — link doctors to this hospital from the Doctors module.</p>
-                    <?php else: ?>
-                        <ul class="chip-list">
-                            <?php foreach ($autoSpecialties as $specialty): ?>
-                                <li><?= e((string) $specialty['name']) ?></li>
-                            <?php endforeach; ?>
-                        </ul>
-                    <?php endif; ?>
-                    <h3>Featured doctors (automatic)</h3>
-                    <p class="muted">Uses featured doctors linked to this hospital, then fills up to 6 with other active doctors.</p>
-                    <?php if ($autoDoctors === []): ?>
-                        <p class="muted">No doctors linked yet.</p>
-                    <?php else: ?>
-                        <ul class="chip-list">
-                            <?php foreach ($autoDoctors as $doctor): ?>
-                                <li><?= e((string) $doctor['name']) ?><?= !empty($doctor['is_featured']) ? ' · Featured' : '' ?></li>
-                            <?php endforeach; ?>
-                        </ul>
+            </div>
+
+            <fieldset class="field full">
+                <legend>Specialties (Multi Select)</legend>
+                <div class="checkbox-grid">
+                    <?php foreach ($options['specialties'] as $specialty): ?>
+                        <label class="checkbox-field">
+                            <input type="checkbox" name="specialty_ids[]" value="<?= (int) $specialty['id'] ?>" <?= in_array((string) $specialty['id'], array_map('strval', $checkedIds('specialty_ids')), true) ? 'checked' : '' ?>>
+                            <span class="accreditation-option">
+                                <?php if (!empty($specialty['image'])): ?>
+                                    <img src="<?= e(asset((string) $specialty['image'])) ?>" alt="" width="24" height="24">
+                                <?php endif; ?>
+                                <?= e((string) $specialty['name']) ?>
+                            </span>
+                        </label>
+                    <?php endforeach; ?>
+                    <?php if ($options['specialties'] === []): ?>
+                        <p class="muted">No specialties yet — add some from the Specialties module.</p>
                     <?php endif; ?>
                 </div>
+            </fieldset>
+
+            <div class="relation-grid">
+                <?php component('multi-select', ['name' => 'doctor_ids[]', 'label' => 'Top Doctors', 'options' => $options['doctors'], 'selected' => $checkedIds('doctor_ids')]); ?>
             </div>
         </div>
 

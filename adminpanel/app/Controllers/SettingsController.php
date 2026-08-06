@@ -50,19 +50,21 @@ final class SettingsController extends Controller
         redirect('/settings/hero');
     }
 
-    public function accreditations(): void
+    public function icons(): void
     {
         Auth::requirePermission('settings.view');
-        View::renderInLayout('settings/accreditations', 'admin', [
-            'title' => 'Accreditation Icons',
-            'activeNav' => 'settings-accreditations',
+        View::renderInLayout('settings/icons', 'admin', [
+            'title' => 'Icons',
+            'activeNav' => 'settings-icons',
             'breadcrumbs' => [
                 ['label' => 'Admin', 'href' => url('/dashboard')],
-                ['label' => 'Accreditation Icons'],
+                ['label' => 'Icons'],
             ],
             'user' => Auth::user(),
             'csrf' => Csrf::field(),
             'accreditationTypes' => $this->settings->getAccreditationTypes(),
+            'quickFactTypes' => SettingsService::QUICK_FACT_TYPES,
+            'quickFactIcons' => $this->settings->getQuickFactIcons(),
             'notifications' => [],
         ]);
     }
@@ -77,7 +79,7 @@ final class SettingsController extends Controller
         } catch (RuntimeException $e) {
             flash('error', $e->getMessage());
         }
-        redirect('/settings/accreditations');
+        redirect('/settings/icons');
     }
 
     public function updateAccreditation(string $code): void
@@ -90,7 +92,7 @@ final class SettingsController extends Controller
         } catch (RuntimeException $e) {
             flash('error', $e->getMessage());
         }
-        redirect('/settings/accreditations');
+        redirect('/settings/icons');
     }
 
     public function destroyAccreditation(string $code): void
@@ -99,6 +101,19 @@ final class SettingsController extends Controller
         $this->validateCsrf();
         $this->settings->deleteAccreditationType($code);
         flash('success', 'Accreditation type removed.');
-        redirect('/settings/accreditations');
+        redirect('/settings/icons');
+    }
+
+    public function updateQuickFactIcon(string $code): void
+    {
+        Auth::requirePermission('settings.update');
+        $this->validateCsrf();
+        try {
+            $this->settings->updateQuickFactIcon($code, $_FILES['logo'] ?? null);
+            flash('success', 'Quick fact icon updated successfully.');
+        } catch (RuntimeException $e) {
+            flash('error', $e->getMessage());
+        }
+        redirect('/settings/icons');
     }
 }

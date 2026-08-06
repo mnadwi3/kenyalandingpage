@@ -73,10 +73,13 @@ final class HospitalService
     {
         return [
             'treatments' => $this->options->treatments(),
+            'specialties' => $this->options->specialties(),
+            'doctors' => $this->options->doctors(),
             'statuses' => Hospital::STATUSES,
             'types' => Hospital::TYPES,
             'accreditations' => $this->settings->getAccreditationTypesMap(),
             'international_services' => Hospital::INTERNATIONAL_SERVICES,
+            'quick_fact_icons' => $this->settings->getQuickFactIcons(),
         ];
     }
 
@@ -187,9 +190,16 @@ final class HospitalService
             'name' => $hospital['name'] . ' (Copy)',
             'logo' => $this->images->copy((string) ($hospital['logo'] ?? ''), 'hospitals'),
             'cover_image' => $this->images->copy((string) ($hospital['cover_image'] ?? ''), 'hospitals'),
+            'hero_image_alt' => $hospital['hero_image_alt'] ?? null,
             'description' => $hospital['description'] ?? $hospital['about'] ?? null,
+            'short_description' => $hospital['short_description'] ?? null,
+            'website' => $hospital['website'] ?? null,
             'established_year' => $hospital['established_year'] ?? null,
             'number_of_beds' => $hospital['number_of_beds'] ?? null,
+            'icu_beds' => $hospital['icu_beds'] ?? null,
+            'operation_theatres' => $hospital['operation_theatres'] ?? null,
+            'international_patients_per_year' => $hospital['international_patients_per_year'] ?? null,
+            'airport_distance' => $hospital['airport_distance'] ?? null,
             'hospital_type' => $hospital['hospital_type'] ?? null,
             'address_line1' => $hospital['address_line1'] ?? null,
             'address_line2' => $hospital['address_line2'] ?? null,
@@ -209,6 +219,8 @@ final class HospitalService
                 'accreditations' => $hospital['accreditation_codes'] ?? [],
                 'international_services' => $hospital['international_service_codes'] ?? [],
                 'treatments' => $hospital['treatment_ids'] ?? [],
+                'specialties' => $hospital['specialty_ids'] ?? [],
+                'doctors' => $hospital['doctor_ids'] ?? [],
             ]);
 
             return $newId;
@@ -307,6 +319,8 @@ final class HospitalService
         $hospital['accreditation_codes'] = $this->hospitals->accreditationCodes($id);
         $hospital['international_service_codes'] = $this->hospitals->internationalServiceCodes($id);
         $hospital['treatment_ids'] = $this->hospitals->treatmentIds($id);
+        $hospital['specialty_ids'] = $this->hospitals->specialtyIds($id);
+        $hospital['doctor_ids'] = $this->hospitals->doctorIds($id);
         $hospital['accreditations'] = $this->mapAccreditations($hospital['accreditation_codes']);
         $hospital['international_services'] = $this->mapServices($hospital['international_service_codes']);
         $hospital['related_specialties'] = $this->hospitals->relatedSpecialties($id);
@@ -314,7 +328,8 @@ final class HospitalService
         $hospital['featured_doctors'] = $this->hospitals->featuredDoctors($id, 6);
         $hospital['public_url'] = $this->publicPath((string) $hospital['slug']);
         $hospital['location'] = $this->formatLocation($hospital);
-        $hospital['short_description'] = $this->shortDescription((string) ($hospital['about'] ?? ''));
+        $hospital['short_description'] = $this->nullableString($hospital['short_description'] ?? null)
+            ?? $this->shortDescription((string) ($hospital['about'] ?? ''));
         $hospital['homepage_card'] = $this->homepageCard($hospital);
         if ($forPublic) {
             $hospital['page'] = $this->dedicatedPage($hospital);
@@ -347,22 +362,57 @@ final class HospitalService
             'country' => $hospital['country'] ?? null,
             'pincode' => $hospital['pincode'] ?? null,
             'location' => $hospital['location'] ?? '',
-            'short_description' => $hospital['short_description'] ?? '',
+            'short_description' => $hospital['short_description'] ?? $this->shortDescription((string) ($hospital['about'] ?? '')),
             'book_appointment_url' => null,
             'whatsapp_url' => null,
             'view_more_url' => $hospital['public_url'] ?? $this->publicPath((string) ($hospital['slug'] ?? '')),
         ];
     }
 
+    private function quickFacts(array $hospital): array
+    {
+        $icons = $this->settings->getQuickFactIcons();
+        $values = [
+            'established' => $hospital['established_year'] ?? null,
+            'beds' => $hospital['number_of_beds'] ?? null,
+            'icu_beds' => $hospital['icu_beds'] ?? null,
+            'operation_theatres' => $hospital['operation_theatres'] ?? null,
+            'international_patients' => $hospital['international_patients_per_year'] ?? null,
+            'airport_distance' => $hospital['airport_distance'] ?? null,
+        ];
+        $facts = [];
+        foreach (SettingsService::QUICK_FACT_TYPES as $code => $label) {
+            $facts[] = [
+                'code' => $code,
+                'label' => $label,
+                'value' => $values[$code],
+                'icon' => $icons[$code] ?? '',
+            ];
+        }
+
+        return $facts;
+    }
+
     private function dedicatedPage(array $hospital): array
     {
         return [
             'cover_image' => $hospital['cover_image'] ?? null,
+            'hero_image_alt' => $hospital['hero_image_alt'] ?? $hospital['name'] ?? '',
+            'website' => $hospital['website'] ?? null,
             'about' => $hospital['about'] ?? null,
+            'quick_facts' => $this->quickFacts($hospital),
             'international_patient_services' => $hospital['international_services'] ?? [],
             'related_treatments' => $hospital['related_treatments'] ?? [],
             'featured_doctors' => $hospital['featured_doctors'] ?? [],
-            'related_specialties' => $hospital['related_specialties'] ?? [],
+            'related_specialties' => array_map(
+                static fn (array $item): array => [
+                    'id' => (int) $item['id'],
+                    'slug' => $item['slug'],
+                    'name' => $item['name'],
+                    'icon' => $item['image'] ?? null,
+                ],
+                $hospital['related_specialties'] ?? []
+            ),
             'contact_form' => [
                 'enabled' => true,
                 'action' => null,
@@ -395,6 +445,9 @@ final class HospitalService
             ->maxLength('state', 120, 'State')
             ->maxLength('country', 120, 'Country')
             ->maxLength('pincode', 20, 'Pincode')
+            ->maxLength('website', 255, 'Website')
+            ->maxLength('short_description', 320, 'Short description')
+            ->maxLength('hero_image_alt', 255, 'Hero image alt text')
             ->maxLength('seo_title', 255, 'SEO title')
             ->maxLength('seo_description', 320, 'Meta description')
             ->maxLength('slug', 191, 'Slug');
@@ -421,13 +474,26 @@ final class HospitalService
         if ($beds !== '' && $beds !== null && (!ctype_digit((string) $beds) || (int) $beds < 0)) {
             throw new RuntimeException('Number of beds is invalid.');
         }
+        foreach (['icu_beds' => 'ICU beds', 'operation_theatres' => 'Operation theatres', 'international_patients_per_year' => 'International patients (per year)'] as $field => $label) {
+            $value = $input[$field] ?? '';
+            if ($value !== '' && $value !== null && (!ctype_digit((string) $value) || (int) $value < 0)) {
+                throw new RuntimeException($label . ' is invalid.');
+            }
+        }
 
         $payload = [
             'slug' => $slug,
             'name' => $name,
             'description' => $this->nullableString($input['about'] ?? $input['description'] ?? null),
+            'short_description' => $this->nullableString($input['short_description'] ?? null),
+            'hero_image_alt' => $this->nullableString($input['hero_image_alt'] ?? null),
+            'website' => $this->nullableString($input['website'] ?? null),
             'established_year' => $year === '' || $year === null ? null : (int) $year,
             'number_of_beds' => $beds === '' || $beds === null ? null : (int) $beds,
+            'icu_beds' => ($input['icu_beds'] ?? '') === '' ? null : (int) $input['icu_beds'],
+            'operation_theatres' => ($input['operation_theatres'] ?? '') === '' ? null : (int) $input['operation_theatres'],
+            'international_patients_per_year' => ($input['international_patients_per_year'] ?? '') === '' ? null : (int) $input['international_patients_per_year'],
+            'airport_distance' => $this->nullableString($input['airport_distance'] ?? null),
             'hospital_type' => $this->nullableString($input['hospital_type'] ?? null),
             'address_line1' => $this->nullableString($input['address_line1'] ?? null),
             'address_line2' => $this->nullableString($input['address_line2'] ?? null),
@@ -453,6 +519,8 @@ final class HospitalService
         $this->hospitals->syncAccreditations($hospitalId, $relations['accreditations'] ?? []);
         $this->hospitals->syncInternationalServices($hospitalId, $relations['international_services'] ?? []);
         $this->hospitals->syncTreatments($hospitalId, $relations['treatments'] ?? []);
+        $this->hospitals->syncSpecialties($hospitalId, $relations['specialties'] ?? []);
+        $this->hospitals->syncDoctors($hospitalId, $relations['doctors'] ?? []);
     }
 
     private function extractRelations(array $input): array
@@ -461,6 +529,8 @@ final class HospitalService
             'accreditations' => array_values(array_filter(array_map('strval', (array) ($input['accreditation_codes'] ?? [])))),
             'international_services' => array_values(array_filter(array_map('strval', (array) ($input['international_service_codes'] ?? [])))),
             'treatments' => $this->idList($input['treatment_ids'] ?? []),
+            'specialties' => $this->idList($input['specialty_ids'] ?? []),
+            'doctors' => $this->idList($input['doctor_ids'] ?? []),
         ];
     }
 
@@ -512,7 +582,7 @@ final class HospitalService
 
     private function shortDescription(string $about): string
     {
-        $about = trim(preg_replace('/\s+/', ' ', $about) ?? $about);
+        $about = trim(preg_replace('/\s+/', ' ', strip_tags($about)) ?? strip_tags($about));
         if ($about === '') {
             return '';
         }

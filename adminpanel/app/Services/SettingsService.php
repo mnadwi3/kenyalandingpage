@@ -17,6 +17,16 @@ final class SettingsService
         ['code' => 'others', 'label' => 'Others', 'logo' => ''],
     ];
 
+    /** Fixed set of quick-fact slots shown on the hospital dedicated page. */
+    public const QUICK_FACT_TYPES = [
+        'established' => 'Established',
+        'beds' => 'Beds',
+        'icu_beds' => 'ICU Beds',
+        'operation_theatres' => 'Operation Theatres',
+        'international_patients' => 'International Patients (Per Year)',
+        'airport_distance' => 'Airport Distance',
+    ];
+
     private SiteSettingRepository $settings;
     private ImageUploader $images;
 
@@ -145,5 +155,31 @@ final class SettingsService
         if ($target !== null && !empty($target['logo'])) {
             $this->images->delete($target['logo']);
         }
+    }
+
+    /** @return array<string, string> code => logo path (may be empty string if not uploaded) */
+    public function getQuickFactIcons(): array
+    {
+        $stored = $this->settings->get('quick_fact_icons');
+        $stored = is_array($stored) ? $stored : [];
+        $icons = [];
+        foreach (array_keys(self::QUICK_FACT_TYPES) as $code) {
+            $icons[$code] = (string) ($stored[$code] ?? '');
+        }
+
+        return $icons;
+    }
+
+    public function updateQuickFactIcon(string $code, ?array $iconFile): void
+    {
+        if (!isset(self::QUICK_FACT_TYPES[$code])) {
+            throw new RuntimeException('Unknown quick fact type.');
+        }
+        if (!$iconFile || ($iconFile['error'] ?? UPLOAD_ERR_NO_FILE) === UPLOAD_ERR_NO_FILE) {
+            throw new RuntimeException('An icon image is required.');
+        }
+        $icons = $this->getQuickFactIcons();
+        $icons[$code] = $this->images->upload($iconFile, 'quick-facts', $icons[$code] ?: null);
+        $this->settings->put('quick_fact_icons', $icons);
     }
 }

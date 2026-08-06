@@ -50,6 +50,14 @@ interface HospitalRepositoryInterface
 
     public function treatmentIds(int $hospitalId): array;
 
+    public function specialtyIds(int $hospitalId): array;
+
+    public function syncSpecialties(int $hospitalId, array $specialtyIds): void;
+
+    public function doctorIds(int $hospitalId): array;
+
+    public function syncDoctors(int $hospitalId, array $doctorIds): void;
+
     public function relatedTreatments(int $hospitalId): array;
 
     public function relatedSpecialties(int $hospitalId): array;

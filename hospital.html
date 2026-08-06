@@ -1,0 +1,422 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title id="page-title">Hospital | VaidTrack.com</title>
+  <meta id="page-description" name="description" content="Hospital details on VaidTrack.com.">
+  <meta name="theme-color" content="#ffffff">
+  <link id="page-canonical" rel="canonical" href="https://www.vaidtrack.com/hospital">
+  <link rel="icon" href="/favicon.ico" sizes="any">
+  <link rel="preload" href="/assets/fonts/inter-latin.woff2" as="font" type="font/woff2" crossorigin>
+  <link rel="stylesheet" href="/assets/css/tailwind.min.css?v=20260803-perf3">
+  <link rel="stylesheet" href="/assets/css/styles.min.css?v=20260805-faqcards8">
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    window.gtag = window.gtag || function () { window.dataLayer.push(arguments); };
+  </script>
+  <style>
+    .hp-hero {
+      position: relative;
+      border-radius: 1rem;
+      overflow: hidden;
+      min-height: 360px;
+      display: flex;
+      align-items: flex-end;
+      background: linear-gradient(120deg, var(--secondary, #0B3A61), #103a63);
+    }
+
+    .hp-hero img {
+      position: absolute;
+      inset: 0;
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      z-index: 0;
+    }
+
+    .hp-hero::after {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(90deg, rgba(11,58,97,0.92) 0%, rgba(11,58,97,0.55) 55%, rgba(11,58,97,0.15) 100%);
+      z-index: 1;
+    }
+
+    .hp-hero-content {
+      position: relative;
+      z-index: 2;
+      padding: 2rem;
+      color: #fff;
+      max-width: 640px;
+    }
+
+    .hp-accreditation-pills {
+      display: flex;
+      gap: 0.5rem;
+      flex-wrap: wrap;
+      margin-bottom: 1rem;
+    }
+
+    .hp-accreditation-pill {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.4rem;
+      background: rgba(255,255,255,0.12);
+      border: 1px solid rgba(255,255,255,0.35);
+      border-radius: 999px;
+      padding: 0.3rem 0.75rem;
+      font-size: 0.75rem;
+      font-weight: 600;
+    }
+
+    .hp-accreditation-pill img { width: 16px; height: 16px; object-fit: contain; }
+
+    .hp-quick-facts {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
+      gap: 1rem;
+    }
+
+    .hp-quick-fact {
+      text-align: center;
+      background: #fff;
+      border: 1px solid #eef2f6;
+      border-radius: 0.75rem;
+      padding: 1.25rem 0.75rem;
+    }
+
+    .hp-quick-fact img { width: 32px; height: 32px; object-fit: contain; margin: 0 auto 0.5rem; }
+    .hp-quick-fact .hp-fact-label { font-size: 0.8rem; color: #64748b; }
+    .hp-quick-fact .hp-fact-value { font-size: 1.25rem; font-weight: 700; color: var(--primary, #0F4C81); }
+
+    .hp-specialty-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(130px, 1fr));
+      gap: 1rem;
+    }
+
+    .hp-specialty-card {
+      text-align: center;
+      border: 1px solid #eef2f6;
+      border-radius: 0.75rem;
+      padding: 1.25rem 0.75rem;
+      background: #fff;
+    }
+
+    .hp-specialty-card img { width: 32px; height: 32px; object-fit: contain; margin: 0 auto 0.5rem; }
+
+    .hp-doctor-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+      gap: 1.25rem;
+    }
+
+    .hp-doctor-card {
+      border: 1px solid #eef2f6;
+      border-radius: 0.75rem;
+      padding: 1.25rem;
+      display: flex;
+      gap: 0.9rem;
+      align-items: flex-start;
+      background: #fff;
+    }
+
+    .hp-doctor-card img {
+      width: 64px;
+      height: 64px;
+      border-radius: 50%;
+      object-fit: cover;
+      background: #eef2f6;
+      flex-shrink: 0;
+    }
+
+    .hp-about-checklist { list-style: none; padding: 0; margin: 1rem 0 0; }
+    .hp-about-checklist li { display: flex; gap: 0.5rem; align-items: flex-start; margin-bottom: 0.5rem; font-size: 0.9rem; color: #334155; }
+    .hp-about-checklist li svg { flex-shrink: 0; margin-top: 2px; color: var(--primary, #0F4C81); }
+  </style>
+</head>
+
+<body class="bg-white antialiased">
+  <noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-KZ86XPT5" height="0" width="0"
+      style="display:none;visibility:hidden"></iframe></noscript>
+
+  <!-- ========== HEADER ========== -->
+  <header class="sticky top-0 z-50 bg-primary shadow-md">
+    <div class="max-w-6xl mx-auto px-4 sm:px-6 h-[4.25rem] sm:h-[4.75rem] flex items-center justify-between gap-3">
+      <a href="/" class="site-logo shrink-0 inline-flex items-center" aria-label="Home">
+        <picture>
+          <source type="image/webp"
+            srcset="/images/vaidtrack-wordmark-nav-160.webp?v=20260803-perf3 160w, /images/vaidtrack-wordmark-nav.webp?v=20260803-perf3 304w"
+            sizes="(max-width: 767px) 160px, 220px">
+          <img src="/images/vaidtrack-wordmark.png?v=20260803-perf3" alt="VaidTrack.com - For Medical Solutions"
+            width="220" height="44" class="site-logo-img w-auto object-contain object-left" decoding="async"
+            fetchpriority="high">
+        </picture>
+      </a>
+
+      <nav class="hidden md:flex items-center text-white/85 whitespace-nowrap nav-primary" style="gap:20px"
+        aria-label="Primary">
+        <a href="/" class="hover:text-white transition-colors">Home</a>
+        <a href="/treatment" class="hover:text-white transition-colors">Treatments</a>
+        <a href="/all-doctors" class="hover:text-white transition-colors">Doctors</a>
+        <a href="/hospitals" class="hover:text-white transition-colors">Hospitals</a>
+        <a href="/testimonials" class="hover:text-white transition-colors">Testimonials</a>
+        <a href="/about-us" class="hover:text-white transition-colors">About Us</a>
+        <a href="/faq" class="hover:text-white transition-colors">FAQ</a>
+      </nav>
+
+      <div class="flex items-center gap-2 shrink-0">
+        <a href="https://wa.me/918979983149?text=Hi%2C%20I%20want%20to%20know%20more%20about%20Cancer%20Treatment%20in%20India"
+          target="_blank" rel="noopener noreferrer" role="button"
+          class="header-wa inline-flex items-center gap-2 bg-[var(--wa)] hover:bg-[var(--wa-hover)] text-white font-semibold text-sm px-3.5 py-2.5 rounded-md shadow-card transition-colors"
+          aria-label="Chat with us on WhatsApp">
+          <svg class="w-5 h-5 shrink-0" fill="currentColor" viewBox="0 0 24 24" aria-hidden="true">
+            <path
+              d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.435 9.884-9.85 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 6.045L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z" />
+          </svg>
+          <span class="header-wa-text">WhatsApp</span>
+        </a>
+      </div>
+    </div>
+  </header>
+
+  <main id="top">
+    <div id="hp-loading" class="max-w-6xl mx-auto px-4 sm:px-6 py-16 text-center text-slate-500">Loading hospital…</div>
+    <div id="hp-not-found" class="max-w-6xl mx-auto px-4 sm:px-6 py-16 text-center hidden">
+      <h1 class="text-2xl font-bold text-secondary mb-2">Hospital not found</h1>
+      <p class="text-slate-600 mb-6">This hospital may have been removed or the link is incorrect.</p>
+      <a href="/hospitals" class="inline-flex items-center gap-2 bg-primary text-white font-semibold px-5 py-3 rounded-lg">Browse all hospitals</a>
+    </div>
+
+    <div id="hp-content" class="hidden">
+      <section class="max-w-6xl mx-auto px-4 sm:px-6 pt-8">
+        <div class="hp-hero">
+          <img id="hp-hero-img" src="" alt="">
+          <div class="hp-hero-content">
+            <div id="hp-accreditation-pills" class="hp-accreditation-pills"></div>
+            <h1 id="hp-name" class="text-2xl sm:text-4xl font-bold mb-2"></h1>
+            <p id="hp-location" class="flex items-center gap-1.5 text-white/85 mb-3 text-sm"></p>
+            <p id="hp-short-desc" class="text-white/90 text-sm sm:text-base mb-5 max-w-lg"></p>
+            <div class="flex flex-wrap gap-3">
+              <a id="hp-book-btn" href="https://wa.me/918979983149" target="_blank" rel="noopener noreferrer"
+                class="inline-flex items-center gap-2 bg-gold text-secondary font-bold px-5 py-3 rounded-lg text-sm">Book Free Consultation</a>
+              <a id="hp-whatsapp-btn" href="https://wa.me/918979983149" target="_blank" rel="noopener noreferrer"
+                class="inline-flex items-center gap-2 border border-white/60 text-white font-semibold px-5 py-3 rounded-lg text-sm">Chat on WhatsApp</a>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section class="max-w-6xl mx-auto px-4 sm:px-6 py-10">
+        <h2 class="text-xl sm:text-2xl font-bold text-secondary mb-5">Quick Facts</h2>
+        <div id="hp-quick-facts" class="hp-quick-facts"></div>
+      </section>
+
+      <section class="max-w-6xl mx-auto px-4 sm:px-6 py-10 grid lg:grid-cols-2 gap-8 items-start">
+        <div>
+          <h2 class="text-xl sm:text-2xl font-bold text-secondary mb-4">About Hospital</h2>
+          <div id="hp-about" class="text-slate-600 text-sm sm:text-base leading-relaxed"></div>
+        </div>
+        <div id="hp-about-image-wrap">
+          <img id="hp-about-image" src="" alt="" class="w-full h-full object-cover rounded-2xl" style="max-height:360px;">
+        </div>
+      </section>
+
+      <section id="hp-specialties-section" class="max-w-6xl mx-auto px-4 sm:px-6 py-10 hidden">
+        <h2 class="text-xl sm:text-2xl font-bold text-secondary mb-5">Specialties</h2>
+        <div id="hp-specialties" class="hp-specialty-grid"></div>
+      </section>
+
+      <section id="hp-doctors-section" class="max-w-6xl mx-auto px-4 sm:px-6 py-10 hidden">
+        <h2 class="text-xl sm:text-2xl font-bold text-secondary mb-5">Top Doctors</h2>
+        <div id="hp-doctors" class="hp-doctor-grid"></div>
+      </section>
+
+      <section class="bg-soft py-10">
+        <div class="max-w-6xl mx-auto px-4 sm:px-6 grid lg:grid-cols-2 gap-8">
+          <div>
+            <h2 class="text-lg sm:text-xl font-bold text-secondary mb-4">Contact Information</h2>
+            <ul class="space-y-2 text-sm text-slate-700">
+              <li>+91-8979983149</li>
+              <li>query@tabeebway.com</li>
+              <li id="hp-address"></li>
+            </ul>
+            <a href="https://wa.me/918979983149" target="_blank" rel="noopener noreferrer"
+              class="inline-flex items-center gap-2 mt-4 bg-[var(--wa)] text-white font-semibold px-4 py-2.5 rounded-lg text-sm">Chat on WhatsApp</a>
+          </div>
+          <div>
+            <h2 class="text-lg sm:text-xl font-bold text-secondary mb-4">Send Us an Enquiry</h2>
+            <form id="hp-enquiry-form" class="grid sm:grid-cols-2 gap-3">
+              <input type="text" name="name" placeholder="Full Name" required class="rounded-lg border border-slate-200 px-3.5 py-2.5 text-sm">
+              <input type="text" name="country" placeholder="Country" class="rounded-lg border border-slate-200 px-3.5 py-2.5 text-sm">
+              <input type="tel" name="phone" placeholder="Phone / WhatsApp" required class="rounded-lg border border-slate-200 px-3.5 py-2.5 text-sm">
+              <input type="email" name="email" placeholder="Email Address" class="rounded-lg border border-slate-200 px-3.5 py-2.5 text-sm">
+              <textarea name="message" placeholder="Your Message" rows="3" class="sm:col-span-2 rounded-lg border border-slate-200 px-3.5 py-2.5 text-sm"></textarea>
+              <button type="submit" class="sm:col-span-2 bg-primary text-white font-bold py-3 rounded-lg text-sm">Request Free Consultation</button>
+            </form>
+          </div>
+        </div>
+      </section>
+    </div>
+  </main>
+
+  <!-- ========== FOOTER ========== -->
+  <footer class="bg-[var(--secondary)] text-white">
+    <div
+      class="max-w-6xl mx-auto px-4 sm:px-6 py-5 flex flex-col sm:flex-row sm:items-center sm:justify-between gap-3 text-sm">
+      <p class="text-white/90">&copy; 2026 All Rights Reserved</p>
+      <div class="flex items-center gap-6">
+        <a href="/privacy-policy" class="text-white/90 hover:text-white transition-colors">Privacy</a>
+        <a href="/disclaimer" class="text-white/90 hover:text-white transition-colors">Disclaimer</a>
+      </div>
+    </div>
+    <div class="border-t border-white/15">
+      <div class="max-w-4xl mx-auto px-4 sm:px-6 py-5">
+        <p class="text-center text-xs text-white/55 leading-relaxed">
+          This website is a medical tourism facilitation platform. Any hospital or healthcare provider names used are
+          for informational purposes only. We do not claim ownership or direct partnership unless specifically
+          mentioned.
+        </p>
+      </div>
+    </div>
+  </footer>
+
+  <a id="whatsapp-float"
+    href="https://wa.me/918979983149?text=Hi%2C%20I%20want%20to%20know%20more%20about%20Cancer%20Treatment%20in%20India"
+    target="_blank" rel="noopener noreferrer"
+    class="fixed bottom-5 right-5 z-50 hidden md:flex items-center gap-2 bg-[var(--wa)] hover:bg-[var(--wa-hover)] text-white font-semibold text-sm pl-3.5 pr-4 py-3 rounded-full shadow-card"
+    aria-label="Chat with us on WhatsApp">
+    <svg class="w-6 h-6" fill="currentColor" viewBox="0 0 24 24" aria-hidden="true">
+      <path
+        d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.435 9.884-9.85 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 6.045L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z" />
+    </svg>
+    <span>WhatsApp</span>
+  </a>
+
+  <script src="/assets/js/analytics.js?v=20260803-perf3" defer></script>
+  <script>
+    (function () {
+      var API_BASE = '/adminpanel';
+
+      function escapeHtml(str) {
+        return String(str == null ? '' : str)
+          .replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;')
+          .replace(/"/g, '&quot;').replace(/'/g, '&#39;');
+      }
+
+      function qs(name) {
+        return new URLSearchParams(window.location.search).get(name);
+      }
+
+      var slug = qs('slug');
+      var loadingEl = document.getElementById('hp-loading');
+      var notFoundEl = document.getElementById('hp-not-found');
+      var contentEl = document.getElementById('hp-content');
+
+      if (!slug) {
+        loadingEl.classList.add('hidden');
+        notFoundEl.classList.remove('hidden');
+        return;
+      }
+
+      fetch(API_BASE + '/api/hospitals/' + encodeURIComponent(slug) + '.json', { credentials: 'omit' })
+        .then(function (res) { if (!res.ok) throw new Error('not found'); return res.json(); })
+        .then(function (h) { render(h); })
+        .catch(function () {
+          loadingEl.classList.add('hidden');
+          notFoundEl.classList.remove('hidden');
+        });
+
+      function render(h) {
+        loadingEl.classList.add('hidden');
+        contentEl.classList.remove('hidden');
+
+        document.getElementById('page-title').textContent = (h.seo && h.seo.title ? h.seo.title : h.name) + ' | VaidTrack.com';
+        document.getElementById('page-description').setAttribute('content', (h.seo && h.seo.description) || h.short_description || '');
+        document.getElementById('page-canonical').setAttribute('href', (h.seo && h.seo.canonical) ? 'https://www.vaidtrack.com' + h.seo.canonical.replace(/^\/adminpanel/, '') : window.location.href);
+
+        var heroImg = document.getElementById('hp-hero-img');
+        if (h.cover_image) { heroImg.src = h.cover_image; heroImg.alt = h.hero_image_alt || h.name; }
+
+        var pills = document.getElementById('hp-accreditation-pills');
+        if (Array.isArray(h.accreditation_logos)) {
+          pills.innerHTML = h.accreditation_logos.map(function (a) {
+            return '<span class="hp-accreditation-pill"><img src="' + escapeHtml(a.logo) + '" alt="">' + escapeHtml(a.label) + ' Accredited</span>';
+          }).join('');
+        }
+
+        document.getElementById('hp-name').textContent = h.name || '';
+        document.getElementById('hp-location').textContent = h.location || [h.city, h.country].filter(Boolean).join(', ');
+        document.getElementById('hp-short-desc').textContent = h.short_description || '';
+
+        var waText = encodeURIComponent('Hi, I want to know more about ' + (h.name || 'this hospital'));
+        document.getElementById('hp-whatsapp-btn').href = 'https://wa.me/918979983149?text=' + waText;
+        document.getElementById('hp-book-btn').href = 'https://wa.me/918979983149?text=' + waText;
+
+        var factsWrap = document.getElementById('hp-quick-facts');
+        if (Array.isArray(h.quick_facts)) {
+          factsWrap.innerHTML = h.quick_facts.filter(function (f) { return f.value !== null && f.value !== '' && f.value !== undefined; }).map(function (f) {
+            var icon = f.icon ? '<img src="' + escapeHtml(f.icon) + '" alt="">' : '';
+            return '<div class="hp-quick-fact">' + icon +
+              '<div class="hp-fact-value">' + escapeHtml(f.value) + '</div>' +
+              '<div class="hp-fact-label">' + escapeHtml(f.label) + '</div></div>';
+          }).join('');
+        }
+
+        var aboutEl = document.getElementById('hp-about');
+        aboutEl.innerHTML = h.about_html || ('<p>' + escapeHtml(h.description || '') + '</p>');
+
+        var aboutImgWrap = document.getElementById('hp-about-image-wrap');
+        var aboutImg = document.getElementById('hp-about-image');
+        if (h.logo || h.cover_image) {
+          aboutImg.src = h.logo || h.cover_image;
+          aboutImg.alt = h.name || '';
+        } else {
+          aboutImgWrap.classList.add('hidden');
+        }
+
+        if (Array.isArray(h.specialties) && h.specialties.length) {
+          document.getElementById('hp-specialties-section').classList.remove('hidden');
+          document.getElementById('hp-specialties').innerHTML = h.specialties.map(function (s) {
+            var icon = s.icon ? '<img src="' + escapeHtml(s.icon) + '" alt="">' : '';
+            return '<div class="hp-specialty-card">' + icon + '<div class="text-sm font-semibold text-secondary">' + escapeHtml(s.name) + '</div></div>';
+          }).join('');
+        }
+
+        if (Array.isArray(h.doctors) && h.doctors.length) {
+          document.getElementById('hp-doctors-section').classList.remove('hidden');
+          document.getElementById('hp-doctors').innerHTML = h.doctors.map(function (d) {
+            var photo = d.photo
+              ? '<img src="' + escapeHtml(d.photo) + '" alt="' + escapeHtml(d.name) + '">'
+              : '<div class="hp-doctor-card-fallback" style="width:64px;height:64px;border-radius:50%;background:#eef2f6;flex-shrink:0;"></div>';
+            return '<div class="hp-doctor-card">' + photo +
+              '<div><div class="font-semibold text-secondary">' + escapeHtml(d.name) + '</div>' +
+              (d.qualification ? '<div class="text-xs text-slate-500">' + escapeHtml(d.qualification) + '</div>' : '') +
+              '<a href="' + API_BASE + '/doctors/' + escapeHtml(d.slug || '') + '" class="text-xs text-primary font-semibold inline-block mt-2">View Profile</a>' +
+              '</div></div>';
+          }).join('');
+        }
+
+        var addressParts = [h.address_line1, h.address_line2, h.location].filter(Boolean);
+        document.getElementById('hp-address').textContent = addressParts.join(', ');
+      }
+
+      var enquiryForm = document.getElementById('hp-enquiry-form');
+      enquiryForm.addEventListener('submit', function (event) {
+        event.preventDefault();
+        var data = new FormData(enquiryForm);
+        var lines = ['Enquiry for ' + (document.getElementById('hp-name').textContent || 'hospital') + ':'];
+        ['name', 'country', 'phone', 'email', 'message'].forEach(function (key) {
+          var value = (data.get(key) || '').toString().trim();
+          if (value) lines.push(key + ': ' + value);
+        });
+        var url = 'https://wa.me/918979983149?text=' + encodeURIComponent(lines.join('\n'));
+        window.open(url, '_blank', 'noopener');
+      });
+    })();
+  </script>
+</body>
+
+</html>

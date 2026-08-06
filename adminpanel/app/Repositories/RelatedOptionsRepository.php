@@ -22,7 +22,7 @@ final class RelatedOptionsRepository extends Model
         }
         try {
             return self::db()->query(
-                "SELECT id, name FROM specialties
+                "SELECT id, name, image FROM specialties
                  WHERE status = 'active' AND deleted_at IS NULL
                  ORDER BY name ASC"
             )->fetchAll() ?: [];

@@ -123,8 +123,10 @@
         '</div>';
     }
 
+    var href = h.url || '#';
+
     return (
-      '<div class="hospital-card bg-white rounded-2xl shadow-card overflow-hidden border border-slate-100">' +
+      '<a class="hospital-card bg-white rounded-2xl shadow-card overflow-hidden border border-slate-100" href="' + escapeHtml(href) + '">' +
         '<div class="hospital-card-img">' + imgHtml + accreditationHtml + '</div>' +
         '<div class="hospital-card-info bg-[var(--section-bg)] p-6 flex flex-col justify-center">' +
           '<h3 class="font-display text-xl sm:text-2xl font-bold text-primary mb-2">' + escapeHtml(h.name) + '</h3>' +
@@ -133,7 +135,7 @@
           addressHtml +
           cityLineHtml +
         '</div>' +
-      '</div>'
+      '</a>'
     );
   }
 
@@ -219,7 +221,9 @@
   function init() {
     fetchJson('/api/hero.json').then(renderHero).catch(function () {});
     fetchJson('/api/treatments.json').then(renderTreatments).catch(function () {});
-    fetchJson('/api/hospitals.json').then(renderHospitals).catch(function () {});
+    fetchJson('/api/hospitals.json').then(function (data) {
+      renderHospitals(Array.isArray(data) ? data : (data.items || []));
+    }).catch(function () {});
     fetchJson('/api/testimonials.json').then(renderTestimonials).catch(function () {});
     fetchJson('/api/faqs.json').then(renderFaqs).catch(function () {});
   }

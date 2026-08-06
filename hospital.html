@@ -78,22 +78,25 @@
     }
     @media (max-width: 640px) { .hp-hero-content { padding: 1.5rem; } }
 
-    .hp-accreditation-pills { display: flex; gap: 0.5rem; flex-wrap: wrap; margin-bottom: 1.1rem; }
+    .hp-accreditation-pills { display: flex; justify-content: flex-start; gap: 0.5rem; flex-wrap: wrap; margin-bottom: 1.1rem; }
     .hp-accreditation-pill {
       display: inline-flex;
       align-items: center;
-      gap: 0.4rem;
+      justify-content: flex-start;
+      gap: 0.55rem;
       background: rgba(255,255,255,0.14);
       backdrop-filter: blur(4px);
       border: 1px solid rgba(255,255,255,0.4);
       border-radius: 999px;
-      padding: 0.32rem 0.85rem;
+      padding: 0.4rem 0.95rem;
       font-size: 0.72rem;
       font-weight: 700;
       letter-spacing: 0.02em;
       text-transform: uppercase;
+      line-height: 1;
     }
-    .hp-accreditation-pill img { width: 15px; height: 15px; object-fit: contain; }
+    .hp-accreditation-pill img { width: 15px; height: 15px; object-fit: contain; flex-shrink: 0; display: block; }
+    .hp-accreditation-pill span { display: inline-block; }
 
     .hp-name { font-size: 1.75rem; font-weight: 800; margin-bottom: 0.6rem; letter-spacing: -0.01em; line-height: 1.15; }
     @media (min-width: 640px) { .hp-name { font-size: 2.5rem; } }
@@ -114,13 +117,13 @@
       text-decoration: none;
     }
     .hp-btn:hover { transform: translateY(-1px); }
-    .hp-btn-gold { background: var(--hp-gold); color: var(--hp-secondary); box-shadow: 0 10px 20px -10px rgba(201,162,75,0.7); }
+    .hp-btn-gold { background: var(--hp-gold); color: #fff; box-shadow: 0 10px 20px -12px rgba(15,23,42,0.35); }
     .hp-btn-outline { border: 1.5px solid rgba(255,255,255,0.65); color: #fff; }
     .hp-btn-outline:hover { background: rgba(255,255,255,0.12); }
     .hp-btn-primary { background: var(--hp-primary); color: #fff; }
     .hp-btn-primary:hover { background: var(--hp-secondary); }
-    .hp-btn-wa { background: var(--wa, #16A34A); color: #fff; }
-    .hp-btn-wa:hover { background: var(--wa-hover, #128a3e); }
+    .hp-btn-wa { background: #25D366; color: #fff; }
+    .hp-btn-wa:hover { background: #1EBE5A; }
 
     /* ---------- Quick facts ---------- */
     .hp-quick-facts { display: grid; grid-template-columns: repeat(auto-fit, minmax(130px, 1fr)); gap: 1rem; }
@@ -301,7 +304,7 @@
             <p id="hp-short-desc" class="hp-short-desc"></p>
             <div class="hp-hero-actions">
               <a id="hp-book-btn" href="https://wa.me/918979983149" target="_blank" rel="noopener noreferrer" class="hp-btn hp-btn-gold">Book Free Consultation</a>
-              <a id="hp-whatsapp-btn" href="https://wa.me/918979983149" target="_blank" rel="noopener noreferrer" class="hp-btn hp-btn-outline">Chat on WhatsApp</a>
+              <a id="hp-whatsapp-btn" href="https://wa.me/918979983149" target="_blank" rel="noopener noreferrer" class="hp-btn hp-btn-wa">Chat on WhatsApp</a>
             </div>
           </div>
         </div>
@@ -449,7 +452,7 @@
         var pills = document.getElementById('hp-accreditation-pills');
         if (Array.isArray(h.accreditation_logos)) {
           pills.innerHTML = h.accreditation_logos.map(function (a) {
-            return '<span class="hp-accreditation-pill"><img src="' + escapeHtml(a.logo) + '" alt="">' + escapeHtml(a.label) + ' Accredited</span>';
+            return '<span class="hp-accreditation-pill"><img src="' + escapeHtml(a.logo) + '" alt=""><span>' + escapeHtml(a.label) + ' Accredited</span></span>';
           }).join('');
         }
 

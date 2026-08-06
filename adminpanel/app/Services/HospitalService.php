@@ -13,6 +13,7 @@ use App\Models\Hospital;
 use App\Repositories\HospitalRepository;
 use App\Repositories\RelatedOptionsRepository;
 use App\Support\Paginator;
+use PDOException;
 use RuntimeException;
 
 final class HospitalService
@@ -104,12 +105,16 @@ final class HospitalService
             $payload['cover_image'] = $this->images->upload($coverFile, 'hospitals');
         }
 
-        return Database::transaction(function () use ($payload, $relations): int {
-            $id = $this->hospitals->create($payload);
-            $this->syncRelations($id, $relations);
+        try {
+            return Database::transaction(function () use ($payload, $relations): int {
+                $id = $this->hospitals->create($payload);
+                $this->syncRelations($id, $relations);
 
-            return $id;
-        });
+                return $id;
+            });
+        } catch (PDOException $e) {
+            throw $this->translateDuplicateNameError($e, $payload['name']);
+        }
     }
 
     public function update(int $id, array $input, ?array $logoFile = null, ?array $coverFile = null): void
@@ -134,10 +139,14 @@ final class HospitalService
             $this->images->delete($existing['cover_image'] ?? null);
             $payload['cover_image'] = null;
         }
-        Database::transaction(function () use ($id, $payload, $relations): void {
-            $this->hospitals->update($id, $payload);
-            $this->syncRelations($id, $relations);
-        });
+        try {
+            Database::transaction(function () use ($id, $payload, $relations): void {
+                $this->hospitals->update($id, $payload);
+                $this->syncRelations($id, $relations);
+            });
+        } catch (PDOException $e) {
+            throw $this->translateDuplicateNameError($e, $payload['name']);
+        }
     }
 
     public function softDelete(int $id): void
@@ -148,6 +157,15 @@ final class HospitalService
     public function restore(int $id): void
     {
         $this->hospitals->restore($id);
+    }
+
+    private function translateDuplicateNameError(PDOException $e, string $name): RuntimeException
+    {
+        if ($e->getCode() === '23000' && str_contains($e->getMessage(), 'uq_hospitals_name_active')) {
+            return new RuntimeException('A hospital named "' . $name . '" already exists.');
+        }
+
+        return new RuntimeException('Unable to save hospital.', 0, $e);
     }
 
     public function duplicate(int $id): int

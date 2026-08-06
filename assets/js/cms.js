@@ -116,7 +116,7 @@
 
     var accreditationHtml = '';
     if (Array.isArray(h.accreditation_logos) && h.accreditation_logos.length) {
-      accreditationHtml = '<div class="hospital-card-accreditations flex items-center gap-3 mt-1">' +
+      accreditationHtml = '<div class="hospital-card-accreditations flex items-center gap-1">' +
         h.accreditation_logos.map(function (a) {
           return '<img src="' + escapeHtml(a.logo) + '" alt="' + escapeHtml(a.label) + '" title="' + escapeHtml(a.label) + '" loading="lazy" decoding="async">';
         }).join('') +
@@ -125,14 +125,13 @@
 
     return (
       '<div class="hospital-card bg-white rounded-2xl shadow-card overflow-hidden border border-slate-100">' +
-        '<div class="hospital-card-img">' + imgHtml + '</div>' +
+        '<div class="hospital-card-img">' + imgHtml + accreditationHtml + '</div>' +
         '<div class="hospital-card-info bg-[var(--section-bg)] p-6 flex flex-col justify-center">' +
           '<h3 class="font-display text-xl sm:text-2xl font-bold text-primary mb-2">' + escapeHtml(h.name) + '</h3>' +
           '<div class="w-12 h-1 bg-gold rounded-full mb-4" aria-hidden="true"></div>' +
           descriptionHtml +
           addressHtml +
           cityLineHtml +
-          accreditationHtml +
         '</div>' +
       '</div>'
     );

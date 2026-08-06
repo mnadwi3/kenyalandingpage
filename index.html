@@ -897,6 +897,24 @@
         flex: 0 0 175px;
         height: 175px;
         overflow: hidden;
+        position: relative;
+      }
+
+      .hospital-card-accreditations {
+        position: absolute;
+        top: 10px;
+        left: 10px;
+        z-index: 2;
+      }
+
+      .hospital-card-accreditations img {
+        width: 26px;
+        height: 26px;
+        object-fit: contain;
+        background: #fff;
+        border-radius: 6px;
+        padding: 3px;
+        box-shadow: 0 1px 4px rgba(0, 0, 0, 0.25);
       }
 
       .hospital-card-info {
@@ -924,16 +942,6 @@
         margin-bottom: 0.2rem !important;
         font-size: 0.75rem !important;
         line-height: 1.35 !important;
-      }
-
-      .hospital-card-accreditations {
-        margin-top: 0.35rem !important;
-      }
-
-      .hospital-card-accreditations img {
-        width: 26px;
-        height: 26px;
-        object-fit: contain;
       }
 
       @media (max-width: 768px) {
@@ -1599,7 +1607,7 @@
 
     <script src="assets/js/analytics.js?v=20260803-perf3" defer></script>
     <script src="assets/js/doctors.js?v=20260803-perf3" defer></script>
-    <script src="assets/js/cms.js?v=2" defer></script>
+    <script src="assets/js/cms.js?v=3" defer></script>
     <script src="assets/js/main.min.js?v=20260803-hero1" defer></script>
 </body>
 

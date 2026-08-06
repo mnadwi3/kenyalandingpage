@@ -276,28 +276,69 @@
     }
 
     /* ---------- Specialties ---------- */
-    .hp-specialty-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(150px, 1fr)); gap: 1.1rem; }
+    .hp-specialty-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(190px, 1fr)); gap: 1.1rem; }
     .hp-specialty-card {
       text-align: center;
       border: 1px solid var(--hp-border);
       border-radius: 1rem;
-      padding: 1.6rem 1rem;
+      padding: 1.85rem 1rem;
       background: #fff;
       transition: box-shadow 0.2s ease, transform 0.2s ease, border-color 0.2s ease;
     }
     .hp-specialty-card:hover { box-shadow: 0 18px 34px -20px rgba(15,76,129,0.35); transform: translateY(-3px); border-color: rgba(15,76,129,0.28); }
     .hp-specialty-icon {
-      width: 56px;
-      height: 56px;
+      width: 132px;
+      height: 132px;
       border-radius: 50%;
       background: var(--hp-tint);
       display: flex;
       align-items: center;
       justify-content: center;
-      margin: 0 auto 0.85rem;
+      margin: 0 auto 1rem;
     }
-    .hp-specialty-icon img { width: 26px; height: 26px; object-fit: contain; }
-    .hp-specialty-name { font-size: 0.85rem; font-weight: 700; color: var(--hp-ink); }
+    /* Icon is shown 3x larger on desktop per request (26px -> 78px) */
+    .hp-specialty-icon img { width: 78px; height: 78px; object-fit: contain; }
+    .hp-specialty-name { font-size: 0.9rem; font-weight: 700; color: var(--hp-ink); }
+
+    /* Green check badge — hidden on desktop, swapped in for the icon
+       circle on mobile where specialties become a checklist instead of
+       a card grid. */
+    .hp-specialty-check {
+      display: none;
+      width: 26px;
+      height: 26px;
+      border-radius: 50%;
+      background: #16A34A;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+    }
+    .hp-specialty-check svg { width: 14px; height: 14px; color: #fff; }
+
+    @media (max-width: 640px) {
+      .hp-specialty-grid {
+        display: flex;
+        flex-direction: column;
+        gap: 0;
+        border-top: 1px solid var(--hp-border);
+      }
+      .hp-specialty-card {
+        display: flex;
+        flex-direction: row;
+        align-items: center;
+        justify-content: flex-start;
+        text-align: left;
+        gap: 0.9rem;
+        border: none;
+        border-bottom: 1px solid var(--hp-border);
+        border-radius: 0;
+        padding: 1rem 0.25rem;
+      }
+      .hp-specialty-card:hover { box-shadow: none; transform: none; border-color: transparent; }
+      .hp-specialty-icon { display: none; }
+      .hp-specialty-check { display: flex; }
+      .hp-specialty-name { font-size: 0.95rem; }
+    }
 
     /* ---------- Doctors ---------- */
     .hp-doctor-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(240px, 1fr)); gap: 1.35rem; }
@@ -653,7 +694,9 @@
           document.getElementById('hp-specialties-section').classList.remove('hidden');
           document.getElementById('hp-specialties').innerHTML = h.specialties.map(function (s) {
             var icon = s.icon ? '<img src="' + escapeHtml(s.icon) + '" alt="">' : '';
-            return '<div class="hp-specialty-card"><div class="hp-specialty-icon">' + icon + '</div><div class="hp-specialty-name">' + escapeHtml(s.name) + '</div></div>';
+            return '<div class="hp-specialty-card"><div class="hp-specialty-icon">' + icon + '</div>' +
+              '<div class="hp-specialty-check" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><path stroke-linecap="round" stroke-linejoin="round" d="M20 6L9 17l-5-5"/></svg></div>' +
+              '<div class="hp-specialty-name">' + escapeHtml(s.name) + '</div></div>';
           }).join('');
         }
 

@@ -201,13 +201,21 @@
     .hp-about-body { color: var(--hp-muted); font-size: 0.95rem; line-height: 1.7; }
     .hp-about-body p { margin-bottom: 0.9rem; }
 
-    .hp-sticky-form {
-      position: sticky;
-      top: 96px;
-    }
+    /* Pinning is done in JS (not CSS position:sticky) because the site sets
+       overflow-x:hidden on <html>, which breaks position:sticky in most
+       browsers. .hp-sticky-form-outer reserves the layout space; the inner
+       .hp-sticky-form panel is switched between static/fixed/absolute by
+       the scroll handler below. */
+    .hp-sticky-form-outer { position: relative; }
+    .hp-sticky-form { width: 100%; }
+    .hp-sticky-form.is-fixed { position: fixed; top: 96px; }
+    .hp-sticky-form.is-bottom { position: absolute; left: 0; bottom: 0; top: auto; }
     .hp-sticky-form .hp-card-panel { box-shadow: 0 20px 40px -22px rgba(15,23,42,0.25); }
     .hp-sticky-form h3 { font-size: 1.05rem; font-weight: 800; color: var(--hp-secondary); margin-bottom: 0.35rem; }
     .hp-sticky-form p { font-size: 0.82rem; color: var(--hp-muted); margin-bottom: 1.1rem; }
+    @media (max-width: 991px) {
+      .hp-sticky-form.is-fixed, .hp-sticky-form.is-bottom { position: static !important; }
+    }
 
     /* ---------- Specialties ---------- */
     .hp-specialty-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(140px, 1fr)); gap: 1rem; }
@@ -374,18 +382,20 @@
         <h2 class="hp-section-title">About Hospital</h2>
         <div class="hp-about-grid">
           <div id="hp-about" class="hp-about-body"></div>
-          <div class="hp-sticky-form">
-            <div class="hp-card-panel">
-              <h3>Get a Free Second Opinion</h3>
-              <p>Share your details and our care team will get back to you within 24 hours.</p>
-              <form id="hp-sidebar-form" class="hp-enquiry-form">
-                <input type="text" name="name" placeholder="Full Name" required class="hp-full">
-                <input type="text" name="country" placeholder="Country">
-                <input type="tel" name="phone" placeholder="Phone / WhatsApp" required>
-                <input type="email" name="email" placeholder="Email Address" class="hp-full">
-                <textarea name="message" placeholder="Your Message" rows="3" class="hp-full"></textarea>
-                <button type="submit" class="hp-enquiry-submit">Request Free Consultation</button>
-              </form>
+          <div id="hp-sticky-form-outer" class="hp-sticky-form-outer">
+            <div id="hp-sticky-form" class="hp-sticky-form">
+              <div class="hp-card-panel">
+                <h3>Get a Free Second Opinion</h3>
+                <p>Share your details and our care team will get back to you within 24 hours.</p>
+                <form id="hp-sidebar-form" class="hp-enquiry-form">
+                  <input type="text" name="name" placeholder="Full Name" required class="hp-full">
+                  <input type="text" name="country" placeholder="Country">
+                  <input type="tel" name="phone" placeholder="Phone / WhatsApp" required>
+                  <input type="email" name="email" placeholder="Email Address" class="hp-full">
+                  <textarea name="message" placeholder="Your Message" rows="3" class="hp-full"></textarea>
+                  <button type="submit" class="hp-enquiry-submit">Request Free Consultation</button>
+                </form>
+              </div>
             </div>
           </div>
         </div>
@@ -568,6 +578,10 @@
 
         var addressParts = [h.address_line1, h.address_line2, h.location].filter(Boolean);
         document.getElementById('hp-address').textContent = addressParts.join(', ');
+
+        // Content just became visible/sized; (re)measure for the pinned form.
+        updateStickyForm();
+        setTimeout(updateStickyForm, 200);
       }
 
       function bindEnquiryForm(form) {
@@ -587,6 +601,52 @@
 
       bindEnquiryForm(document.getElementById('hp-enquiry-form'));
       bindEnquiryForm(document.getElementById('hp-sidebar-form'));
+    })();
+
+    /* Manual scroll-pinning for the sidebar form (position:sticky is
+       unreliable here because <html> has overflow-x:hidden site-wide,
+       which breaks sticky's containing-block resolution in most browsers). */
+    var updateStickyForm = (function () {
+      var outer = document.getElementById('hp-sticky-form-outer');
+      var panel = document.getElementById('hp-sticky-form');
+      var TOP_OFFSET = 96;
+
+      function update() {
+        if (!outer || !panel) return;
+        if (window.innerWidth < 992) {
+          panel.classList.remove('is-fixed', 'is-bottom');
+          panel.style.width = '';
+          outer.style.height = '';
+          return;
+        }
+        var outerRect = outer.getBoundingClientRect();
+        var panelHeight = panel.offsetHeight;
+        outer.style.height = panelHeight + 'px';
+
+        if (outerRect.top > TOP_OFFSET) {
+          panel.classList.remove('is-fixed', 'is-bottom');
+          panel.style.width = '';
+        } else if (outerRect.bottom < TOP_OFFSET + panelHeight) {
+          panel.classList.remove('is-fixed');
+          panel.classList.add('is-bottom');
+          panel.style.width = '';
+        } else {
+          panel.classList.remove('is-bottom');
+          panel.classList.add('is-fixed');
+          panel.style.width = outerRect.width + 'px';
+        }
+      }
+
+      var ticking = false;
+      function onScroll() {
+        if (ticking) return;
+        ticking = true;
+        window.requestAnimationFrame(function () { update(); ticking = false; });
+      }
+
+      window.addEventListener('scroll', onScroll, { passive: true });
+      window.addEventListener('resize', onScroll);
+      return update;
     })();
   </script>
 </body>

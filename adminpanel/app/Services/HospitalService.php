@@ -21,15 +21,18 @@ final class HospitalService
     private HospitalRepositoryInterface $hospitals;
     private RelatedOptionsRepository $options;
     private ImageUploader $images;
+    private SettingsService $settings;
 
     public function __construct(
         ?HospitalRepositoryInterface $hospitals = null,
         ?RelatedOptionsRepository $options = null,
-        ?ImageUploader $images = null
+        ?ImageUploader $images = null,
+        ?SettingsService $settings = null
     ) {
         $this->hospitals = $hospitals ?? new HospitalRepository();
         $this->options = $options ?? new RelatedOptionsRepository();
         $this->images = $images ?? new ImageUploader();
+        $this->settings = $settings ?? new SettingsService();
     }
 
     public function list(array $query): array
@@ -72,7 +75,7 @@ final class HospitalService
             'treatments' => $this->options->treatments(),
             'statuses' => Hospital::STATUSES,
             'types' => Hospital::TYPES,
-            'accreditations' => Hospital::ACCREDITATIONS,
+            'accreditations' => $this->settings->getAccreditationTypesMap(),
             'international_services' => Hospital::INTERNATIONAL_SERVICES,
         ];
     }
@@ -463,12 +466,13 @@ final class HospitalService
 
     private function mapAccreditations(array $codes): array
     {
+        $types = $this->settings->getAccreditationTypesMap();
         $items = [];
         foreach ($codes as $code) {
-            if (!isset(Hospital::ACCREDITATIONS[$code])) {
+            if (!isset($types[$code])) {
                 continue;
             }
-            $meta = Hospital::ACCREDITATIONS[$code];
+            $meta = $types[$code];
             $items[] = [
                 'code' => $code,
                 'label' => $meta['label'],

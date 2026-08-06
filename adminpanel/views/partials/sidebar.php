@@ -11,6 +11,7 @@ $links = [
     ['key' => 'testimonials', 'label' => 'Testimonials', 'href' => url('/testimonials')],
     ['key' => 'faqs', 'label' => 'FAQs', 'href' => url('/faqs')],
     ['key' => 'settings', 'label' => 'Hero Content', 'href' => url('/settings/hero')],
+    ['key' => 'settings-accreditations', 'label' => 'Accreditation Icons', 'href' => url('/settings/accreditations')],
 ];
 ?>
 <aside class="admin-sidebar" data-sidebar>

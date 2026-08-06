@@ -105,7 +105,8 @@
 
     var addressLines = [h.address_line1, h.address_line2].filter(Boolean).map(escapeHtml).join('<br>');
     var addressHtml = addressLines
-      ? '<p class="text-slate-600 text-sm leading-relaxed mb-2">' + addressLines + '</p>'
+      ? '<p class="text-sm font-semibold text-secondary mb-1">Address</p>' +
+        '<p class="text-slate-600 text-sm leading-relaxed mb-2">' + addressLines + '</p>'
       : '';
 
     var cityLine = [h.city, h.pincode, h.country].filter(Boolean).map(escapeHtml).join(', ');

@@ -120,6 +120,11 @@ $router->post('/faqs/{id}/delete', [FaqController::class, 'destroy'], [AuthMiddl
 $router->get('/settings/hero', [SettingsController::class, 'hero'], [AuthMiddleware::class]);
 $router->post('/settings/hero', [SettingsController::class, 'updateHero'], [AuthMiddleware::class]);
 
+$router->get('/settings/accreditations', [SettingsController::class, 'accreditations'], [AuthMiddleware::class]);
+$router->post('/settings/accreditations', [SettingsController::class, 'storeAccreditation'], [AuthMiddleware::class]);
+$router->post('/settings/accreditations/{code}', [SettingsController::class, 'updateAccreditation'], [AuthMiddleware::class]);
+$router->post('/settings/accreditations/{code}/delete', [SettingsController::class, 'destroyAccreditation'], [AuthMiddleware::class]);
+
 // Public read-only JSON API — powers the static frontend's content sync.
 $router->get('/api/treatments.json', [PublicContentController::class, 'treatmentsList']);
 $router->get('/api/treatments/{slug}.json', [PublicContentController::class, 'treatmentBySlug']);

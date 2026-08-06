@@ -172,14 +172,10 @@ final class HospitalRepository extends Model implements HospitalRepositoryInterf
         self::db()->prepare('DELETE FROM hospital_accreditation WHERE hospital_id = :hospital_id')
             ->execute(['hospital_id' => $hospitalId]);
         $codes = array_values(array_unique(array_filter(array_map('strval', $codes))));
-        $allowed = array_keys(Hospital::ACCREDITATIONS);
         $stmt = self::db()->prepare(
             'INSERT INTO hospital_accreditation (hospital_id, code, created_at) VALUES (:hospital_id, :code, NOW(3))'
         );
         foreach ($codes as $code) {
-            if (!in_array($code, $allowed, true)) {
-                continue;
-            }
             $stmt->execute(['hospital_id' => $hospitalId, 'code' => $code]);
         }
     }

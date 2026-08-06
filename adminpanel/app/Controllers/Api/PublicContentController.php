@@ -10,6 +10,7 @@ use App\Repositories\SiteSettingRepository;
 use App\Repositories\TestimonialRepository;
 use App\Services\DoctorService;
 use App\Services\HospitalService;
+use App\Services\SettingsService;
 use App\Services\TreatmentService;
 
 /**
@@ -24,6 +25,7 @@ final class PublicContentController extends Controller
     private TestimonialRepository $testimonials;
     private FaqRepository $faqs;
     private SiteSettingRepository $settings;
+    private SettingsService $settingsService;
     /** @var array<int, list<string>> */
     private array $hospitalAccreditations = [];
 
@@ -33,7 +35,8 @@ final class PublicContentController extends Controller
         ?DoctorService $doctors = null,
         ?TestimonialRepository $testimonials = null,
         ?FaqRepository $faqs = null,
-        ?SiteSettingRepository $settings = null
+        ?SiteSettingRepository $settings = null,
+        ?SettingsService $settingsService = null
     ) {
         $this->treatments = $treatments ?? new TreatmentService();
         $this->hospitals = $hospitals ?? new HospitalService();
@@ -41,6 +44,7 @@ final class PublicContentController extends Controller
         $this->testimonials = $testimonials ?? new TestimonialRepository();
         $this->faqs = $faqs ?? new FaqRepository();
         $this->settings = $settings ?? new SiteSettingRepository();
+        $this->settingsService = $settingsService ?? new SettingsService();
     }
 
     public function treatmentsList(): void
@@ -128,11 +132,15 @@ final class PublicContentController extends Controller
         ], static fn (string $part): bool => $part !== ''));
 
         $accreditationCodes = $this->hospitalAccreditations[(int) $h['id']] ?? [];
+        $accreditationTypes = $this->settingsService->getAccreditationTypesMap();
         $accreditationLogos = array_values(array_filter(array_map(
-            static function (string $code): ?array {
-                $meta = \App\Models\Hospital::ACCREDITATIONS[$code] ?? null;
+            function (string $code) use ($accreditationTypes): ?array {
+                $meta = $accreditationTypes[$code] ?? null;
+                if ($meta === null || empty($meta['logo'])) {
+                    return null;
+                }
 
-                return $meta === null ? null : ['code' => $code, 'label' => $meta['label'], 'logo' => $meta['logo']];
+                return ['code' => $code, 'label' => $meta['label'], 'logo' => $this->imageUrl($meta['logo'])];
             },
             $accreditationCodes
         )));

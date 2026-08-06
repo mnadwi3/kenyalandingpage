@@ -23,26 +23,6 @@ final class Hospital extends Model
         'Clinic',
     ];
 
-    /** @var array<string, array{label:string, logo:string}> */
-    public const ACCREDITATIONS = [
-        'jci' => [
-            'label' => 'JCI',
-            'logo' => '/assets/images/accreditations/jci.svg',
-        ],
-        'nabh' => [
-            'label' => 'NABH',
-            'logo' => '/assets/images/accreditations/nabh.svg',
-        ],
-        'nabl' => [
-            'label' => 'NABL',
-            'logo' => '/assets/images/accreditations/nabl.svg',
-        ],
-        'others' => [
-            'label' => 'Others',
-            'logo' => '/assets/images/accreditations/others.svg',
-        ],
-    ];
-
     /** @var array<string, string> */
     public const INTERNATIONAL_SERVICES = [
         'visa_invitation' => 'Visa Invitation Letter',

@@ -64,7 +64,7 @@
                     height: 320,
                     menubar: false,
                     plugins: 'lists link image',
-                    toolbar: 'blocks | bold italic underline | bullist numlist | alignleft aligncenter alignright | link image',
+                    toolbar: 'blocks | bold italic underline | forecolor backcolor | bullist numlist | alignleft aligncenter alignright | link image',
                     branding: false,
                     setup: function (editor) {
                         editor.on('change keyup', function () {

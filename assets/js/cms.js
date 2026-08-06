@@ -97,12 +97,19 @@
       ? '<img src="' + escapeHtml(img) + '" alt="' + escapeHtml(h.name) + '" class="w-full h-full object-cover" width="500" height="250" loading="lazy" decoding="async">'
       : '';
 
+    var description = (h.description || '').trim();
+    if (description.length > 160) description = description.slice(0, 157).trim() + '…';
+    var descriptionHtml = description
+      ? '<p class="text-slate-600 text-sm leading-relaxed mb-3">' + escapeHtml(description) + '</p>'
+      : '';
+
     return (
       '<div class="hospital-card bg-white rounded-2xl shadow-card overflow-hidden border border-slate-100">' +
         '<div class="hospital-card-img">' + imgHtml + '</div>' +
         '<div class="hospital-card-info bg-[var(--section-bg)] p-6 flex flex-col justify-center">' +
           '<h3 class="font-display text-xl sm:text-2xl font-bold text-primary mb-2">' + escapeHtml(h.name) + '</h3>' +
           '<div class="w-12 h-1 bg-gold rounded-full mb-4" aria-hidden="true"></div>' +
+          descriptionHtml +
           (h.location ? '<p class="text-sm font-semibold text-secondary mb-1">Location</p><p class="text-slate-600 text-sm leading-relaxed">' + escapeHtml(h.location) + '</p>' : '') +
         '</div>' +
       '</div>'

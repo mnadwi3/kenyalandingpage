@@ -73,6 +73,20 @@ final class HospitalRepository extends Model implements HospitalRepositoryInterf
         return (bool) $stmt->fetchColumn();
     }
 
+    public function nameExists(string $name, ?int $ignoreId = null): bool
+    {
+        $sql = 'SELECT 1 FROM hospitals WHERE LOWER(name) = LOWER(:name) AND deleted_at IS NULL';
+        $params = ['name' => $name];
+        if ($ignoreId !== null) {
+            $sql .= ' AND id != :id';
+            $params['id'] = $ignoreId;
+        }
+        $stmt = self::db()->prepare($sql . ' LIMIT 1');
+        $stmt->execute($params);
+
+        return (bool) $stmt->fetchColumn();
+    }
+
     public function create(array $data): int
     {
         $columns = array_keys($data);

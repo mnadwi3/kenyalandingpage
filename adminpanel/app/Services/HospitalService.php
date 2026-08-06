@@ -361,6 +361,9 @@ final class HospitalService
         }
 
         $name = trim((string) $input['name']);
+        if ($name !== '' && $this->hospitals->nameExists($name, $ignoreId)) {
+            throw new RuntimeException('A hospital named "' . $name . '" already exists.');
+        }
         $slugInput = trim((string) ($input['slug'] ?? ''));
         $slug = Slug::unique(
             $slugInput !== '' ? $slugInput : $name,

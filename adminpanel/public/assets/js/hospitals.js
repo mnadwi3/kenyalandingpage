@@ -39,6 +39,15 @@
 
   const form = document.querySelector('[data-hospital-form]');
   if (!form) return;
+  form.addEventListener('submit', (event) => {
+    if (form.dataset.submitted === 'true') {
+      event.preventDefault();
+      return;
+    }
+    form.dataset.submitted = 'true';
+    const submitBtn = form.querySelector('button[type="submit"]');
+    if (submitBtn) submitBtn.disabled = true;
+  });
   const source = form.querySelector('[data-slug-source]');
   const target = form.querySelector('[data-slug-target]');
   let slugTouched = !!(target && target.value);

@@ -16,6 +16,8 @@ interface HospitalRepositoryInterface
 
     public function slugExists(string $slug, ?int $ignoreId = null): bool;
 
+    public function nameExists(string $name, ?int $ignoreId = null): bool;
+
     public function create(array $data): int;
 
     public function update(int $id, array $data): void;

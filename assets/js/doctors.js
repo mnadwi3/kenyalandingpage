@@ -137,12 +137,18 @@
     );
   }
 
+  var HOME_FEATURED_LIMIT = 6;
+
   function mountDoctors(doctors) {
     var homeGrid = document.querySelector('#doctors .doc-grid');
     if (homeGrid) {
-      var homeHtml = doctors.map(renderHomeCard).join('');
+      var featured = doctors.filter(function (d) { return d.is_featured; }).slice(0, HOME_FEATURED_LIMIT);
+      var homeHtml = featured.map(renderHomeCard).join('');
       homeGrid.innerHTML = homeHtml;
       observeReveal(homeGrid.querySelectorAll('.reveal'));
+
+      var viewAllBtn = document.querySelector('[data-view-all-doctors]');
+      if (viewAllBtn) viewAllBtn.hidden = false;
     }
 
     var treatmentGrid = document.querySelector('#doctors .docgrid');
@@ -155,6 +161,15 @@
       treatmentGrid.innerHTML = doctors
         .map(function (doctor) { return renderTreatmentCard(doctor, treatmentName); })
         .join('');
+    }
+
+    var allGrid = document.querySelector('#all-doctors-grid');
+    if (allGrid) {
+      var nonFeatured = doctors.filter(function (d) { return !d.is_featured; });
+      allGrid.innerHTML = nonFeatured.length
+        ? nonFeatured.map(renderHomeCard).join('')
+        : '<p class="muted">No additional doctors to show right now.</p>';
+      observeReveal(allGrid.querySelectorAll('.reveal'));
     }
   }
 
@@ -182,7 +197,8 @@
   function init() {
     var needsHome = !!document.querySelector('#doctors .doc-grid');
     var needsTreatment = !!document.querySelector('#doctors .docgrid');
-    if (!needsHome && !needsTreatment) return;
+    var needsAll = !!document.querySelector('#all-doctors-grid');
+    if (!needsHome && !needsTreatment && !needsAll) return;
 
     loadDoctors()
       .then(mountDoctors)

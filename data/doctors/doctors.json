@@ -12,7 +12,8 @@
       "Breast Surgical Oncology",
       "Head & Neck Oncology"
     ],
-    "location": "New Delhi, India"
+    "location": "New Delhi, India",
+    "is_featured": true
   },
   {
     "id": 2,
@@ -27,7 +28,8 @@
       "Breast Cancer",
       "Colon Cancer"
     ],
-    "location": "New Delhi, India"
+    "location": "New Delhi, India",
+    "is_featured": true
   },
   {
     "id": 3,
@@ -42,7 +44,8 @@
       "Cholangiocarcinoma",
       "Ovarian cysts"
     ],
-    "location": "New Delhi, India"
+    "location": "New Delhi, India",
+    "is_featured": true
   },
   {
     "id": 4,
@@ -57,7 +60,8 @@
       "Esophageal Cancer",
       "Chondrosarcoma"
     ],
-    "location": "New Delhi, India"
+    "location": "New Delhi, India",
+    "is_featured": true
   },
   {
     "id": 5,
@@ -73,7 +77,8 @@
       "Chondrosarcoma",
       "Colon Cancer"
     ],
-    "location": "New Delhi, India"
+    "location": "New Delhi, India",
+    "is_featured": true
   },
   {
     "id": 6,
@@ -88,7 +93,8 @@
       "Reconstructive Orthopedic Surgery",
       "Bone Tumors and Cysts"
     ],
-    "location": "New Delhi, India"
+    "location": "New Delhi, India",
+    "is_featured": true
   },
   {
     "id": 7,
@@ -103,7 +109,8 @@
       "Sentinel Node Biopsy",
       "Breast Reconstructive Surgery"
     ],
-    "location": "New Delhi, India"
+    "location": "New Delhi, India",
+    "is_featured": false
   },
   {
     "id": 8,
@@ -118,6 +125,7 @@
       "Immunotherapy",
       "Targeted Therapy"
     ],
-    "location": "New Delhi, India"
+    "location": "New Delhi, India",
+    "is_featured": false
   }
 ]

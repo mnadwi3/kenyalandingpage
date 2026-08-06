@@ -17,14 +17,39 @@
     window.gtag = window.gtag || function () { window.dataLayer.push(arguments); };
   </script>
   <style>
+    :root {
+      --hp-primary: var(--primary, #0F4C81);
+      --hp-secondary: var(--secondary, #0B3A61);
+      --hp-gold: var(--gold, #C9A24B);
+      --hp-ink: #1E293B;
+      --hp-muted: #64748B;
+      --hp-border: #EEF2F6;
+      --hp-soft: #F8FAFC;
+    }
+
+    .hp-wrap { max-width: 72rem; margin: 0 auto; padding-left: 1rem; padding-right: 1rem; }
+    @media (min-width: 640px) { .hp-wrap { padding-left: 1.5rem; padding-right: 1.5rem; } }
+
+    .hp-section { padding-top: 3rem; padding-bottom: 3rem; }
+    .hp-section-title {
+      font-size: 1.375rem;
+      font-weight: 800;
+      color: var(--hp-secondary);
+      margin-bottom: 1.5rem;
+      letter-spacing: -0.01em;
+    }
+    @media (min-width: 640px) { .hp-section-title { font-size: 1.625rem; } }
+
+    /* ---------- Hero ---------- */
     .hp-hero {
       position: relative;
-      border-radius: 1rem;
+      border-radius: 1.25rem;
       overflow: hidden;
-      min-height: 360px;
+      min-height: 380px;
       display: flex;
       align-items: flex-end;
-      background: linear-gradient(120deg, var(--secondary, #0B3A61), #103a63);
+      background: linear-gradient(120deg, var(--hp-secondary), #103a63);
+      box-shadow: 0 18px 40px -18px rgba(11, 58, 97, 0.45);
     }
 
     .hp-hero img {
@@ -40,101 +65,176 @@
       content: '';
       position: absolute;
       inset: 0;
-      background: linear-gradient(90deg, rgba(11,58,97,0.92) 0%, rgba(11,58,97,0.55) 55%, rgba(11,58,97,0.15) 100%);
+      background: linear-gradient(100deg, rgba(11,58,97,0.94) 0%, rgba(11,58,97,0.68) 48%, rgba(11,58,97,0.18) 100%);
       z-index: 1;
     }
 
     .hp-hero-content {
       position: relative;
       z-index: 2;
-      padding: 2rem;
+      padding: 2.25rem;
       color: #fff;
       max-width: 640px;
     }
+    @media (max-width: 640px) { .hp-hero-content { padding: 1.5rem; } }
 
-    .hp-accreditation-pills {
-      display: flex;
-      gap: 0.5rem;
-      flex-wrap: wrap;
-      margin-bottom: 1rem;
-    }
-
+    .hp-accreditation-pills { display: flex; gap: 0.5rem; flex-wrap: wrap; margin-bottom: 1.1rem; }
     .hp-accreditation-pill {
       display: inline-flex;
       align-items: center;
       gap: 0.4rem;
-      background: rgba(255,255,255,0.12);
-      border: 1px solid rgba(255,255,255,0.35);
+      background: rgba(255,255,255,0.14);
+      backdrop-filter: blur(4px);
+      border: 1px solid rgba(255,255,255,0.4);
       border-radius: 999px;
-      padding: 0.3rem 0.75rem;
-      font-size: 0.75rem;
-      font-weight: 600;
+      padding: 0.32rem 0.85rem;
+      font-size: 0.72rem;
+      font-weight: 700;
+      letter-spacing: 0.02em;
+      text-transform: uppercase;
     }
+    .hp-accreditation-pill img { width: 15px; height: 15px; object-fit: contain; }
 
-    .hp-accreditation-pill img { width: 16px; height: 16px; object-fit: contain; }
+    .hp-name { font-size: 1.75rem; font-weight: 800; margin-bottom: 0.6rem; letter-spacing: -0.01em; line-height: 1.15; }
+    @media (min-width: 640px) { .hp-name { font-size: 2.5rem; } }
 
-    .hp-quick-facts {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
-      gap: 1rem;
+    .hp-location { display: flex; align-items: center; gap: 0.4rem; color: rgba(255,255,255,0.85); margin-bottom: 0.85rem; font-size: 0.9rem; }
+    .hp-short-desc { color: rgba(255,255,255,0.92); font-size: 0.95rem; line-height: 1.55; margin-bottom: 1.5rem; max-width: 34rem; }
+
+    .hp-hero-actions { display: flex; flex-wrap: wrap; gap: 0.75rem; }
+    .hp-btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      font-weight: 700;
+      font-size: 0.875rem;
+      padding: 0.8rem 1.4rem;
+      border-radius: 0.6rem;
+      transition: transform 0.15s ease, box-shadow 0.15s ease, opacity 0.15s ease;
+      text-decoration: none;
     }
+    .hp-btn:hover { transform: translateY(-1px); }
+    .hp-btn-gold { background: var(--hp-gold); color: var(--hp-secondary); box-shadow: 0 10px 20px -10px rgba(201,162,75,0.7); }
+    .hp-btn-outline { border: 1.5px solid rgba(255,255,255,0.65); color: #fff; }
+    .hp-btn-outline:hover { background: rgba(255,255,255,0.12); }
+    .hp-btn-primary { background: var(--hp-primary); color: #fff; }
+    .hp-btn-primary:hover { background: var(--hp-secondary); }
+    .hp-btn-wa { background: var(--wa, #16A34A); color: #fff; }
+    .hp-btn-wa:hover { background: var(--wa-hover, #128a3e); }
 
+    /* ---------- Quick facts ---------- */
+    .hp-quick-facts { display: grid; grid-template-columns: repeat(auto-fit, minmax(130px, 1fr)); gap: 1rem; }
     .hp-quick-fact {
       text-align: center;
       background: #fff;
-      border: 1px solid #eef2f6;
-      border-radius: 0.75rem;
-      padding: 1.25rem 0.75rem;
+      border: 1px solid var(--hp-border);
+      border-radius: 0.9rem;
+      padding: 1.4rem 0.75rem;
+      transition: box-shadow 0.15s ease, transform 0.15s ease;
+    }
+    .hp-quick-fact:hover { box-shadow: 0 12px 24px -14px rgba(15,76,129,0.35); transform: translateY(-2px); }
+    .hp-quick-fact img { width: 30px; height: 30px; object-fit: contain; margin: 0 auto 0.6rem; }
+    .hp-fact-value { font-size: 1.3rem; font-weight: 800; color: var(--hp-primary); letter-spacing: -0.01em; }
+    .hp-fact-label { font-size: 0.75rem; color: var(--hp-muted); margin-top: 0.15rem; }
+
+    /* ---------- About ---------- */
+    .hp-about-grid { display: grid; gap: 2rem; align-items: start; }
+    @media (min-width: 992px) { .hp-about-grid { grid-template-columns: 1.1fr 0.9fr; } }
+    .hp-about-body { color: var(--hp-muted); font-size: 0.95rem; line-height: 1.7; }
+    .hp-about-body p { margin-bottom: 0.9rem; }
+    .hp-about-image {
+      width: 100%;
+      height: 100%;
+      max-height: 380px;
+      object-fit: cover;
+      border-radius: 1.1rem;
+      box-shadow: 0 20px 40px -22px rgba(15,23,42,0.35);
     }
 
-    .hp-quick-fact img { width: 32px; height: 32px; object-fit: contain; margin: 0 auto 0.5rem; }
-    .hp-quick-fact .hp-fact-label { font-size: 0.8rem; color: #64748b; }
-    .hp-quick-fact .hp-fact-value { font-size: 1.25rem; font-weight: 700; color: var(--primary, #0F4C81); }
-
-    .hp-specialty-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fill, minmax(130px, 1fr));
-      gap: 1rem;
-    }
-
+    /* ---------- Specialties ---------- */
+    .hp-specialty-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(140px, 1fr)); gap: 1rem; }
     .hp-specialty-card {
       text-align: center;
-      border: 1px solid #eef2f6;
-      border-radius: 0.75rem;
-      padding: 1.25rem 0.75rem;
+      border: 1px solid var(--hp-border);
+      border-radius: 0.9rem;
+      padding: 1.4rem 0.75rem;
       background: #fff;
+      transition: box-shadow 0.15s ease, transform 0.15s ease, border-color 0.15s ease;
     }
+    .hp-specialty-card:hover { box-shadow: 0 12px 24px -14px rgba(15,76,129,0.3); transform: translateY(-2px); border-color: rgba(15,76,129,0.25); }
+    .hp-specialty-card img { width: 30px; height: 30px; object-fit: contain; margin: 0 auto 0.65rem; }
+    .hp-specialty-name { font-size: 0.85rem; font-weight: 700; color: var(--hp-secondary); }
 
-    .hp-specialty-card img { width: 32px; height: 32px; object-fit: contain; margin: 0 auto 0.5rem; }
-
-    .hp-doctor-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
-      gap: 1.25rem;
-    }
-
+    /* ---------- Doctors ---------- */
+    .hp-doctor-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(230px, 1fr)); gap: 1.25rem; }
     .hp-doctor-card {
-      border: 1px solid #eef2f6;
-      border-radius: 0.75rem;
-      padding: 1.25rem;
+      border: 1px solid var(--hp-border);
+      border-radius: 1rem;
+      padding: 1.3rem;
       display: flex;
       gap: 0.9rem;
       align-items: flex-start;
       background: #fff;
+      transition: box-shadow 0.15s ease, transform 0.15s ease;
     }
-
-    .hp-doctor-card img {
-      width: 64px;
-      height: 64px;
+    .hp-doctor-card:hover { box-shadow: 0 14px 28px -16px rgba(15,23,42,0.25); transform: translateY(-2px); }
+    .hp-doctor-photo, .hp-doctor-photo-fallback {
+      width: 60px;
+      height: 60px;
       border-radius: 50%;
       object-fit: cover;
-      background: #eef2f6;
+      background: var(--hp-border);
       flex-shrink: 0;
     }
+    .hp-doctor-name { font-weight: 700; color: var(--hp-secondary); font-size: 0.95rem; }
+    .hp-doctor-qual { font-size: 0.78rem; color: var(--hp-muted); margin-top: 0.15rem; }
+    .hp-doctor-link { font-size: 0.78rem; color: var(--hp-primary); font-weight: 700; display: inline-block; margin-top: 0.6rem; text-decoration: none; }
+    .hp-doctor-link:hover { text-decoration: underline; }
 
-    .hp-about-checklist { list-style: none; padding: 0; margin: 1rem 0 0; }
-    .hp-about-checklist li { display: flex; gap: 0.5rem; align-items: flex-start; margin-bottom: 0.5rem; font-size: 0.9rem; color: #334155; }
-    .hp-about-checklist li svg { flex-shrink: 0; margin-top: 2px; color: var(--primary, #0F4C81); }
+    /* ---------- Contact / enquiry ---------- */
+    .hp-contact-grid { display: grid; gap: 2.5rem; }
+    @media (min-width: 992px) { .hp-contact-grid { grid-template-columns: 0.85fr 1.15fr; } }
+    .hp-contact-list { list-style: none; padding: 0; margin: 0 0 1.25rem; }
+    .hp-contact-list li { display: flex; align-items: center; gap: 0.6rem; font-size: 0.9rem; color: #334155; margin-bottom: 0.65rem; }
+    .hp-contact-list li svg { color: var(--hp-primary); flex-shrink: 0; }
+
+    .hp-enquiry-form { display: grid; grid-template-columns: 1fr 1fr; gap: 0.85rem; }
+    @media (max-width: 560px) { .hp-enquiry-form { grid-template-columns: 1fr; } }
+    .hp-enquiry-form input,
+    .hp-enquiry-form textarea {
+      width: 100%;
+      border: 1px solid #dbe3ec;
+      border-radius: 0.6rem;
+      padding: 0.7rem 0.9rem;
+      font-size: 0.875rem;
+      color: var(--hp-ink);
+      background: #fff;
+      box-sizing: border-box;
+    }
+    .hp-enquiry-form input:focus,
+    .hp-enquiry-form textarea:focus {
+      outline: none;
+      border-color: var(--hp-primary);
+      box-shadow: 0 0 0 3px rgba(15,76,129,0.12);
+    }
+    .hp-enquiry-form .hp-full { grid-column: 1 / -1; }
+    .hp-enquiry-submit {
+      grid-column: 1 / -1;
+      background: var(--hp-primary);
+      color: #fff;
+      font-weight: 700;
+      font-size: 0.9rem;
+      padding: 0.85rem;
+      border-radius: 0.6rem;
+      border: none;
+      cursor: pointer;
+      transition: background 0.15s ease;
+    }
+    .hp-enquiry-submit:hover { background: var(--hp-secondary); }
+
+    .hp-card-panel { background: #fff; border-radius: 1.1rem; border: 1px solid var(--hp-border); padding: 1.75rem; }
+
+    #hp-loading, #hp-not-found { padding-top: 4rem; padding-bottom: 4rem; text-align: center; }
   </style>
 </head>
 
@@ -183,78 +283,84 @@
   </header>
 
   <main id="top">
-    <div id="hp-loading" class="max-w-6xl mx-auto px-4 sm:px-6 py-16 text-center text-slate-500">Loading hospital…</div>
-    <div id="hp-not-found" class="max-w-6xl mx-auto px-4 sm:px-6 py-16 text-center hidden">
-      <h1 class="text-2xl font-bold text-secondary mb-2">Hospital not found</h1>
-      <p class="text-slate-600 mb-6">This hospital may have been removed or the link is incorrect.</p>
-      <a href="/hospitals" class="inline-flex items-center gap-2 bg-primary text-white font-semibold px-5 py-3 rounded-lg">Browse all hospitals</a>
+    <div id="hp-loading" class="hp-wrap text-slate-500">Loading hospital&hellip;</div>
+    <div id="hp-not-found" class="hp-wrap hidden">
+      <h1 style="font-size:1.5rem;font-weight:800;color:var(--hp-secondary);margin-bottom:0.5rem;">Hospital not found</h1>
+      <p style="color:var(--hp-muted);margin-bottom:1.5rem;">This hospital may have been removed or the link is incorrect.</p>
+      <a href="/hospitals" class="hp-btn hp-btn-primary">Browse all hospitals</a>
     </div>
 
     <div id="hp-content" class="hidden">
-      <section class="max-w-6xl mx-auto px-4 sm:px-6 pt-8">
+      <section class="hp-wrap" style="padding-top:2rem;">
         <div class="hp-hero">
           <img id="hp-hero-img" src="" alt="">
           <div class="hp-hero-content">
             <div id="hp-accreditation-pills" class="hp-accreditation-pills"></div>
-            <h1 id="hp-name" class="text-2xl sm:text-4xl font-bold mb-2"></h1>
-            <p id="hp-location" class="flex items-center gap-1.5 text-white/85 mb-3 text-sm"></p>
-            <p id="hp-short-desc" class="text-white/90 text-sm sm:text-base mb-5 max-w-lg"></p>
-            <div class="flex flex-wrap gap-3">
-              <a id="hp-book-btn" href="https://wa.me/918979983149" target="_blank" rel="noopener noreferrer"
-                class="inline-flex items-center gap-2 bg-gold text-secondary font-bold px-5 py-3 rounded-lg text-sm">Book Free Consultation</a>
-              <a id="hp-whatsapp-btn" href="https://wa.me/918979983149" target="_blank" rel="noopener noreferrer"
-                class="inline-flex items-center gap-2 border border-white/60 text-white font-semibold px-5 py-3 rounded-lg text-sm">Chat on WhatsApp</a>
+            <h1 id="hp-name" class="hp-name"></h1>
+            <p id="hp-location" class="hp-location"></p>
+            <p id="hp-short-desc" class="hp-short-desc"></p>
+            <div class="hp-hero-actions">
+              <a id="hp-book-btn" href="https://wa.me/918979983149" target="_blank" rel="noopener noreferrer" class="hp-btn hp-btn-gold">Book Free Consultation</a>
+              <a id="hp-whatsapp-btn" href="https://wa.me/918979983149" target="_blank" rel="noopener noreferrer" class="hp-btn hp-btn-outline">Chat on WhatsApp</a>
             </div>
           </div>
         </div>
       </section>
 
-      <section class="max-w-6xl mx-auto px-4 sm:px-6 py-10">
-        <h2 class="text-xl sm:text-2xl font-bold text-secondary mb-5">Quick Facts</h2>
+      <section class="hp-wrap hp-section">
+        <h2 class="hp-section-title">Quick Facts</h2>
         <div id="hp-quick-facts" class="hp-quick-facts"></div>
       </section>
 
-      <section class="max-w-6xl mx-auto px-4 sm:px-6 py-10 grid lg:grid-cols-2 gap-8 items-start">
-        <div>
-          <h2 class="text-xl sm:text-2xl font-bold text-secondary mb-4">About Hospital</h2>
-          <div id="hp-about" class="text-slate-600 text-sm sm:text-base leading-relaxed"></div>
-        </div>
-        <div id="hp-about-image-wrap">
-          <img id="hp-about-image" src="" alt="" class="w-full h-full object-cover rounded-2xl" style="max-height:360px;">
+      <section class="hp-wrap hp-section" style="padding-top:0;">
+        <h2 class="hp-section-title">About Hospital</h2>
+        <div class="hp-about-grid">
+          <div id="hp-about" class="hp-about-body"></div>
+          <div id="hp-about-image-wrap">
+            <img id="hp-about-image" src="" alt="" class="hp-about-image">
+          </div>
         </div>
       </section>
 
-      <section id="hp-specialties-section" class="max-w-6xl mx-auto px-4 sm:px-6 py-10 hidden">
-        <h2 class="text-xl sm:text-2xl font-bold text-secondary mb-5">Specialties</h2>
+      <section id="hp-specialties-section" class="hp-wrap hp-section hidden" style="padding-top:0;">
+        <h2 class="hp-section-title">Specialties</h2>
         <div id="hp-specialties" class="hp-specialty-grid"></div>
       </section>
 
-      <section id="hp-doctors-section" class="max-w-6xl mx-auto px-4 sm:px-6 py-10 hidden">
-        <h2 class="text-xl sm:text-2xl font-bold text-secondary mb-5">Top Doctors</h2>
+      <section id="hp-doctors-section" class="hp-wrap hp-section hidden" style="padding-top:0;">
+        <h2 class="hp-section-title">Top Doctors</h2>
         <div id="hp-doctors" class="hp-doctor-grid"></div>
       </section>
 
-      <section class="bg-soft py-10">
-        <div class="max-w-6xl mx-auto px-4 sm:px-6 grid lg:grid-cols-2 gap-8">
-          <div>
-            <h2 class="text-lg sm:text-xl font-bold text-secondary mb-4">Contact Information</h2>
-            <ul class="space-y-2 text-sm text-slate-700">
-              <li>+91-8979983149</li>
-              <li>query@tabeebway.com</li>
-              <li id="hp-address"></li>
+      <section style="background:var(--hp-soft);padding-top:3rem;padding-bottom:3rem;">
+        <div class="hp-wrap hp-contact-grid">
+          <div class="hp-card-panel">
+            <h2 style="font-size:1.15rem;font-weight:800;color:var(--hp-secondary);margin-bottom:1.1rem;">Contact Information</h2>
+            <ul class="hp-contact-list">
+              <li>
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path stroke-linecap="round" stroke-linejoin="round" d="M22 16.92v3a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07 19.5 19.5 0 01-6-6 19.79 19.79 0 01-3.07-8.67A2 2 0 014.11 2h3a2 2 0 012 1.72c.127.96.362 1.903.7 2.81a2 2 0 01-.45 2.11L8.09 9.91a16 16 0 006 6l1.27-1.27a2 2 0 012.11-.45c.907.338 1.85.573 2.81.7A2 2 0 0122 16.92z"/></svg>
+                +91-8979983149
+              </li>
+              <li>
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path stroke-linecap="round" stroke-linejoin="round" d="M4 4h16v16H4z" opacity="0"/><path stroke-linecap="round" stroke-linejoin="round" d="M22 6l-10 7L2 6M4 4h16a2 2 0 012 2v12a2 2 0 01-2 2H4a2 2 0 01-2-2V6a2 2 0 012-2z"/></svg>
+                query@tabeebway.com
+              </li>
+              <li>
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path stroke-linecap="round" stroke-linejoin="round" d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0118 0z"/><circle cx="12" cy="10" r="3"/></svg>
+                <span id="hp-address"></span>
+              </li>
             </ul>
-            <a href="https://wa.me/918979983149" target="_blank" rel="noopener noreferrer"
-              class="inline-flex items-center gap-2 mt-4 bg-[var(--wa)] text-white font-semibold px-4 py-2.5 rounded-lg text-sm">Chat on WhatsApp</a>
+            <a href="https://wa.me/918979983149" target="_blank" rel="noopener noreferrer" class="hp-btn hp-btn-wa">Chat on WhatsApp</a>
           </div>
-          <div>
-            <h2 class="text-lg sm:text-xl font-bold text-secondary mb-4">Send Us an Enquiry</h2>
-            <form id="hp-enquiry-form" class="grid sm:grid-cols-2 gap-3">
-              <input type="text" name="name" placeholder="Full Name" required class="rounded-lg border border-slate-200 px-3.5 py-2.5 text-sm">
-              <input type="text" name="country" placeholder="Country" class="rounded-lg border border-slate-200 px-3.5 py-2.5 text-sm">
-              <input type="tel" name="phone" placeholder="Phone / WhatsApp" required class="rounded-lg border border-slate-200 px-3.5 py-2.5 text-sm">
-              <input type="email" name="email" placeholder="Email Address" class="rounded-lg border border-slate-200 px-3.5 py-2.5 text-sm">
-              <textarea name="message" placeholder="Your Message" rows="3" class="sm:col-span-2 rounded-lg border border-slate-200 px-3.5 py-2.5 text-sm"></textarea>
-              <button type="submit" class="sm:col-span-2 bg-primary text-white font-bold py-3 rounded-lg text-sm">Request Free Consultation</button>
+          <div class="hp-card-panel">
+            <h2 style="font-size:1.15rem;font-weight:800;color:var(--hp-secondary);margin-bottom:1.1rem;">Send Us an Enquiry</h2>
+            <form id="hp-enquiry-form" class="hp-enquiry-form">
+              <input type="text" name="name" placeholder="Full Name" required>
+              <input type="text" name="country" placeholder="Country">
+              <input type="tel" name="phone" placeholder="Phone / WhatsApp" required>
+              <input type="email" name="email" placeholder="Email Address">
+              <textarea name="message" placeholder="Your Message" rows="3" class="hp-full"></textarea>
+              <button type="submit" class="hp-enquiry-submit">Request Free Consultation</button>
             </form>
           </div>
         </div>
@@ -381,7 +487,7 @@
           document.getElementById('hp-specialties-section').classList.remove('hidden');
           document.getElementById('hp-specialties').innerHTML = h.specialties.map(function (s) {
             var icon = s.icon ? '<img src="' + escapeHtml(s.icon) + '" alt="">' : '';
-            return '<div class="hp-specialty-card">' + icon + '<div class="text-sm font-semibold text-secondary">' + escapeHtml(s.name) + '</div></div>';
+            return '<div class="hp-specialty-card">' + icon + '<div class="hp-specialty-name">' + escapeHtml(s.name) + '</div></div>';
           }).join('');
         }
 
@@ -389,12 +495,12 @@
           document.getElementById('hp-doctors-section').classList.remove('hidden');
           document.getElementById('hp-doctors').innerHTML = h.doctors.map(function (d) {
             var photo = d.photo
-              ? '<img src="' + escapeHtml(d.photo) + '" alt="' + escapeHtml(d.name) + '">'
-              : '<div class="hp-doctor-card-fallback" style="width:64px;height:64px;border-radius:50%;background:#eef2f6;flex-shrink:0;"></div>';
+              ? '<img class="hp-doctor-photo" src="' + escapeHtml(d.photo) + '" alt="' + escapeHtml(d.name) + '">'
+              : '<div class="hp-doctor-photo-fallback"></div>';
             return '<div class="hp-doctor-card">' + photo +
-              '<div><div class="font-semibold text-secondary">' + escapeHtml(d.name) + '</div>' +
-              (d.qualification ? '<div class="text-xs text-slate-500">' + escapeHtml(d.qualification) + '</div>' : '') +
-              '<a href="' + API_BASE + '/doctors/' + escapeHtml(d.slug || '') + '" class="text-xs text-primary font-semibold inline-block mt-2">View Profile</a>' +
+              '<div><div class="hp-doctor-name">' + escapeHtml(d.name) + '</div>' +
+              (d.qualification ? '<div class="hp-doctor-qual">' + escapeHtml(d.qualification) + '</div>' : '') +
+              '<a href="' + API_BASE + '/doctors/' + escapeHtml(d.slug || '') + '" class="hp-doctor-link">View Profile</a>' +
               '</div></div>';
           }).join('');
         }

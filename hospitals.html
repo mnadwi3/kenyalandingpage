@@ -18,10 +18,58 @@
     window.gtag = window.gtag || function () { window.dataLayer.push(arguments); };
   </script>
   <style>
+    :root {
+      --hl-primary: var(--primary, #0F4C81);
+      --hl-secondary: var(--secondary, #0B3A61);
+      --hl-muted: #64748B;
+      --hl-border: #EEF2F6;
+      --hl-soft: #F8FAFC;
+    }
+
+    .hl-wrap { max-width: 72rem; margin: 0 auto; padding-left: 1rem; padding-right: 1rem; }
+    @media (min-width: 640px) { .hl-wrap { padding-left: 1.5rem; padding-right: 1.5rem; } }
+
+    .hl-hero {
+      background: var(--hl-soft);
+      padding-top: 3.5rem;
+      padding-bottom: 3rem;
+    }
+
+    .hl-eyebrow {
+      font-size: 0.8rem;
+      font-weight: 700;
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+      color: var(--hl-primary);
+      margin-bottom: 0.6rem;
+      text-align: center;
+    }
+
+    .hl-title {
+      font-size: 1.75rem;
+      font-weight: 800;
+      color: var(--hl-secondary);
+      text-align: center;
+      letter-spacing: -0.01em;
+      margin-bottom: 0.75rem;
+    }
+    @media (min-width: 640px) { .hl-title { font-size: 2.5rem; } }
+
+    .hl-subtitle {
+      color: var(--hl-muted);
+      text-align: center;
+      max-width: 38rem;
+      margin: 0 auto 2.5rem;
+      font-size: 0.95rem;
+      line-height: 1.6;
+    }
+
     .hospital-grid {
       display: grid;
       grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
       gap: 24px;
+      padding-top: 2.5rem;
+      padding-bottom: 2.5rem;
     }
 
     .hospital-grid-card {
@@ -30,23 +78,34 @@
       background: #fff;
       border-radius: 1rem;
       overflow: hidden;
-      border: 1px solid #f1f5f9;
-      box-shadow: 0 1px 3px rgba(0, 0, 0, 0.06);
+      border: 1px solid var(--hl-border);
+      box-shadow: 0 1px 3px rgba(15, 23, 42, 0.06);
       text-decoration: none;
       color: inherit;
+      transition: box-shadow 0.15s ease, transform 0.15s ease;
+    }
+
+    .hospital-grid-card:hover {
+      box-shadow: 0 16px 30px -16px rgba(15, 76, 129, 0.35);
+      transform: translateY(-3px);
     }
 
     .hospital-grid-card-img {
       position: relative;
-      height: 175px;
+      height: 180px;
       overflow: hidden;
-      background: #f1f5f9;
+      background: var(--hl-border);
     }
 
     .hospital-grid-card-img img {
       width: 100%;
       height: 100%;
       object-fit: cover;
+      transition: transform 0.3s ease;
+    }
+
+    .hospital-grid-card:hover .hospital-grid-card-img img {
+      transform: scale(1.04);
     }
 
     .hospital-grid-card-accreditations {
@@ -69,32 +128,67 @@
     }
 
     .hospital-grid-card-info {
-      padding: 18px;
+      padding: 1.15rem;
       flex: 1;
       display: flex;
       flex-direction: column;
     }
 
-    #hospitals-sentinel {
-      height: 1px;
+    .hospital-grid-card-name {
+      font-size: 1.05rem;
+      font-weight: 800;
+      color: var(--hl-secondary);
+      margin-bottom: 0.3rem;
+      letter-spacing: -0.005em;
     }
+
+    .hospital-grid-card-location {
+      display: flex;
+      align-items: center;
+      gap: 0.35rem;
+      font-size: 0.8rem;
+      color: var(--hl-primary);
+      font-weight: 600;
+      margin-bottom: 0.5rem;
+    }
+
+    .hospital-grid-card-desc {
+      font-size: 0.85rem;
+      color: var(--hl-muted);
+      line-height: 1.55;
+      margin: 0;
+    }
+
+    #hospitals-sentinel { height: 1px; }
 
     #hospitals-loading {
       display: none;
-      text-align: center;
+      align-items: center;
+      justify-content: center;
+      gap: 0.6rem;
       padding: 2rem 0;
-      color: var(--text-light, #64748b);
+      color: var(--hl-muted);
+      font-size: 0.9rem;
     }
 
-    #hospitals-loading.is-visible {
-      display: block;
+    #hospitals-loading.is-visible { display: flex; }
+
+    .hl-spinner {
+      width: 16px;
+      height: 16px;
+      border-radius: 50%;
+      border: 2px solid var(--hl-border);
+      border-top-color: var(--hl-primary);
+      animation: hl-spin 0.7s linear infinite;
     }
+
+    @keyframes hl-spin { to { transform: rotate(360deg); } }
 
     #hospitals-empty {
       display: none;
       text-align: center;
-      padding: 3rem 0;
-      color: var(--text-light, #64748b);
+      padding: 3.5rem 0;
+      color: var(--hl-muted);
     }
   </style>
 </head>
@@ -144,18 +238,15 @@
   </header>
 
   <main id="top">
-    <section class="py-16 sm:py-20 bg-soft scroll-mt-24">
-      <div class="max-w-6xl mx-auto px-4 sm:px-6">
-        <div class="text-center max-w-2xl mx-auto mb-10 reveal">
-          <p class="text-sm font-semibold uppercase tracking-wider text-primary mb-2">Hospitals</p>
-          <h1 class="text-[1.35rem] sm:text-3xl font-bold text-secondary mb-3 text-center">All Partner Hospitals</h1>
-          <p class="text-slate-600">Browse our full network of accredited hospitals across India offering
-            world-class cancer care.</p>
-        </div>
+    <section class="hl-hero">
+      <div class="hl-wrap">
+        <p class="hl-eyebrow">Hospitals</p>
+        <h1 class="hl-title">All Partner Hospitals</h1>
+        <p class="hl-subtitle">Browse our full network of accredited hospitals across India offering world-class cancer care.</p>
 
         <div id="hospitals-grid" class="hospital-grid" aria-live="polite"></div>
         <p id="hospitals-empty">No hospitals found.</p>
-        <p id="hospitals-loading">Loading more hospitals&hellip;</p>
+        <div id="hospitals-loading"><span class="hl-spinner" aria-hidden="true"></span>Loading more hospitals&hellip;</div>
         <div id="hospitals-sentinel"></div>
       </div>
     </section>
@@ -213,6 +304,8 @@
           .replace(/"/g, '&quot;').replace(/'/g, '&#39;');
       }
 
+      var pinIcon = '<svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" aria-hidden="true"><path stroke-linecap="round" stroke-linejoin="round" d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0118 0z"/><circle cx="12" cy="10" r="3"/></svg>';
+
       function cardHtml(h) {
         var img = h.cover_image || h.logo || '';
         var imgHtml = img
@@ -226,15 +319,15 @@
             }).join('') +
             '</div>';
         }
-        var location = h.location ? '<p class="text-slate-600 text-sm mb-2">' + escapeHtml(h.location) + '</p>' : '';
+        var location = h.location ? '<p class="hospital-grid-card-location">' + pinIcon + escapeHtml(h.location) + '</p>' : '';
         var desc = h.short_description || h.description || '';
         if (desc.length > 140) desc = desc.slice(0, 137).trim() + '…';
-        var descHtml = desc ? '<p class="text-slate-600 text-sm leading-relaxed">' + escapeHtml(desc) + '</p>' : '';
+        var descHtml = desc ? '<p class="hospital-grid-card-desc">' + escapeHtml(desc) + '</p>' : '';
         return (
           '<a class="hospital-grid-card" href="' + escapeHtml(h.url || '#') + '">' +
             '<div class="hospital-grid-card-img">' + imgHtml + accreditationHtml + '</div>' +
             '<div class="hospital-grid-card-info">' +
-              '<h3 class="font-display text-lg font-bold text-primary mb-1">' + escapeHtml(h.name) + '</h3>' +
+              '<h3 class="hospital-grid-card-name">' + escapeHtml(h.name) + '</h3>' +
               location +
               descHtml +
             '</div>' +

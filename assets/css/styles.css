@@ -566,6 +566,24 @@ label {
 .spec-arrow { flex: none; width: 18px; height: 18px; color: #cbd5e1; }
 .spec-arrow svg { width: 100%; height: 100%; }
 
+/* Mobile: match the tx-card grid used for treatments on /all-treatments
+   (2-column grid, icon centered on top) instead of the horizontal row. */
+@media (max-width: 639px) {
+  .spec-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 0.65rem; }
+  .spec-card {
+    flex-direction: column;
+    text-align: center;
+    justify-content: flex-start;
+    gap: 0.4rem;
+    padding: 0.9rem 0.6rem 0.75rem;
+  }
+  .spec-icon { width: 3rem; height: 3rem; border-radius: 999px; }
+  .spec-icon svg { width: 26px; height: 26px; }
+  .spec-body { align-items: center; text-align: center; }
+  .spec-desc { white-space: normal; }
+  .spec-arrow { display: none; }
+}
+
 /* ---- All-treatments grouped listing ---- */
 .tx-group + .tx-group {
   margin-top: 2.5rem;

@@ -190,13 +190,20 @@
       box-sizing: border-box;
     }
 
+    /* The sitewide h1 rule (assets/css/styles.css) forces font-size and
+       line-height with !important, which silently wins over both this
+       class rule and any inline style the auto-fit JS below sets (an
+       !important stylesheet rule beats a non-important inline style
+       too). Matching !important here, on a more specific class selector,
+       is required for this page's custom hero heading to actually apply
+       and for the auto-fit script to have any effect. */
     .hp-name {
       font-family: var(--hp-display);
-      font-size: clamp(1.5rem, 5vw, 2.75rem);
+      font-size: clamp(1.5rem, 5vw, 2.75rem) !important;
       font-weight: 600;
       margin-bottom: 0.7rem;
       letter-spacing: -0.01em;
-      line-height: 1.1;
+      line-height: 1.1 !important;
       white-space: nowrap;
       max-width: 100%;
       display: inline-block;
@@ -662,12 +669,15 @@
         if (!el || !el.textContent) return;
         var maxPx = parseFloat(getComputedStyle(el).fontSize);
         var minPx = 16;
-        el.style.fontSize = maxPx + 'px';
+        // setProperty(...,'important') because the sitewide h1 rule sets
+        // font-size with !important, which a plain el.style.fontSize
+        // assignment cannot override.
+        el.style.setProperty('font-size', maxPx + 'px', 'important');
         var container = el.parentElement;
         var guard = 0;
         while (el.scrollWidth > container.clientWidth && maxPx > minPx && guard < 40) {
           maxPx -= 1;
-          el.style.fontSize = maxPx + 'px';
+          el.style.setProperty('font-size', maxPx + 'px', 'important');
           guard++;
         }
       }

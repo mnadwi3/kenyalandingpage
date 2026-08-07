@@ -195,9 +195,8 @@
       letter-spacing: -0.01em;
       line-height: 1.1;
       white-space: nowrap;
-      overflow: hidden;
-      text-overflow: ellipsis;
       max-width: 100%;
+      display: inline-block;
     }
 
     .hp-location { display: flex; align-items: center; justify-content: center; gap: 0.45rem; color: rgba(255,255,255,0.78); margin-bottom: 1rem; font-size: 0.9rem; }
@@ -653,6 +652,23 @@
         return new URLSearchParams(window.location.search).get(name);
       }
 
+      // Shrinks the hospital-name heading's font-size until it fits on one
+      // line within its container, so long names never get clipped or
+      // wrap to a second line.
+      function fitNameToWidth(el) {
+        if (!el || !el.textContent) return;
+        var maxPx = parseFloat(getComputedStyle(el).fontSize);
+        var minPx = 16;
+        el.style.fontSize = maxPx + 'px';
+        var container = el.parentElement;
+        var guard = 0;
+        while (el.scrollWidth > container.clientWidth && maxPx > minPx && guard < 40) {
+          maxPx -= 1;
+          el.style.fontSize = maxPx + 'px';
+          guard++;
+        }
+      }
+
       var slug = qs('slug');
       var loadingEl = document.getElementById('hp-loading');
       var notFoundEl = document.getElementById('hp-not-found');
@@ -691,7 +707,9 @@
           }).join('');
         }
 
-        document.getElementById('hp-name').textContent = h.name || '';
+        var nameEl = document.getElementById('hp-name');
+        nameEl.textContent = h.name || '';
+        fitNameToWidth(nameEl);
         document.getElementById('hp-location-text').textContent = h.location || [h.city, h.country].filter(Boolean).join(', ');
         document.getElementById('hp-short-desc').textContent = h.short_description || '';
 
@@ -744,6 +762,8 @@
         updateStickyForm();
         setTimeout(updateStickyForm, 200);
         armReveal();
+
+        window.addEventListener('resize', function () { fitNameToWidth(nameEl); });
       }
 
       function bindEnquiryForm(form) {

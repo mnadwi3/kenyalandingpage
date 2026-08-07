@@ -274,7 +274,7 @@
     }
   </style>
   <link rel="stylesheet" href="/assets/css/tailwind.min.css?v=20260803-perf3">
-  <link rel="stylesheet" href="/assets/css/styles.min.css?v=20260806-hospcard1">
+  <link rel="stylesheet" href="/assets/css/styles.min.css?v=20260808-specialties1">
 
   <!-- Analytics stub; full GTM/GA load deferred until idle/interaction -->
   <script>
@@ -448,6 +448,23 @@
       </div>
     </div>
 
+
+    <!-- ========== SPECIALITIES ========== -->
+    <section id="specialties" class="py-16 sm:py-20 scroll-mt-24" hidden>
+      <div class="max-w-6xl mx-auto px-4 sm:px-6">
+        <div class="text-center max-w-2xl mx-auto mb-10 reveal">
+          <p class="text-sm font-semibold uppercase tracking-wider text-primary mb-2">Specialities</p>
+          <h2
+            class="font-display text-[clamp(1.15rem,5vw,1.5rem)] sm:text-4xl font-bold text-primary mb-2 text-center leading-snug">
+            Our Medical Specialities</h2>
+          <div class="w-14 h-1 bg-gold rounded-full mx-auto mb-4" aria-hidden="true"></div>
+          <p class="text-slate-600 hidden sm:block">Explore treatments organized by specialty, backed by
+            experienced specialists.</p>
+        </div>
+
+        <div class="spec-grid" id="specialties-grid"></div>
+      </div>
+    </section>
 
     <!-- ========== TREATMENTS ========== -->
     <section id="treatment" class="py-16 sm:py-20 bg-soft scroll-mt-24">
@@ -1383,6 +1400,7 @@
 
     <script src="assets/js/analytics.js?v=20260803-perf3" defer></script>
     <script src="assets/js/doctors.js?v=20260807-cachefix1" defer></script>
+    <script src="assets/js/specialties.js?v=20260808-specialties1" defer></script>
     <script src="assets/js/treatments.js?v=20260807-groups1" defer></script>
     <script src="assets/js/cms.js?v=20260807-txfix1" defer></script>
     <script src="assets/js/main.min.js?v=20260803-hero1" defer></script>

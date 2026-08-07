@@ -49,6 +49,16 @@ final class SpecialtyRepository extends Model implements SpecialtyRepositoryInte
         return $row ?: null;
     }
 
+    public function findBySlug(string $slug): ?array
+    {
+        $sql = 'SELECT * FROM specialties WHERE slug = :slug AND deleted_at IS NULL LIMIT 1';
+        $stmt = self::db()->prepare($sql);
+        $stmt->execute(['slug' => $slug]);
+        $row = $stmt->fetch();
+
+        return $row ?: null;
+    }
+
     public function slugExists(string $slug, ?int $ignoreId = null): bool
     {
         $sql = 'SELECT 1 FROM specialties WHERE slug = :slug';

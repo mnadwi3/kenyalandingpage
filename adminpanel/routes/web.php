@@ -10,6 +10,7 @@ use App\Controllers\FaqController;
 use App\Controllers\HospitalController;
 use App\Controllers\PublicDoctorController;
 use App\Controllers\PublicHospitalController;
+use App\Controllers\PublicSpecialtyController;
 use App\Controllers\PublicTreatmentController;
 use App\Controllers\SettingsController;
 use App\Controllers\SpecialtyController;
@@ -71,6 +72,7 @@ $router->post('/treatments/{id}/restore', [TreatmentController::class, 'restore'
 $router->post('/treatments/{id}/duplicate', [TreatmentController::class, 'duplicate'], [AuthMiddleware::class]);
 
 $router->get('/treatments/{slug}', [PublicTreatmentController::class, 'show']);
+$router->get('/specialities/{slug}', [PublicSpecialtyController::class, 'show']);
 
 $router->get('/hospitals', [HospitalController::class, 'index'], [AuthMiddleware::class]);
 $router->get('/hospitals/create', [HospitalController::class, 'create'], [AuthMiddleware::class]);
@@ -128,6 +130,7 @@ $router->post('/settings/icons/quick-facts/{code}', [SettingsController::class, 
 
 // Public read-only JSON API — powers the static frontend's content sync.
 $router->get('/api/treatments.json', [PublicContentController::class, 'treatmentsList']);
+$router->get('/api/specialties.json', [PublicContentController::class, 'specialtiesList']);
 $router->get('/api/treatments/{slug}.json', [PublicContentController::class, 'treatmentBySlug']);
 $router->get('/api/hospitals.json', [PublicContentController::class, 'hospitalsList']);
 $router->get('/api/hospitals/{slug}.json', [PublicContentController::class, 'hospitalBySlug']);

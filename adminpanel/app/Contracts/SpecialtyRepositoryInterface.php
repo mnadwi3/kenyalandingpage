@@ -12,6 +12,8 @@ interface SpecialtyRepositoryInterface
 
     public function findById(int $id, bool $withTrashed = false): ?array;
 
+    public function findBySlug(string $slug): ?array;
+
     public function slugExists(string $slug, ?int $ignoreId = null): bool;
 
     public function nameExists(string $name, ?int $ignoreId = null): bool;

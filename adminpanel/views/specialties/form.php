@@ -29,6 +29,7 @@ $val = static fn (string $key, mixed $default = ''): string => e((string) ($valu
                 <?php endforeach; ?>
             </select>
         </label>
+        <label class="field full"><span>Short description</span><textarea name="description" rows="2" maxlength="300" placeholder="One line shown on the homepage specialty card"><?= $val('description') ?></textarea></label>
         <div class="field">
             <span>Icon</span>
             <?php if (!empty($specialty['image'])): ?>

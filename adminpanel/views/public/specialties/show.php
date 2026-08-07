@@ -1,14 +1,57 @@
+<?php
+/** @var array<string,mixed> $specialty */
+/** @var array<int,array<string,mixed>> $treatments */
+/** @var string $title */
+
+$name = (string) ($specialty['name'] ?? '');
+$description = (string) ($specialty['description'] ?? '');
+$canonical = 'https://www.vaidtrack.com/specialities/' . ((string) ($specialty['slug'] ?? ''));
+$waNumber = '918979983149';
+
+$renderCard = static function (array $t) use ($waNumber): string {
+    $tName = (string) ($t['name'] ?? '');
+    $url = '/treatments/' . (string) ($t['slug'] ?? '');
+    $overview = (string) ($t['overview'] ?? '');
+    $priceFrom = (string) ($t['price_from'] ?? '');
+    $image = !empty($t['featured_image']) ? asset((string) $t['featured_image']) : '';
+    $bookMsg = 'Hi, I want a free consultation for ' . $tName . ' treatment';
+    $waUrl = 'https://wa.me/' . $waNumber . '?text=' . rawurlencode($bookMsg);
+
+    $iconHtml = $image !== ''
+        ? '<img src="' . e($image) . '" alt="" width="128" height="128" decoding="async">'
+        : '';
+    $priceHtml = $priceFrom !== ''
+        ? '<span class="tx-price">From ' . e($priceFrom) . '</span>'
+        : '';
+
+    return
+        '<article class="tx-card">' .
+            '<a class="tx-page-link" href="' . e($url) . '" aria-label="Open ' . e($tName) . ' details page">' .
+                '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" aria-hidden="true"><path stroke-linecap="round" stroke-linejoin="round" d="M7 17L17 7M10 7h7v7"/></svg>' .
+            '</a>' .
+            '<div class="tx-icon tx-icon--svg" style="--tx-color:var(--primary)" aria-hidden="true">' . $iconHtml . '</div>' .
+            '<div class="tx-body">' .
+                '<h3><a href="' . e($url) . '">' . e($tName) . '</a></h3>' .
+                $priceHtml .
+                '<p>' . e(mb_strimwidth($overview, 0, 120, '...')) . '</p>' .
+            '</div>' .
+            '<a class="tx-book" href="' . e($waUrl) . '" target="_blank" rel="noopener noreferrer">' .
+                '<span class="tx-book-short">Consult for Free</span><span class="tx-book-full">Consult for Free</span>' .
+                '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" aria-hidden="true"><path stroke-linecap="round" stroke-linejoin="round" d="M7 17L17 7M10 7h7v7"/></svg>' .
+            '</a>' .
+        '</article>';
+};
+?>
 <!DOCTYPE html>
 <html lang="en">
 
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>All Treatments | VaidTrack.com</title>
-  <meta name="description"
-    content="Browse every cancer treatment we support, grouped by specialty. Free second opinion and transparent treatment costs from VaidTrack.com.">
+  <title><?= e($title) ?></title>
+  <?php if ($description !== ''): ?><meta name="description" content="<?= e($description) ?>"><?php endif; ?>
   <meta name="theme-color" content="#ffffff">
-  <link rel="canonical" href="https://www.vaidtrack.com/all-treatments">
+  <link rel="canonical" href="<?= e($canonical) ?>">
   <link rel="icon" href="/favicon.ico" sizes="any">
   <link rel="preload" href="/assets/fonts/inter-latin.woff2" as="font" type="font/woff2" crossorigin>
   <link rel="stylesheet" href="/assets/css/tailwind.min.css?v=20260803-perf3">
@@ -66,14 +109,23 @@
   <main id="top">
     <section class="py-16 sm:py-20 bg-soft scroll-mt-24">
       <div class="max-w-6xl mx-auto px-4 sm:px-6">
-        <div class="text-center max-w-2xl mx-auto mb-10 reveal">
-          <p class="text-sm font-semibold uppercase tracking-wider text-primary mb-2">Treatment</p>
-          <h1 class="text-[1.35rem] sm:text-3xl font-bold text-secondary mb-3 text-center">All Treatments</h1>
-          <p class="text-slate-600">Browse every treatment we support, grouped by specialty. Book a free WhatsApp
-            consultation for any of them.</p>
+        <div class="text-center max-w-2xl mx-auto mb-10">
+          <p class="text-sm font-semibold uppercase tracking-wider text-primary mb-2">Speciality</p>
+          <h1 class="text-[1.35rem] sm:text-3xl font-bold text-secondary mb-3 text-center"><?= e($name) ?></h1>
+          <?php if ($description !== ''): ?>
+            <p class="text-slate-600"><?= e($description) ?></p>
+          <?php endif; ?>
         </div>
 
-        <div id="all-treatments-groups" aria-live="polite"></div>
+        <div class="tx-grid">
+          <?php if ($treatments === []): ?>
+            <p class="muted">No treatments listed under this speciality yet.</p>
+          <?php else: ?>
+            <?php foreach ($treatments as $t): ?>
+              <?= $renderCard($t) ?>
+            <?php endforeach; ?>
+          <?php endif; ?>
+        </div>
       </div>
     </section>
   </main>
@@ -132,7 +184,6 @@
   </div>
 
   <script src="/assets/js/analytics.js?v=20260803-perf3" defer></script>
-  <script src="/assets/js/treatments.js?v=20260807-groups1" defer></script>
 </body>
 
 </html>

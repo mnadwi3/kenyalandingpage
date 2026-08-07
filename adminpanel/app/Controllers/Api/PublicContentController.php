@@ -11,6 +11,7 @@ use App\Repositories\TestimonialRepository;
 use App\Services\DoctorService;
 use App\Services\HospitalService;
 use App\Services\SettingsService;
+use App\Services\SpecialtyService;
 use App\Services\TreatmentService;
 
 /**
@@ -22,6 +23,7 @@ final class PublicContentController extends Controller
     private TreatmentService $treatments;
     private HospitalService $hospitals;
     private DoctorService $doctors;
+    private SpecialtyService $specialties;
     private TestimonialRepository $testimonials;
     private FaqRepository $faqs;
     private SiteSettingRepository $settings;
@@ -33,6 +35,7 @@ final class PublicContentController extends Controller
         ?TreatmentService $treatments = null,
         ?HospitalService $hospitals = null,
         ?DoctorService $doctors = null,
+        ?SpecialtyService $specialties = null,
         ?TestimonialRepository $testimonials = null,
         ?FaqRepository $faqs = null,
         ?SiteSettingRepository $settings = null,
@@ -41,6 +44,7 @@ final class PublicContentController extends Controller
         $this->treatments = $treatments ?? new TreatmentService();
         $this->hospitals = $hospitals ?? new HospitalService();
         $this->doctors = $doctors ?? new DoctorService();
+        $this->specialties = $specialties ?? new SpecialtyService();
         $this->testimonials = $testimonials ?? new TestimonialRepository();
         $this->faqs = $faqs ?? new FaqRepository();
         $this->settings = $settings ?? new SiteSettingRepository();
@@ -51,6 +55,12 @@ final class PublicContentController extends Controller
     {
         $rows = $this->treatments->list(['status' => 'active', 'per_page' => 100])['treatments'];
         $this->cached($this->mapList($rows, [$this, 'mapTreatment']));
+    }
+
+    public function specialtiesList(): void
+    {
+        $rows = $this->specialties->list(['status' => 'active', 'per_page' => 100])['specialties'];
+        $this->cached($this->mapList($rows, [$this, 'mapSpecialty']));
     }
 
     public function treatmentBySlug(string $slug): void
@@ -165,6 +175,18 @@ final class PublicContentController extends Controller
     private function mapList(array $rows, callable $mapper): array
     {
         return array_map($mapper, $rows);
+    }
+
+    private function mapSpecialty(array $s): array
+    {
+        return [
+            'id' => (int) $s['id'],
+            'slug' => (string) $s['slug'],
+            'name' => (string) $s['name'],
+            'description' => $s['description'] ?? null,
+            'image' => $this->imageUrl($s['image'] ?? null),
+            'url' => '/specialities/' . $s['slug'],
+        ];
     }
 
     private function mapTreatment(array $t): array

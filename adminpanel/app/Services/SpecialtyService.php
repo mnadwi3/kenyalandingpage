@@ -56,6 +56,16 @@ final class SpecialtyService
         return $this->specialties->findById($id, $withTrashed);
     }
 
+    public function findBySlug(string $slug): ?array
+    {
+        $specialty = $this->specialties->findBySlug($slug);
+        if ($specialty === null || ($specialty['status'] ?? '') !== 'active') {
+            return null;
+        }
+
+        return $specialty;
+    }
+
     public function create(array $input, ?array $iconFile = null): int
     {
         $payload = $this->validatedPayload($input);
@@ -148,7 +158,8 @@ final class SpecialtyService
             ->required('name', 'Specialty name')
             ->maxLength('name', 150, 'Specialty name')
             ->in('status', Specialty::STATUSES, 'Status')
-            ->maxLength('slug', 191, 'Slug');
+            ->maxLength('slug', 191, 'Slug')
+            ->maxLength('description', 300, 'Short description');
         if ($validator->fails()) {
             throw new RuntimeException($validator->firstError());
         }
@@ -165,9 +176,12 @@ final class SpecialtyService
             $ignoreId
         );
 
+        $description = trim((string) ($input['description'] ?? ''));
+
         $payload = [
             'slug' => $slug,
             'name' => $name,
+            'description' => $description !== '' ? $description : null,
             'status' => (string) $input['status'],
         ];
         if ($ignoreId === null) {

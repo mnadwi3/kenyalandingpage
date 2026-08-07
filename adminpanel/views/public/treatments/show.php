@@ -5,7 +5,6 @@
 $name = (string) ($treatment['name'] ?? '');
 $category = (string) ($treatment['category'] ?? '');
 $specialty = (string) ($treatment['specialty_name'] ?? '');
-$priceFrom = (string) ($treatment['price_from'] ?? '');
 $overview = (string) ($treatment['introduction'] ?? $treatment['overview'] ?? '');
 $symptoms = (string) ($treatment['symptoms'] ?? '');
 $whenNeeded = (string) ($treatment['when_needed'] ?? '');
@@ -88,7 +87,7 @@ $secHead = static function (string $title): string {
 <link rel="dns-prefetch" href="https://www.googletagmanager.com">
 <link rel="preload" href="/assets/fonts/inter-latin.woff2" as="font" type="font/woff2" crossorigin>
 <link rel="stylesheet" href="/assets/css/fonts-inter.css?v=20260803-perf3">
-<link rel="stylesheet" href="/assets/css/treatment-page.css?v=20260807-unified1">
+<link rel="stylesheet" href="/assets/css/treatment-page.css?v=20260807-layout2">
 <script type="application/ld+json"><?= json_encode($jsonLd, JSON_UNESCAPED_SLASHES | JSON_UNESCAPED_UNICODE) ?></script>
 </head>
 <body>
@@ -113,84 +112,68 @@ $secHead = static function (string $title): string {
   </div>
 </header>
 
-<section class="hero">
-  <div class="wrap hero-grid">
-    <div class="hero-copy reveal">
-      <div class="eyebrow"><?= e($specialty !== '' ? $specialty : ($category !== '' ? $category : 'Oncology')) ?> &middot; India</div>
-      <h1><?= e($name) ?> Treatment in India</h1>
+<section class="hero hero-plain">
+  <div class="wrap">
+    <div class="eyebrow center reveal"><?= e($specialty !== '' ? $specialty : ($category !== '' ? $category : 'Oncology')) ?> &middot; India</div>
+    <h1 class="center reveal"><?= e($name) ?> Treatment in India</h1>
+  </div>
+</section>
+
+<section class="tp-section" aria-label="Treatment details">
+  <div class="wrap detail-layout">
+    <div class="detail-main">
       <?php if ($overview !== ''): ?>
-        <p class="hero-sub"><?= e(mb_strimwidth($overview, 0, 220, '...')) ?></p>
+      <div class="detail-block">
+        <?= $secHead('About ' . $name) ?>
+        <div class="sec-body reveal"><?= $renderBlock($overview) ?></div>
+      </div>
       <?php endif; ?>
-      <div class="hero-ctas">
+
+      <?php if ($symptoms !== ''): ?>
+      <div class="detail-block">
+        <?= $secHead('Symptoms to Watch For') ?>
+        <div class="sec-body reveal"><?= $renderBlock($symptoms) ?></div>
+      </div>
+      <?php endif; ?>
+
+      <?php if ($whenNeeded !== ''): ?>
+      <div class="detail-block">
+        <?= $secHead('When You Should Seek Treatment') ?>
+        <div class="sec-body reveal"><?= $renderBlock($whenNeeded) ?></div>
+      </div>
+      <?php endif; ?>
+
+      <?php if ($procedure !== ''): ?>
+      <div class="detail-block">
+        <?= $secHead('How the Treatment Works') ?>
+        <div class="sec-body reveal"><?= $renderBlock($procedure) ?></div>
+      </div>
+      <?php endif; ?>
+
+      <?php if ($recovery !== ''): ?>
+      <div class="detail-block">
+        <?= $secHead('Recovery & Hospital Stay') ?>
+        <div class="sec-body reveal"><?= $renderBlock($recovery) ?></div>
+      </div>
+      <?php endif; ?>
+
+      <?php if ($whyChoose !== ''): ?>
+      <div class="detail-block">
+        <?= $secHead('Why Choose VaidTrack.com') ?>
+        <div class="sec-body reveal"><?= $renderBlock($whyChoose) ?></div>
+      </div>
+      <?php endif; ?>
+    </div>
+
+    <div class="detail-sidebar">
+      <div class="sidebar-cta reveal">
         <a class="btn btn-primary" href="/book-appointment">Get Free Treatment Plan</a>
-        <a class="btn btn-outline-dark" href="<?= e($waUrl) ?>" target="_blank" rel="noopener">Message on WhatsApp</a>
-      </div>
-    </div>
-
-    <div class="formcard reveal">
-      <div class="form-fields">
-        <h3>Get a free second opinion</h3>
-        <p class="resp">Reviewed by an oncologist &middot; response <b>under 15 minutes</b></p>
-        <?php if ($priceFrom !== ''): ?><p class="resp">Packages typically start from <b><?= e($priceFrom) ?></b>.</p><?php endif; ?>
-        <a class="btn btn-primary submit" href="<?= e($waUrl) ?>" target="_blank" rel="noopener">Chat on WhatsApp</a>
+        <a class="btn btn-wa" href="<?= e($waUrl) ?>" target="_blank" rel="noopener">Chat on WhatsApp</a>
+        <p class="sidebar-note">Get Response within 2 Hours</p>
       </div>
     </div>
   </div>
 </section>
-
-<?php if ($overview !== ''): ?>
-<section class="tp-section" aria-label="About this treatment">
-  <div class="wrap">
-    <?= $secHead('About ' . $name) ?>
-    <div class="sec-body reveal"><?= $renderBlock($overview) ?></div>
-  </div>
-</section>
-<?php endif; ?>
-
-<?php if ($symptoms !== ''): ?>
-<section class="tp-section" aria-label="Symptoms">
-  <div class="wrap">
-    <?= $secHead('Symptoms to Watch For') ?>
-    <div class="sec-body reveal"><?= $renderBlock($symptoms) ?></div>
-  </div>
-</section>
-<?php endif; ?>
-
-<?php if ($whenNeeded !== ''): ?>
-<section class="tp-section" aria-label="When treatment is needed">
-  <div class="wrap">
-    <?= $secHead('When You Should Seek Treatment') ?>
-    <div class="sec-body reveal"><?= $renderBlock($whenNeeded) ?></div>
-  </div>
-</section>
-<?php endif; ?>
-
-<?php if ($procedure !== ''): ?>
-<section class="tp-section" aria-label="Procedure overview">
-  <div class="wrap">
-    <?= $secHead('How the Treatment Works') ?>
-    <div class="sec-body reveal"><?= $renderBlock($procedure) ?></div>
-  </div>
-</section>
-<?php endif; ?>
-
-<?php if ($recovery !== ''): ?>
-<section class="tp-section" aria-label="Recovery and hospital stay">
-  <div class="wrap">
-    <?= $secHead('Recovery & Hospital Stay') ?>
-    <div class="sec-body reveal"><?= $renderBlock($recovery) ?></div>
-  </div>
-</section>
-<?php endif; ?>
-
-<?php if ($whyChoose !== ''): ?>
-<section class="tp-section" aria-label="Why choose VaidTrack">
-  <div class="wrap">
-    <?= $secHead('Why Choose VaidTrack.com') ?>
-    <div class="sec-body reveal"><?= $renderBlock($whyChoose) ?></div>
-  </div>
-</section>
-<?php endif; ?>
 
 <section class="tp-section" id="doctors">
   <div class="wrap">

@@ -274,7 +274,7 @@
     }
   </style>
   <link rel="stylesheet" href="/assets/css/tailwind.min.css?v=20260803-perf3">
-  <link rel="stylesheet" href="/assets/css/styles.min.css?v=20260808-specialties1">
+  <link rel="stylesheet" href="/assets/css/styles.min.css?v=20260808-rhythm1">
 
   <!-- Analytics stub; full GTM/GA load deferred until idle/interaction -->
   <script>
@@ -306,7 +306,7 @@
       <nav class="hidden md:flex items-center text-white/85 whitespace-nowrap nav-primary" style="gap:20px"
         aria-label="Primary">
         <a href="/" class="hover:text-white transition-colors">Home</a>
-        <a href="/treatment" class="hover:text-white transition-colors">Treatments</a>
+        <a href="/all-treatments" class="hover:text-white transition-colors">Treatments</a>
         <a href="/doctors" class="hover:text-white transition-colors">Doctors</a>
         <a href="/#location" class="hover:text-white transition-colors">Hospitals</a>
         <a href="/testimonials" class="hover:text-white transition-colors">Testimonials</a>
@@ -450,7 +450,7 @@
 
 
     <!-- ========== SPECIALITIES ========== -->
-    <section id="specialties" class="py-16 sm:py-20 scroll-mt-24" hidden>
+    <section id="specialties" class="py-16 sm:py-20 scroll-mt-24 bg-tint" hidden>
       <div class="max-w-6xl mx-auto px-4 sm:px-6">
         <div class="text-center max-w-2xl mx-auto mb-10 reveal">
           <p class="text-sm font-semibold uppercase tracking-wider text-primary mb-2">Specialities</p>
@@ -463,29 +463,6 @@
         </div>
 
         <div class="spec-grid" id="specialties-grid"></div>
-      </div>
-    </section>
-
-    <!-- ========== TREATMENTS ========== -->
-    <section id="treatment" class="py-16 sm:py-20 bg-soft scroll-mt-24">
-      <div class="max-w-6xl mx-auto px-4 sm:px-6">
-        <div class="text-center max-w-2xl mx-auto mb-10 reveal">
-          <p class="text-sm font-semibold uppercase tracking-wider text-primary mb-2">Treatment</p>
-          <h2
-            class="font-display text-[clamp(1.15rem,5vw,1.5rem)] sm:text-4xl font-bold text-primary mb-2 text-center leading-snug">
-            Treatment Services </h2>
-          <div class="w-14 h-1 bg-gold rounded-full mx-auto mb-4" aria-hidden="true"></div>
-          <p class="text-slate-600 hidden sm:block">Book an appointment on WhatsApp for a free experts opinion and care
-            pathway guidance.</p>
-        </div>
-
-        <div class="tx-grid" id="tx-grid">
-        </div>
-        <div class="text-center mt-10">
-          <a href="/all-treatments" data-view-all-treatments hidden
-            class="inline-flex items-center justify-center gap-2 border-2 border-primary text-primary hover:bg-primary hover:text-white font-semibold text-sm sm:text-base px-6 py-3 rounded-lg transition-colors">View
-            All Treatments</a>
-        </div>
       </div>
     </section>
 
@@ -509,7 +486,7 @@
       </div>
     </section>
     <!-- ========== LOCATION - Partner Hospitals ========== -->
-    <section id="location" class="bg-soft scroll-mt-24 location-section">
+    <section id="location" class="bg-white scroll-mt-24 location-section">
       <div class="w-full px-4 sm:px-6">
         <div class="text-center mb-10 reveal">
           <p class="text-sm font-semibold uppercase tracking-wider text-primary mb-2">Hospitals</p>
@@ -823,7 +800,7 @@
     </script>
 
     <!-- ========== JOURNEY: How it works + Visa & Travel (combined) ========== -->
-    <section id="how-it-works" class="scroll-mt-24" aria-labelledby="hiw-heading">
+    <section id="how-it-works" class="scroll-mt-24 bg-soft" aria-labelledby="hiw-heading">
       <div id="visa-travel" class="hiw-inner reveal">
         <header class="hiw-header">
           <p class="hiw-eyebrow">Care journey &amp; travel</p>
@@ -1144,7 +1121,7 @@
       </div>
     </section>
 
-    <section id="faq" class="py-16 sm:py-24 bg-soft scroll-mt-24 relative overflow-hidden">
+    <section id="faq" class="py-16 sm:py-24 bg-white scroll-mt-24 relative overflow-hidden">
       <div class="absolute inset-x-0 top-0 h-px bg-gradient-to-r from-transparent via-primary/20 to-transparent"></div>
       <div class="max-w-3xl mx-auto px-4 sm:px-6 relative">
         <div class="text-center mb-12 sm:mb-14 reveal">
@@ -1401,7 +1378,6 @@
     <script src="assets/js/analytics.js?v=20260803-perf3" defer></script>
     <script src="assets/js/doctors.js?v=20260807-cachefix1" defer></script>
     <script src="assets/js/specialties.js?v=20260808-specialties1" defer></script>
-    <script src="assets/js/treatments.js?v=20260807-groups1" defer></script>
     <script src="assets/js/cms.js?v=20260807-txfix1" defer></script>
     <script src="assets/js/main.min.js?v=20260803-hero1" defer></script>
 </body>

@@ -101,7 +101,7 @@ $secHead = static function (string $title): string {
     <a class="tp-logo" href="/" aria-label="VaidTrack.com Home"><picture><source srcset="/images/vaidtrack-wordmark-nav.webp?v=20260803-perf3" type="image/webp"><img src="/images/vaidtrack-wordmark.png?v=20260803-perf3" alt="VaidTrack.com - For Medical Solutions" width="220" height="44" decoding="async" fetchpriority="high"></picture></a>
     <nav class="tp-nav" aria-label="Primary">
       <a href="/">Home</a>
-      <a href="/treatment">Treatments</a>
+      <a href="/all-treatments">Treatments</a>
       <a href="/all-doctors">Doctors</a>
       <a href="/faq">FAQ</a>
     </nav>

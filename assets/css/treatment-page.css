@@ -253,6 +253,31 @@ ul { margin: 0; padding: 0; }
 .sechead h2 { font-size: clamp(1.5rem, 3vw, 2rem); line-height: 1.15; }
 .sechead p { color: var(--muted); font-size: 1rem; margin-top: 12px; }
 
+/* Icon-led section headers (treatment detail page) */
+.sec-icon-head {
+  display: flex; align-items: center; gap: 14px;
+  max-width: 640px; margin-bottom: 28px;
+}
+.sec-icon-head .sec-icon {
+  flex: none; width: 44px; height: 44px; border-radius: 12px;
+  background: var(--bg-alt); color: var(--accent-dark);
+  display: flex; align-items: center; justify-content: center;
+}
+.sec-icon-head .sec-icon svg { width: 22px; height: 22px; }
+.sec-icon-head h2 { font-size: clamp(1.25rem, 2.6vw, 1.6rem); line-height: 1.2; margin: 0; }
+.sec-body { max-width: 720px; }
+.sec-body p { color: var(--muted); font-size: 1rem; line-height: 1.7; }
+.sec-body p + p { margin-top: 1rem; }
+.sec-list { list-style: none; margin-top: 0.25rem; }
+.sec-list li {
+  position: relative; padding: 0.4rem 0 0.4rem 1.15rem;
+  font-size: 0.98rem; color: var(--muted); line-height: 1.55;
+}
+.sec-list li::before {
+  content: ""; position: absolute; left: 0; top: 0.9rem;
+  width: 6px; height: 6px; border-radius: 50%; background: var(--accent);
+}
+
 /* Facts strip */
 .facts { background: var(--deep); border-bottom: none; padding: 0; }
 .facts-grid { display: grid; grid-template-columns: 1fr 1fr; }

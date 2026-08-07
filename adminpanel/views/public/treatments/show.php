@@ -22,32 +22,20 @@ $lines = static function (string $text): array {
     return array_values(array_filter(array_map('trim', preg_split('/\r\n|\r|\n/', $text) ?: [])));
 };
 
-$faqs = [
-    [
-        'q' => 'Is ' . $name . ' treatment in India safe for international patients?',
-        'a' => 'Yes. Partner hospitals follow international protocols, with NABH/JCI accreditation pathways, experienced specialists, and dedicated international patient desks.',
-    ],
-];
-if ($priceFrom !== '') {
-    $faqs[] = [
-        'q' => 'How much does ' . $name . ' treatment cost in India?',
-        'a' => 'Packages typically start around ' . $priceFrom . ', but the final cost depends on stage, treatment plan and hospital. We share a written estimate after report review.',
-    ];
-}
-$faqs[] = [
-    'q' => 'How fast can I get a second opinion?',
-    'a' => 'Most families receive an initial specialist opinion within 24-48 hours after sharing complete reports.',
-];
-$faqs[] = [
-    'q' => 'Do I need a medical visa?',
-    'a' => 'Usually yes. We guide invitation letters, hospital documentation, and visa steps for the patient and one attendant.',
-];
-
-$faqSchema = array_map(static fn (array $f): array => [
-    '@type' => 'Question',
-    'name' => $f['q'],
-    'acceptedAnswer' => ['@type' => 'Answer', 'text' => $f['a']],
-], $faqs);
+/** Render a block of admin-authored text: a bulleted list if it has multiple
+ *  lines, a plain paragraph block otherwise. Keeps sections visually varied
+ *  instead of every section looking identical. */
+$renderBlock = static function (string $text) use ($lines): string {
+    $items = $lines($text);
+    if (count($items) > 1) {
+        $html = '<ul class="sec-list">';
+        foreach ($items as $item) {
+            $html .= '<li>' . e($item) . '</li>';
+        }
+        return $html . '</ul>';
+    }
+    return '<p>' . nl2br(e($text)) . '</p>';
+};
 
 $jsonLd = [
     '@context' => 'https://schema.org',
@@ -69,9 +57,21 @@ $jsonLd = [
                 ['@type' => 'ListItem', 'position' => 3, 'name' => $name, 'item' => $canonical],
             ],
         ],
-        ['@type' => 'FAQPage', 'mainEntity' => $faqSchema],
     ],
 ];
+
+/** Icon-led section header. $icon is a raw <svg> string. */
+$secHead = static function (string $icon, string $title): string {
+    return '<div class="sec-icon-head reveal"><span class="sec-icon" aria-hidden="true">' . $icon . '</span><h2>' . e($title) . '</h2></div>';
+};
+
+$ICON_INFO = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><circle cx="12" cy="12" r="9"/><path stroke-linecap="round" d="M12 11v5.5M12 8v.01"/></svg>';
+$ICON_ALERT = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path stroke-linecap="round" stroke-linejoin="round" d="M12 9v4.5M12 17v.01M10.3 4.6L2.9 18a1.8 1.8 0 001.6 2.6h15a1.8 1.8 0 001.6-2.6L13.7 4.6a1.8 1.8 0 00-3.4 0z"/></svg>';
+$ICON_CALENDAR = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><rect x="3" y="5" width="18" height="16" rx="2"/><path stroke-linecap="round" d="M8 3v4M16 3v4M3 10h18M8.5 14.5l2 2 4-4"/></svg>';
+$ICON_CLIPBOARD = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><rect x="6" y="4" width="12" height="17" rx="2"/><path stroke-linecap="round" d="M9 4V3a1 1 0 011-1h4a1 1 0 011 1v1M9 11h6M9 15h6"/></svg>';
+$ICON_HEART = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path stroke-linecap="round" stroke-linejoin="round" d="M12 20s-7-4.35-9.5-8.5C.9 8.2 2.4 5 5.6 5c1.9 0 3.3 1 4.4 2.5C11.1 6 12.5 5 14.4 5c3.2 0 4.7 3.2 3.1 6.5C15 15.65 12 20 12 20z"/></svg>';
+$ICON_SHIELD = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path stroke-linecap="round" stroke-linejoin="round" d="M12 3l7 3v6c0 4.4-3 7.6-7 9-4-1.4-7-4.6-7-9V6l7-3z"/><path stroke-linecap="round" stroke-linejoin="round" d="M9 12l2 2 4-4"/></svg>';
+$ICON_USERS = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><circle cx="9" cy="8" r="3.2"/><path stroke-linecap="round" d="M3 20c0-3.3 2.7-5.5 6-5.5s6 2.2 6 5.5"/><circle cx="17.5" cy="9" r="2.6"/><path stroke-linecap="round" d="M15.5 14.6c2.6.3 4.5 2.2 4.5 5.4"/></svg>';
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -96,7 +96,7 @@ $jsonLd = [
 <link rel="dns-prefetch" href="https://www.googletagmanager.com">
 <link rel="preload" href="/assets/fonts/inter-latin.woff2" as="font" type="font/woff2" crossorigin>
 <link rel="stylesheet" href="/assets/css/fonts-inter.css?v=20260803-perf3">
-<link rel="stylesheet" href="/assets/css/treatment-page.css?v=20260803-perf3">
+<link rel="stylesheet" href="/assets/css/treatment-page.css?v=20260807-unified1">
 <script type="application/ld+json"><?= json_encode($jsonLd, JSON_UNESCAPED_SLASHES | JSON_UNESCAPED_UNICODE) ?></script>
 </head>
 <body>
@@ -143,50 +143,32 @@ $jsonLd = [
         <a class="btn btn-primary submit" href="<?= e($waUrl) ?>" target="_blank" rel="noopener">Chat on WhatsApp</a>
       </div>
     </div>
-
-    <?php if ($overview !== ''): ?>
-    <div class="hero-overview">
-      <div class="sechead reveal">
-        <div class="kicker">Overview</div>
-        <h2>Understanding <?= e($name) ?></h2>
-      </div>
-      <div class="overview-grid reveal">
-        <article class="overview-card">
-          <p><?= nl2br(e($overview)) ?></p>
-        </article>
-      </div>
-    </div>
-    <?php endif; ?>
   </div>
 </section>
 
-<?php if ($symptoms !== '' || $whenNeeded !== ''): ?>
-<section class="tp-section sym-dx" aria-label="Symptoms and when treatment is needed">
-  <div class="wrap sym-dx-grid">
-    <?php if ($symptoms !== ''): ?>
-    <div class="sym-dx-col">
-      <div class="sechead reveal">
-        <div class="kicker">Symptoms</div>
-        <h2>Common warning signs</h2>
-        <p>These symptoms do not always mean cancer - but they should be checked by a specialist, especially if they persist.</p>
-      </div>
-      <ul class="checklist reveal checklist-wide">
-        <?php foreach ($lines($symptoms) as $item): ?>
-          <li><span class="mark" aria-hidden="true">&#10003;</span><?= e($item) ?></li>
-        <?php endforeach; ?>
-      </ul>
-    </div>
-    <?php endif; ?>
+<?php if ($overview !== ''): ?>
+<section class="tp-section" aria-label="About this treatment">
+  <div class="wrap">
+    <?= $secHead($ICON_INFO, 'About ' . $name) ?>
+    <div class="sec-body reveal"><?= $renderBlock($overview) ?></div>
+  </div>
+</section>
+<?php endif; ?>
 
-    <?php if ($whenNeeded !== ''): ?>
-    <div class="sym-dx-col">
-      <div class="sechead reveal">
-        <div class="kicker">When is it needed</div>
-        <h2>When this treatment is recommended</h2>
-      </div>
-      <p class="diag-note reveal"><?= nl2br(e($whenNeeded)) ?></p>
-    </div>
-    <?php endif; ?>
+<?php if ($symptoms !== ''): ?>
+<section class="tp-section" aria-label="Symptoms">
+  <div class="wrap">
+    <?= $secHead($ICON_ALERT, 'Symptoms to Watch For') ?>
+    <div class="sec-body reveal"><?= $renderBlock($symptoms) ?></div>
+  </div>
+</section>
+<?php endif; ?>
+
+<?php if ($whenNeeded !== ''): ?>
+<section class="tp-section" aria-label="When treatment is needed">
+  <div class="wrap">
+    <?= $secHead($ICON_CALENDAR, 'When You Should Seek Treatment') ?>
+    <div class="sec-body reveal"><?= $renderBlock($whenNeeded) ?></div>
   </div>
 </section>
 <?php endif; ?>
@@ -194,11 +176,8 @@ $jsonLd = [
 <?php if ($procedure !== ''): ?>
 <section class="tp-section" aria-label="Procedure overview">
   <div class="wrap">
-    <div class="sechead reveal">
-      <div class="kicker">Procedure</div>
-      <h2>What the treatment involves</h2>
-    </div>
-    <p class="reveal"><?= nl2br(e($procedure)) ?></p>
+    <?= $secHead($ICON_CLIPBOARD, 'How the Treatment Works') ?>
+    <div class="sec-body reveal"><?= $renderBlock($procedure) ?></div>
   </div>
 </section>
 <?php endif; ?>
@@ -206,11 +185,8 @@ $jsonLd = [
 <?php if ($recovery !== ''): ?>
 <section class="tp-section" aria-label="Recovery and hospital stay">
   <div class="wrap">
-    <div class="sechead reveal">
-      <div class="kicker">Recovery</div>
-      <h2>Recovery &amp; hospital stay</h2>
-    </div>
-    <p class="reveal"><?= nl2br(e($recovery)) ?></p>
+    <?= $secHead($ICON_HEART, 'Recovery & Hospital Stay') ?>
+    <div class="sec-body reveal"><?= $renderBlock($recovery) ?></div>
   </div>
 </section>
 <?php endif; ?>
@@ -218,37 +194,16 @@ $jsonLd = [
 <?php if ($whyChoose !== ''): ?>
 <section class="tp-section" aria-label="Why choose VaidTrack">
   <div class="wrap">
-    <div class="sechead reveal">
-      <div class="kicker">Why VaidTrack</div>
-      <h2>Why choose VaidTrack.com</h2>
-    </div>
-    <p class="reveal"><?= nl2br(e($whyChoose)) ?></p>
+    <?= $secHead($ICON_SHIELD, 'Why Choose VaidTrack.com') ?>
+    <div class="sec-body reveal"><?= $renderBlock($whyChoose) ?></div>
   </div>
 </section>
 <?php endif; ?>
 
 <section class="tp-section" id="doctors">
   <div class="wrap">
-    <div class="sechead reveal">
-      <div class="kicker">Oncology specialists</div>
-      <h2>The team reviewing your case</h2>
-    </div>
+    <?= $secHead($ICON_USERS, 'The Team Reviewing Your Case') ?>
     <div class="docgrid" data-treatment="<?= e($name) ?>" aria-live="polite"></div>
-  </div>
-</section>
-
-<section class="tp-section" id="faq">
-  <div class="wrap">
-    <div class="sechead reveal">
-      <div class="kicker">FAQ</div>
-      <h2>Common questions</h2>
-    </div>
-    <?php foreach ($faqs as $i => $f): ?>
-      <div class="faq-item<?= $i === 0 ? ' open' : '' ?>">
-        <button class="faq-trigger" type="button" aria-expanded="<?= $i === 0 ? 'true' : 'false' ?>"><?= e($f['q']) ?><span class="x" aria-hidden="true">+</span></button>
-        <div class="faq-panel"><p><?= e($f['a']) ?></p></div>
-      </div>
-    <?php endforeach; ?>
   </div>
 </section>
 

@@ -509,6 +509,19 @@ label {
   }
 }
 
+/* ---- All-treatments grouped listing ---- */
+.tx-group + .tx-group {
+  margin-top: 2.5rem;
+}
+.tx-group-title {
+  font-size: 1.15rem;
+  font-weight: 700;
+  color: var(--primary);
+  margin-bottom: 1rem;
+  padding-bottom: 0.5rem;
+  border-bottom: 2px solid var(--gold, #d4af37);
+}
+
 /* ---- Treatment detail pages ---- */
 .tx-detail-layout {
   display: grid;

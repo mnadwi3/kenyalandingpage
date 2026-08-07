@@ -73,7 +73,7 @@
 
   var HOME_LIMIT = 12;
 
-  function mountTreatments(treatments) {
+  function mountHome(treatments) {
     var grid = document.querySelector('#tx-grid');
     if (!grid) return;
 
@@ -85,6 +85,52 @@
       : '<p class="muted">No treatments to show right now.</p>';
 
     observeReveal(grid.querySelectorAll('.reveal'));
+
+    var viewAllBtn = document.querySelector('[data-view-all-treatments]');
+    if (viewAllBtn) viewAllBtn.hidden = false;
+  }
+
+  function groupBySpecialty(treatments) {
+    var groups = [];
+    var index = {};
+    treatments.forEach(function (t) {
+      var label = t.specialty || t.category || 'Other Treatments';
+      if (!index[label]) {
+        index[label] = { label: label, items: [] };
+        groups.push(index[label]);
+      }
+      index[label].items.push(t);
+    });
+    groups.sort(function (a, b) { return a.label.localeCompare(b.label); });
+    return groups;
+  }
+
+  function renderGroup(group) {
+    return (
+      '<div class="tx-group">' +
+        '<h3 class="tx-group-title">' + escapeHtml(group.label) + '</h3>' +
+        '<div class="tx-grid">' + group.items.map(renderCard).join('') + '</div>' +
+      '</div>'
+    );
+  }
+
+  function mountAll(treatments) {
+    var container = document.querySelector('#all-treatments-groups');
+    if (!container) return;
+
+    if (!treatments.length) {
+      container.innerHTML = '<p class="muted">No treatments to show right now.</p>';
+      return;
+    }
+
+    var groups = groupBySpecialty(treatments);
+    container.innerHTML = groups.map(renderGroup).join('');
+    observeReveal(container.querySelectorAll('.reveal'));
+  }
+
+  function mountTreatments(treatments) {
+    mountHome(treatments);
+    mountAll(treatments);
   }
 
   function fetchTreatmentList(url) {
@@ -114,7 +160,7 @@
   }
 
   function init() {
-    if (!document.querySelector('#tx-grid')) return;
+    if (!document.querySelector('#tx-grid') && !document.querySelector('#all-treatments-groups')) return;
 
     loadTreatments()
       .then(mountTreatments)

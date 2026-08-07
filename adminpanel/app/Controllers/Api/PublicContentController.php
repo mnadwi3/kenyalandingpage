@@ -174,6 +174,7 @@ final class PublicContentController extends Controller
             'slug' => (string) $t['slug'],
             'name' => (string) $t['name'],
             'category' => $t['category'] ?? null,
+            'specialty' => $t['specialty_name'] ?? null,
             'price_from' => $t['price_from'] ?? null,
             'overview' => $t['overview'] ?? null,
             'symptoms' => $t['symptoms'] ?? null,
@@ -185,7 +186,7 @@ final class PublicContentController extends Controller
             'image' => $this->imageUrl($t['featured_image'] ?? null),
             'seo_title' => $t['seo_title'] ?? $t['name'],
             'seo_description' => $t['seo_description'] ?? null,
-            'url' => '/treatments/' . $t['slug'] . '.html',
+            'url' => '/treatments/' . $t['slug'],
         ];
     }
 

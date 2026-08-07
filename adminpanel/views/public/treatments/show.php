@@ -87,7 +87,7 @@ $secHead = static function (string $title): string {
 <link rel="dns-prefetch" href="https://www.googletagmanager.com">
 <link rel="preload" href="/assets/fonts/inter-latin.woff2" as="font" type="font/woff2" crossorigin>
 <link rel="stylesheet" href="/assets/css/fonts-inter.css?v=20260803-perf3">
-<link rel="stylesheet" href="/assets/css/treatment-page.css?v=20260807-layout2">
+<link rel="stylesheet" href="/assets/css/treatment-page.css?v=20260807-leadform1">
 <script type="application/ld+json"><?= json_encode($jsonLd, JSON_UNESCAPED_SLASHES | JSON_UNESCAPED_UNICODE) ?></script>
 </head>
 <body>
@@ -166,9 +166,22 @@ $secHead = static function (string $title): string {
     </div>
 
     <div class="detail-sidebar">
-      <div class="sidebar-cta reveal">
-        <a class="btn btn-primary" href="/book-appointment">Get Free Treatment Plan</a>
-        <a class="btn btn-wa" href="<?= e($waUrl) ?>" target="_blank" rel="noopener">Chat on WhatsApp</a>
+      <div class="formcard lead-card reveal">
+        <div class="form-fields">
+          <h3>Get a free second opinion</h3>
+          <p class="resp">Reviewed by an oncologist &middot; response <b>under 15 minutes</b></p>
+          <form id="lead-form-desktop" novalidate>
+            <div class="field"><label for="lead-name">Full name</label><input id="lead-name" name="name" required autocomplete="name" placeholder="Your name"></div>
+            <div class="field"><label for="lead-country">Country</label><input id="lead-country" name="country" required autocomplete="country-name" placeholder="Your country"></div>
+            <div class="field"><label for="lead-phone">Phone / WhatsApp</label><input id="lead-phone" name="phone" type="tel" required autocomplete="tel" inputmode="tel" placeholder="+ country code"></div>
+            <input type="hidden" name="cancerType" value="<?= e($name) ?>">
+            <div class="field"><label for="lead-msg">Message (optional)</label><textarea id="lead-msg" name="message" rows="2" placeholder="Stage, reports you have, anything we should know"></textarea></div>
+            <button class="btn btn-primary submit" type="submit">Get Free Treatment Plan</button>
+            <p class="form-error" role="alert"></p>
+          </form>
+        </div>
+        <div class="form-success"><h4>Thank you</h4><p>We received your details. A case manager will contact you shortly.</p></div>
+        <a class="btn btn-wa btn-block" href="<?= e($waUrl) ?>" target="_blank" rel="noopener">Chat on WhatsApp</a>
         <p class="sidebar-note">Get Response within 2 Hours</p>
       </div>
     </div>

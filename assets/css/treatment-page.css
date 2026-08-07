@@ -161,10 +161,6 @@ ul { margin: 0; padding: 0; }
 .hero-plain .eyebrow { justify-content: center; }
 .hero-plain .eyebrow::before { display: none; }
 .hero-plain h1 { margin: 0 auto; max-width: 46rem; }
-.hero-grid {
-  display: grid; grid-template-columns: 1fr; gap: 2rem; align-items: start;
-}
-.hero-copy { min-width: 0; }
 .eyebrow {
   font-size: 13px; font-weight: 600; letter-spacing: .06em;
   text-transform: uppercase; color: var(--accent);
@@ -176,42 +172,10 @@ ul { margin: 0; padding: 0; }
   line-height: 1.1; margin-bottom: 20px; color: var(--secondary);
 }
 .hero h1 em { font-style: italic; font-weight: 600; color: var(--accent); }
-.hero-sub {
-  font-size: 1.05rem; color: var(--muted); max-width: 480px; margin-bottom: 28px;
-}
-.hero-ctas { display: flex; flex-wrap: wrap; gap: 12px; margin-bottom: 0; }
-.hero-ctas .btn-outline-dark { border-color: var(--deep); color: var(--deep); }
-.hero-overview {
-  min-width: 0;
-  padding-top: 0.5rem;
-  border-top: 1px solid var(--line);
-}
-.hero-overview .sechead { margin-bottom: 1.25rem; }
-.hero-overview .overview-grid { gap: 12px; }
-.hero-overview .overview-card { padding: 1rem 1.1rem; }
 @media (min-width: 960px) {
   .hero {
     padding-bottom: 56px;
     border-bottom: none;
-  }
-  .hero-grid {
-    grid-template-columns: minmax(0, 1.15fr) minmax(280px, 0.85fr);
-    grid-template-rows: auto auto;
-    column-gap: 48px;
-    row-gap: 2rem;
-  }
-  .hero-copy { grid-column: 1; grid-row: 1; }
-  .formcard {
-    grid-column: 2;
-    grid-row: 1 / span 2;
-    position: sticky;
-    top: calc(var(--header-h) + 1rem);
-  }
-  .hero-overview {
-    grid-column: 1;
-    grid-row: 2;
-    border-top: 1px solid var(--line);
-    padding-top: 1.5rem;
   }
 }
 
@@ -220,15 +184,7 @@ ul { margin: 0; padding: 0; }
 .detail-block + .detail-block {
   margin-top: 3rem; padding-top: 3rem; border-top: 1px solid var(--line);
 }
-.sidebar-cta {
-  background: var(--white);
-  border: 1px solid var(--line);
-  border-radius: 12px;
-  padding: 1.5rem;
-  box-shadow: 0 12px 28px rgba(15, 23, 42, .06);
-}
-.sidebar-cta .btn { width: 100%; justify-content: center; }
-.sidebar-cta .btn + .btn { margin-top: 12px; }
+.lead-card .btn-wa { margin-top: 6px; }
 .sidebar-note {
   margin-top: 14px; text-align: center;
   font-size: 13px; color: var(--muted);

@@ -93,6 +93,7 @@
       min-height: 460px;
       display: flex;
       align-items: center;
+      justify-content: center;
       overflow: hidden;
     }
     @media (min-width: 900px) { .hp-hero { min-height: 520px; } }
@@ -121,6 +122,8 @@
       display: flex;
       flex-direction: column;
       justify-content: center;
+      align-items: center;
+      text-align: center;
       text-shadow: 0 2px 16px rgba(4, 18, 34, 0.55);
       /* .hp-hero-copy is the flex item of .hp-hero (display:flex). Flex
          items default to min-width:auto, so on narrow screens the
@@ -136,6 +139,7 @@
     .hp-accreditation-pills {
       display: flex;
       align-items: center;
+      justify-content: center;
       gap: 12px;
       margin-bottom: 1.5rem;
       width: 100%;
@@ -185,19 +189,22 @@
 
     .hp-name {
       font-family: var(--hp-display);
-      font-size: 2rem;
+      font-size: clamp(1.5rem, 5vw, 2.75rem);
       font-weight: 600;
       margin-bottom: 0.7rem;
       letter-spacing: -0.01em;
       line-height: 1.1;
-      text-wrap: balance;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      max-width: 100%;
     }
-    @media (min-width: 640px) { .hp-name { font-size: 2.75rem; } }
 
-    .hp-location { display: flex; align-items: center; gap: 0.45rem; color: rgba(255,255,255,0.78); margin-bottom: 1rem; font-size: 0.9rem; }
-    .hp-short-desc { color: rgba(255,255,255,0.88); font-size: 1rem; line-height: 1.65; margin-bottom: 1.85rem; max-width: 34rem; }
+    .hp-location { display: flex; align-items: center; justify-content: center; gap: 0.45rem; color: rgba(255,255,255,0.78); margin-bottom: 1rem; font-size: 0.9rem; }
+    .hp-location svg { flex-shrink: 0; }
+    .hp-short-desc { color: rgba(255,255,255,0.88); font-size: 1rem; line-height: 1.65; margin-bottom: 1.85rem; max-width: 34rem; text-align: center; }
 
-    .hp-hero-actions { display: flex; flex-wrap: wrap; gap: 0.85rem; }
+    .hp-hero-actions { display: flex; flex-wrap: wrap; justify-content: center; gap: 0.85rem; }
     .hp-btn {
       display: inline-flex;
       align-items: center;
@@ -503,7 +510,10 @@
           <div class="hp-hero-copy">
             <div id="hp-accreditation-pills" class="hp-accreditation-pills"></div>
             <h1 id="hp-name" class="hp-name"></h1>
-            <p id="hp-location" class="hp-location"></p>
+            <p id="hp-location" class="hp-location">
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path stroke-linecap="round" stroke-linejoin="round" d="M12 21s-7-6.1-7-11.5A7 7 0 0 1 19 9.5C19 14.9 12 21 12 21Z"/><circle cx="12" cy="9.5" r="2.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+              <span id="hp-location-text"></span>
+            </p>
             <p id="hp-short-desc" class="hp-short-desc"></p>
             <div class="hp-hero-actions">
               <a id="hp-book-btn" href="https://wa.me/918979983149" target="_blank" rel="noopener noreferrer" class="hp-btn hp-btn-gold">Book Free Consultation</a>
@@ -682,7 +692,7 @@
         }
 
         document.getElementById('hp-name').textContent = h.name || '';
-        document.getElementById('hp-location').textContent = h.location || [h.city, h.country].filter(Boolean).join(', ');
+        document.getElementById('hp-location-text').textContent = h.location || [h.city, h.country].filter(Boolean).join(', ');
         document.getElementById('hp-short-desc').textContent = h.short_description || '';
 
         var waText = encodeURIComponent('Hi, I want to know more about ' + (h.name || 'this hospital'));

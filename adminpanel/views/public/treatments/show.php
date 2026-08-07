@@ -60,18 +60,10 @@ $jsonLd = [
     ],
 ];
 
-/** Icon-led section header. $icon is a raw <svg> string. */
-$secHead = static function (string $icon, string $title): string {
-    return '<div class="sec-icon-head reveal"><span class="sec-icon" aria-hidden="true">' . $icon . '</span><h2>' . e($title) . '</h2></div>';
+/** Section header. */
+$secHead = static function (string $title): string {
+    return '<div class="sec-icon-head reveal"><h2>' . e($title) . '</h2></div>';
 };
-
-$ICON_INFO = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><circle cx="12" cy="12" r="9"/><path stroke-linecap="round" d="M12 11v5.5M12 8v.01"/></svg>';
-$ICON_ALERT = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path stroke-linecap="round" stroke-linejoin="round" d="M12 9v4.5M12 17v.01M10.3 4.6L2.9 18a1.8 1.8 0 001.6 2.6h15a1.8 1.8 0 001.6-2.6L13.7 4.6a1.8 1.8 0 00-3.4 0z"/></svg>';
-$ICON_CALENDAR = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><rect x="3" y="5" width="18" height="16" rx="2"/><path stroke-linecap="round" d="M8 3v4M16 3v4M3 10h18M8.5 14.5l2 2 4-4"/></svg>';
-$ICON_CLIPBOARD = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><rect x="6" y="4" width="12" height="17" rx="2"/><path stroke-linecap="round" d="M9 4V3a1 1 0 011-1h4a1 1 0 011 1v1M9 11h6M9 15h6"/></svg>';
-$ICON_HEART = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path stroke-linecap="round" stroke-linejoin="round" d="M12 20s-7-4.35-9.5-8.5C.9 8.2 2.4 5 5.6 5c1.9 0 3.3 1 4.4 2.5C11.1 6 12.5 5 14.4 5c3.2 0 4.7 3.2 3.1 6.5C15 15.65 12 20 12 20z"/></svg>';
-$ICON_SHIELD = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path stroke-linecap="round" stroke-linejoin="round" d="M12 3l7 3v6c0 4.4-3 7.6-7 9-4-1.4-7-4.6-7-9V6l7-3z"/><path stroke-linecap="round" stroke-linejoin="round" d="M9 12l2 2 4-4"/></svg>';
-$ICON_USERS = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><circle cx="9" cy="8" r="3.2"/><path stroke-linecap="round" d="M3 20c0-3.3 2.7-5.5 6-5.5s6 2.2 6 5.5"/><circle cx="17.5" cy="9" r="2.6"/><path stroke-linecap="round" d="M15.5 14.6c2.6.3 4.5 2.2 4.5 5.4"/></svg>';
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -149,7 +141,7 @@ $ICON_USERS = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke
 <?php if ($overview !== ''): ?>
 <section class="tp-section" aria-label="About this treatment">
   <div class="wrap">
-    <?= $secHead($ICON_INFO, 'About ' . $name) ?>
+    <?= $secHead('About ' . $name) ?>
     <div class="sec-body reveal"><?= $renderBlock($overview) ?></div>
   </div>
 </section>
@@ -158,7 +150,7 @@ $ICON_USERS = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke
 <?php if ($symptoms !== ''): ?>
 <section class="tp-section" aria-label="Symptoms">
   <div class="wrap">
-    <?= $secHead($ICON_ALERT, 'Symptoms to Watch For') ?>
+    <?= $secHead('Symptoms to Watch For') ?>
     <div class="sec-body reveal"><?= $renderBlock($symptoms) ?></div>
   </div>
 </section>
@@ -167,7 +159,7 @@ $ICON_USERS = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke
 <?php if ($whenNeeded !== ''): ?>
 <section class="tp-section" aria-label="When treatment is needed">
   <div class="wrap">
-    <?= $secHead($ICON_CALENDAR, 'When You Should Seek Treatment') ?>
+    <?= $secHead('When You Should Seek Treatment') ?>
     <div class="sec-body reveal"><?= $renderBlock($whenNeeded) ?></div>
   </div>
 </section>
@@ -176,7 +168,7 @@ $ICON_USERS = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke
 <?php if ($procedure !== ''): ?>
 <section class="tp-section" aria-label="Procedure overview">
   <div class="wrap">
-    <?= $secHead($ICON_CLIPBOARD, 'How the Treatment Works') ?>
+    <?= $secHead('How the Treatment Works') ?>
     <div class="sec-body reveal"><?= $renderBlock($procedure) ?></div>
   </div>
 </section>
@@ -185,7 +177,7 @@ $ICON_USERS = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke
 <?php if ($recovery !== ''): ?>
 <section class="tp-section" aria-label="Recovery and hospital stay">
   <div class="wrap">
-    <?= $secHead($ICON_HEART, 'Recovery & Hospital Stay') ?>
+    <?= $secHead('Recovery & Hospital Stay') ?>
     <div class="sec-body reveal"><?= $renderBlock($recovery) ?></div>
   </div>
 </section>
@@ -194,7 +186,7 @@ $ICON_USERS = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke
 <?php if ($whyChoose !== ''): ?>
 <section class="tp-section" aria-label="Why choose VaidTrack">
   <div class="wrap">
-    <?= $secHead($ICON_SHIELD, 'Why Choose VaidTrack.com') ?>
+    <?= $secHead('Why Choose VaidTrack.com') ?>
     <div class="sec-body reveal"><?= $renderBlock($whyChoose) ?></div>
   </div>
 </section>
@@ -202,7 +194,7 @@ $ICON_USERS = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke
 
 <section class="tp-section" id="doctors">
   <div class="wrap">
-    <?= $secHead($ICON_USERS, 'The Team Reviewing Your Case') ?>
+    <?= $secHead('The Team Reviewing Your Case') ?>
     <div class="docgrid" data-treatment="<?= e($name) ?>" aria-live="polite"></div>
   </div>
 </section>

@@ -249,7 +249,7 @@ final class DoctorService
 
     private function validatedPayload(array $input, ?int $ignoreId = null): array
     {
-        $input['status'] = ($input['status'] ?? '') !== '' ? $input['status'] : 'draft';
+        $input['status'] = ($input['status'] ?? '') !== '' ? $input['status'] : 'active';
 
         $validator = new Validator($input);
         $validator

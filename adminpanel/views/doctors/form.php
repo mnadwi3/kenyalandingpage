@@ -43,7 +43,7 @@ $expertiseValue = (string) ($values['expertise'] ?? $values['experience_summary'
                 <label class="field"><span>Status</span>
                     <select name="status">
                         <?php foreach ($options['statuses'] as $status): ?>
-                            <option value="<?= e($status) ?>" <?= ($values['status'] ?? 'draft') === $status ? 'selected' : '' ?>><?= e(ucfirst($status)) ?></option>
+                            <option value="<?= e($status) ?>" <?= ($values['status'] ?? 'active') === $status ? 'selected' : '' ?>><?= e(ucfirst($status)) ?></option>
                         <?php endforeach; ?>
                     </select>
                 </label>

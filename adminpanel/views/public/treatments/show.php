@@ -190,7 +190,7 @@ $secHead = static function (string $title): string {
 <section class="tp-section" id="doctors">
   <div class="wrap">
     <?= $secHead('Top Doctors for ' . $name) ?>
-    <div class="docgrid" data-treatment="<?= e($name) ?>" aria-live="polite"></div>
+    <div class="docgrid" data-treatment="<?= e($name) ?>" data-specialty-id="<?= e((string) ($treatment['specialty_id'] ?? '')) ?>" data-treatment-id="<?= e((string) ($treatment['id'] ?? '')) ?>" aria-live="polite"></div>
   </div>
 </section>
 

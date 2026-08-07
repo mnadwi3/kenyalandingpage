@@ -148,7 +148,14 @@ final class PublicContentController extends Controller
 
     public function doctorsList(): void
     {
-        $rows = $this->doctors->list(['status' => 'active', 'per_page' => 200])['doctors'];
+        $filters = ['status' => 'active', 'per_page' => 200];
+        if (!empty($_GET['specialty_id'])) {
+            $filters['specialty_id'] = (int) $_GET['specialty_id'];
+        }
+        if (!empty($_GET['treatment_id'])) {
+            $filters['treatment_id'] = (int) $_GET['treatment_id'];
+        }
+        $rows = $this->doctors->list($filters)['doctors'];
         $this->cached($this->mapList($rows, [$this, 'mapDoctor']));
     }
 

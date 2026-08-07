@@ -158,9 +158,9 @@
         (document.querySelector('meta[name="treatment-name"]') &&
           document.querySelector('meta[name="treatment-name"]').getAttribute('content')) ||
         '';
-      treatmentGrid.innerHTML = doctors
-        .map(function (doctor) { return renderTreatmentCard(doctor, treatmentName); })
-        .join('');
+      treatmentGrid.innerHTML = doctors.length
+        ? doctors.map(function (doctor) { return renderTreatmentCard(doctor, treatmentName); }).join('')
+        : '<p class="muted">Doctor details for this treatment will be added soon. Contact us on WhatsApp for a recommendation.</p>';
     }
 
     var allGrid = document.querySelector('#all-doctors-grid');
@@ -185,22 +185,33 @@
       });
   }
 
-  function loadDoctors() {
-    return fetchDoctorList(DOCTORS_URL).catch(function (err) {
+  // On a treatment page, scope the admin API request to doctors linked to
+  // that treatment's specialty so unrelated specialists don't show up on
+  // every treatment. The static fallback JSON has no specialty relationships,
+  // so it is only usable for the unscoped home/all-doctors grids.
+  function loadDoctors(specialtyId) {
+    var url = DOCTORS_URL;
+    if (specialtyId) {
+      url += (url.indexOf('?') === -1 ? '?' : '&') + 'specialty_id=' + encodeURIComponent(specialtyId);
+    }
+    return fetchDoctorList(url).catch(function (err) {
       if (typeof console !== 'undefined' && console.warn) {
-        console.warn('[doctors] admin API unavailable, falling back to static JSON', err);
+        console.warn('[doctors] admin API unavailable', err);
       }
+      if (specialtyId) return [];
       return fetchDoctorList(DOCTORS_FALLBACK_URL);
     });
   }
 
   function init() {
-    var needsHome = !!document.querySelector('#doctors .doc-grid');
-    var needsTreatment = !!document.querySelector('#doctors .docgrid');
-    var needsAll = !!document.querySelector('#all-doctors-grid');
-    if (!needsHome && !needsTreatment && !needsAll) return;
+    var homeGrid = document.querySelector('#doctors .doc-grid');
+    var treatmentGrid = document.querySelector('#doctors .docgrid');
+    var allGrid = document.querySelector('#all-doctors-grid');
+    if (!homeGrid && !treatmentGrid && !allGrid) return;
 
-    loadDoctors()
+    var specialtyId = treatmentGrid ? treatmentGrid.getAttribute('data-specialty-id') : '';
+
+    loadDoctors(specialtyId)
       .then(mountDoctors)
       .catch(function (err) {
         if (typeof console !== 'undefined' && console.error) {

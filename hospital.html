@@ -108,10 +108,13 @@
       content: '';
       position: absolute;
       inset: 0;
-      background: linear-gradient(100deg, rgba(11,58,97,0.62) 0%, rgba(11,58,97,0.42) 45%, rgba(11,58,97,0.22) 70%, rgba(11,58,97,0.32) 100%);
+      /* Content is centered now, so the darkest point of the overlay
+         sits behind it (center) and eases off toward the edges, instead
+         of the old left-to-right gradient built for left-aligned text. */
+      background: radial-gradient(ellipse 70% 75% at 50% 50%, rgba(4,18,34,0.8) 0%, rgba(6,26,46,0.62) 45%, rgba(8,32,54,0.34) 75%, rgba(8,32,54,0.22) 100%);
     }
     @media (max-width: 899px) {
-      .hp-hero-media::after { background: linear-gradient(180deg, rgba(11,58,97,0.35) 0%, rgba(11,58,97,0.78) 100%); }
+      .hp-hero-media::after { background: radial-gradient(ellipse 90% 65% at 50% 45%, rgba(4,18,34,0.82) 0%, rgba(6,26,46,0.68) 50%, rgba(8,32,54,0.4) 100%); }
     }
 
     .hp-hero-copy {

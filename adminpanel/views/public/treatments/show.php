@@ -210,7 +210,7 @@ $secHead = static function (string $title): string {
 </div>
 
 <script src="/assets/js/analytics.js?v=20260803-perf3" defer></script>
-<script src="/assets/js/doctors.js?v=20260808-specfilter1" defer></script>
+<script src="/assets/js/doctors.js?v=20260808-allgridfix1" defer></script>
 <script src="/assets/js/treatment-page.js?v=20260803-perf3" defer></script>
 </body>
 </html>

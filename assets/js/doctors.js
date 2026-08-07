@@ -165,10 +165,9 @@
 
     var allGrid = document.querySelector('#all-doctors-grid');
     if (allGrid) {
-      var nonFeatured = doctors.filter(function (d) { return !d.is_featured; });
-      allGrid.innerHTML = nonFeatured.length
-        ? nonFeatured.map(renderHomeCard).join('')
-        : '<p class="muted">No additional doctors to show right now.</p>';
+      allGrid.innerHTML = doctors.length
+        ? doctors.map(renderHomeCard).join('')
+        : '<p class="muted">No doctors to show right now.</p>';
       observeReveal(allGrid.querySelectorAll('.reveal'));
     }
   }

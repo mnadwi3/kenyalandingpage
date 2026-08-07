@@ -1,6 +1,7 @@
 /* ============================================
-   VaidTrack.com - CMS sync (treatments, hospitals,
-   testimonials, FAQs, hero) from the admin panel API.
+   VaidTrack.com - CMS sync (hospitals, testimonials,
+   FAQs, hero) from the admin panel API.
+   Treatment cards are handled by treatments.js.
 
    Same pattern as doctors.js: fetch JSON, render into
    existing mount points, keep hardcoded markup as a
@@ -56,38 +57,6 @@
         if (items[i]) items[i].textContent = text;
       });
     }
-  }
-
-  /* ---------- Treatments ---------- */
-  function renderTreatmentCard(t) {
-    var url = t.url || ('/treatments/' + t.slug + '.html');
-    var iconHtml = t.image
-      ? '<img src="' + escapeHtml(t.image) + '" alt="" width="128" height="128" loading="lazy" decoding="async">'
-      : '<span>' + escapeHtml((t.name || 'T').charAt(0)) + '</span>';
-
-    return (
-      '<article class="tx-card reveal">' +
-        '<a class="tx-page-link" href="' + escapeHtml(url) + '" aria-label="Open ' + escapeHtml(t.name) + ' details page">' +
-          '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" aria-hidden="true">' +
-            '<path stroke-linecap="round" stroke-linejoin="round" d="M7 17L17 7M10 7h7v7" /></svg></a>' +
-        '<div class="tx-icon tx-icon--svg" style="--tx-color:var(--primary)" aria-hidden="true">' + iconHtml + '</div>' +
-        '<div class="tx-body">' +
-          '<h3><a href="' + escapeHtml(url) + '">' + escapeHtml(t.name) + '</a></h3>' +
-          (t.category ? '<span class="tx-price">' + escapeHtml(t.category) + '</span>' : '') +
-          '<p>' + escapeHtml(t.overview || '') + '</p>' +
-        '</div>' +
-        '<a class="tx-book" href="' + escapeHtml(url) + '" aria-label="Learn more about ' + escapeHtml(t.name) + '">' +
-          '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" aria-hidden="true">' +
-            '<path stroke-linecap="round" stroke-linejoin="round" d="M7 17L17 7M10 7h7v7" /></svg></a>' +
-      '</article>'
-    );
-  }
-
-  function renderTreatments(list) {
-    var grid = document.getElementById('tx-grid');
-    if (!grid || !Array.isArray(list) || !list.length) return;
-    grid.innerHTML = list.map(renderTreatmentCard).join('');
-    observeReveal(grid.querySelectorAll('.reveal'));
   }
 
   /* ---------- Hospitals ---------- */
@@ -220,7 +189,6 @@
 
   function init() {
     fetchJson('/api/hero.json').then(renderHero).catch(function () {});
-    fetchJson('/api/treatments.json').then(renderTreatments).catch(function () {});
     fetchJson('/api/hospitals.json').then(function (data) {
       renderHospitals(Array.isArray(data) ? data : (data.items || []));
     }).catch(function () {});

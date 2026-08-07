@@ -48,6 +48,9 @@ $introduction = (string) ($values['introduction'] ?? $values['overview'] ?? '');
                         <?php endforeach; ?>
                     </datalist>
                 </label>
+                <label class="field"><span>Starting price</span>
+                    <input type="text" name="price_from" value="<?= $val('price_from') ?>" placeholder="e.g. $6,800">
+                </label>
                 <label class="field"><span>Specialty</span>
                     <select name="specialty_id">
                         <option value="">Select specialty</option>
@@ -114,6 +117,9 @@ $introduction = (string) ($values['introduction'] ?? $values['overview'] ?? '');
                     <div>
                         <h2 data-preview-name><?= e((string) ($values['name'] ?? 'Treatment name')) ?></h2>
                         <p class="muted" data-preview-category><?= e((string) ($values['category'] ?? 'Category')) ?></p>
+                        <?php if (!empty($values['price_from'])): ?>
+                            <p class="muted">From <?= e((string) $values['price_from']) ?></p>
+                        <?php endif; ?>
                         <p class="muted" data-preview-slug><?= e((string) ($values['slug'] ?? 'slug')) ?></p>
                     </div>
                 </div>

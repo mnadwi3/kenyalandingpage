@@ -157,6 +157,7 @@ final class TreatmentService
             'slug' => $slug,
             'name' => $treatment['name'] . ' (Copy)',
             'category' => $treatment['category'] ?? null,
+            'price_from' => $treatment['price_from'] ?? null,
             'specialty_id' => $treatment['specialty_id'] ?? null,
             'overview' => $treatment['overview'] ?? $treatment['introduction'] ?? null,
             'symptoms' => $treatment['symptoms'] ?? null,
@@ -218,6 +219,7 @@ final class TreatmentService
                     'name' => $row['name'] ?? $row['treatment_name'] ?? '',
                     'slug' => $row['slug'] ?? '',
                     'category' => $row['category'] ?? '',
+                    'price_from' => $row['price_from'] ?? '',
                     'specialty_id' => $row['specialty_id'] ?? '',
                     'introduction' => $row['introduction'] ?? $row['overview'] ?? '',
                     'symptoms' => $row['symptoms'] ?? '',
@@ -266,6 +268,7 @@ final class TreatmentService
             ->maxLength('name', 200, 'Treatment name')
             ->in('status', Treatment::STATUSES, 'Status')
             ->maxLength('category', 150, 'Category')
+            ->maxLength('price_from', 50, 'Starting price')
             ->maxLength('seo_title', 255, 'SEO title')
             ->maxLength('seo_description', 320, 'Meta description')
             ->maxLength('slug', 191, 'Slug');
@@ -288,6 +291,7 @@ final class TreatmentService
             'slug' => $slug,
             'name' => $name,
             'category' => $this->nullableString($input['category'] ?? null),
+            'price_from' => $this->nullableString($input['price_from'] ?? null),
             'specialty_id' => $specialtyId === '' || $specialtyId === null ? null : (int) $specialtyId,
             'overview' => $this->nullableString($input['introduction'] ?? $input['overview'] ?? null),
             'symptoms' => $this->nullableString($input['symptoms'] ?? null),

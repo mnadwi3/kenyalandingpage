@@ -174,6 +174,7 @@ final class PublicContentController extends Controller
             'slug' => (string) $t['slug'],
             'name' => (string) $t['name'],
             'category' => $t['category'] ?? null,
+            'price_from' => $t['price_from'] ?? null,
             'overview' => $t['overview'] ?? null,
             'symptoms' => $t['symptoms'] ?? null,
             'when_needed' => $t['when_needed'] ?? null,

@@ -1,0 +1,123 @@
+[
+  {
+    "id": 1,
+    "slug": "breast-cancer",
+    "name": "Breast Cancer",
+    "category": "Surgical Oncology",
+    "overview": "Advanced breast oncology with surgery, chemo & targeted care.",
+    "price_from": "$6,800",
+    "image": "/assets/images/treatments/breast-cancer.svg",
+    "is_featured": true,
+    "url": "/treatments/breast-cancer"
+  },
+  {
+    "id": 2,
+    "slug": "kidney-cancer",
+    "name": "Kidney Cancer",
+    "category": "Urologic Oncology",
+    "overview": "Expert renal oncology and kidney-preserving surgery options.",
+    "price_from": "$7,200",
+    "image": "/assets/images/treatments/kidney-cancer.svg",
+    "is_featured": true,
+    "url": "/treatments/kidney-cancer"
+  },
+  {
+    "id": 3,
+    "slug": "liver-cancer",
+    "name": "Liver Cancer",
+    "category": "Surgical Oncology",
+    "overview": "Specialized liver cancer care including complex resections.",
+    "price_from": "$9,500",
+    "image": "/assets/images/treatments/liver-cancer.svg",
+    "is_featured": true,
+    "url": "/treatments/liver-cancer"
+  },
+  {
+    "id": 4,
+    "slug": "cervical-cancer",
+    "name": "Cervical Cancer",
+    "category": "Gynecologic Oncology",
+    "overview": "Focused gynecologic oncology with modern treatment plans.",
+    "price_from": "$6,500",
+    "image": "/assets/images/treatments/cervical-cancer.svg",
+    "is_featured": true,
+    "url": "/treatments/cervical-cancer"
+  },
+  {
+    "id": 5,
+    "slug": "colorectal-cancer",
+    "name": "Colorectal Cancer",
+    "category": "Surgical Oncology",
+    "overview": "Comprehensive colon & rectal cancer treatment pathways.",
+    "price_from": "$7,800",
+    "image": "/assets/images/treatments/colorectal-cancer.svg",
+    "is_featured": true,
+    "url": "/treatments/colorectal-cancer"
+  },
+  {
+    "id": 6,
+    "slug": "bladder-cancer",
+    "name": "Bladder Cancer",
+    "category": "Urologic Oncology",
+    "overview": "Precise urologic oncology for early and advanced stages.",
+    "price_from": "$7,000",
+    "image": "/assets/images/treatments/bladder-cancer.svg",
+    "is_featured": true,
+    "url": "/treatments/bladder-cancer"
+  },
+  {
+    "id": 7,
+    "slug": "blood-cancer",
+    "name": "Blood Cancer",
+    "category": "Medical Oncology",
+    "overview": "Leukemia, lymphoma & myeloma care with expert hematologists.",
+    "price_from": "$8,200",
+    "image": "/assets/images/treatments/blood-cancer.svg",
+    "is_featured": true,
+    "url": "/treatments/blood-cancer"
+  },
+  {
+    "id": 8,
+    "slug": "prostate-cancer",
+    "name": "Prostate Cancer",
+    "category": "Urologic Oncology",
+    "overview": "Modern prostate cancer diagnosis and treatment options.",
+    "price_from": "$6,800",
+    "image": "/assets/images/treatments/prostate-cancer.svg",
+    "is_featured": true,
+    "url": "/treatments/prostate-cancer"
+  },
+  {
+    "id": 9,
+    "slug": "lung-cancer",
+    "name": "Lung Cancer",
+    "category": "Medical Oncology",
+    "overview": "Advanced lung oncology with surgery, radiation & targeted therapy.",
+    "price_from": "$8,500",
+    "image": "/assets/images/treatments/lung-cancer.svg",
+    "is_featured": true,
+    "url": "/treatments/lung-cancer"
+  },
+  {
+    "id": 10,
+    "slug": "head-and-neck-cancer",
+    "name": "Head and Neck Cancer",
+    "category": "Surgical Oncology",
+    "overview": "Multidisciplinary care for head, neck & oral cancers.",
+    "price_from": "$7,500",
+    "image": "/assets/images/treatments/head-and-neck-cancer.svg",
+    "is_featured": true,
+    "url": "/treatments/head-and-neck-cancer"
+  },
+  {
+    "id": 11,
+    "slug": "brain-cancer",
+    "name": "Brain Cancer",
+    "category": "Surgical Oncology",
+    "overview": "Neuro-oncology with precision surgery and advanced therapy.",
+    "price_from": "$10,500",
+    "image": "/assets/images/treatments/brain-cancer.svg",
+    "is_featured": true,
+    "url": "/treatments/brain-cancer"
+  }
+]

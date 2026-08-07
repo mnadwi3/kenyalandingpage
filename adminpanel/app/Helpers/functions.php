@@ -96,14 +96,20 @@ function old(string $key, string $default = ''): string
  *
  * @param array<string, mixed> $data
  */
-function component(string $name, array $data = []): void
+function component(string $componentName, array $data = []): void
 {
-    $path = BASE_PATH . '/views/components/' . $name . '.php';
+    $path = BASE_PATH . '/views/components/' . $componentName . '.php';
 
     if (!is_file($path)) {
-        throw new RuntimeException("Component [{$name}] not found.");
+        throw new RuntimeException("Component [{$componentName}] not found.");
     }
 
+    // Data keys are extracted as local variables for the component template
+    // (e.g. 'name' => $name). The loader's own parameter must not be called
+    // $name/$data/$path, or EXTR_SKIP silently drops that key on collision -
+    // this previously broke every component call that passed a 'name' key,
+    // including all multi-select fields (languages/specialties/treatments/
+    // hospitals), because $name held this function's own argument instead.
     extract($data, EXTR_SKIP);
     require $path;
 }

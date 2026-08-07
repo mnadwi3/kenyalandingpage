@@ -174,7 +174,7 @@
   }
 
   function fetchDoctorList(url) {
-    return fetch(url, { credentials: 'omit' })
+    return fetch(url, { credentials: 'omit', cache: 'no-store' })
       .then(function (res) {
         if (!res.ok) throw new Error('Failed to load ' + url + ' (' + res.status + ')');
         return res.json();

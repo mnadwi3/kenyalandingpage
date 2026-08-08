@@ -1015,8 +1015,8 @@ label {
 /* ---- Hero slider ---- */
 .hero-slider {
   position: relative;
-  /* Base 0.81, +15% for desktop/tablet (0.9315), then +10% more on desktop only: 0.9315 * 1.10 = 1.02465 */
-  min-height: clamp(574px, 90.17vh, 737px);
+  min-height: 100vh;
+  height: 100vh;
   overflow: hidden;
   background: linear-gradient(180deg, #F5FBFA 0%, #D5EFEC 48%, #8CDAD4 100%);
 }
@@ -1884,8 +1884,8 @@ header .site-logo-img {
 }
 @media (min-width: 768px) and (max-width: 1023px) {
   .hero-slider {
-    min-height: calc((100svh - 4.75rem) * 0.9315);
-    height: calc((100svh - 4.75rem) * 0.9315);
+    min-height: 100vh;
+    height: 100vh;
   }
   .hero-slide-content {
     padding-top: 3rem !important;

@@ -1472,10 +1472,6 @@ body.appt-modal-open { overflow: hidden; }
   transform: translateY(-1px);
 }
 
-/* Mobile hamburger nav removed - keep selectors inert if markup remains elsewhere */
-.nav-toggle,
-.mobile-nav { display: none !important; }
-
 /* ---- Mobile bottom bar (WhatsApp + Book Now) ---- */
 .mobile-bottom-bar {
   display: none;

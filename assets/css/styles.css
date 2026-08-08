@@ -1541,9 +1541,12 @@ header .site-logo-img {
 }
 .nav-toggle:hover { background: rgba(255, 255, 255, 0.22); }
 .nav-toggle svg { width: 1.4rem; height: 1.4rem; display: block; }
-.nav-toggle-icon-close { display: none; }
-.nav-toggle[aria-expanded="true"] .nav-toggle-icon-open { display: none; }
-.nav-toggle[aria-expanded="true"] .nav-toggle-icon-close { display: block; }
+/* .nav-toggle svg (0,1,1) beats a bare .nav-toggle-icon-close (0,1,0)
+   regardless of source order, so the close icon never actually hid --
+   both icons rendered stacked. Match specificity on the toggle rules. */
+.nav-toggle svg.nav-toggle-icon-close { display: none; }
+.nav-toggle[aria-expanded="true"] svg.nav-toggle-icon-open { display: none; }
+.nav-toggle[aria-expanded="true"] svg.nav-toggle-icon-close { display: block; }
 
 .mobile-nav {
   display: flex;

@@ -1856,7 +1856,7 @@ header .site-logo-img {
     height: calc((100svh - 4.25rem) * 0.75735);
   }
   .hero-slide-content {
-    padding-top: 2.03rem !important;
+    padding-top: 4.53rem !important;
     padding-bottom: calc(4.75rem + env(safe-area-inset-bottom, 0px)) !important;
     justify-content: center !important;
     align-items: center !important;

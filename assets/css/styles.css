@@ -1078,9 +1078,11 @@ label {
 }
 
 .hero-stats-wrap {
-  position: relative;
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: 2.5rem;
   z-index: 4;
-  margin-top: -2.25rem;
 }
 .hero-stats {
   background: #fff;
@@ -1890,6 +1892,7 @@ header .site-logo-img {
   .hero-slide-content {
     padding-top: 3rem !important;
     padding-bottom: calc(4.75rem + env(safe-area-inset-bottom, 0px)) !important;
+    justify-content: center !important;
   }
   .hero-trust {
     padding: 0.9rem 0.35rem !important;

@@ -1015,7 +1015,8 @@ label {
 /* ---- Hero slider ---- */
 .hero-slider {
   position: relative;
-  min-height: clamp(560px, 88vh, 720px);
+  /* 10% shorter than the original clamp(560px, 88vh, 720px) */
+  min-height: clamp(504px, 79.2vh, 648px);
   overflow: hidden;
   background: linear-gradient(180deg, #F5FBFA 0%, #D5EFEC 48%, #8CDAD4 100%);
 }
@@ -1597,8 +1598,10 @@ header .site-logo-img {
   .hero-slider {
     aspect-ratio: auto;
     width: 100%;
-    min-height: calc(100svh - 4.25rem);
-    height: calc(100dvh - 4.25rem);
+    /* Content is top-anchored (see .hero-slide-content below), so
+       shrinking the box by 10% trims empty space at the bottom. */
+    min-height: calc((100svh - 4.25rem) * 0.9);
+    height: calc((100dvh - 4.25rem) * 0.9);
     overflow: hidden;
     background: linear-gradient(
       180deg,
@@ -1698,8 +1701,8 @@ header .site-logo-img {
 }
 @media (max-width: 767px) {
   .hero-slider {
-    min-height: calc(100svh - 4.25rem);
-    height: calc(100dvh - 4.25rem);
+    min-height: calc((100svh - 4.25rem) * 0.9);
+    height: calc((100dvh - 4.25rem) * 0.9);
   }
   .hero-slide-content {
     padding-top: 3rem !important;
@@ -1708,8 +1711,8 @@ header .site-logo-img {
 }
 @media (min-width: 768px) and (max-width: 1023px) {
   .hero-slider {
-    min-height: calc(100svh - 4.75rem);
-    height: calc(100dvh - 4.75rem);
+    min-height: calc((100svh - 4.75rem) * 0.9);
+    height: calc((100dvh - 4.75rem) * 0.9);
   }
   .hero-slide-content {
     padding-top: 3rem !important;

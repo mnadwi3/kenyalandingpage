@@ -137,13 +137,15 @@
     );
   }
 
-  var HOME_FEATURED_LIMIT = 6;
+  var HOME_FEATURED_LIMIT = 8;
 
   function mountDoctors(doctors) {
     var homeGrid = document.querySelector('#doctors .doc-grid');
     if (homeGrid) {
-      var featured = doctors.filter(function (d) { return d.is_featured; }).slice(0, HOME_FEATURED_LIMIT);
-      var homeHtml = featured.map(renderHomeCard).join('');
+      var featured = doctors.filter(function (d) { return d.is_featured; });
+      var rest = doctors.filter(function (d) { return !d.is_featured; });
+      var homeDoctors = featured.concat(rest).slice(0, HOME_FEATURED_LIMIT);
+      var homeHtml = homeDoctors.map(renderHomeCard).join('');
       homeGrid.innerHTML = homeHtml;
       observeReveal(homeGrid.querySelectorAll('.reveal'));
 

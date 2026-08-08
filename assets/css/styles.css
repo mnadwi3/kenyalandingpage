@@ -1015,8 +1015,10 @@ label {
 /* ---- Hero slider ---- */
 .hero-slider {
   position: relative;
-  min-height: 100vh;
-  height: 100vh;
+  /* 100vh minus the sticky header's own height (4.75rem at sm+), so
+     header + hero together fit exactly one screen with no scroll. */
+  min-height: calc(100vh - 4.75rem);
+  height: calc(100vh - 4.75rem);
   overflow: hidden;
   background: linear-gradient(180deg, #F5FBFA 0%, #D5EFEC 48%, #8CDAD4 100%);
 }
@@ -1886,8 +1888,8 @@ header .site-logo-img {
 }
 @media (min-width: 768px) and (max-width: 1023px) {
   .hero-slider {
-    min-height: 100vh;
-    height: 100vh;
+    min-height: calc(100vh - 4.75rem);
+    height: calc(100vh - 4.75rem);
   }
   .hero-slide-content {
     padding-top: 3rem !important;

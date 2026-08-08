@@ -1525,6 +1525,32 @@ header .site-logo-img {
   }
 }
 
+/* ---- View All Doctors button ----
+   Was plain Tailwind utilities (border-primary, hover:bg-primary,
+   hover:text-white, mt-10) -- none of those specific combinations were
+   used anywhere else in the codebase, so this static/non-JIT Tailwind
+   build never generated them: no border ever rendered ("no box"), hover
+   did nothing so the label just sat there, and the missing mt-10 left
+   zero gap above the doctor grid ("stuck to the last card"). */
+.view-all-wrap { text-align: center; margin-top: 2.5rem; }
+.btn-view-all {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  border: 2px solid var(--primary);
+  color: var(--primary);
+  background: transparent;
+  font-weight: 600;
+  font-size: 0.875rem;
+  padding: 0.75rem 1.5rem;
+  border-radius: 0.5rem;
+  text-decoration: none;
+  transition: background 0.15s ease, color 0.15s ease;
+}
+.btn-view-all:hover { background: var(--primary); color: #fff; }
+@media (min-width: 640px) { .btn-view-all { font-size: 1rem; } }
+
 /* ---- Mobile hamburger menu ---- */
 /* tailwind.min.css here is a static pre-built bundle (no JIT at runtime),
    so "md:inline-flex" on .header-wa compiles to nothing since that

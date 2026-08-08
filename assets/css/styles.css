@@ -1526,6 +1526,16 @@ header .site-logo-img {
 }
 
 /* ---- Mobile hamburger menu ---- */
+/* tailwind.min.css here is a static pre-built bundle (no JIT at runtime),
+   so "md:inline-flex" on .header-wa compiles to nothing since that
+   utility combination was never used anywhere before this feature --
+   "hidden" alone then applies with nothing to override it at any width.
+   Owning the header-wa visibility directly avoids relying on utility
+   classes that don't exist in the build. */
+.header-wa { display: none; }
+@media (min-width: 768px) {
+  .header-wa { display: inline-flex; }
+}
 .nav-toggle {
   display: inline-flex;
   align-items: center;

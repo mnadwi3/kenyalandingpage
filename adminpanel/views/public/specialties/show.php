@@ -58,7 +58,7 @@ $renderCard = static function (array $t) use ($waNumber): string {
   <link rel="icon" href="/favicon.ico" sizes="any">
   <link rel="preload" href="/assets/fonts/inter-latin.woff2" as="font" type="font/woff2" crossorigin>
   <link rel="stylesheet" href="/assets/css/tailwind.min.css?v=20260803-perf3">
-  <link rel="stylesheet" href="/assets/css/styles.min.css?v=20260808-navmenu3">
+  <link rel="stylesheet" href="/assets/css/styles.min.css?v=20260808-navmenu4">
   <script>
     window.dataLayer = window.dataLayer || [];
     window.gtag = window.gtag || function () { window.dataLayer.push(arguments); };
@@ -97,7 +97,7 @@ $renderCard = static function (array $t) use ($waNumber): string {
       <div class="flex items-center gap-2 shrink-0">
         <a href="https://wa.me/918979983149?text=Hi%2C%20I%20want%20to%20know%20more%20about%20Cancer%20Treatment%20in%20India"
           target="_blank" rel="noopener noreferrer" role="button"
-          class="header-wa hidden md:inline-flex items-center gap-2 bg-[var(--wa)] hover:bg-[var(--wa-hover)] text-white font-semibold text-sm px-3.5 py-2.5 rounded-md shadow-card transition-colors"
+          class="header-wa items-center gap-2 bg-[var(--wa)] hover:bg-[var(--wa-hover)] text-white font-semibold text-sm px-3.5 py-2.5 rounded-md shadow-card transition-colors"
           aria-label="Chat with us on WhatsApp">
           <svg class="w-5 h-5 shrink-0" fill="currentColor" viewBox="0 0 24 24" aria-hidden="true">
             <path

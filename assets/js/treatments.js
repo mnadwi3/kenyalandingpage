@@ -47,8 +47,11 @@
     var priceFrom = treatment.price_from || '';
     var bookMsg = 'Hi, I want a free consultation for ' + name + ' treatment';
 
+    // No reserved icon slot when there's no image -- an empty fixed-height
+    // placeholder was leaving a blank gap above the title on cards for
+    // treatments without one.
     var iconHtml = image
-      ? '<img src="' + escapeHtml(image) + '" alt="" width="128" height="128" decoding="async">'
+      ? '<div class="tx-icon tx-icon--svg" style="--tx-color:var(--primary)" aria-hidden="true"><img src="' + escapeHtml(image) + '" alt="" width="128" height="128" decoding="async"></div>'
       : '';
 
     var priceHtml = priceFrom
@@ -58,7 +61,7 @@
     return (
       '<article class="tx-card reveal">' +
         '<a class="tx-page-link" href="' + escapeHtml(url) + '" aria-label="Open ' + escapeHtml(name) + ' details page">' + ICON_ARROW + '</a>' +
-        '<div class="tx-icon tx-icon--svg" style="--tx-color:var(--primary)" aria-hidden="true">' + iconHtml + '</div>' +
+        iconHtml +
         '<div class="tx-body">' +
           '<h3><a href="' + escapeHtml(url) + '">' + escapeHtml(name) + '</a></h3>' +
           priceHtml +

@@ -17,8 +17,11 @@ $renderCard = static function (array $t) use ($waNumber): string {
     $bookMsg = 'Hi, I want a free consultation for ' . $tName . ' treatment';
     $waUrl = 'https://wa.me/' . $waNumber . '?text=' . rawurlencode($bookMsg);
 
+    // No reserved icon slot when there's no featured image -- an empty
+    // fixed-height placeholder was leaving a blank gap above every card's
+    // title on specialty pages where treatments don't have images set.
     $iconHtml = $image !== ''
-        ? '<img src="' . e($image) . '" alt="" width="128" height="128" decoding="async">'
+        ? '<div class="tx-icon tx-icon--svg" style="--tx-color:var(--primary)" aria-hidden="true"><img src="' . e($image) . '" alt="" width="128" height="128" decoding="async"></div>'
         : '';
     $priceHtml = $priceFrom !== ''
         ? '<span class="tx-price">From ' . e($priceFrom) . '</span>'
@@ -29,7 +32,7 @@ $renderCard = static function (array $t) use ($waNumber): string {
             '<a class="tx-page-link" href="' . e($url) . '" aria-label="Open ' . e($tName) . ' details page">' .
                 '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" aria-hidden="true"><path stroke-linecap="round" stroke-linejoin="round" d="M7 17L17 7M10 7h7v7"/></svg>' .
             '</a>' .
-            '<div class="tx-icon tx-icon--svg" style="--tx-color:var(--primary)" aria-hidden="true">' . $iconHtml . '</div>' .
+            $iconHtml .
             '<div class="tx-body">' .
                 '<h3><a href="' . e($url) . '">' . e($tName) . '</a></h3>' .
                 $priceHtml .
@@ -55,7 +58,7 @@ $renderCard = static function (array $t) use ($waNumber): string {
   <link rel="icon" href="/favicon.ico" sizes="any">
   <link rel="preload" href="/assets/fonts/inter-latin.woff2" as="font" type="font/woff2" crossorigin>
   <link rel="stylesheet" href="/assets/css/tailwind.min.css?v=20260803-perf3">
-  <link rel="stylesheet" href="/assets/css/styles.min.css?v=20260808-txcardheight1">
+  <link rel="stylesheet" href="/assets/css/styles.min.css?v=20260808-icongap1">
   <script>
     window.dataLayer = window.dataLayer || [];
     window.gtag = window.gtag || function () { window.dataLayer.push(arguments); };

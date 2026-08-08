@@ -2085,10 +2085,11 @@ header .site-logo-img {
   color: var(--secondary);
 }
 
-.trust-chips { display: flex; flex-wrap: wrap; gap: 0.6rem; }
+.trust-chips { display: grid; grid-template-columns: repeat(2, 1fr); gap: 0.6rem; }
 .trust-chip {
   display: inline-flex;
   align-items: center;
+  justify-content: center;
   gap: 0.45rem;
   padding: 0.55rem 1rem;
   border-radius: 999px;
@@ -2097,6 +2098,7 @@ header .site-logo-img {
   font-size: 0.8125rem;
   font-weight: 600;
   color: var(--secondary);
+  text-align: center;
 }
 .trust-chip svg { color: var(--primary); flex: none; }
 

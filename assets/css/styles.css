@@ -1562,9 +1562,19 @@ header .site-logo-img {
   display: flex;
   flex-direction: column;
   background: var(--secondary);
-  padding: 0.25rem 1.25rem 1.25rem;
+  padding: 0 1.25rem;
+  max-height: 0;
+  overflow: hidden;
+  opacity: 0;
+  pointer-events: none;
+  transition: max-height 0.32s ease, opacity 0.22s ease, padding 0.32s ease;
 }
-.mobile-nav[hidden] { display: none; }
+.mobile-nav.is-open {
+  max-height: 34rem;
+  opacity: 1;
+  padding: 0.25rem 1.25rem 1.25rem;
+  pointer-events: auto;
+}
 .mobile-nav a {
   color: rgba(255, 255, 255, 0.92);
   padding: 0.9rem 0.1rem;

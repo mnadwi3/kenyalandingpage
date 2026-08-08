@@ -58,7 +58,7 @@ $renderCard = static function (array $t) use ($waNumber): string {
   <link rel="icon" href="/favicon.ico" sizes="any">
   <link rel="preload" href="/assets/fonts/inter-latin.woff2" as="font" type="font/woff2" crossorigin>
   <link rel="stylesheet" href="/assets/css/tailwind.min.css?v=20260803-perf3">
-  <link rel="stylesheet" href="/assets/css/styles.min.css?v=20260808-navmenu4">
+  <link rel="stylesheet" href="/assets/css/styles.min.css?v=20260808-navsmooth1">
   <script>
     window.dataLayer = window.dataLayer || [];
     window.gtag = window.gtag || function () { window.dataLayer.push(arguments); };
@@ -112,7 +112,7 @@ $renderCard = static function (array $t) use ($waNumber): string {
       </div>
     </div>
   </header>
-  <nav id="mobile-nav" class="mobile-nav" aria-label="Mobile" hidden>
+  <nav id="mobile-nav" class="mobile-nav" aria-label="Mobile">
     <a href="/">Home</a>
     <a href="/all-treatments">Treatments</a>
     <a href="/all-doctors">Doctors</a>
@@ -204,7 +204,7 @@ $renderCard = static function (array $t) use ($waNumber): string {
   </div>
 
   <script src="/assets/js/analytics.js?v=20260803-perf3" defer></script>
-  <script src="/assets/js/nav.js?v=20260808-navmenu1" defer></script>
+  <script src="/assets/js/nav.js?v=20260808-navsmooth1" defer></script>
 </body>
 
 </html>

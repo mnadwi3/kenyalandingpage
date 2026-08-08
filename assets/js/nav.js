@@ -6,21 +6,25 @@
   var menu = document.getElementById('mobile-nav');
   if (!toggle || !menu) return;
 
+  function isOpen() {
+    return menu.classList.contains('is-open');
+  }
+
   function closeMenu() {
-    menu.hidden = true;
+    menu.classList.remove('is-open');
     toggle.setAttribute('aria-expanded', 'false');
   }
 
   function openMenu() {
-    menu.hidden = false;
+    menu.classList.add('is-open');
     toggle.setAttribute('aria-expanded', 'true');
   }
 
   toggle.addEventListener('click', function () {
-    if (menu.hidden) {
-      openMenu();
-    } else {
+    if (isOpen()) {
       closeMenu();
+    } else {
+      openMenu();
     }
   });
 
@@ -33,12 +37,12 @@
   });
 
   document.addEventListener('click', function (event) {
-    if (!menu.hidden && !menu.contains(event.target) && !toggle.contains(event.target)) {
+    if (isOpen() && !menu.contains(event.target) && !toggle.contains(event.target)) {
       closeMenu();
     }
   });
 
   window.addEventListener('resize', function () {
-    if (window.innerWidth >= 768 && !menu.hidden) closeMenu();
+    if (window.innerWidth >= 768 && isOpen()) closeMenu();
   });
 })();

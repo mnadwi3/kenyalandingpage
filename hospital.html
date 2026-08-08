@@ -348,6 +348,23 @@
       .hp-specialty-grid { grid-template-columns: 1fr; }
     }
 
+    /* ---------- Related Treatments ---------- */
+    .hp-treatment-grid { display: flex; flex-wrap: wrap; justify-content: center; gap: 0.65rem; }
+    .hp-treatment-pill {
+      display: inline-flex;
+      align-items: center;
+      padding: 0.6rem 1.15rem;
+      border: 1px solid var(--hp-border);
+      border-radius: 999px;
+      background: #fff;
+      color: var(--hp-primary);
+      font-weight: 600;
+      font-size: 0.85rem;
+      text-decoration: none;
+      transition: border-color 0.2s ease, box-shadow 0.2s ease;
+    }
+    .hp-treatment-pill:hover { border-color: rgba(15,76,129,0.35); box-shadow: 0 10px 22px -16px rgba(15,76,129,0.35); }
+
     /* ---------- Doctors ----------
        Mirrors the homepage doctor card's centered-photo layout and fixed
        card height (assets/css/styles.css .doc-card) so a hospital page
@@ -629,6 +646,16 @@
         <div id="hp-doctors" class="hp-doctor-grid hp-reveal"></div>
       </section>
 
+      <!-- ===== Related Treatments ===== -->
+      <section id="hp-treatments-section" style="background:var(--hp-tint);" class="hp-section hidden">
+        <div class="hp-wrap">
+          <div class="hp-section-head hp-reveal" style="text-align:center;">
+            <h2 class="hp-section-title">Top Treatments Offered</h2>
+          </div>
+          <div id="hp-treatments" class="hp-treatment-grid hp-reveal"></div>
+        </div>
+      </section>
+
       <!-- ===== Contact ===== -->
       <section style="background:var(--hp-tint);padding-top:4rem;padding-bottom:4rem;">
         <div class="hp-wrap hp-narrow hp-reveal">
@@ -808,6 +835,14 @@
               (d.qualification ? '<div class="hp-doctor-qual">' + escapeHtml(d.qualification) + '</div>' : '') +
               '<a href="' + API_BASE + '/doctors/' + escapeHtml(d.slug || '') + '" class="hp-doctor-link"><span>View Profile</span></a>' +
               '</div>';
+          }).join('');
+        }
+
+        if (Array.isArray(h.related_treatments) && h.related_treatments.length) {
+          document.getElementById('hp-treatments-section').classList.remove('hidden');
+          document.getElementById('hp-treatments').innerHTML = h.related_treatments.map(function (t) {
+            return '<a href="/treatments/' + escapeHtml(t.slug || '') + '" class="hp-treatment-pill">' +
+              escapeHtml(t.name) + '</a>';
           }).join('');
         }
 

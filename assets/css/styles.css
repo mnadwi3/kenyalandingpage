@@ -1117,6 +1117,13 @@ label {
   .hero-stats-num { font-size: 1.05rem; }
 }
 
+/* Trust badges below lg (site's own mobile/tablet breakpoint), stats bar at lg+ (desktop) */
+.hero-desktop-only { display: none; }
+@media (min-width: 1024px) {
+  .hero-mobile-only { display: none; }
+  .hero-desktop-only { display: block; }
+}
+
 .hero-arrow {
   position: absolute; top: 50%; z-index: 5; transform: translateY(-50%);
   width: 2.75rem; height: 2.75rem; border-radius: 9999px;

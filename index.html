@@ -274,7 +274,7 @@
     }
   </style>
   <link rel="stylesheet" href="/assets/css/tailwind.min.css?v=20260803-perf3">
-  <link rel="stylesheet" href="/assets/css/styles.min.css?v=20260808-herostats1">
+  <link rel="stylesheet" href="/assets/css/styles.min.css?v=20260808-herostats3">
 
   <!-- Analytics stub; full GTM/GA load deferred until idle/interaction -->
   <script>
@@ -364,7 +364,7 @@
                 From expert opinion and hospital selection to medical visa, travel, treatment, accommodation, and
                 follow-up, we coordinate every step of your journey.
               </p>
-              <ul class="hero-trust" aria-label="Trust highlights" id="hero-trust-list">
+              <ul class="hero-trust hero-mobile-only" aria-label="Trust highlights" id="hero-trust-list">
                 <li>
                   <svg fill="none" stroke="currentColor" stroke-width="1.7" viewBox="0 0 24 24" aria-hidden="true">
                     <path stroke-linecap="round" stroke-linejoin="round"
@@ -432,8 +432,8 @@
       </div>
     </section>
 
-    <!-- Hero stats bar -->
-    <div class="hero-stats-wrap max-w-6xl mx-auto px-4 sm:px-6">
+    <!-- Hero stats bar (desktop/tablet only; mobile keeps the trust badges list above) -->
+    <div class="hero-stats-wrap hero-desktop-only max-w-6xl mx-auto px-4 sm:px-6">
       <div class="hero-stats">
         <div>
           <span class="hero-stats-num">500+</span>

@@ -312,14 +312,20 @@ label {
   display: flex;
   flex-direction: column;
   align-items: center;
-  justify-content: center;
+  /* Was centered — a short title (e.g. "Pacemaker Implantation") sat
+     mid-card while a long one (e.g. "TAVI...") pushed toward the top,
+     so price/button landed at a different height on every card in a
+     row. Starting from the top with fixed spacing after the heading
+     keeps price and button at a consistent position regardless of
+     title length. */
+  justify-content: flex-start;
   min-width: 0;
   min-height: 0;
   flex: 1;
 }
 .tx-card h3,
 .tx-body h3 {
-  margin: 0 0 0.2rem;
+  margin: 0 0 0.45rem;
   font-size: 0.88rem !important;
   font-weight: 700 !important;
   line-height: 1.25 !important;

@@ -1015,8 +1015,8 @@ label {
 /* ---- Hero slider ---- */
 .hero-slider {
   position: relative;
-  /* Base 0.81 multiplier (two 10% reductions), then +15% for desktop/tablet: 0.81 * 1.15 = 0.9315 */
-  min-height: clamp(522px, 81.97vh, 670px);
+  /* Base 0.81, +15% for desktop/tablet (0.9315), then +10% more on desktop only: 0.9315 * 1.10 = 1.02465 */
+  min-height: clamp(574px, 90.17vh, 737px);
   overflow: hidden;
   background: linear-gradient(180deg, #F5FBFA 0%, #D5EFEC 48%, #8CDAD4 100%);
 }
@@ -1750,8 +1750,8 @@ header .site-logo-img {
        svh (not dvh) on both properties: dvh recalculates live as the
        mobile browser's address bar shows/hides during scroll, which
        was making the whole section visibly resize/jump mid-scroll. */
-    min-height: calc((100svh - 4.25rem) * 0.891);
-    height: calc((100svh - 4.25rem) * 0.891);
+    min-height: calc((100svh - 4.25rem) * 0.75735);
+    height: calc((100svh - 4.25rem) * 0.75735);
     overflow: hidden;
     background: linear-gradient(
       180deg,
@@ -1778,7 +1778,7 @@ header .site-logo-img {
     align-items: stretch !important;
     height: 100% !important;
     min-height: 100% !important;
-    padding-top: 1.5rem !important;
+    padding-top: 0.5rem !important;
     padding-bottom: calc(4.75rem + env(safe-area-inset-bottom, 0px)) !important;
     box-sizing: border-box;
   }
@@ -1795,14 +1795,14 @@ header .site-logo-img {
   .hero-copy h1,
   .hero-copy h2 {
     font-size: clamp(1.85rem, 8vw, 2.25rem);
-    margin: 0 0 0.5rem !important;
+    margin: 0 0 0.25rem !important;
     text-align: left;
   }
   .hero-copy p {
     font-size: 0.95rem;
     max-width: none;
     width: 100%;
-    margin: 0 0 0.6rem !important;
+    margin: 0 0 0.4rem !important;
     text-align: left;
   }
   .hero-trust {
@@ -1817,8 +1817,8 @@ header .site-logo-img {
     justify-content: stretch !important;
     width: 100% !important;
     max-width: 100% !important;
-    margin: 0.4rem 0 0 !important;
-    padding: 0.35rem 0.2rem !important;
+    margin: 0.2rem 0 0 !important;
+    padding: 0.1rem 0.2rem !important;
     box-sizing: border-box;
     overflow: visible;
     background: #FFFFFF;
@@ -1833,7 +1833,8 @@ header .site-logo-img {
     font-size: 0.58rem;
     white-space: normal;
     line-height: 1.2;
-    padding: 0.1rem 0.3rem;
+    gap: 0.3rem;
+    padding: 0.05rem 0.3rem;
     border-left: 1px solid rgba(15, 76, 129, 0.14);
     min-width: 0;
   }
@@ -1851,8 +1852,8 @@ header .site-logo-img {
 }
 @media (max-width: 767px) {
   .hero-slider {
-    min-height: calc((100svh - 4.25rem) * 0.891);
-    height: calc((100svh - 4.25rem) * 0.891);
+    min-height: calc((100svh - 4.25rem) * 0.75735);
+    height: calc((100svh - 4.25rem) * 0.75735);
   }
   .hero-slide-content {
     padding-top: 3rem !important;

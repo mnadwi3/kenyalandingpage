@@ -55,7 +55,7 @@ $renderCard = static function (array $t) use ($waNumber): string {
   <link rel="icon" href="/favicon.ico" sizes="any">
   <link rel="preload" href="/assets/fonts/inter-latin.woff2" as="font" type="font/woff2" crossorigin>
   <link rel="stylesheet" href="/assets/css/tailwind.min.css?v=20260803-perf3">
-  <link rel="stylesheet" href="/assets/css/styles.min.css?v=20260808-specialties1">
+  <link rel="stylesheet" href="/assets/css/styles.min.css?v=20260808-doccardfix1">
   <script>
     window.dataLayer = window.dataLayer || [];
     window.gtag = window.gtag || function () { window.dataLayer.push(arguments); };

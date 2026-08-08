@@ -1064,6 +1064,7 @@ label {
 .hero-copy h1,
 .hero-copy h2 {
   color: var(--text) !important;
+  line-height: 1.25 !important;
 }
 .hero-copy .hero-accent {
   color: var(--primary) !important;

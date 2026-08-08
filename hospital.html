@@ -646,7 +646,7 @@
               </li>
               <li>
                 <span class="hp-contact-icon"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path stroke-linecap="round" stroke-linejoin="round" d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0118 0z"/><circle cx="12" cy="10" r="3"/></svg></span>
-                <span id="hp-address"></span>
+                <span id="hp-address">R-7, Joga Bai Ext. Jamia Nagar, Okhla, New Delhi, India 110025</span>
               </li>
             </ul>
             <a href="https://wa.me/918979983149" target="_blank" rel="noopener noreferrer" class="hp-btn hp-btn-wa">Chat on WhatsApp</a>
@@ -810,9 +810,6 @@
               '</div>';
           }).join('');
         }
-
-        var addressParts = [h.address_line1, h.address_line2, h.location].filter(Boolean);
-        document.getElementById('hp-address').textContent = addressParts.join(', ');
 
         // Content just became visible/sized; (re)measure for the pinned form
         // and arm the scroll-reveal observer for the newly-populated blocks.

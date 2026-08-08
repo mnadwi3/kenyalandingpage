@@ -1599,9 +1599,12 @@ header .site-logo-img {
     aspect-ratio: auto;
     width: 100%;
     /* Content is top-anchored (see .hero-slide-content below), so
-       shrinking the box by 10% trims empty space at the bottom. */
+       shrinking the box by 10% trims empty space at the bottom.
+       svh (not dvh) on both properties: dvh recalculates live as the
+       mobile browser's address bar shows/hides during scroll, which
+       was making the whole section visibly resize/jump mid-scroll. */
     min-height: calc((100svh - 4.25rem) * 0.9);
-    height: calc((100dvh - 4.25rem) * 0.9);
+    height: calc((100svh - 4.25rem) * 0.9);
     overflow: hidden;
     background: linear-gradient(
       180deg,
@@ -1702,7 +1705,7 @@ header .site-logo-img {
 @media (max-width: 767px) {
   .hero-slider {
     min-height: calc((100svh - 4.25rem) * 0.9);
-    height: calc((100dvh - 4.25rem) * 0.9);
+    height: calc((100svh - 4.25rem) * 0.9);
   }
   .hero-slide-content {
     padding-top: 3rem !important;
@@ -1712,7 +1715,7 @@ header .site-logo-img {
 @media (min-width: 768px) and (max-width: 1023px) {
   .hero-slider {
     min-height: calc((100svh - 4.75rem) * 0.9);
-    height: calc((100dvh - 4.75rem) * 0.9);
+    height: calc((100svh - 4.75rem) * 0.9);
   }
   .hero-slide-content {
     padding-top: 3rem !important;

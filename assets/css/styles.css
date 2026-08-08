@@ -1015,8 +1015,9 @@ label {
 /* ---- Hero slider ---- */
 .hero-slider {
   position: relative;
-  /* 10% shorter than the original clamp(560px, 88vh, 720px) */
-  min-height: clamp(504px, 79.2vh, 648px);
+  /* 19% shorter than the original clamp(560px, 88vh, 720px) -- two
+     successive 10% reductions compound to 0.9 * 0.9 = 0.81 */
+  min-height: clamp(454px, 71.28vh, 583px);
   overflow: hidden;
   background: linear-gradient(180deg, #F5FBFA 0%, #D5EFEC 48%, #8CDAD4 100%);
 }
@@ -1603,8 +1604,8 @@ header .site-logo-img {
        svh (not dvh) on both properties: dvh recalculates live as the
        mobile browser's address bar shows/hides during scroll, which
        was making the whole section visibly resize/jump mid-scroll. */
-    min-height: calc((100svh - 4.25rem) * 0.9);
-    height: calc((100svh - 4.25rem) * 0.9);
+    min-height: calc((100svh - 4.25rem) * 0.81);
+    height: calc((100svh - 4.25rem) * 0.81);
     overflow: hidden;
     background: linear-gradient(
       180deg,
@@ -1704,8 +1705,8 @@ header .site-logo-img {
 }
 @media (max-width: 767px) {
   .hero-slider {
-    min-height: calc((100svh - 4.25rem) * 0.9);
-    height: calc((100svh - 4.25rem) * 0.9);
+    min-height: calc((100svh - 4.25rem) * 0.81);
+    height: calc((100svh - 4.25rem) * 0.81);
   }
   .hero-slide-content {
     padding-top: 3rem !important;
@@ -1714,8 +1715,8 @@ header .site-logo-img {
 }
 @media (min-width: 768px) and (max-width: 1023px) {
   .hero-slider {
-    min-height: calc((100svh - 4.75rem) * 0.9);
-    height: calc((100svh - 4.75rem) * 0.9);
+    min-height: calc((100svh - 4.75rem) * 0.81);
+    height: calc((100svh - 4.75rem) * 0.81);
   }
   .hero-slide-content {
     padding-top: 3rem !important;

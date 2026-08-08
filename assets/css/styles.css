@@ -866,10 +866,11 @@ label {
   line-height: 1.2;
   text-decoration: none;
   text-align: center;
-  white-space: nowrap;
+  white-space: normal;
   transition: background 0.15s ease, filter 0.15s ease;
   margin-top: 0;
-  width: auto;
+  width: 0;
+  min-width: 0;
   max-width: none;
 }
 .doc-book {
@@ -992,7 +993,8 @@ label {
     font-size: 0.8rem;
     white-space: normal;
     margin-top: 0;
-    width: auto;
+    width: 0;
+    min-width: 0;
   }
 
   .doc-book svg,
